@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Link } from "gatsby"
+import React, {useState} from "react"
+import {Link} from "gatsby"
 import {
   FaGithub,
   FaLinkedin,
@@ -24,8 +24,8 @@ const Header = () => {
         <div className={style.title}>
           <Link to={"/"}>
             <h4>
-              Chris
-              <span style={{ color: "red" }}>@</span>
+              Ayush
+              <span style={{color: "red"}}>@</span>
               Machine
             </h4>
           </Link>
@@ -34,8 +34,8 @@ const Header = () => {
           {isMenuCollapsed ? (
             <FaBars size="30" onClick={toggleMenu} />
           ) : (
-            <FaTimes size="30" onClick={toggleMenu} />
-          )}
+              <FaTimes size="30" onClick={toggleMenu} />
+            )}
         </div>
       </div>
       <div
