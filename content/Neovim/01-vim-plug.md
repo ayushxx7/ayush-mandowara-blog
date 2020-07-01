@@ -9,6 +9,12 @@ tags: ["neovim"]
 
 ## Installing Neovim
 
+- On Windows
+
+  ```
+  chocolatey install neovim
+  ```
+
 - On Mac
 
   ```
