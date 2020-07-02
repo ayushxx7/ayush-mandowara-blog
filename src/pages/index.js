@@ -1,7 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { Link } from "gatsby"
+import {Link} from "gatsby"
 import Me from "../images/me.jpg"
 import Nvim from "../images/nvim.png"
 import ThisBlog from "../images/this-blog.png"
@@ -18,28 +18,28 @@ import {
 const IndexPage = () => {
   return (
     <Layout>
-      <h1 style={{ textAlign: "center", marginTop: "80px" }}>Portfolio</h1>
-      <SEO title="Home" keywords={["chris@machine"]} />
+      <h1 style={{textAlign: "center", marginTop: "80px"}}>Portfolio</h1>
+      <SEO title="Home" keywords={["ayush@machine"]} />
       <div className={style.card}>
         <div className={style.post}>
           <div className={style.cover}>
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://www.linkedin.com/in/christianchiarulli/"}
+              href={"https://www.linkedin.com/in/ayushxx7/"}
             >
               <img
                 src={Me}
                 height="200px"
                 width="200px"
-                style={{ borderRadius: "50%" }}
+                style={{borderRadius: "50%"}}
                 alt="Me"
               />
             </a>
           </div>
           <div className={style.content}>
             <span>
-              My name is Christian, I'm a Full Stack developer. I make YouTube
+              My name is Ayush Mandowara, I'm a Full Stack developer. I make YouTube
               videos about various topics such as Software Development, Linux,
               Neovim and Machine Learning. You can find me on the following
               social media sites.
@@ -50,7 +50,7 @@ const IndexPage = () => {
                   <a
                     target="_blank"
                     rel="nofollow noopener noreferrer"
-                    href={"https://github.com/ChristianChiarulli"}
+                    href={"https://github.com/ayushxx7"}
                   >
                     <FaGithub color="#FFFFFF" size="30" />
                   </a>
@@ -60,7 +60,7 @@ const IndexPage = () => {
                     target="_blank"
                     rel="nofollow noopener noreferrer"
                     href={
-                      "https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA"
+                      "https://www.youtube.com/c/AyushMandowara_xx7"
                     }
                   >
                     <FaYoutube color="#EB3323" size="30" />
@@ -70,7 +70,7 @@ const IndexPage = () => {
                   <a
                     target="_blank"
                     rel="nofollow noopener noreferrer"
-                    href={"https://discord.gg/Xb9B4Ny"}
+                    href={"https://discord.com/channels/@me/ayushxx7#6337/"}
                   >
                     <FaDiscord color="#768AD4" size="30" />
                   </a>
@@ -79,7 +79,7 @@ const IndexPage = () => {
                   <a
                     target="_blank"
                     rel="nofollow noopener noreferrer"
-                    href={"https://www.linkedin.com/in/christianchiarulli/"}
+                    href={"https://www.linkedin.com/in/ayushxx7/"}
                   >
                     <FaLinkedin color="#3077B0" size="30" />
                   </a>
