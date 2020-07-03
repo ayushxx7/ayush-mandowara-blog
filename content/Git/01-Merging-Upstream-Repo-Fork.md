@@ -1,3 +1,6 @@
+---
+title: Merging an upstream repo into your fork
+description: description
 date: "2019-08-01"
 image: git.png
 author: "Chris"
