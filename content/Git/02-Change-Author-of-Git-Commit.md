@@ -3,25 +3,23 @@ title: How to change Author of a previous Git Commit.
 description: If you've made a commit from a different account, and want to change the author (essentially rewriting history) follow these steps.
 date: "2020-07-03"
 image: git.png
-author: "Chris"
+author: "Ayush"
 tags: ["git"]
 ---
 
 <br />
 
-This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915) I am adding it here to quickly reference it when I inevitably forget how to do it.
+This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915). 
+I am adding it here to quickly reference it when I inevitably forget how to do it.
 
+<h3>PURPOSE</h3>
 If you want to change the Author of a commit in your repo you can ammend the commit author and rebase it reflect in the commit history.
 
 1. Open Terminal.
 
 2. Change the current working directory to your local project.
 
-Note: The accepted answer to this question is a wonderfully clever use of interactive rebase, but it unfortunately exhibits conflicts if the commit we are trying to change the author of used to be on a branch which was subsequently merged in. More generally, it does not work when handling messy histories.
-
-Since I am apprehensive about running scripts which depend on setting and unsetting environment variables to rewrite git history, I am writing a new answer based on this post which is similar to this answer but is more complete.
-
-The following is tested and working, unlike the linked answer. Assume for clarity of exposition that 03f482d6 is the commit whose author we are trying to replace, and 42627abe is the commit with the new author.
+Assume for clarity of exposition that 03f482d6 is the commit whose author we are trying to replace, and 42627abe is the commit with the new author.
 
 4. Checkout the commit we are trying to modify.
 
