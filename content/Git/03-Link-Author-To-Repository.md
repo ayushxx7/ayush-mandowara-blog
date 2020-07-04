@@ -34,6 +34,13 @@ gvim .git\config
         name = Ayush Mandowara -- name of the author
         email = example@email.com -- git email of the author
         username = ayushxx7 -- git username of the author
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
 [remote "origin"]
 	url = https://user_name:password@github.com/ayushxx7/ayush-mandowara-blog -- url of the repository.
 	fetch = +refs/heads/*:refs/remotes/origin/*
