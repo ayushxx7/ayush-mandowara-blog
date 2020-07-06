@@ -9,8 +9,6 @@ tags: ["git"]
 
 <br />
 
-This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915). 
-
 <h3>PURPOSE</h3>
 If you have multiple accounts on your machine, chances are you end up making commits from the wrong author in a repository. 
 To avoid having to change it afterwards, which is possible (Read: 02-How-to-Change-Author), follow these simple steps.
@@ -21,7 +19,7 @@ To avoid having to change it afterwards, which is possible (Read: 02-How-to-Chan
 
 Note: Make sure you are in the root directory, i.e., the directory containing [.git] folder.
 
-3. Open the <b>.git\config</b> file for the repository.
+3. Open the <b>.git\config</b> file of the repository.
 
 ```
 gvim .git\config
@@ -34,27 +32,26 @@ gvim .git\config
         name = Ayush Mandowara -- name of the author
         email = example@email.com -- git email of the author
         username = ayushxx7 -- git username of the author
-[core]
-	repositoryformatversion = 0
-	filemode = false
-	bare = false
-	logallrefupdates = true
-	symlinks = false
-	ignorecase = true
+```
+
+5. Optionally, you can also modify Remote URL for a branch like so:
+```
 [remote "origin"]
-	url = https://user_name:password@github.com/ayushxx7/ayush-mandowara-blog -- url of the repository.
+	url = https://user_name:password@github.com/ayushxx7/ayush-mandowara-blog **Modified URL with username:pass
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
 ```
+This helps skip the prompt for Sign In even if you don't have credentials configured properly. Of course, you need to make sure that the username you are going to type in the above URL, has Edit rights.
 
-5. Hit Save and you're done.
+6. Hit Save and you're done.
 
 <h4> Some Points to Note about the config file changes </h4>
 
-  - You especially need the [user] block to do what this post is for the rest is all optional.
-  - Adding a URL like shared in the above file will help in never having to enter credentials for Git again.
-  - However, at the same time, this is not very safe, and you should only do this if it's your personal machine.
+  - It is mandatory to add the [user] block for this to work. The <b>"email"</b> is the unique indentifier for the commit author in the repo. However, ensure to use the correct the username and Name for the changes to reflect properly.
+  - Adding a URL like shared in the above file will help in never having to enter credentials for Git again. However, at the same time, this is not very safe, and you should only do this if it's your personal machine. Your credentials are basically being stored in the repo as plain text.
 
-<h3> I have not experimented with multiple branches for this specifically, when I do, I will update how the file will look like for such a scenario </h3>
+<h3>CREDITS</h3>
+This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915). 
+

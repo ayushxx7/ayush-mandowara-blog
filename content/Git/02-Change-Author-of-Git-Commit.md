@@ -9,17 +9,16 @@ tags: ["git"]
 
 <br />
 
-This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915). 
-I am adding it here to quickly reference it when I inevitably forget how to do it.
-
 <h3>PURPOSE</h3>
-If you want to change the Author of a commit in your repo you can ammend the commit author and rebase it reflect in the commit history.
+To change the Author of a previous commit in a Repository. 
+<h4>Many times you end up commiting and pushing changes to a repository from a different account than you originally intended to do. You can ignore that commit, and move on in life Or You can follow these steps below:</h4>
+
+
+<h5>Assume for clarity of exposition that 03f482d6 is the commit whose author we are trying to replace, and 42627abe is the commit with the new author.</h5>
 
 1. Open Terminal.
 
 2. Change the current working directory to your local project.
-
-Assume for clarity of exposition that 03f482d6 is the commit whose author we are trying to replace, and 42627abe is the commit with the new author.
 
 3. Checkout the commit we are trying to modify.
 
@@ -70,4 +69,8 @@ Note: Instead of 7-9 you can just rebase onto new commit:
 ```
 git rebase -i 42627abe
 ```
+
+<H3>CREDITS</H3>
+This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915). 
+I am adding it here to quickly reference it when I inevitably forget how to do it.
 
