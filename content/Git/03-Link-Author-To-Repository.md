@@ -29,29 +29,45 @@ gvim .git\config
 
 ```
 [user]
-        name = Ayush Mandowara -- name of the author
-        email = example@email.com -- git email of the author
-        username = ayushxx7 -- git username of the author
+        name = Ayush Mandowara
+        email = example@email.com
+        username = ayushxx7
 ```
 
+<p>
+Note: Here,
+name: Name of the Author
+email: git email of the author
+username: git username of the author
+</p>
+
 5. Optionally, you can also modify Remote URL for a branch like so:
+
 ```
 [remote "origin"]
-	url = https://user_name:password@github.com/ayushxx7/ayush-mandowara-blog **Modified URL with username:pass
+	url = https://user_name:password@github.com/ayushxx7/ayush-mandowara-blog
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
 ```
+
+<p>
+Note: Notice, the url field has additional git username:git password followed by @ symbol. 
+
 This helps skip the prompt for Sign In even if you don't have credentials configured properly. Of course, you need to make sure that the username you are going to type in the above URL, has Edit rights.
+</p>
 
 6. Hit Save and you're done.
 
 <h4> Some Points to Note about the config file changes </h4>
 
-  - It is mandatory to add the [user] block for this to work. The <b>"email"</b> is the unique indentifier for the commit author in the repo. However, ensure to use the correct the username and Name for the changes to reflect properly.
+  - It is mandatory to add the [user] block for this to work. The <b>"email"</b> is the unique indentifier for the commit author in the repo. However, ensure to use the correct "username" and "name" for the changes to reflect properly.
   - Adding a URL like shared in the above file will help in never having to enter credentials for Git again. However, at the same time, this is not very safe, and you should only do this if it's your personal machine. Your credentials are basically being stored in the repo as plain text.
 
 <h3>CREDITS</h3>
-This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915). 
+<br>
+This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915)  
+<br>
+
 

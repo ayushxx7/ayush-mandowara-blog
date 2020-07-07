@@ -70,7 +70,8 @@ Note: Instead of 7-9 you can just rebase onto new commit:
 git rebase -i 42627abe
 ```
 
-<H3>CREDITS</H3>
-This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915). 
+<h3>CREDITS</h3>
+<br>
+This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915)  
 I am adding it here to quickly reference it when I inevitably forget how to do it.
 
