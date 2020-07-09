@@ -69,7 +69,7 @@ However, it does not do anything yet! Let's add the Hello World part now:
 1. Open your `app.py` file and change the code to the following:
 
 ```
-import Flask
+from flask import Flask
 
 app = Flask(__name__)
 
