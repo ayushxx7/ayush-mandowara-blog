@@ -73,5 +73,6 @@ git rebase -i 42627abe
 <h3>CREDITS</h3>
 <br>
 This article is from a StackOverflow Answer [here](https://stackoverflow.com/a/30737248/7048915)  
+<br>
 I am adding it here to quickly reference it when I inevitably forget how to do it.
 
