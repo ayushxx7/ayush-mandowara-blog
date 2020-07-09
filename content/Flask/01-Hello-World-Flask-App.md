@@ -47,7 +47,7 @@ gvim app.py
 2. Inside the `app.py` file just created:
 
 ```
-import Flask
+from flask import Flask
 
 app = Flask(__name__)
 
