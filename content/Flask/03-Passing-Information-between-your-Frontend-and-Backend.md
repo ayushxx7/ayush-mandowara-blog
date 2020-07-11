@@ -95,11 +95,12 @@ if __name__ == "__main__":
  app.run(debug=True)
 ```
 
-<h3> Key Points to Note here: </h3>
-- The name of the endpoint in your server should be same as the name of the action in the HTML
-- The name of the function that is being decorated as an endpoint is irrelavant.
-- Since we are submitting (POSTing) the data from the HTML, 
-  we need to notify our endpoint that the method should support POST requests.
+<h4> Key Points to Note here: </h4>
+  - <b>The name of the endpoint in your server should be same as the name of the action in the HTML.</b>
+  - The name of the function that is being decorated as an endpoint is irrelavant.
+  - <b>Since we are submitting (POSTing) the data from the HTML, we need to notify our endpoint that the method should support POST requests.</b>
+
+<br>
 
 4. Run the `app.py` file:
 
@@ -107,25 +108,24 @@ if __name__ == "__main__":
 py app.py
 ```
 
+<br>
 
 Voila, a fully functioning Web App that receives information from the HTML and processes it in the backend has been created.
 Visit localhost:5000, and input any information into the fields. 
+
 Once you hit submit
-- You will see the data you passed being logged into the command prompt (via the print statements).
-- You will also be able to see that you receive, a rather bland but nevertheless relevant HTML response on your browser (via the return statement).
+  - You will see the data you passed being logged into the command prompt (via the print statements).
+  - You will also be able to see that you receive, a rather bland but nevertheless relevant HTML response on your browser (via the return statement).
 
 As you know from the previous [02] blog, this reponse can be rendered as an HTML as well.
 
 
-
+<br><br>
+<em>
 Holy crap, it couldn't have been this simple! 
 <h3>Well, IT IS!</h3>
-
-
-
-Next Blog: How to add some sassiness to your webpage.
+</em>
 
 
 To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
-
 
