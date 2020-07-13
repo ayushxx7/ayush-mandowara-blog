@@ -124,8 +124,93 @@ As you know from the previous [02] blog, this reponse can be rendered as an HTML
 <em>
 Holy crap, it couldn't have been this simple! 
 <h3>Well, IT IS!</h3>
+<h6> Let's move to the next topic, to finish this easy but useful lesson </h6>
 </em>
 
+
+
+## Topic 2: Sending Information from Backend Flask to HTML.
+
+
+1. Modify your main `app.py` file like so:  
+
+```
+from flask import Flask, render_template, request # importing request to fetch info from form
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+  return render_template('index.html') 
+
+@app.route('/run', methods=['POST']) 
+def run_suite_util():
+
+  suite_name = request.form['suite']
+  build_url = request.form['build_url']
+  host_url = request.form['host_url']
+
+  print('The Suite that is going to be triggered is:',suite_name)
+  print('The Suite that is going to be triggered is:',build_url)
+  print('The Suite that is going to be triggered is:',host_url)
+
+  return render_template('suite_run.html', suite_info = [suite_name,build_url,host_url])
+  # we are rendering an HTML template, and passing a list of values that will be parsed by our HTML.
+
+
+if __name__ == "__main__":
+ app.run(debug=True)
+```
+
+
+2. Create a new `suite_run.html` in your `templates` directory, and add the following to it:
+
+```
+<h1> Suite Triggered </h1>
+
+<h2> A suite was triggered with the following specifications: </h1>
+
+<ul>
+{% for val in suite_info %}
+  <li> {{val}} </li>
+{% endfor %}
+<!-- We are using Jinja Templating here, to parse values passed from script and render them in the HTML. 
+As you may have noticed, we recieved the variable named suite_info, and ran a simple for loop.
+Then we added some semantic Sugar to for it be rendered as as an HTML List. -->
+</ul>
+```
+
+<h4> Key Points to Note here: </h4>
+  - <b>The name of the variable passed in render_template can be accessed by the HTML using Jinja2 Templating.</b>
+  - To let the HTML know, that this is a python variable, use {{python_variable}}. 
+  - For Loop: {% for x in python_variable %} {{x}} {% endfor %}
+  - If: {% if x in y %} {{x}} {% endif %}
+
+<br>
+
+3. Run the `app.py` file:
+
+```
+py app.py
+```
+
+<br>
+
+Voila, a fully functioning Web App where both the backend and frontend can communicate with each other easily is ready!
+Visit localhost:5000, and input any information into the fields. 
+
+Once you hit submit
+  - You will see the data you passed being logged into the command prompt (via the print statements).
+  - You will also be able to see that you receive, a rather bland but nevertheless relevant HTML webpage on your browser, which has parsed the backend variables with ease.
+
+I encourage you to pass a dictionary {key:value} information, instead of a list and play around with it. See how you can render the info to HTML in that case.
+
+
+<br><br>
+<em>
+Holy crap, it couldn't have been this simple! 
+<h3>Well, IT IS!</h3>
+</em>
 
 To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
 
