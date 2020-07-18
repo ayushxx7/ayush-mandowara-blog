@@ -1,56 +1,40 @@
 ---
 title: Plugins with Vim-Plug
 description:
-date: "2020-04-23"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+date: "2020-07-18"
+image: "gvim.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
-## Installing Neovim
+## Installing gVim
 
 - On Windows
 
   ```
-  chocolatey install neovim
-  ```
-
-- On Mac
-
-  ```
-  brew install neovim
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt install neovim
-  ```
-
-- Arch
-
-  ```
-  sudo pacman -S neovim
+  chocolatey install vim
   ```
 
 ## Create config
 
-Make directory for your Neovim config
+Make directory for your Vim config
 
 ```
-mkdir ~/.config/nvim
+mkdir %userprofile%\.config\vim
 ```
 
-Create an `init.vim` file
+Create an `.vimrc` file if not already present.
+- Note: `_vimrc` has a higher priority on Windows, so if it is present then either delete it, or add your config in `_vimrc` instead of `.vimrc'
+
 
 ```
-touch ~/.config/nvim/init.vim
+type nul > %userprofile%\.vimrc
 ```
 
 ## Install vim-plug
 
 ```
-curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo %userprofile%\.config\vim\autoload\plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
 You should now have `plug.vim` in your autoload directory so it will load of on start
@@ -60,32 +44,32 @@ You should now have `plug.vim` in your autoload directory so it will load of on 
 We will manage our plugins in a separate file for the sake of my own sanity
 
 ```
-mkdir ~/.config/nvim/vim-plug
+mkdir %userprofile%\.config\vim\vim-plug
 
-touch ~/.config/nvim/vim-plug/plugins.vim
+type nul > %userprofile%\.config\vim\vim-plug\plugins.vim
 ```
 
 ## Let's add some plugins
 
-Add the following to `~/.config/nvim/vim-plug/plugins.vim`
+Add the following to `%userprofile%\.config\vim\vim-plug\plugins.vim`
 
 ```
 " auto-install vim-plug
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob('%userprofile%\.config\vim\autoload\plug.vim'))
+  silent !curl -fLo %userprofile%\.config\vim\autoload\plug.vim --create-dirs
+    \ https:\\raw.githubusercontent.com\junegunn\vim-plug\master\plug.vim
   "autocmd VimEnter * PlugInstall
   "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/autoload/plugged')
+call plug#begin('%userprofile%\.config\vim\autoload\plugged')
 
     " Better Syntax Support
-    Plug 'sheerun/vim-polyglot'
+    Plug 'sheerun\vim-polyglot'
     " File Explorer
-    Plug 'scrooloose/NERDTree'
+    Plug 'scrooloose\NERDTree'
     " Auto pairs for '(' '[' '{'
-    Plug 'jiangmiao/auto-pairs'
+    Plug 'jiangmiao\auto-pairs'
 
 call plug#end()
 
@@ -93,18 +77,18 @@ call plug#end()
 
 ## Source your plugins
 
-Add the following line to `init.vim`
+Add the following line to `.vimrc`
 
 ```
-source $HOME/.config/nvim/vim-plug/plugins.vim
+source $HOME\.config\vim\vim-plug\plugins.vim
 ```
 
 ## Vim-plug commands
 
-Open `nvim`
+Open `vim`. Make sure you have the vim executable in your %PATH% variables.
 
 ```
-nvim
+gvim
 ```
 
 Check the status of your plugins
@@ -146,3 +130,4 @@ Finally if you want to upgrade vim-plug itself run the following
 ## Where did I learn all this?
 
 [Check out vim-plug on github](https://github.com/junegunn/vim-plug)
+
