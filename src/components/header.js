@@ -60,7 +60,7 @@ const Header = () => {
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://github.com/ChristianChiarulli"}
+              href={"https://github.com/ayushxx7"}
             >
               <FaGithub color="#FFFFFF" size="30" />
             </a>
@@ -69,7 +69,7 @@ const Header = () => {
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://www.youtube.com/channel/UCS97tchJDq17Qms3cux8wcA"}
+              href={"https://www.youtube.com/c/AyushMandowara_xx7/videos"}
             >
               <FaYoutube color="#EB3323" size="30" />
             </a>
@@ -87,7 +87,7 @@ const Header = () => {
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://www.linkedin.com/in/christianchiarulli/"}
+              href={"https://www.linkedin.com/in/ayushxx7/"}
             >
               <FaLinkedin color="#3077B0" size="30" />
             </a>

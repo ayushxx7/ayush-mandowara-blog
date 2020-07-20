@@ -3,7 +3,8 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {Link} from "gatsby"
 import Me from "../images/me.jpg"
-import Nvim from "../images/nvim.png"
+// import Nvim from "../images/nvim.png"
+import Gvim from "../images/gvim.png"
 import ThisBlog from "../images/this-blog.png"
 import bluestacks from "../images/bluestacks.png"
 import style from "./index.module.less"
@@ -104,9 +105,9 @@ const IndexPage = () => {
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://github.com/ayushxx7/nvim"}
+              href={"https://github.com/ayushxx7/dotfiles"}
             >
-              <img src={Nvim} height="200px" width="200px" alt="nvim" />
+              <img src={Gvim} height="200px" width="200px" alt="nvim" />
             </a>
           </div>
           <div className={style.content}>

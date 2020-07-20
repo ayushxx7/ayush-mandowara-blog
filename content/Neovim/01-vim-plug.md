@@ -2,7 +2,7 @@
 title: Plugins with Vim-Plug
 description: How to add Plugins to Vim using a Plugin Manager.
 date: "2020-07-18"
-image: "neovim.png"
+image: "gvim.png"
 author: "Ayush"
 tags: ["gvim"]
 ---
