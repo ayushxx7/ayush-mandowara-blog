@@ -145,7 +145,7 @@ const IndexPage = () => {
                 "https://www.bluestacks.com"
               }
             >
-              <img src={bluestacks} height="150px" width="153px" alt="blog" />
+              <img src={bluestacks} height="200px" width="200px" alt="blog" />
             </a>
           </div>
           <div className={style.content}>
