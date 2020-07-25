@@ -167,12 +167,15 @@ nnoremap <silent> <leader>- :vertical resize -5<CR>
 ```
 
 - Chris's mappings.
+
 ```
-"Chris's Mappings"
-" Better nav for omnicomplete
+"Chris's Mappings 
+"Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
+```
 
+```
 " Use alt + hjkl to resize windows
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
@@ -213,6 +216,7 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
+
 ```
 
 Source in .vimrc
