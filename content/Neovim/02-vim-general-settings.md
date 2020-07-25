@@ -1,10 +1,10 @@
 ---
-title: Neovim Setting up the basics
+title: Gvim Setting up the basics
 description:
 date: "2020-04-24"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+image: "gvim.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## General Setings
@@ -12,9 +12,9 @@ tags: ["neovim"]
 To include some basics in your config first create a directory called general and a file called `settings.vim`
 
 ```
-mkdir ~/.config/nvim/general
+mkdir %userprofile%\.config\vim\general
 
-touch ~/.config/nvim/general/settings.vim
+type nul > %userprofile%\gvim\general\settings.vim
 ```
 
 Here is every general setting I use with a brief explanation:
@@ -68,7 +68,7 @@ cmap w!! w !sudo tee %
 Source in init.vim
 
 ```
-source $HOME/.config/nvim/general/settings.vim
+source $HOME\.config\nvim\general\settings.vim
 ```
 
 ## Mapping new keys
@@ -76,9 +76,9 @@ source $HOME/.config/nvim/general/settings.vim
 Again we'll create a directory called keys and and a file called mappings.vim
 
 ```
-mkdir ~/.config/nvim/keys
+mkdir %userprofile%\.config\vim\keys
 
-touch ~/.config/nvim/keys/mappings.vim
+type nul > %userprofile%\.config\vim\keys\mappings.vim
 ```
 
 Add the following to mappings.vim:
@@ -133,12 +133,12 @@ nnoremap <Leader>O O<Esc>^Da
 Source in init.vim
 
 ```
-source $HOME/.config/nvim/keys/mappings.vim
+source $HOME\.config\nvim\keys\mappings.vim
 ```
 
 ## Get healthy
 
-Open `nvim` and enter the following:
+Open `gvim` and enter the following:
 
 ```
 :checkhealth
