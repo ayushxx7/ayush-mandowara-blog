@@ -1,8 +1,8 @@
 ---
-title: Neovim Themes
+title: Gvim Themes
 description:
 date: "2020-04-25"
-image: "gvim-wq.png"
+image: "gvim-intro.png"
 author: "Ayush"
 tags: ["gvim"]
 ---
