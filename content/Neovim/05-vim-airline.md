@@ -1,15 +1,15 @@
 ---
 title: Airline
 description:
-date: "2020-04-27"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+date: "2020-07-27"
+image: "gvim-intro.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## Plugin Airline and Airline themes
 
-Add the following to `~/.config/nvim/vim-plug/plugins.vim`
+Add the following to `%userprofile%\.config\vim\vim-plug\plugins.vim`
 
 ```
 Plug 'vim-airline/vim-airline'
@@ -21,7 +21,7 @@ Plug 'vim-airline/vim-airline-themes'
 Create theme file for airline
 
 ```
-touch ~/.config/nvim/themes/airline.vim
+type nul > %userprofile%\.config\vim\themes\airline.vim
 ```
 
 Add the following configuration
@@ -57,15 +57,22 @@ source $HOME/.config/nvim/themes/airline.vim
 
 ## Install fonts
 
-You may want to install these fonts if you want the little arrows and stuff
+You may want to install some awesome fonts. You can do so by following these stepe.
+[Original Source](https://medium.com/@slmeng/how-to-install-powerline-fonts-in-windows-b2eedecace58)
+
+Open Powershell [Administrator], cd to a directory of your choice, and type the following commands.
 
 ```
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
+git clone https://github.com/powerline/fonts.git
 cd fonts
-./install.sh
-# clean-up a bit
+
+Set-ExecutionPolicy Bypass
+## press 'y' if a prompt appeears after the above command.
+
+./install.ps1
+
+# since you've already installed fonts, you can get rid of the cloned repo
+
 cd ..
 rm -rf fonts
 ```

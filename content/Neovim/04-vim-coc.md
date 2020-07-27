@@ -1,10 +1,10 @@
 ---
-title: Neovim Intellisense with coc
+title: Gvim Intellisense with Conquerer of Completion (CoC)
 description:
-date: "2020-04-26"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+date: "2020-07-27"
+image: "gvim-intro.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## Conquerer of Completion
@@ -32,19 +32,20 @@ npm i -g yarn
 Create a directory called `plug-config` and an entry for `coc`
 
 ```
-mkdir ~/.config/nvim/plug-config
+mkdir %userprofile%\.config\vim\plug-config
 
-touch ~/.config/nvim/plug-config/coc.vim
+
+type nul > %userprofile%\.config\plug-config\coc.vim
 ```
 
 ## Create basic config file
 
 Head over to the [readme](https://github.com/neoclide/coc.nvim) and grab his example config
 
-Add the following to your `init.vim`
+Add the following to your `.vimrc`
 
 ```
-source $HOME/.config/nvim/plug-config/coc.vim
+source $HOME\.config\vim\plug-config\coc.vim
 ```
 
 ## Checking coc health
@@ -114,53 +115,3 @@ and other configuration like autoformat and adding a location for snippets (I'll
 
 for more info on configuring your settings checkout [this page](https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file)
 
-## Optional install watchman
-
-For watchman supprt install watchman
-
-- Mac
-
-  ```
-  brew install watchman
-  ```
-
-- Ubuntu
-
-  ```
-  sudo apt install watchman
-  ```
-
-- Arch
-
-  ```
-  yay -S watchman
-  ```
-
-### Note
-
-watchman can be a memory hog, to stop all watchman processes and free up some memory run
-
-```
-watchman watch-del-all
-```
-
-## Automatically reinstall the extensions you use
-
-If you use `neovim` and already have `node` installed, you can use the following script to reinstall your favorite extensions
-
-```
-#!/usr/bin/bash
-
-set -o nounset    # error when referencing undefined variable
-set -o errexit    # exit when command fails
-
-# Install extensions
-mkdir -p ~/.config/coc/extensions
-cd ~/.config/coc/extensions
-if [ ! -f package.json ]
-then
-  echo '{"dependencies":{}}'> package.json
-fi
-# Change extension names to the extensions you need
-npm install coc-snippets coc-python coc-tsserver coc-html coc-css coc-json coc-yaml --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
-```
