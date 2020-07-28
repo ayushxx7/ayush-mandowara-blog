@@ -1,15 +1,32 @@
 ---
-title: Integrate Neovim with FZF & more
+title: Integrate Gvim with FZF & more
 description:
-date: "2020-04-30"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+date: "2020-07-28"
+image: "gvim-intro.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## Install FZF, Ripgrep, Universal-ctags, Silver-searcher
 
 First let's just install a bunch of awesome tools to help you search/find stuff
+
+- Windows 
+
+  ```
+  chocolatey install fzf
+
+  # To install useful key bindings and fuzzy completion:
+  # -- need to look windows equivalent. $(brew --prefix)/opt/fzf/install
+
+  chocolatey install ripgrep
+
+  chocolatey install --HEAD universal-ctags/universal-ctags/universal-ctags
+
+  chocolatey install the_silver_searcher
+
+  chocolatey install fd
+  ```
 
 - Mac
 

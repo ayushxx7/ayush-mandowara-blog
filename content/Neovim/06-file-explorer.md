@@ -2,9 +2,9 @@
 title: Exploring coc-explorer
 description:
 date: "2020-04-28"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+image: "gvim-intro.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## Install coc-explorer
@@ -32,7 +32,7 @@ We can add some simple settings in the `coc-settings.json` file
   }
 ```
 
-We'll also add some settings in `~/.config/nvim/plug-config/coc.vim`
+We'll also add some settings in `%userprofile%\.config\vim\plug-config\coc.vim`
 
 Append these lines to the end
 
