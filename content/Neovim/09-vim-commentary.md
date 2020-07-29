@@ -1,7 +1,7 @@
 ---
 title: Vim-commentary
 description:
-date: "2020-04-30"
+date: "2020-07-29"
 image: "gvim-intro.png"
 author: "Ayush"
 tags: ["gvim"]
@@ -28,8 +28,12 @@ Then, Just press <space>/ and it will comment out the line.
 In visual mode select the text you want to comment out and press <space>/
 
 <br>
-However, I still prefer the 'gc<motion>', 'gcc' for single line, and 'gc' for visual block mode. (Default config)
-
+However, I still prefer these default settings. 
+```
+To comment/uncomment on a motion such as 4j: 'gc<motion>'
+To comment/uncomment single line: 'gcc' 
+To comment/uncomment on visual block, after selecting block: 'gc'
+```
 
 ## Link to repo
 
