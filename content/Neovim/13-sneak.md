@@ -1,10 +1,10 @@
 ---
 title: Sneak
 description:
-date: "2020-05-03"
-image: "neovim.png"
-author: "Chris"
-tags: ["neovim"]
+date: "2020-07-29"
+image: "gvim-intro.png"
+author: "Ayush"
+tags: ["gvim"]
 ---
 
 ## Install
@@ -16,10 +16,10 @@ Plug 'justinmk/vim-sneak'
 ## Create config file
 
 ```
-touch ~/.config/nvim/plug-config/sneak.vim
+type nul > %userprofile%\.config\vim\plug-config\sneak.vim
 ```
 
-Make sure to source this file in `init.vim`
+Make sure to source this file in `.vimrc`
 
 ## Sneak
 

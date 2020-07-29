@@ -2,7 +2,7 @@
 title: Gvim Setting up the basics
 description:
 date: "2020-04-24"
-image: "gvim.png"
+image: "gvim-intro.png"
 author: "Ayush"
 tags: ["gvim"]
 ---
