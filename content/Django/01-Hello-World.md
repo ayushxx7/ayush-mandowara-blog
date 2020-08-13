@@ -67,9 +67,9 @@ gvim .
 Hello-World-Django
 │
 └───learning_django
-│   │
-│   └───learning_django
-│   └───first_app
+    │
+    └───learning_django
+    └───first_app
     │   admin.py
     │   models.py
     │   views.py <- Open this file.
@@ -95,9 +95,9 @@ def index(request): # our first view/function that will have some logic.
 Hello-World-Django
 │
 └───learning_django
-│   │
-│   └───learning_django
-│   └───first_app
+    │
+    └───learning_django
+    └───first_app
     │   admin.py
     │   models.py
     │   views.py
@@ -117,22 +117,51 @@ urlpatterns = [
     # to replicate the same behavior.
 ]
 ```
-- Keeping separate files for `urls` gives us clarity about what all endpoints exist within the codebase without having to go through the whole app.
-- It is also easier to mantain and update paths this way.
-- Now, to complete the mapping, we have to add this apps 'urls' to our main app `learning_django`'s URLs.
 
-7. Open `learning_django\urls.py` and add:
+- We must add `first_app` app's urls to our `learning_django` app's `urls.py` file
+
+#### Open `learning_django\urls.py`:
 ```
-from django.contrib import admin
-from django.urls import include, path
+Hello-World-Django
+│
+└───learning_django
+    │
+    └───learning_django
+    │   asgi.py
+    │   settings.py
+    │   urls.py <- Open this file.
+    └───first_app
+```
+
+#### Modify it to:
+```
+from django.contrib import admin # for the admin routes
+from django.urls import include, path # include is used to include paths from other apps.
 
 urlpatterns = [
-    path('first_app/', include('polls.urls')),
+    path('first_app/', include('first_app.urls')), 
+    # we are serving this app's endpoints at /first_app
     path('admin/', admin.site.urls),
 ]
 ```
+- A separate `urls` file for each app adds clarity.
+- We can scan through all the `urls` files to know what all endpoints are there
+- To understand the routes, we don't need to view the internal logic (i.e. views) and vice-versa.
+- It is also easier to mantain and update paths this way.
 
-8. Open your `learning_django\settings.py` and add `first_app` to your installed apps:
+
+#### Open your `learning_django\settings.py` and add `first_app` to your installed apps:
+```
+Hello-World-Django
+│
+└───learning_django
+    │
+    └───learning_django
+    │   asgi.py
+    │   settings.py <- Open this file.
+    │   urls.py 
+    └───first_app
+```
 
 ```
 INSTALLED_APPS = [
@@ -146,11 +175,11 @@ INSTALLED_APPS = [
 ]
 ```
 
-9. Now, run the server again and visit localhost:8000\first_app
+## Step 3: Now, run the server again and visit `localhost:8000\first_app`
 ```
 py manage.py runserver
 ```
-- You would see that the page is returning whatever you wrote in the views.py index function.
+- You would be greeted with the `Hello World` message that you wrote in your views.
 
 # Voila! You have successfully hosted a Django Web App on your local machine and served your own response on an endpoint!
 
