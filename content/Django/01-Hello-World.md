@@ -55,13 +55,13 @@ djangoadmin startapp first_app
 
 ## Step 2: Let's some write code:
 
-#### Open your project in ~your favorite text editor~ Vim!
+#### Open your project in ~~your favorite text editor~~ Vim!
 
 ```
 gvim .
 ```
 
-#### Inside your `first_app` folder, you will see a `views.py` file
+### Inside your `first_app` folder, you will see a `views.py` file
 
 ```
 Hello-World-Django
@@ -90,7 +90,7 @@ def index(request): # our first view/function that will have some logic.
 ```
 - The comments can be ommited, they are for explanatory purposes only.
 
-#### Create & Open `first_app\urls.py`
+### Create & Open `first_app\urls.py`
 ```
 Hello-World-Django
 │
@@ -118,9 +118,9 @@ urlpatterns = [
 ]
 ```
 
-- We must add `first_app` app's urls to our `learning_django` app's `urls.py` file
+## We must add `first_app` app's urls to our `learning_django` app's `urls.py` file
 
-#### Open `learning_django\urls.py`:
+### Open `learning_django\urls.py`:
 ```
 Hello-World-Django
 │
@@ -150,7 +150,7 @@ urlpatterns = [
 - It is also easier to mantain and update paths this way.
 
 
-#### Open your `learning_django\settings.py` and add `first_app` to your installed apps:
+### Open `learning_django\settings.py`
 ```
 Hello-World-Django
 │
@@ -162,7 +162,7 @@ Hello-World-Django
     │   urls.py 
     └───first_app
 ```
-
+#### Add `first_app` to your installed apps:
 ```
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -171,7 +171,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'first_app'
+    'first_app' # Add your app name here.
 ]
 ```
 
