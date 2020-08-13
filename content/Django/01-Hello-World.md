@@ -8,11 +8,11 @@ tags: ["django"]
 ---
 
 <h2> PURPOSE </h2>
-<h3>To create a full fledged Web App with a strong backend core, that provides a lot of features out of the box, and takes care of securtiy from the ground "Django" is the go to choice. It's built for scalability & essentially forces you to follow best practices.</h3>
+<h3>To create a Web App that focuses on scalabality & securtiy, "Django" is the go to framework in Python. It's a feature rich solution that enforces best practices from the ground up.</h3>
 
 <h4>The Author assumes that you have some basic understanding of working with Python 3.</h4>
 
-Step 0: [Optional] Creating a virtual environment for your project and installing the django framework.
+### Step 0: [Optional] Creating a virtual environment and activate it.
 
 If you're on Windows, open command prompt and type:
 
@@ -21,9 +21,11 @@ py -m venv django_env
 cd django_env/Scripts
 ./activate
 ```
-Now you have activated your freshly created virtualenviornment.
 
-1. Installing Flask framework using pip
+
+## Step 1. Initial Setup:
+
+#### Installing Django framework using pip
 
 ```
 # inside the venv
@@ -32,9 +34,7 @@ pip install django
 py -m pip install django
 ```
 
-## Step 2: Creating a new project directory ("Hello-World-Flask") on your machine and creating basic app.
-
-2. In you command prompt:
+#### Creating a new project
 
 ```
 md Hello-World-Django
@@ -43,48 +43,82 @@ djangoadmin startproject learning_django
 py manage.py runserver
 ```
 
-- See the directory structure, you will see a bunch of files. We will discuss them as well proceed.
-- Now visit `localhost:8000`, Django will let you know that your project has been setup.
+- Take a look at your project directory. Why so many files, I wonder?
+- Visit `localhost:8000` on your browser. Oh look, it's Django, saying hello to you!
 
-3. Now back to your command prompt to create your first app:
+#### Creating an app inside the project
 
 ```
 djangoadmin startapp first_app
 ```
-- You will see that a subdirectory by name of `first_app` was created inside the `learning_django` folder.
+- Take a look at your directory structure again. Wonderful, isn't it? Confusing, but wonderful!
 
-4. Open your project in your favorite text editor. 
+## Step 2: Let's some write code:
+
+#### Open your project in ~your favorite text editor~ Vim!
 
 ```
 gvim .
 ```
 
-5. Inside your `first_app` folder, you will see a `views.py` file. Modify it like so:
+#### Inside your `first_app` folder, you will see a `views.py` file
 
 ```
-from django.http import HttpResponse
+Hello-World-Django
+│
+└───learning_django
+│   │
+│   └───learning_django
+│   └───first_app
+    │   admin.py
+    │   models.py
+    │   views.py <- Open this file.
+```
 
+#### Open it, and modify the code so it looks like this:
+```
+from django.http import HttpResponse # simple html response. no templates.
 
-def index(request):
+# in flask, you would use @app.route decorator here. 
+# in django, we keep the route/url path in a separate file called "urls.py"
+def index(request): # our first view/function that will have some logic.
+    # this is where you would write some operational logic like 
+    # split_text = some_text_to_split.split(',')
+    # for now, we will just return Hello World, without any additional processing.
+
     return HttpResponse("Hello, world. You're at the first_app index.")
 ```
+- The comments can be ommited, they are for explanatory purposes only.
 
-- Views are like a parent file, where all your scripting will happen. 
-- To compare it with `flask`, this is where you would write your `@decorated` functions.
-- To map the `views` a.ka. `functions` we need to create a `urls.py` file inside the `first_app` directory, and add a mapping for it.
-
-
-6. Create & Open `first_app\urls.py` and add:
+#### Create & Open `first_app\urls.py`
 ```
-from django.urls import path
+Hello-World-Django
+│
+└───learning_django
+│   │
+│   └───learning_django
+│   └───first_app
+    │   admin.py
+    │   models.py
+    │   views.py
+    │   urls.py <- create this file and open it.
+```
 
-from . import views
+#### Add the following to it:
+```
+from django.urls import path # standard django function for defining url paths
+
+from . import views # importing the views.py file that we just modified.
 
 urlpatterns = [
     path('', views.index, name='index'),
+    # !IMPORTANT: We are importing and serving the index function at /first_app endpoint.
+    # in flask, you would just add the path like @app.route('/first_app') in your function.
+    # to replicate the same behavior.
 ]
 ```
-
+- Keeping separate files for `urls` gives us clarity about what all endpoints exist within the codebase without having to go through the whole app.
+- It is also easier to mantain and update paths this way.
 - Now, to complete the mapping, we have to add this apps 'urls' to our main app `learning_django`'s URLs.
 
 7. Open `learning_django\urls.py` and add:
