@@ -14,19 +14,16 @@ This article is intended to be a Hello World project for such a use case </h3>
 
 <h4>The Author assumes that you have some basic understanding of working with Python 3.</h4>
 
-## Step 1: [Optional] Creating a virtual environment for your project and installing the flask framework.
+## Step 0: [Optional] Creating a virtual environment
 
-If you're on Windows, open command prompt and type:
-
+#### If you're on Windows, open command prompt and type:
 ```
 py -m venv first_flask_app
 cd first_flask_app/Scripts
 ./activate
 ```
-Now you have activated your freshly created virtualenviornment.
 
-2. Installing Flask framework using pip
-
+#### Installing Flask framework using pip
 ```
 # inside the venv
 pip install flask
@@ -34,39 +31,36 @@ pip install flask
 py -m pip install flask
 ```
 
-## Step 2: Creating a new project directory ("Hello-World-Flask") on your machine and creating basic app.
+## Step 1: INITIAL SETUP
 
-1. In you command prompt:
-
+#### Create a new project directory, and open a file named `app.py` inside it.
 ```
 md Hello-World-Flask
 cd Hello-World-Flask
 gvim app.py
 ```
 
-2. Inside the `app.py` file just created:
+## Step 2: CODING YOUR FIRST FLASK APP
 
+#### Add the following to the `app.py` file:
 ```
-from flask import Flask
+from flask import Flask # importing the Flask module from the framework. 
 
-app = Flask(__name__)
+app = Flask(__name__) # initializing an app
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(debug=True) # running the server when the file is called directly.
 ```
 
-3. Run the `app.py` file:
-
+#### Run the `app.py` file.
 ```
 py app.py
 ```
+- Flask would be telling that the server is running `port 5000`
 
-Voila, you would seeing a message saying your server is running on localhost and port number (default is 5000 for python)
-However, it does not do anything yet! Let's add the Hello World part now:
+### Let's Serve our First Web Page.
 
-## Step 3: Making your Flask app do something
-
-1. Open your `app.py` file and change the code to the following:
+#### Modify your `app.py` file like so:
 
 ```
 from flask import Flask
@@ -74,11 +68,12 @@ from flask import Flask
 app = Flask(__name__)
 
 # Adding your first endpoint
-
-@app.route('/')
+# the @decorator app.route can take multiple arguments.
+# for now, we will just past the path at which we want to serve our page.
+@app.route('/') # serving at localhost:5000/ (localhost:5000)
 def index():
-  return 'Hello World!'
-
+  # whenever we visit the endpoint, `index` function will be called.
+  return 'Hello World!' # just returning a plain string for now.
 
 if __name__ == "__main__":
   app.run(debug=True)
