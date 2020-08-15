@@ -79,21 +79,12 @@ if __name__ == "__main__":
   app.run(debug=True)
 ```
 
-2. Run the app and visit localhost:portnumber on any browser in you machine (for ex: in the address bar, type localhost:5000).
-
-The page would say:
-
+- That's about it, just visit `localhost:5000` on your browser
 ```
 Hello World!
 ```
+- And bask in the glory of your simple yet powerful creation.
 
-Holy crap, it couldn't have been this simple! 
-<h3>Well, IT IS!</h3>
+Next Blog: How to Serve HTML Pages using Flask. 
 
-
-Next Blog: How to configure your app to do some actual processing, and beautifying the webpage.
-
-
-To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
-
-
+# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
