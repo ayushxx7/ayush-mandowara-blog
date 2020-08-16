@@ -23,6 +23,7 @@ cd first_flask_app/Scripts
 ./activate
 ```
 
+## Step 1: INITIAL SETUP
 #### Installing Flask framework using pip
 ```
 # inside the venv
@@ -30,8 +31,6 @@ pip install flask
 # if you have skipped the step of creating a virtual environment
 py -m pip install flask
 ```
-
-## Step 1: INITIAL SETUP
 
 #### Create a new project directory, and open a file named `app.py` inside it.
 ```
@@ -56,7 +55,7 @@ if __name__ == "__main__":
 ```
 py app.py
 ```
-- Flask would be telling that the server is running `port 5000`
+- Your command prompt will be telling you that a server is up and running on `port 5000`
 
 ### Let's Serve our First Web Page.
 
