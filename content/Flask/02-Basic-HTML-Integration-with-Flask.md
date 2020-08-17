@@ -7,29 +7,44 @@ author: "Ayush"
 tags: ["flask"]
 ---
 
-<h2> PURPOSE </h2>
-<h3>Understanding how to Render HTML Pages on a Flask based Web App</h3>
+## PURPOSE
+### Understanding how to Render HTML Pages on a Flask based Web App
 
-<h4>The Author assumes that you have read this blog [01] or have basic understanding of Flask, and HTML.</h4>
+#### The Author assumes that you have read this blog [01] or have basic understanding of Flask, and HTML.
 
-## Step 1: Setting up Flask to Render HTML. 
-
-1. Create a `templates\` directory in your Project Root.
+### Step 1: Creating a templates directory, where your HTML files will be placed
+#### Create a `templates\` directory in your Project Root.
+```
+# assuming your project root is called 'flask_app' & app name is 'app.py'
+flask_app
+│   app.py 
+└───templates <- create this folder
+    │   index.html <- create this file
+```
 
 ```
-# assuming your project root is called 'flask app'.
 cd flask_app/
 md templates
+cd templates
+gvim index.html
 ```
 
-2. Assuming your flask app is called `app.py`, and contains the following:
+### Step 2: Let's write a simple HTML Page
+#### In your `index.html` present in your `templates` directory, add the following code:
+```
+<h1> Hello World! </h1>
+<h2> Made with <3 and Python </h2>
+<em>by <b>Ayush Mandowara</b></em>
+<!-- enter your name instead of mine! -->
+```
 
+### Step 3: Let's render the HTML Page just created through Flask
+#### If you followed the previous tutorial, your `app.py` file looks something like this:
 ```
 from flask import Flask
 
 app = Flask(__name__)
 
-# Adding your first endpoint
 
 @app.route('/')
 def index():
@@ -40,8 +55,7 @@ if __name__ == "__main__":
   app.run(debug=True)
 ```
 
-- Modify the file to:
-
+#### Modify the file to:
 ```
 from flask import Flask, render_template # adding template support
 
@@ -51,37 +65,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  return render_template('index.html') 
-  # instead of rendering plain text, we are rendering a proper HTML page now.
+  return render_template('index.html') # pass the name of the HTML file you created.
 
 if __name__ == "__main__":
   app.run(debug=True)
 ```
 
-3. Add `index.html` in your `templates` directory and add the following code to it:
 
-```
-<h1> Hello World! </h1>
-<h2> Made with <3 and Python </h2>
-<em>by <b>Ayush Mandowara</b></em>
-<!-- enter your name instead of mine! -->
-```
-
-4. Run the `app.py` file:
-
+### Run the `app.py` file:
 ```
 py app.py
 ```
+- That's about it, just visit `localhost:5000` on your browser, and say hello to the first of many pages you will serve using this technique.
 
-Voila, you have successfully created a web app, and are able to render actual HTML instead of plain old text. 
-Visit localhost:5000 to bask in the glory of your simple yet powerful creation!
-
-Holy crap, it couldn't have been this simple! 
-<h3>Well, IT IS!</h3>
-
-Next Blog: How to add some sassiness to your webpage.
+Next Blog: How to render Dynamic Data to your webpage.
 
 
-To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
-
-
+# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
