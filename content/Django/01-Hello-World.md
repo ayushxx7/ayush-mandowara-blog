@@ -12,7 +12,7 @@ tags: ["django"]
 
 <h4>The Author assumes that you have some basic understanding of working with Python 3.</h4>
 
-### Step 0: [Optional] Creating a virtual environment and activate it.
+### Step 0: [Optional] Creating a virtual environment and activating it.
 
 If you're on Windows, open command prompt and type:
 
