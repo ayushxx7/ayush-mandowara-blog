@@ -7,58 +7,65 @@ author: "Ayush"
 tags: ["flask"]
 ---
 
-<h2> PURPOSE </h2>
-<h3>To pass dynamic information from your server to your front end and vice-versa</h3>
+## PURPOSE
+### To pass dynamic information from your server to your front end and vice-versa
 
-<h4>The Author assumes that you have read this blog [02] and have basic understanding of integrating HTML with Flask.</h4>
+#### The Author assumes that you have read this blog [02] and have basic understanding of integrating HTML with Flask.
 
-## Topic 1: Sending Information from Frontend HTML to your Python Server Script.
+# [PART ONE] Sending Information from Frontend HTML to your Python Server Script.
 
-1. Creating a basic form in HTML, that triggers an endpoint when submitted. 
-
+## HTML
 ```
-# assuming your project root is called 'flask app', and has a 'templates/index.html' file in it.
+# assuming your project structure looks like this:
+flask_app
+│   app.py 
+└───templates
+    │   index.html <- open this file
+
 cd flask_app/templates
 gvim index.html
 ```
 
-- Modify your index.html so that it contains a basic form:
+### Creating a form in HTML.
+#### To pass data from Frontend we need to Submit. Forms provide a way to do so.
+
+- Modify your `index.html` so that it contains a basic form:
 
 ```
 <h1> Hello World! </h1>
 <h2> Made with <3 and Python </h2>
-    <em>by <b>Ayush Mandowara</b></em>
-    <!-- enter your name instead of mine! -->
+<em>by <b>Ayush Mandowara</b></em>
+<!-- enter your name instead of mine! -->
 
-    <div>
-      <div class="container text-left">
-        <h3> Suite Runner </h3>
-        <form id="my_form" action="/run" method="post">
-          <!-- /run is the endpoint that will be triggered on form submission -->
-          
-          <!-- The "name" attribute is "key" for getting the form information from HTML to Python -->
-          <div class="form-group">
-            <label for="Suite">Choose a Suite:</label>
-            <select id="suite" name="suite">
-              <option value="regression">Regression</option>
-              <option value="html_home">HTML Home Page</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <h3>Build URL:
-              <input type="text" name="build_url" placeholder="Enter Build URL" size="100"></input>
-            </h3>
-            <h3>Host URL:
-              <input type="text" name="host_url" placeholder="Leave Empty for Production" size="100"></input>
-            </h3>
-            <br><br>
-          </div>
-          <div class="form-group">
-            <button type="submit" value="Run" class="btn" name="submit_button">Run Suite</button>
-          </div>
-        </form>
+<div>
+  <div class="container text-left">
+    <h3> Suite Runner </h3>
+    <form id="my_form" action="/run" method="post">
+      <!-- /run is the endpoint that will be triggered on form submission -->
+      
+      <!-- The "name" attribute is "key" for getting the form information from HTML to Python -->
+      <div class="form-group">
+        <label for="Suite">Choose a Suite:</label>
+        <select id="suite" name="suite">
+          <option value="regression">Regression</option>
+          <option value="html_home">HTML Home Page</option>
+        </select>
       </div>
-    </div>
+      <div class="form-group">
+        <h3>Build URL:
+          <input type="text" name="build_url" placeholder="Enter Build URL" size="100"></input>
+        </h3>
+        <h3>Host URL:
+          <input type="text" name="host_url" placeholder="Leave Empty for Production" size="100"></input>
+        </h3>
+        <br><br>
+      </div>
+      <div class="form-group">
+        <button type="submit" value="Run" class="btn" name="submit_button">Run Suite</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 ```
 
