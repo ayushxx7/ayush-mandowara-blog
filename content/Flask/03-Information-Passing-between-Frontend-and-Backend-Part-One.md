@@ -8,9 +8,9 @@ tags: ["flask"]
 ---
 
 ## PURPOSE
-### To pass dynamic information from your server to your front end and vice-versa
+### To pass dynamic information from the front end to the server [HTML Forms Parsing]
 
-#### The Author assumes that you have read this blog [02] and have basic understanding of integrating HTML with Flask.
+#### The Author assumes that you have basic understanding of integrating HTML with Flask.
 
 # Sending Information from Frontend HTML to your Python Server Script.
 
