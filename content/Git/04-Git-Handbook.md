@@ -32,4 +32,13 @@ git commit -m "some relevant message to why you reverted to this one. since you 
 git pull origin master --allow-unrelated-histories
 ```
 
+# [Playing Detective]()
+```
+# To check the latest commit history, the standard command is this:
+git log 
+# To check who changed what line in a file and when, use:
+git blame <filename>
+# To search for a string, like a function name, in your entire git commit history:
+git log -S "search_string"
+```
 # To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
