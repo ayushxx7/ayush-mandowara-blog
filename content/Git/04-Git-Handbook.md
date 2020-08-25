@@ -32,13 +32,24 @@ git commit -m "some relevant message to why you reverted to this one. since you 
 git pull origin master --allow-unrelated-histories
 ```
 
-# [Playing Detective]()
+# [Playing Detective](https://vimeo.com/280579162)
 ```
-# To check the latest commit history, the standard command is this:
-git log 
+# There are times when you need to figure out exactly who made the changes in a file
+# Sometimes, the standard `git log` command will suffice, but there are times when 
+# you need to dig deeper and find out why was a change made? 
+
 # To check who changed what line in a file and when, use:
 git blame <filename>
+# This will show you who made the last change in a file, when and with what commit.
+
 # To search for a string, like a function name, in your entire git commit history:
 git log -S "search_string"
+# This will show a complete history of when this line was introduced, along with 
+# every time it was changed, who changed it and with what commit hash.
+
+# Once you have a commit hash, you can use:
+git diff <commit_hash>
+# to learn what all changes were part of the commit history.
 ```
+
 # To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
