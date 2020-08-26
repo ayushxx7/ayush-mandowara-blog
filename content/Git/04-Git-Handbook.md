@@ -32,6 +32,16 @@ git commit -m "some relevant message to why you reverted to this one. since you 
 git pull origin master --allow-unrelated-histories
 ```
 
+# [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
+```
+# There are times when you have made several changes in a file, but you only want to commit part of it at the moment.
+git add -p <filename>
+# This will show you a comprehensive menu, where your changes will be divided into so called `hunks`
+# if you want to commit a specific hunk, press `y`, else press `n`
+# To split the changes into even smaller hunks, press `s`
+# Press `?` to know what each option does
+```
+
 # [Playing Detective](https://vimeo.com/280579162)
 ```
 # There are times when you need to figure out exactly who made the changes in a file
