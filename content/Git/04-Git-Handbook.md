@@ -62,4 +62,12 @@ git diff <commit_hash>
 # to learn what all changes were part of the commit history.
 ```
 
+### Further Reading
+#### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
+#### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
+#### [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
+#### [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
+#### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
+
+
 # To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
