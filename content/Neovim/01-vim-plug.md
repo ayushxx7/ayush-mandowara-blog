@@ -54,25 +54,26 @@ type nul > %userprofile%\.config\vim\vim-plug\plugins.vim
 Add the following to `%userprofile%\.config\vim\vim-plug\plugins.vim`
 
 ```
-" auto-install vim-plug
-if empty(glob('%userprofile%\.config\vim\autoload\plug.vim'))
-  silent !curl -fLo %userprofile%\.config\vim\autoload\plug.vim --create-dirs
-    \ https:\\raw.githubusercontent.com\junegunn\vim-plug\master\plug.vim
-  "autocmd VimEnter * PlugInstall
-  "autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-call plug#begin('%userprofile%\.config\vim\autoload\plugged')
-
-    " Better Syntax Support
-    Plug 'sheerun\vim-polyglot'
-    " File Explorer
-    Plug 'scrooloose\NERDTree'
-    " Auto pairs for '(' '[' '{'
-    Plug 'jiangmiao\auto-pairs'
-
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fuzzy file search using fzf.
+Plug 'junegunn/fzf.vim', { 'commit': '23dda8602f138a9d75dd03803a79733ee783e356'} " fzf mappings.
+Plug 'tpope/vim-fugitive' "git plugin 
+Plug 'tpope/vim-commentary' " to quickly comment and uncomment statements.
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Intellisense Plugin.
+Plug 'preservim/nerdtree' " file tree.
+Plug 'justinmk/vim-sneak' " super quick jumping to desired position.
+Plug 'svermeulen/vim-easyclip' " awesome clipboard like features for yank/delete.
+Plug 'jiangmiao/auto-pairs' " opening brackets / quotes will add a matching closing pair. ## experimental.
+Plug 'tpope/vim-surround' "changing surrounding brackets characters
+Plug 'tpope/vim-repeat' " covers a lot more in the dot (repeat command).
+Plug 'nelstrom/vim-visual-star-search' " expanding star search from single word to all selection.
+Plug 'mhinz/vim-startify' "cool startup screen
+Plug 'mattn/emmet-vim' " quickly write html.
+Plug 'gruvbox-community/gruvbox' " community gruvbox.
+Plug 'vim-airline/vim-airline' " customized status line.
+Plug 'vim-airline/vim-airline-themes' "airline themes
+Plug 'sheerun/vim-polyglot' " better syntax highlighting
 call plug#end()
-
 ```
 
 ## Source your plugins
