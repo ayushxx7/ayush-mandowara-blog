@@ -7,38 +7,19 @@ author: "Ayush"
 tags: ["gvim"]
 ---
 
-## Install coc-explorer
+## Install nerdtree
 
-This install will be a little different and if you've been following along you probably know we are using coc
-
-coc-explorer is just and extension to that
-
+Add the following to `plugins.vim`
 ```
-:CocInstall coc-explorer
+Plug 'preservim/nerdtree' " file tree.
 ```
 
 ## Config
 
-We can add some simple settings in the `coc-settings.json` file
-
-```
-// explorer
-  "explorer.width": 30,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit"
-  }
-```
-
-We'll also add some settings in `%userprofile%\.config\vim\plug-config\coc.vim`
+Add the following to `%userprofile%\.config\vim\plug-config\nerdtree.vim` and source it.
 
 Append these lines to the end
 
 ```
-" Explorer
-nmap <space>e :CocCommand explorer<CR>
-nmap <space>f :CocCommand explorer --preset floating<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+map <C-n> :NERDTreeToggle<CR>
 ```
