@@ -13,6 +13,14 @@ tags: ["git"]
 There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those. 
 
 
+# [Revert last commit](https://stackoverflow.com/a/2846154/7048915)
+```
+# to uncommit but keep the changes intact
+git reset --soft HEAD^
+# to uncommit and remove the changes from the file as well
+git reset --hard HEAD^
+```
+
 # [Revert to a Commit](https://stackoverflow.com/a/21718540/7048915)
 
 ```
