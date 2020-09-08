@@ -49,8 +49,10 @@ git add -p <filename>
 # To split the changes into even smaller hunks, press `s`
 # Press `?` to know what each option does
 
+If you use Vim, add the `fugitive` plugin
+Plug 'tpope/vim-commentary' " to quickly comment and uncomment statements.
 
-#Bonus Tip: If you use Vim, just add `Git`
+Then you can see the diff using `:Gdiff`. Now, you can patch by copying contents from local pane to Git pane and saving.
 ```
 
 # [Playing Detective](https://vimeo.com/280579162)
