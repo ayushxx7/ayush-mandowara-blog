@@ -48,6 +48,9 @@ git add -p <filename>
 # if you want to commit a specific hunk, press `y`, else press `n`
 # To split the changes into even smaller hunks, press `s`
 # Press `?` to know what each option does
+
+
+#Bonus Tip: If you use Vim, just add `Git`
 ```
 
 # [Playing Detective](https://vimeo.com/280579162)
