@@ -75,6 +75,17 @@ git diff <commit_hash>
 # to learn what all changes were part of the commit history.
 ```
 
+# [Reverting commits](http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html)
+```
+# To revert the most recent change
+git revert HEAD
+# To revert the change made before the most recent change
+git revert HEAD~
+# To revert changes made in a specific commit, say, 12345678
+git revert 12345678
+
+If you are reverting to a merge commit, add the -m flag, with the number specifying to which commit you want to go to
+```
 ### Further Reading
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 #### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
