@@ -41,3 +41,12 @@ It is advisable to add `set hidden` in your `.vimrc`
 # Delete leading spaces from all lines
 :%le
 ```
+
+[Delete based on search pattern](https://vim.fandom.com/wiki/Delete_all_lines_containing_a_pattern)
+```
+# It is possible to delete lines based on regex patterns
+# To delete all lines that end with a number
+:g/\d$\d
+
+# Note: It is advised that you first find the exact pattern using the `/` search and then use it in the delete operation.
+```
