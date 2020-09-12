@@ -98,20 +98,19 @@ and other configuration like autoformat and adding a location for snippets (I'll
 
 ```
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "javascript", "graphql", "html", "yaml",  "json", "python"],
-
-  // python config
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-
-  "snippets.ultisnips.directories":
-  [
-    "UltiSnips",
-    "~/.config/nvim/utils/snips"
-  ]
-
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "javascript",
+        "graphql",
+        "html",
+        "yaml",
+        "json",
+        "python"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true
 }
 ```
 
 for more info on configuring your settings checkout [this page](https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file)
-

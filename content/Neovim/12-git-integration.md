@@ -21,7 +21,7 @@ Plug 'junegunn/gv.vim'
 ## Create config files
 
 ```
-touch ~/.config/nvim/plug-config/signify.vim
+type nul > %userprofile%\.config\vim\plug-config\signify.vim
 ```
 
 Make sure to source this file in `init.vim`
