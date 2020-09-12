@@ -16,61 +16,11 @@ First let's just install a bunch of awesome tools to help you search/find stuff
   ```
   chocolatey install fzf
 
-  # To install useful key bindings and fuzzy completion:
-  # -- need to look windows equivalent. $(brew --prefix)/opt/fzf/install
+  choco install ripgrep
 
-  chocolatey install ripgrep
-
-  chocolatey install --HEAD universal-ctags/universal-ctags/universal-ctags
-
-  chocolatey install the_silver_searcher
+  choco install universal-ctags
 
   chocolatey install fd
-  ```
-
-- Mac
-
-  ```
-  brew install fzf
-
-  # To install useful key bindings and fuzzy completion:
-  $(brew --prefix)/opt/fzf/install
-
-  brew install ripgrep
-
-  brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-
-  brew install the_silver_searcher
-
-  brew install fd
-  ```
-
-- Ubuntu (I think there's snaps for this stuff too)
-
-  ```
-  sudo apt install fzf
-
-  sudo apt install ripgrep
-
-  sudo apt install universal-ctags
-
-  sudo apt install silversearcher-ag
-
-  sudo apt install fd-find
-  ```
-
-- Arch
-
-  ```
-  sudo pacman -S fzf
-
-  sudo pacman -S ripgrep
-
-  yay -S universal-ctags-git
-
-  sudo pacman -S the_silver_searcher
-
-  pacman -S fd
   ```
 
 ## Plug FZF & vim-rooter into vim
@@ -154,33 +104,3 @@ command! -bang -nargs=* GGrep
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 
 - [universal-ctags](https://github.com/universal-ctags/ctags)
-
-- [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
-
-- [fd](https://github.com/sharkdp/fd)
-
-## Note on extra keybindings
-
-Read more about keybindings [here](https://wiki.archlinux.org/index.php/Fzf)
-
-It is sufficient to source these files below in your bashrc or zshrc for completion and keybindings
-
-```
-/usr/share/fzf/completion.zsh
-/usr/share/fzf/key-bindings.zsh
-
-/usr/share/fzf/completion.bash
-/usr/share/fzf/key-bindings.bash
-```
-
-## Another note
-
-From the Archwiki, commands to query packages and install them
-
-```
-sudo pacman -Fy # <- only run this once
-
-pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk "{print \$2}")' | xargs -ro sudo pacman -S
-
-yay -Slq | fzf -m --preview 'cat <(yay -Si {1}) <(yay -Fl {1} | awk "{print \$2}")' | xargs -ro  yay -S
-```
