@@ -57,4 +57,13 @@ source $HOME\.config\vim\themes\gruvbox.vim
 
 [Check out this repo](https://github.com/rafi/awesome-vim-colorschemes)
 
-Click on any theme in the readme and install it similar to the way I did above
+
+# To add better syntax highlighting to your code
+
+Add the following plugin:
+
+```
+Plug 'sheerun/vim-polyglot' " better syntax highlighting
+```
+- It adds the all nice little tweaks to highlight certain keywords based on the language you are coding in (using the filetype), with practically zero overhead
+- Read more about the plugin [here](https://github.com/sheerun/vim-polyglot)
