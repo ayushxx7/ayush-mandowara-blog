@@ -1,35 +1,39 @@
 import React from "react"
 import Layout from "../components/layout"
 import Img from "gatsby-image"
-import { graphql } from "gatsby"
+import {graphql} from "gatsby"
 import PostPager from "../components/post-pager"
 import style from "./blog-post.module.less"
 import "katex/dist/katex.min.css"
+import Footer from "../components/footer"
 
 function BlogPost(props) {
-  const { title, image, tags } = props.data.markdownRemark.frontmatter
-  const { prev, next } = props.pageContext
+  const {title, image, tags} = props.data.markdownRemark.frontmatter
+  const {prev, next} = props.pageContext
   return (
     <Layout>
       <div>
         {image && (
           <Img
-            style={{ backgroundColor: "#1e2127" }}
+            style={{backgroundColor: "#1e2127"}}
             fluid={image.childImageSharp.fluid}
           />
         )}
-        <h1 style={{ backgroundColor: "#1e2127", textAlign: "left" }}>
+        <h1 style={{backgroundColor: "#1e2127", textAlign: "left"}}>
           {title}
         </h1>
         <div
-          dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
+          dangerouslySetInnerHTML={{__html: props.data.markdownRemark.html}}
           className={style.markdownBody}
         />
+        <div className={style.markdownBody}>
+          <Footer />
+        </div>
         <div className={style.markdownBody}>
           <br />
           <span>Tagged in </span>
           {tags.map((tag, i) => (
-            <a href={`/${tag}`} key={i} style={{ marginLeft: "10px" }}>
+            <a href={`/${tag}`} key={i} style={{marginLeft: "10px"}}>
               {tag}
             </a>
           ))}
