@@ -1,7 +1,7 @@
 ---
-title: Common but hard to remember Git Commands.
+title: Tips and references for Git
 description:
-date: "2020-08-12"
+date: "2020-09-17"
 image: git.png
 author: "Ayush"
 tags: ["git"]
@@ -9,28 +9,8 @@ tags: ["git"]
 
 <br />
 
-<h3>PURPOSE</h3>
+###PURPOSE
 There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those. 
-
-
-# [Revert last commit](https://stackoverflow.com/a/2846154/7048915)
-```
-# to uncommit but keep the changes intact
-git reset --soft HEAD^
-# to uncommit and remove the changes from the file as well
-git reset --hard HEAD^
-```
-
-# [Revert to a Commit](https://stackoverflow.com/a/21718540/7048915)
-
-```
-# To see what commit you want to revert to, first check all the commits.
-git log 
-# once you have a commit hash, let's say 0123456
-
-git revert --no-commit 0123456..HEAD
-git commit -m "some relevant message to why you reverted to this one. since you are essentially rewriting history"
-```
 
 # [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 ```
@@ -55,43 +35,15 @@ Plug 'tpope/vim-commentary' " to quickly comment and uncomment statements.
 Then you can see the diff using `:Gdiff`. Now, you can patch by copying contents from local pane to Git pane and saving.
 ```
 
-# [Playing Detective](https://vimeo.com/280579162)
+# [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
 ```
-# There are times when you need to figure out exactly who made the changes in a file
-# Sometimes, the standard `git log` command will suffice, but there are times when 
-# you need to dig deeper and find out why was a change made? 
-
-# To check who changed what line in a file and when, use:
-git blame <filename>
-# This will show you who made the last change in a file, when and with what commit.
-
-# To search for a string, like a function name, in your entire git commit history:
-git log -S "search_string"
-# This will show a complete history of when this line was introduced, along with 
-# every time it was changed, who changed it and with what commit hash.
-
-# Once you have a commit hash, you can use:
-git diff <commit_hash>
-# to learn what all changes were part of the commit history.
+# Add the end of your Git Repo, just add /fork.
+Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 ```
 
-# [Reverting commits](http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html)
-```
-# To revert the most recent change
-git revert HEAD
-# To revert the change made before the most recent change
-git revert HEAD~
-# To revert changes made in a specific commit, say, 12345678
-git revert 12345678
-
-If you are reverting to a merge commit, add the -m flag, with the number specifying to which commit you want to go to
-```
 ### Further Reading
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 #### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
 #### [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
 #### [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
 #### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
-
-
-# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
