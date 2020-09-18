@@ -18,9 +18,8 @@ Plug 'norcalli/nvim-colorizer.lua'
 Create a place for lua plugins
 
 ```
-mkdir ~/.config/nvim/lua
-
-touch ~/.config/nvim/lua/plug-colorizer.lua
+mkdir %userprofile%\.config\vim\lua
+type nul > %userprofile%\.config\vim\lua\plug-colorizer.lua
 ```
 
 Add the following:
@@ -29,24 +28,25 @@ Add the following:
 require'colorizer'.setup(
   {'*';},
   {
-    RGB      = true;         -- #RGB hex codes
-	  RRGGBB   = true;         -- #RRGGBB hex codes
-	  names    = true;         -- "Name" codes like Blue
-	  RRGGBBAA = true;         -- #RRGGBBAA hex codes
-	  rgb_fn   = true;         -- CSS rgb() and rgba() functions
-	  hsl_fn   = true;         -- CSS hsl() and hsla() functions
-	  css      = true;         -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
-	  css_fn   = true;         -- Enable all CSS *functions*: rgb_fn, hsl_fn
+    rgb      = true;         -- #rgb hex codes
+	  rrggbb   = true;         -- #rrggbb hex codes
+	  names    = true;         -- "name" codes like blue
+	  rrggbbaa = true;         -- #rrggbbaa hex codes
+	  rgb_fn   = true;         -- css rgb() and rgba() functions
+	  hsl_fn   = true;         -- css hsl() and hsla() functions
+	  css      = true;         -- enable all css features: rgb_fn, hsl_fn, names, rgb, rrggbb
+	  css_fn   = true;         -- enable all css *functions*: rgb_fn, hsl_fn
   })
-
 ```
 
 Remember to source in `init.vim`, but a little differently this time
 
 ```
 lua require'plug-colorizer'
-```
 
+# if you see an error regarding lua dll, install `lua` using chocolatey
+choco install lua
+```
 ### Note
 
 This will not work if the file doesn't have and extension i.e. .txt .py. js .css
