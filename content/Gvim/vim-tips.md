@@ -50,3 +50,16 @@ It is advisable to add `set hidden` in your `.vimrc`
 
 # Note: It is advised that you first find the exact pattern using the `/` search and then use it in the delete operation.
 ```
+
+
+[Substitution]()
+```
+# Map the substitute command to be accessbile easily.
+# For example, you can set it so `<leader>z` would invoke it and put the cursor at the correct possition.
+
+- Add the following to your .vimrc
+nmap <leader>s :%s//gc<Left><Left><Left>
+
+#Further, you can also invoke subsitution on a visual selection
+# Just select the lines you want to run subsitution on, and type `:s`
+```
