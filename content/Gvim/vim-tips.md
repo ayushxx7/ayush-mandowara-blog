@@ -63,3 +63,16 @@ nmap <leader>s :%s//gc<Left><Left><Left>
 #Further, you can also invoke subsitution on a visual selection
 # Just select the lines you want to run subsitution on, and type `:s`
 ```
+
+[Delete Trailing Spaces](https://vim.fandom.com/wiki/Remove_unwanted_spaces)
+```
+In Vim run the following command: `:%s/\s\+$//e
+
+Tip: Copy this command and paste in the command window, so you don't have to type.
+- Open command window in Vim using `q:`
+- Press `p` to paste the copied text
+- Press enter to execute the command
+
+You can also create an Auto Command so that trailing spaces are removed by default when saving.
+To do so, you can add the following to your `.vimrc`: autocmd BufWritePre *.* %s/\s\+$//e
+```
