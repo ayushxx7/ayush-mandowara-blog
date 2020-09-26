@@ -41,6 +41,17 @@ Then you can see the diff using `:Gdiff`. Now, you can patch by copying contents
 Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 ```
 
+# [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
+```
+Ex: Assume that you want to ignore all files from `test` folder but keep the folder in tracking.
+In your `.gitignore` file, add the following:
+- First, in the `test` folder, add a `.gitkeep` file
+- Next in your `.gitignore` add:
+test/*
+!test/.gitkeep
+- Now commit the gitignore file. The required tracking will be put in place.
+```
+
 ### Further Reading
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 #### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
