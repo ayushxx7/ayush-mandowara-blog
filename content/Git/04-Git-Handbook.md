@@ -10,7 +10,7 @@ tags: ["git"]
 <br />
 
 ###PURPOSE
-There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those. 
+There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those.
 
 # [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 ```
@@ -50,6 +50,18 @@ In your `.gitignore` file, add the following:
 test/*
 !test/.gitkeep
 - Now commit the gitignore file. The required tracking will be put in place.
+```
+# [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
+```
+There will be times, where you created a branch just for a hotfix.
+In such cases, when the hotfix is merged into master, you can delete the branch.
+To completely remove the branch from local as well as remote, type in command prompt:
+
+git branch –D branch-name #remove branch locally
+git push origin :branch-name #remove branch from online repo
+
+To pull changes on a different machine, where the branch is deleted:
+git fetch -p
 ```
 
 ### Further Reading
