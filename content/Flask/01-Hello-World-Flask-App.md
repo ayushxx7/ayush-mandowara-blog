@@ -8,7 +8,7 @@ tags: ["flask"]
 ---
 
 <h2> PURPOSE </h2>
-<h3> To start hosting your Python Apps on a Webserver, you would first need to deploy it locally. 
+<h3> To start hosting your Python Apps on a Webserver, you would first need to deploy it locally.
 The starting point of any such project, is to create a basic web server, and host your app on your machine's localhost (127.0.0.1).
 This article is intended to be a Hello World project for such a use case </h3>
 
@@ -43,7 +43,7 @@ gvim app.py
 
 #### Add the following to the `app.py` file:
 ```
-from flask import Flask # importing the Flask module from the framework. 
+from flask import Flask # importing the Flask module from the framework.
 
 app = Flask(__name__) # initializing an app
 
@@ -84,6 +84,4 @@ Hello World!
 ```
 - And bask in the glory of your simple yet powerful creation.
 
-Next Blog: How to Serve HTML Pages using Flask. 
-
-# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
+Next Blog: How to Serve HTML Pages using Flask.

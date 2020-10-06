@@ -73,7 +73,7 @@ if __name__ == "__main__":
 ```
 # assuming your project structure looks like this:
 flask_app
-│   app.py 
+│   app.py
 └───templates
     │   index.html
     │   about.html <- create and open this file
@@ -88,7 +88,7 @@ gvim index.html
 <h1> JINJA 101 </h1>
 
 <!-- To access Python functions and variables in HTML
-     You would use the Jinja Templating Syntax. 
+     You would use the Jinja Templating Syntax.
      Here, we are using:
      1. Variables: {{variable}}
      2. For Loops: {% for key_name_of_your_choice in passed_variable_from_server %}
@@ -124,6 +124,3 @@ py app.py
 - Now, visit `localhost:5000` on your browser, you will see the form just created in `index.html`
 - Fill up the information and hit the submit button.
 - Marvel at simple yet beautiful HTML you created.
-
-
-# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).

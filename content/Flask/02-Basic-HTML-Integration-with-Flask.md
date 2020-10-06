@@ -1,6 +1,6 @@
 ---
-title: Integrating HTML Pages with Flask 
-description: Step two of creating your own web app 
+title: Integrating HTML Pages with Flask
+description: Step two of creating your own web app
 date: "2020-07-10"
 image: "flask.png"
 author: "Ayush"
@@ -17,7 +17,7 @@ tags: ["flask"]
 ```
 # assuming your project root is called 'flask_app' & app name is 'app.py'
 flask_app
-│   app.py 
+│   app.py
 └───templates <- create this folder
     │   index.html <- create this file
 ```
@@ -79,6 +79,3 @@ py app.py
 - That's about it, just visit `localhost:5000` on your browser, and say hello to the first of many pages you will serve using this technique.
 
 Next Blog: How to render Dynamic Data to your webpage.
-
-
-# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).

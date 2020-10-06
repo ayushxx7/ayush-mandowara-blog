@@ -8,7 +8,7 @@ tags: ["docker"]
 ---
 
 <h2> PURPOSE </h2>
-<h3> To start hosting your Apps using Docker. 
+<h3> To start hosting your Apps using Docker.
 This article is intended to be a Hello World project for such a use case </h3>
 
 <h4>The Author assumes that you have some basic understanding of working on Windows Machine (familiar with Command Line).</h4>
@@ -21,7 +21,7 @@ Open 'cmd' and type:
 docker-machine create box
 ```
 
-This will take a while, get up from your seat and take a walk. Maybe think about how beautiful the world is? 
+This will take a while, get up from your seat and take a walk. Maybe think about how beautiful the world is?
 
 2.  To connect the current instance of 'cmd' to the VM created in point #1.
 
@@ -88,13 +88,8 @@ The page would say:
 Hello World!
 ```
 
-Holy crap, it couldn't have been this simple! 
+Holy crap, it couldn't have been this simple!
 <h3>Well, IT IS!</h3>
 
 
 Next Blog: How to configure your app to do some actual processing, and beautifying the webpage.
-
-
-To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
-
-

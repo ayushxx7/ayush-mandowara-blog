@@ -79,10 +79,10 @@ Hello-World-Django
 ```
 from django.http import HttpResponse # simple html response. no templates.
 
-# in flask, you would use @app.route decorator here. 
+# in flask, you would use @app.route decorator here.
 # in django, we keep the route/url path in a separate file called "urls.py"
 def index(request): # our first view/function that will have some logic.
-    # this is where you would write some operational logic like 
+    # this is where you would write some operational logic like
     # split_text = some_text_to_split.split(',')
     # for now, we will just return Hello World, without any additional processing.
 
@@ -139,7 +139,7 @@ from django.contrib import admin # for the admin routes
 from django.urls import include, path # include is used to include paths from other apps.
 
 urlpatterns = [
-    path('first_app/', include('first_app.urls')), 
+    path('first_app/', include('first_app.urls')),
     # we are serving this app's endpoints at /first_app
     path('admin/', admin.site.urls),
 ]
@@ -159,7 +159,7 @@ Hello-World-Django
     └───learning_django
     │   asgi.py
     │   settings.py <- Open this file.
-    │   urls.py 
+    │   urls.py
     └───first_app
 ```
 #### Add `first_app` to your installed apps:
@@ -184,6 +184,3 @@ py manage.py runserver
 # Voila! You have successfully hosted a Django Web App on your local machine and served your own response on an endpoint!
 
 - Next Blog: Integrating the App with a DB.
-
-To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
-

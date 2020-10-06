@@ -18,7 +18,7 @@ tags: ["flask"]
 ```
 # assuming your project structure looks like this:
 flask_app
-│   app.py 
+│   app.py
 └───templates
     │   index.html <- open this file
 
@@ -121,6 +121,3 @@ py app.py
 - Rejoice at your creation!
 
 Next Blog: Information Passing between your Frontend and Backend (PART TWO).
-
-
-# To thank the author, give a star to [this repo](https://github.com/ayushxx7/ayush-mandowara-blog).
