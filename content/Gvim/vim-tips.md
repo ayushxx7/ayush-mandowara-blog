@@ -1,5 +1,5 @@
 ---
-title: Vim Quicktips 
+title: Vim Quicktips
 description: You don't always need to write a script to do some automation, sometimes, "Vim" is enough.
 date: "2020-09-09"
 image: "gvim-intro.png"
@@ -22,7 +22,7 @@ tags: ["gvim"]
 [Run commands on multiple files at once](https://stackoverflow.com/questions/7126789/vim-run-a-command-on-multiple-files)
 ```
 # First generate a list of files
-# open a directory 
+# open a directory
 `gvim .`
 # fill argument list with all files which end in `.txt`
 :args *.txt
@@ -75,4 +75,25 @@ Tip: Copy this command and paste in the command window, so you don't have to typ
 
 You can also create an Auto Command so that trailing spaces are removed by default when saving.
 To do so, you can add the following to your `.vimrc`: autocmd BufWritePre *.* %s/\s\+$//e
+```
+
+[Convert spaces to New Lines](https://stackoverflow.com/a/1048646)
+```
+In case you want to convert spaces to a new line, for example,
+when converting a comma separted list to horizontal so you can paste them in a sheet:
+
+Ayush, Mandowara, comma, list
+
+Enter the following in Vim:
+:%s/ /<Ctrl-v><Enter>/gc
+When you press <Ctrl-v>, the command window will let you enter special characters
+Then when you press Enter, the symbols will look like below:
+:%s/ //gc
+
+Press enter and confirm your subsitution.
+The list will now look like
+Ayush,
+Mandowara,
+comma,
+list
 ```
