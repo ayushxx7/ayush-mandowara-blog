@@ -2,7 +2,7 @@
 title: Tips and references for Git
 description:
 date: "2020-09-17"
-image: git.png
+image: "git.png"
 author: "Ayush"
 tags: ["git"]
 ---

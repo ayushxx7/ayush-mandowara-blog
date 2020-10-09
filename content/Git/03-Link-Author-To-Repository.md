@@ -2,7 +2,7 @@
 title: How to Assign a specific Author for a specific repository.
 description: If you have multiple accounts on your machine, chances are you end up making commits from the wrong author in a repository. To avoid that read on.
 date: "2020-07-04"
-image: git.png
+image: "git.png"
 author: "Ayush"
 tags: ["git"]
 ---
@@ -10,7 +10,7 @@ tags: ["git"]
 <br />
 
 <h3>PURPOSE</h3>
-If you have multiple accounts on your machine, chances are you end up making commits from the wrong author in a repository. 
+If you have multiple accounts on your machine, chances are you end up making commits from the wrong author in a repository.
 To avoid having to change it afterwards, which is possible (Read: 02-How-to-Change-Author), follow these simple steps.
 
 1. Open Terminal.
@@ -53,7 +53,7 @@ username: git username of the author
 ```
 
 <p>
-Note: Notice, the url field has additional git username:git password followed by @ symbol. 
+Note: Notice, the url field has additional git username:git password followed by @ symbol.
 
 This helps skip the prompt for Sign In even if you don't have credentials configured properly. Of course, you need to make sure that the username you are going to type in the above URL, has Edit rights.
 </p>
@@ -67,7 +67,7 @@ This helps skip the prompt for Sign In even if you don't have credentials config
 
 <h3>CREDITS</h3>
 <br>
-This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915)  
+This article is inspired from a StackOverflow Answer [here](https://stackoverflow.com/a/55096250/7048915)
 <br>
 
 

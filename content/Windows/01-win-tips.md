@@ -2,7 +2,7 @@
 title: Windows Tips
 description: Some generic tips and tricks that will make life easier as a Windows User
 date: "2020-09-24"
-image: "Windows.jpg"
+image: "windows.png"
 author: "Ayush"
 tags: ["windows"]
 ---

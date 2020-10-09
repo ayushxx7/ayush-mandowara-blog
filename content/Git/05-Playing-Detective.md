@@ -2,7 +2,7 @@
 title: Git-Fu - How to be a Git Detective
 description: Playing detective.
 date: "2020-09-17"
-image: git.png
+image: "git.png"
 author: "Ayush"
 tags: ["git"]
 ---
@@ -20,7 +20,7 @@ git blame <filename>
 
 # To search for a string, like a function name, in your entire git commit history:
 git log -S "search_string"
-# This will show a complete history of when this line was introduced, along with 
+# This will show a complete history of when this line was introduced, along with
 # every time it was changed, who changed it and with what commit hash.
 
 # Once you have a commit hash, you can use:

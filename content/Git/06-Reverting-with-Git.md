@@ -1,8 +1,8 @@
 ---
-title: Git Revert (Quick Reference) 
+title: Git Revert (Quick Reference)
 description:
 date: "2020-09-17"
-image: git.png
+image: "git.png"
 author: "Ayush"
 tags: ["git"]
 ---
@@ -24,7 +24,7 @@ git reset --hard HEAD^
 
 ```
 # To see what commit you want to revert to, first check all the commits.
-git log 
+git log
 # once you have a commit hash, let's say 0123456
 
 git revert --no-commit 0123456..HEAD

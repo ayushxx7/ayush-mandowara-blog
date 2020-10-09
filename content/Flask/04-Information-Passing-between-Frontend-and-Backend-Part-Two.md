@@ -2,7 +2,7 @@
 title: Information Passing between your Frontend and Backend (PART TWO).
 description: How to pass variables/data to and fro between flask and html.
 date: "2020-07-21"
-image: "django.png"
+image: "flask.png"
 author: "Ayush"
 tags: ["flask"]
 ---
