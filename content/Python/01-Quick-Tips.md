@@ -11,10 +11,9 @@ tags: ["python"]
 #### A collection of quick references for Python
 
 ### [Supress error of Subprocess check Output](https://stackoverflow.com/a/31683402/7048915)
+#### In case you call a process via subprocess, but do not wish to see the error in case it throws one,
+- Just redirect the standard error (stderr) to DEVNULL
 ```
-In case you call a process via subprocess, but do not wish to see the error in case it throws one,
-Just redirect the standard error (stderr) to DEVNULL
-
 import subprocess as subp
 subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 ```
@@ -45,4 +44,24 @@ Child().print_all()
 # Running this example will print the following output:
 parent: Parent
 child: Child
+```
+
+### [Add 0 padding to strings](https://stackoverflow.com/questions/339007/how-to-pad-zeroes-to-a-string)
+#### There are times when you would need to add a padding zeroes to the numbers you were converting to strings.
+- Use zfill, a standard string function specifically designed for this use case
+- For example, when calculating time differences and then printing the output
+```
+hrs = 4
+minutes = 3
+
+time = f"{str(hrs).zfill(2)} hour(s) {str(minutes).zfill(2)} min(s)"
+print(time)
+```
+The output will look like this:
+```
+04 hour(s) 03 min(s)
+```
+You could also general string formatting over numbers as well:
+```
+print(f"{hrs:%02}")
 ```
