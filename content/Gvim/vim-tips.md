@@ -111,3 +111,16 @@ gvim -c ":PlugInstall"
 # resize <size> or res <size>
 res 60
 ```
+
+[Vim Diff Quick Tips](https://gist.github.com/mattratleph/4026987)
+```
+]c          - next difference
+[c          - previous difference
+do          - diff obtain
+dp          - diff put
+zo          - open folded text
+zc          - close folded text
+:diffupdate - re-scan the files for differences
+```
+- Note: diffobtain will fetch diff from the other pane and paste it in the current pane
+-       diffput will put the diff from current pane to the other pane
