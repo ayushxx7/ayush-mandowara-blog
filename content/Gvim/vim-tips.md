@@ -97,3 +97,10 @@ Mandowara,
 comma,
 list
 ```
+
+[Execute a vim command from the terminal](https://til.hashrocket.com/posts/aeeauzmhvv-run-vim-command-from-the-command-line)
+- Run a command while opening vim using the `-c` switch
+```
+Ex: run PlugInstall while opening gvim
+gvim -c ":PlugInstall"
+```
