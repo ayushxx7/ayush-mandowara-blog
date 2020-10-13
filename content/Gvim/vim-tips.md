@@ -104,3 +104,10 @@ list
 Ex: run PlugInstall while opening gvim
 gvim -c ":PlugInstall"
 ```
+
+[How to Resize Split windows](https://vim.fandom.com/wiki/Resize_splits_more_quickly)
+- To resize horizontal splits, for example, when viewing diff using Vim Fugitive
+```
+# resize <size> or res <size>
+res 60
+```
