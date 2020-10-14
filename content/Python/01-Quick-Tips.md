@@ -67,3 +67,15 @@ You could also general string formatting over numbers as well:
 ```
 print(f"{hrs:%02}")
 ```
+
+### [Joining values with filter](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
+#### In case you want to join a list or collection string values, but want to ignore certain values, such as empty or none valuse
+- Use filter with join
+```
+x = ["a", "b", None, "4"]
+y = " | ".join(filter(None, x))
+```
+- Printing `y` will produce the following output:
+```
+a | b | 4
+```
