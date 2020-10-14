@@ -124,3 +124,20 @@ zc          - close folded text
 ```
 - Note: diffobtain will fetch diff from the other pane and paste it in the current pane
 -       diffput will put the diff from current pane to the other pane
+
+### [How to set file specific settings](https://www.howtoforge.com/tutorial/vim-modeline-settings/)
+#### Sometimes there can be a situation where you want to set individual settings for a file
+For example, when your default python config is set to 4 tabs, however, some other legacy code was written with 2 tabs
+You can use modeline to set file specific settings
+- In your .vimrc, add the following
+```
+set modelines=10
+```
+- Afterwards, open the file you want to configure and add your desired config, in either the first 10 lines, or the last
+- This is because you have set modelines value to 10
+- Add your config as a comment (for ex, in Python, you would comment using #, while in JS you would use //)
+```
+# vim: set tabstop=2:
+# vim: shiftwidth=2:
+```
+- Now, everytime you will open that file, your forced config will be set, without altering your whole ecosystem
