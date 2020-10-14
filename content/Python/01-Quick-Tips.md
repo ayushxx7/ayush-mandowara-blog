@@ -79,3 +79,15 @@ y = " | ".join(filter(None, x))
 ```
 a | b | 4
 ```
+
+### [Split by comma and strip whitespace](https://stackoverflow.com/a/4071407/7048915)
+- Use list comprehension
+```
+test_str = "a, b,    c,d"
+out_list = [val.strip() for val in test_str.split(',')]
+print(out_list)
+```
+- Output
+```
+['a', 'b', 'c', 'd']
+```
