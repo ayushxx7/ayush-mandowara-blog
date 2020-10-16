@@ -91,3 +91,43 @@ print(out_list)
 ```
 ['a', 'b', 'c', 'd']
 ```
+
+### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
+#### We can use glob and fnmatch for extracting files that match a specific pattern
+
+Let's say you have a list of files
+```
+test_dir
+│   test.txt
+|   test2.txt
+|   other.txt
+|   test.py
+```
+And you want to extract files that have the name test in them,
+or in other words, files that match the pattern: `test*`
+
+- Using glob
+```
+files = glob.glob(os.getcwd()+'/test*')
+print(files)
+```
+Output:
+```
+['C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test.py', 'C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test.txt', 'C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test2.txt']
+```
+- We get a list of files with their exact paths
+
+- Using fnmatch
+```
+files = fnmatch.filter(os.listdir(), 'test*')
+print(files)
+```
+
+Output:
+```
+['test.py', 'test.txt', 'test2.txt']``
+```
+- We can see that fnmatch returns the filename only
+- To create the fullpath, we would need to use `os.path.join` on current_dir and filename
+
+Note: The `glob` module uses the os and fnmatch module internally.
