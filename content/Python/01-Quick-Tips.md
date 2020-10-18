@@ -81,8 +81,13 @@ a | b | 4
 - Note that the filter function can also take `functions` as filterers.
 - The passed function must return True/False over the passed sequence of values after evaluation.
 - [Read example here](https://thepythonguru.com/python-builtin-functions/filter/)
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 26c2c7bf3eedeb9caebeed3483036ee5420c046d
 ### [Stripping values generated during a split operation](https://stackoverflow.com/a/4071407/7048915)
 - Use list comprehension
 ```
