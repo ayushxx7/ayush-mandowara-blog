@@ -42,3 +42,16 @@ git revert 12345678
 
 If you are reverting to a merge commit, add the -m flag, with the number specifying to which commit you want to go to
 ```
+
+# [Reverting a Git Stash Pop](https://stackoverflow.com/a/22207257/7048915)
+- There are times when you accidentaly end up popping your git stash
+- For example, when you wanted to stash pop your changes to a different branch
+- Follow these steps to keep your stash saved, and remove the conflicts
+```
+git reset HEAD .
+git stash
+git checkout other_branch
+git stash apply stash@{1}
+```
+- Note: Mostly an unwanted stash pop would result in a merge conflict, due to which your stash will still be preserved
+- Still, it is better to stash the merge conflict as well, to avoid losing your stashed progress
