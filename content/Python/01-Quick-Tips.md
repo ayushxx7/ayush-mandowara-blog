@@ -1,5 +1,6 @@
 ---
-title: Python Tips description: Easy fixes to common problems
+title: Python Tips
+description: Easy fixes to common problems
 date: "2020-10-09"
 image: "python.png"
 author: "Ayush"
