@@ -1,6 +1,4 @@
----
-title: Python Tips
-description: Easy fixes to common problems
+---title: Python Tips description: Easy fixes to common problems
 date: "2020-10-09"
 image: "python.png"
 author: "Ayush"
@@ -68,9 +66,9 @@ You could also general string formatting over numbers as well:
 print(f"{hrs:%02}")
 ```
 
-### [Joining values with filter](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
-#### In case you want to join a list or collection string values, but want to ignore certain values, such as empty or none valuse
-- Use filter with join
+### [Generating strings from lists after filtering False values](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
+#### In case you want to join a list of string values while ignoring values that will evaluate to False
+- use a filter over join
 ```
 x = ["a", "b", None, "4"]
 y = " | ".join(filter(None, x))
@@ -79,8 +77,12 @@ y = " | ".join(filter(None, x))
 ```
 a | b | 4
 ```
+- Note that the filter function can also take `functions` as filterers.
+- The passed function must return True/False over the passed sequence of values after evaluation.
+- [Read example here](https://thepythonguru.com/python-builtin-functions/filter/)
 
-### [Split by comma and strip whitespace](https://stackoverflow.com/a/4071407/7048915)
+
+### [Stripping values generated during a split operation](https://stackoverflow.com/a/4071407/7048915)
 - Use list comprehension
 ```
 test_str = "a, b,    c,d"
