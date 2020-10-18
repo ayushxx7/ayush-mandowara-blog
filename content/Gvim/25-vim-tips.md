@@ -141,3 +141,12 @@ set modelines=10
 # vim: shiftwidth=2:
 ```
 - Now, everytime you will open that file, your forced config will be set, without altering your whole ecosystem
+
+
+### [Pretty Print JSON in Vim](https://pascalprecht.github.io/posts/pretty-print-json-in-vim)
+- Just run this command in Vim:
+```
+:%!python -m json.tool
+```
+- Note: you can simply paste this command in the command window of Vim.
+- Use `q:` to open command window. Paste the above code using `p`. Hit `enter`.
