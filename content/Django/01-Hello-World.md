@@ -182,5 +182,3 @@ py manage.py runserver
 - You would be greeted with the `Hello World` message that you wrote in your views.
 
 # Voila! You have successfully hosted a Django Web App on your local machine and served your own response on an endpoint!
-
-- Next Blog: Integrating the App with a DB.
