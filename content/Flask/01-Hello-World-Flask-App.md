@@ -84,4 +84,4 @@ Hello World!
 ```
 - And bask in the glory of your simple yet powerful creation.
 
-Next Blog: How to Serve HTML Pages using Flask.
+Next Blog: [How to Serve HTML Pages using Flask](https://ayush-blog.netlify.app/Flask/02-Basic-HTML-Integration-with-Flask/)
