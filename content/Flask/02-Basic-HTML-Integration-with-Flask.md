@@ -78,4 +78,4 @@ py app.py
 ```
 - That's about it, just visit `localhost:5000` on your browser, and say hello to the first of many pages you will serve using this technique.
 
-Next Blog: How to render Dynamic Data to your webpage.
+Next Blog: [How to render Dynamic Data to your webpage](https://ayush-blog.netlify.app/Flask/03-Information-Passing-between-Frontend-and-Backend-Part-One/)

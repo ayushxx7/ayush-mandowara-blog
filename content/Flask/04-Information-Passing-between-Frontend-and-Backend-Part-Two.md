@@ -124,3 +124,5 @@ py app.py
 - Now, visit `localhost:5000` on your browser, you will see the form just created in `index.html`
 - Fill up the information and hit the submit button.
 - Marvel at simple yet beautiful HTML you created.
+
+Next Blog: [How to render Dynamic Data to your webpage (Part TWo)](https://ayush-blog.netlify.app/Flask/04-Information-Passing-between-Frontend-and-Backend-Part-Two/)
