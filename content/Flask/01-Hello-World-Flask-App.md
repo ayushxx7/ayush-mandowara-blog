@@ -7,12 +7,12 @@ author: "Ayush"
 tags: ["flask"]
 ---
 
-<h2> PURPOSE </h2>
-<h3> To start hosting your Python Apps on a Webserver, you would first need to deploy it locally.
-The starting point of any such project, is to create a basic web server, and host your app on your machine's localhost (127.0.0.1).
-This article is intended to be a Hello World project for such a use case </h3>
+## PURPOSE
+### To start hosting your Python Apps on a Webserver, you would first need to deploy it locally.
+### The starting point of any such project, is to create a basic web server, and host your app on your machine's localhost (127.0.0.1).
+### This article is intended to be a Hello World project for such a use case
 
-<h4>The Author assumes that you have some basic understanding of working with Python 3.</h4>
+#### The Author assumes that you have some basic understanding of working with Python 3.
 
 ## Step 0: [Optional] Creating a virtual environment
 
