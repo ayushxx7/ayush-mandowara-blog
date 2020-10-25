@@ -202,11 +202,14 @@ f2
       /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
 
       /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
+      ```
 
+      ```
 
-    array([[nan, 0. , 0. ],
-           [inf, 1. , 0.5],
-           [inf, 2. , 1. ]])
+      array([[nan, 0. , 0. ],
+             [inf, 1. , 0.5],
+             [inf, 2. , 1. ]])
+
       ```
 
   Note: Even though the code executes successful, this would still be considered breaking logic. The reason is simple, when performing the operation, when dividing by 0, an exception will be thrown (as you cannot divide something by 0). Numpy handles the exception and puts in the 'nan' and 'inf' values in their place. nan: Not a Number, inf: Infinity
