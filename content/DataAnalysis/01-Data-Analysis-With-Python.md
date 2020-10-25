@@ -213,3 +213,90 @@ f2
 
 ### When to use this function?
 The function should be used whenever there is a requirement of generating values in the array based on some function rather than some predefined values
+
+
+
+## Function 4 - np.mean
+#### This calculates the arithmetic mean over the array. It is the sum of the elements along the axis divided by the number of elements.
+
+- Example 1
+```
+print(mat1)
+mean1 = np.mean(mat1)
+print(mean1)
+```
+  - Output
+      ```
+      [[1 2]
+       [3 4]
+       [5 6]]
+      3.5
+      ```
+
+  Note: Calculates sum of all value in the matrix (21) and divides them by the total number of values (6). 21/6 = 3.5 When axis is not specfied, mean is calculated over the flattened array.
+
+- Example 2
+```
+mean2 = np.mean(mat1, axis=0)
+print(mean2)
+```
+  - Output
+    ```
+    [[3. 4.]]
+    ```
+
+  Note: Here we calculate mean over axis 0. The mean is calculated over each column individually. i.e. in our example, over (1,3,5) & (2,4,6).
+
+- Example 3 - breaking
+```
+mean3 = np.mean(mat1, axis=2)
+print(mean3)
+```
+  - Output
+      ```
+
+      ---------------------------------------------------------------------------
+      IndexError                                Traceback (most recent call last)
+      <ipython-input-84-3b80448bf7f4> in <module>()
+            1 # Example 3 - breaking
+      ----> 2 mean3 = np.mean(mat1, axis=2)
+            3 print(mean3)
+
+      <__array_function__ internals> in mean(*args, **kwargs)
+
+      /usr/local/lib/python3.6/dist-packages/numpy/core/fromnumeric.py in mean(a, axis, dtype, out, keepdims)
+         3330             pass
+         3331         else:
+      -> 3332             return mean(axis=axis, dtype=dtype, out=out, **kwargs)
+         3333
+         3334     return _methods._mean(a, axis=axis, dtype=dtype,
+
+      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in mean(self, axis, dtype, out)
+          445
+          446         """
+      --> 447         return N.ndarray.mean(self, axis, dtype, out, keepdims=True)._collapse(axis)
+          448
+          449     def std(self, axis=None, dtype=None, out=None, ddof=0):
+
+      /usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py in _mean(a, axis, dtype, out, keepdims)
+          136
+          137     is_float16_result = False
+      --> 138     rcount = _count_reduce_items(arr, axis)
+          139     # Make this warning show up first
+          140     if rcount == 0:
+
+      /usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py in _count_reduce_items(arr, axis)
+           55     items = 1
+           56     for ax in axis:
+      ---> 57         items *= arr.shape[ax]
+           58     return items
+           59
+
+      IndexError: tuple index out of range
+
+      ```
+
+  Note: It is breaking because the axis value is more than the number of axes present in the input array. To fix, use the correct axis number. Note: first axis starts with 0
+
+### When to use this function?
+This function should be used whenever mean is required to be calculated over a given input array. Further Reading: Try calculating average, standard deviation and variance.
