@@ -69,6 +69,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-codefence`,
           {
             resolve: `gatsby-remark-images`,
             options: {
