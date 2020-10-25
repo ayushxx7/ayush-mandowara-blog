@@ -157,3 +157,59 @@ mat3 = np.asmatrix(1,2)
 
 ### When to use this function?
 Matrices are a fundamental unit of data science. They are an easy to use and visualize. This function should be used whenever you need to convert a set of values into a np.matrix object. Further Reading: Try the np.diag, np.tri, np.tril and np.triu functions.
+
+
+
+## Function 3 - np.fromfunction
+#### To generate np arrays where the values are generated via some function, np.fromfunction can be used
+
+- Example 1
+```
+f1 = np.fromfunction(lambda i,j: i==j, (3,3))
+f1
+```
+  - Output
+      ```
+      array([[ True, False, False],
+             [False,  True, False],
+             [False, False,  True]])
+      ```
+
+  Note: i,j represent the coordinates in the matrix, and the values are generated based on whether the value of i matches j or not, i.e. the diagonal values will be returned as True while rest of the values will be returned as False
+
+- Example 2
+```
+f2 = np.fromfunction(lambda i,j: i*(j+1), (3,3), dtype=int)
+f2
+```
+  - Output
+    ```
+    array([[0, 0, 0],
+           [1, 2, 3],
+           [2, 4, 6]])
+    ```
+
+  Note: Using the lamba construct, we generate values of the form i*(j+1), and force the data type to be int
+
+- Example 3 - breaking
+```
+f2 = np.fromfunction(lambda i,j: i/j, (3,3), dtype=int)
+f2
+```
+  - Output
+      ```
+
+      /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
+
+      /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
+
+
+    array([[nan, 0. , 0. ],
+           [inf, 1. , 0.5],
+           [inf, 2. , 1. ]])
+      ```
+
+  Note: Even though the code executes successful, this would still be considered breaking logic. The reason is simple, when performing the operation, when dividing by 0, an exception will be thrown (as you cannot divide something by 0). Numpy handles the exception and puts in the 'nan' and 'inf' values in their place. nan: Not a Number, inf: Infinity
+
+### When to use this function?
+The function should be used whenever there is a requirement of generating values in the array based on some function rather than some predefined values
