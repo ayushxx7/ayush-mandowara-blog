@@ -37,11 +37,12 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
 arr1 = np.zeros(5)
 print(arr1)
 ```
-- Output
-```
-array([0., 0., 0., 0., 0.])
-```
-Note: Creating an array filled with zeros is as simple as calling the np.zeros function. Here, we are simply creating an array using that method, without giving an data type, due to which the default data type, i.e. float has been used to store the numbers in the array.
+  - Output
+      ```
+      array([0., 0., 0., 0., 0.])
+      ```
+
+  Note: Creating an array filled with zeros is as simple as calling the np.zeros function. Here, we are simply creating an array using that method, without giving an data type, due to which the default data type, i.e. float has been used to store the numbers in the array.
 
 - Example 2
 ```
@@ -49,28 +50,32 @@ arr2 = np.zeros((3,4), dtype=int)
 arr2
 ```
   - Output
-  ```
-  array([[0, 0, 0, 0],
-         [0, 0, 0, 0],
-         [0, 0, 0, 0]])
-  ```
-Note: Creating a zero file array, with given dimensions (3 x 4), and providing data type as int so numbers are stored as 0 instead of 0..
+    ```
+    array([[0, 0, 0, 0],
+           [0, 0, 0, 0],
+           [0, 0, 0, 0]])
+    ```
+
+  Note: Creating a zero file array, with given dimensions (3 x 4), and providing data type as int so numbers are stored as 0 instead of 0..
 
 - Example 3 - breaking
 ```
 arr3 = np.zeros(3,4)
 ```
   - Output
-    ```
-    ---------------------------------------------------------------------------
-    TypeError                                 Traceback (most recent call last)
-    <ipython-input-27-11fc22649e4d> in <module>()
-          1 #Example 3 - breaking
-    ----> 2 arr3 = np.zeros(3,4)
+      ```
 
-    TypeError: data type not understood
-    ```
-Note: It is breaking because the comma separted values are being interpreted as parameters. To fix, add the shape inside (), as shown in example #2.
+      ---------------------------------------------------------------------------
+      TypeError                                 Traceback (most recent call last)
+      <ipython-input-27-11fc22649e4d> in <module>()
+            1 #Example 3 - breaking
+      ----> 2 arr3 = np.zeros(3,4)
+
+      TypeError: data type not understood
+
+      ```
+
+  Note: It is breaking because the comma separted values are being interpreted as parameters. To fix, add the shape inside (), as shown in example #2.
 
 ### When to use this function?
 This function should be called when,
@@ -90,19 +95,20 @@ for key in mat1:
   print(key)
   print(type(key))
 ```
-- Output
-```
-[[1 2]
- [3 4]
- [5 6]]
-[[1 2]]
-<class 'numpy.matrix'>
-[[3 4]]
-<class 'numpy.matrix'>
-[[5 6]]
-<class 'numpy.matrix'>
-```
-Note: The function asmatrix simply takes the input values and converts them to equivalent matrices. The type of the output is np.matrix.
+  - Output
+    ```
+    [[1 2]
+     [3 4]
+     [5 6]]
+    [[1 2]]
+    <class 'numpy.matrix'>
+    [[3 4]]
+    <class 'numpy.matrix'>
+    [[5 6]]
+    <class 'numpy.matrix'>
+    ```
+
+  Note: The function asmatrix simply takes the input values and converts them to equivalent matrices. The type of the output is np.matrix.
 
 - Example 2
 ```
@@ -110,40 +116,44 @@ mat2 = np.asmatrix([[1,2,3],[4,5,6],[7,8,9,10]])
 print(mat2)
 ```
   - Output
-  ```
-  [[list([1, 2, 3]) list([4, 5, 6]) list([7, 8, 9, 10])]]
-  ```
-Note: When using uneven number of elements in the columns, the output will be a 1-d matrix, with each set of numbers interpreted as a list
+    ```
+    [[list([1, 2, 3]) list([4, 5, 6]) list([7, 8, 9, 10])]]
+    ```
+
+  Note: When using uneven number of elements in the columns, the output will be a 1-d matrix, with each set of numbers interpreted as a list
 
 - Example 3 - breaking
 ```
 mat3 = np.asmatrix(1,2)
 ```
   - Output
-    ```
-    ---------------------------------------------------------------------------
-    TypeError                                 Traceback (most recent call last)
-    <ipython-input-62-ade2d1f66754> in <module>()
-          1 # Example 3 - breaking
-    ----> 2 mat3 = np.asmatrix(1,2)
+      ```
 
-    /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in asmatrix(data, dtype)
-         69
-         70     """
-    ---> 71     return matrix(data, dtype=dtype, copy=False)
-         72
-         73
+      ---------------------------------------------------------------------------
+      TypeError                                 Traceback (most recent call last)
+      <ipython-input-62-ade2d1f66754> in <module>()
+            1 # Example 3 - breaking
+      ----> 2 mat3 = np.asmatrix(1,2)
 
-    /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in __new__(subtype, data, dtype, copy)
-        145
-        146         # now convert data to an array
-    --> 147         arr = N.array(data, dtype=dtype, copy=copy)
-        148         ndim = arr.ndim
-        149         shape = arr.shape
+      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in asmatrix(data, dtype)
+           69
+           70     """
+      ---> 71     return matrix(data, dtype=dtype, copy=False)
+           72
+           73
 
-    TypeError: data type not understood
-    ```
-Note:Again, when setting the values, it is important that you pass them as a single paramter either as a list or a tuple, otherwise the function will break.
+      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in __new__(subtype, data, dtype, copy)
+          145
+          146         # now convert data to an array
+      --> 147         arr = N.array(data, dtype=dtype, copy=copy)
+          148         ndim = arr.ndim
+          149         shape = arr.shape
+
+      TypeError: data type not understood
+
+      ```
+
+  Note: Again, when setting the values, it is important that you pass them as a single paramter either as a list or a tuple, otherwise the function will break.
 
 ### When to use this function?
 Matrices are a fundamental unit of data science. They are an easy to use and visualize. This function should be used whenever you need to convert a set of values into a np.matrix object. Further Reading: Try the np.diag, np.tri, np.tril and np.triu functions.
