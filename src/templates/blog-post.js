@@ -6,6 +6,7 @@ import PostPager from "../components/post-pager"
 import style from "./blog-post.module.less"
 import "katex/dist/katex.min.css"
 import Footer from "../components/footer"
+import "../style/prism-darcula.less"
 
 function BlogPost(props) {
   const {title, image, tags} = props.data.markdownRemark.frontmatter
