@@ -307,7 +307,7 @@ This function should be used whenever mean is required to be calculated over a g
 
 
 ## Function 5 - np.sin
-![Sine Table](./sine_plot.png)
+![Sine Table](./sine_table.png)
 ### np.sin is a function that simply transforms input values to corresponding sine values
 
 - Example 1
