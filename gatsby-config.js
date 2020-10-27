@@ -37,6 +37,7 @@ module.exports = {
       },
     },
     `gatsby-plugin-less`,
+    `gatsby-plugin-sharp`,
     {
       resolve: "gatsby-transformer-remark",
       options: {
@@ -61,29 +62,15 @@ module.exports = {
               height: 400,
             },
           },
+          {
+            // for images
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            }
+          }
         ],
       },
     },
-    // `gatsby-plugin-sharp`,
-    // {
-    //   resolve: `gatsby-transformer-remark`,
-    //   options: {
-    //     plugins: [
-    //       `gatsby-remark-codefence`,
-    //       {
-    //         resolve: `gatsby-remark-images`,
-    //         options: {
-    //           maxWidth: 800,
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-filesystem`,
-    //   options: {
-    //     path: `${__dirname}/src/images`,
-    //   },
-    // },
   ],
 }
