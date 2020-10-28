@@ -95,9 +95,11 @@ This function should be called when,
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   print(mat1)
   print(type(mat1))
+
   for key in mat1:
-    print(key)
-    print(type(key))
+      print(key)
+      print(type(key))
+
   ```
   - Output
     ```
@@ -327,7 +329,7 @@ This function should be used whenever mean is required to be calculated over a g
 - Example 1
   ```py heading='Sine PI/2'
   import numpy as np
-  np.sin(np.pi/2)
+  print(np.sin(np.pi/2))
   ```
   - Output
       ```
@@ -338,6 +340,7 @@ This function should be used whenever mean is required to be calculated over a g
 
 - Example 2
   ```py heading='Sine Graph' artifact='output.png'
+  import numpy as np
   import matplotlib.pylab as plt
   x = np.linspace(-np.pi, np.pi, 201)
   plt.plot(x, np.sin(x))
@@ -357,6 +360,7 @@ This function should be used whenever mean is required to be calculated over a g
 
 - Example 3 - breaking
   ```py
+  import numpy as np
   np.sin('180')
   ```
   - Output
