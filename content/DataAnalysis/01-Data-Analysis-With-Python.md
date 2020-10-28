@@ -33,7 +33,7 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
 #### Used to create multidimensional array of 0's
 
 - Example 1
-  ```py
+  ```py heading="Array filled with zeros"
   import numpy as np
   arr1 = np.zeros(5)
   print(arr1)
@@ -47,8 +47,9 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
 
 - Example 2
   ```py
+  import numpy as np
   arr2 = np.zeros((3,4), dtype=int)
-  arr2
+  print(arr2)
   ```
   - Output
     ```
@@ -61,6 +62,7 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
 
 - Example 3 - breaking
   ```py
+  import numpy as np
   arr3 = np.zeros(3,4)
   ```
   - Output
@@ -89,9 +91,10 @@ This function should be called when,
 
 - Example 1
   ```py
+  import numpy as np
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   print(mat1)
-  type(mat1)
+  print(type(mat1))
   for key in mat1:
     print(key)
     print(type(key))
@@ -113,6 +116,7 @@ This function should be called when,
 
 - Example 2
   ```py
+  import numpy as np
   mat2 = np.asmatrix([[1,2,3],[4,5,6],[7,8,9,10]])
   print(mat2)
   ```
@@ -125,6 +129,7 @@ This function should be called when,
 
 - Example 3 - breaking
   ```py
+  import numpy as np
   mat3 = np.asmatrix(1,2)
   ```
   - Output
@@ -166,8 +171,9 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
 
 - Example 1
   ```py
+  import numpy as np
   f1 = np.fromfunction(lambda i,j: i==j, (3,3))
-  f1
+  print(f1)
   ```
   - Output
       ```
@@ -180,8 +186,9 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
 
 - Example 2
   ```py
+  import numpy as np
   f2 = np.fromfunction(lambda i,j: i*(j+1), (3,3), dtype=int)
-  f2
+  print(f2)
   ```
   - Output
     ```
@@ -194,8 +201,9 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
 
 - Example 3 - breaking
   ```py
+  import numpy as np
   f2 = np.fromfunction(lambda i,j: i/j, (3,3), dtype=int)
-  f2
+  print(f2)
   ```
   - Output
       ```
@@ -225,6 +233,8 @@ The function should be used whenever there is a requirement of generating values
 
 - Example 1
   ```py
+  import numpy as np
+  mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   print(mat1)
   mean1 = np.mean(mat1)
   print(mean1)
@@ -241,6 +251,8 @@ The function should be used whenever there is a requirement of generating values
 
 - Example 2
   ```py
+  import numpy as np
+  mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   mean2 = np.mean(mat1, axis=0)
   print(mean2)
   ```
@@ -253,6 +265,8 @@ The function should be used whenever there is a requirement of generating values
 
 - Example 3 - breaking
   ```py
+  import numpy as np
+  mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   mean3 = np.mean(mat1, axis=2)
   print(mean3)
   ```
@@ -311,7 +325,8 @@ This function should be used whenever mean is required to be calculated over a g
 ### np.sin is a function that simply transforms input values to corresponding sine values
 
 - Example 1
-  ```py
+  ```py heading='Sine PI/2'
+  import numpy as np
   np.sin(np.pi/2)
   ```
   - Output
@@ -322,7 +337,7 @@ This function should be used whenever mean is required to be calculated over a g
   Note: The sine function takes input in the form of Radians i.e. pi*(somenumber) to generate angles. Hence, np.pi is used to calculate sin(90 degree) = 1. Note that pi = 180 degrees.
 
 - Example 2
-  ```py
+  ```py heading='Sine Graph' artifact='output.png'
   import matplotlib.pylab as plt
   x = np.linspace(-np.pi, np.pi, 201)
   plt.plot(x, np.sin(x))
@@ -330,6 +345,7 @@ This function should be used whenever mean is required to be calculated over a g
   plt.ylabel('sin(x)')
   plt.axis('tight')
   plt.show()
+  plt.savefig('output.png')
   ```
   - Output
   ![Sine Plot](./sine_plot.png)
