@@ -33,7 +33,7 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
 #### Used to create multidimensional array of 0's
 
 - Example 1
-  ```py heading="Array filled with zeros"
+  ```py heading="Example 1: Array filled with zeros"
   import numpy as np
   arr1 = np.zeros(5)
   print(arr1)
@@ -46,7 +46,7 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
   Note: Creating an array filled with zeros is as simple as calling the np.zeros function. Here, we are simply creating an array using that method, without giving an data type, due to which the default data type, i.e. float has been used to store the numbers in the array.
 
 - Example 2
-  ```py
+  ```py heading="Example 2: Multidimensional Array filled with (int) zeros"
   import numpy as np
   arr2 = np.zeros((3,4), dtype=int)
   print(arr2)
@@ -61,7 +61,7 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
   Note: Creating a zero file array, with given dimensions (3 x 4), and providing data type as int so numbers are stored as 0 instead of 0..
 
 - Example 3 - breaking
-  ```py
+  ```py heading="Example 3: Breaking"
   import numpy as np
   arr3 = np.zeros(3,4)
   ```
@@ -90,7 +90,7 @@ This function should be called when,
 #### Interprets the input numbers and generated a corresponding matrix
 
 - Example 1
-  ```py
+  ```py heading="Example 1: Interpet input to generate matrix"
   import numpy as np
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   print(mat1)
@@ -117,7 +117,7 @@ This function should be called when,
   Note: The function asmatrix simply takes the input values and converts them to equivalent matrices. The type of the output is np.matrix.
 
 - Example 2
-  ```py
+  ```py heading="Example 2: Uneven number of elements"
   import numpy as np
   mat2 = np.asmatrix([[1,2,3],[4,5,6],[7,8,9,10]])
   print(mat2)
@@ -130,7 +130,7 @@ This function should be called when,
   Note: When using uneven number of elements in the columns, the output will be a 1-d matrix, with each set of numbers interpreted as a list
 
 - Example 3 - breaking
-  ```py
+  ```py heading="Example 3: Breaking"
   import numpy as np
   mat3 = np.asmatrix(1,2)
   ```
@@ -172,7 +172,7 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
 #### To generate np arrays where the values are generated via some function, np.fromfunction can be used
 
 - Example 1
-  ```py
+  ```py heading="Example 1: Generate array with numbers generated via function"
   import numpy as np
   f1 = np.fromfunction(lambda i,j: i==j, (3,3))
   print(f1)
@@ -187,7 +187,7 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
   Note: i,j represent the coordinates in the matrix, and the values are generated based on whether the value of i matches j or not, i.e. the diagonal values will be returned as True while rest of the values will be returned as False
 
 - Example 2
-  ```py
+  ```py heading="Example 2: Generate Numpy array from a function with integer values"
   import numpy as np
   f2 = np.fromfunction(lambda i,j: i*(j+1), (3,3), dtype=int)
   print(f2)
@@ -202,7 +202,7 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
   Note: Using the lamba construct, we generate values of the form i*(j+1), and force the data type to be int
 
 - Example 3 - breaking
-  ```py
+  ```py heading="Example 3: Breaking"
   import numpy as np
   f2 = np.fromfunction(lambda i,j: i/j, (3,3), dtype=int)
   print(f2)
@@ -234,7 +234,7 @@ The function should be used whenever there is a requirement of generating values
 #### This calculates the arithmetic mean over the array. It is the sum of the elements along the axis divided by the number of elements.
 
 - Example 1
-  ```py
+  ```py heading="Example 1: Calculating Mean of matrix input"
   import numpy as np
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   print(mat1)
@@ -252,7 +252,7 @@ The function should be used whenever there is a requirement of generating values
   Note: Calculates sum of all value in the matrix (21) and divides them by the total number of values (6). 21/6 = 3.5 When axis is not specfied, mean is calculated over the flattened array.
 
 - Example 2
-  ```py
+  ```py heading="Example 2: Calculate Mean of a particular axis of a matrix"
   import numpy as np
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   mean2 = np.mean(mat1, axis=0)
@@ -266,7 +266,7 @@ The function should be used whenever there is a requirement of generating values
   Note: Here we calculate mean over axis 0. The mean is calculated over each column individually. i.e. in our example, over (1,3,5) & (2,4,6).
 
 - Example 3 - breaking
-  ```py
+  ```py heading="Example 3: Breaking"
   import numpy as np
   mat1 = np.asmatrix([[1,2],[3,4],[5,6]])
   mean3 = np.mean(mat1, axis=2)
@@ -327,7 +327,7 @@ This function should be used whenever mean is required to be calculated over a g
 ### np.sin is a function that simply transforms input values to corresponding sine values
 
 - Example 1
-  ```py heading='Sine PI/2'
+  ```py heading='Example 1: Calculte the Sine value of π/2'
   import numpy as np
   print(np.sin(np.pi/2))
   ```
@@ -339,7 +339,7 @@ This function should be used whenever mean is required to be calculated over a g
   Note: The sine function takes input in the form of Radians i.e. pi*(somenumber) to generate angles. Hence, np.pi is used to calculate sin(90 degree) = 1. Note that pi = 180 degrees.
 
 - Example 2
-  ```py heading='Sine Graph' artifact='output.png'
+  ```py heading='Example 2: Sine Curve from -π to π' artifact='output.png'
   import numpy as np
   import matplotlib.pylab as plt
   x = np.linspace(-np.pi, np.pi, 201)
@@ -359,7 +359,7 @@ This function should be used whenever mean is required to be calculated over a g
   - We calculate sines over the specified range and plot them in the graph.
 
 - Example 3 - breaking
-  ```py
+  ```py heading='Example 3: Breaking'
   import numpy as np
   np.sin('180')
   ```
