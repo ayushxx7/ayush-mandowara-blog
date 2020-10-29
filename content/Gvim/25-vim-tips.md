@@ -177,3 +177,18 @@ Here, you can go do whatever you could do in a document inside vim.
     gf
     ```
 - It will take you directly to the line where the error occured!
+
+### [Entering Math Symbols / Special Symbols in Vim](http://www.alecjacobson.com/weblog/?p=443)
+Vim has an inbuilt set of symbols that you can enter in any document
+```
+# First, look up the symbol, using
+:dig or :digraphs
+# The mapping is of the form, type_the_following:to_get_this_symbol
+# Once you know which symbol to type and its character combination
+- Press `i` to switch to insert mode in the document
+- Press `<ctrl><k>`
+- You will be prompted for more input, here type the sequence you looked up
+- For ex, to the mathemical symbol of `pi`
+- <ctrl><k> + p*
+```
+- Now, you would see the symbol entered in the cursor position
