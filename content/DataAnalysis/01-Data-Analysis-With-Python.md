@@ -38,10 +38,6 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
   arr1 = np.zeros(5)
   print(arr1)
   ```
-  - Output
-      ```
-      array([0., 0., 0., 0., 0.])
-      ```
 
   Note: Creating an array filled with zeros is as simple as calling the np.zeros function. Here, we are simply creating an array using that method, without giving an data type, due to which the default data type, i.e. float has been used to store the numbers in the array.
 
@@ -51,12 +47,6 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
   arr2 = np.zeros((3,4), dtype=int)
   print(arr2)
   ```
-  - Output
-    ```
-    array([[0, 0, 0, 0],
-           [0, 0, 0, 0],
-           [0, 0, 0, 0]])
-    ```
 
   Note: Creating a zero file array, with given dimensions (3 x 4), and providing data type as int so numbers are stored as 0 instead of 0..
 
@@ -65,18 +55,6 @@ To put it simply, if you have ever used C/C++, Numpy is the equivalent of Arrays
   import numpy as np
   arr3 = np.zeros(3,4)
   ```
-  - Output
-      ```
-
-      ---------------------------------------------------------------------------
-      TypeError                                 Traceback (most recent call last)
-      <ipython-input-27-11fc22649e4d> in <module>()
-            1 #Example 3 - breaking
-      ----> 2 arr3 = np.zeros(3,4)
-
-      TypeError: data type not understood
-
-      ```
 
   Note: It is breaking because the comma separted values are being interpreted as parameters. To fix, add the shape inside (), as shown in example #2.
 
@@ -101,18 +79,6 @@ This function should be called when,
       print(type(key))
 
   ```
-  - Output
-    ```
-    [[1 2]
-     [3 4]
-     [5 6]]
-    [[1 2]]
-    <class 'numpy.matrix'>
-    [[3 4]]
-    <class 'numpy.matrix'>
-    [[5 6]]
-    <class 'numpy.matrix'>
-    ```
 
   Note: The function asmatrix simply takes the input values and converts them to equivalent matrices. The type of the output is np.matrix.
 
@@ -122,10 +88,6 @@ This function should be called when,
   mat2 = np.asmatrix([[1,2,3],[4,5,6],[7,8,9,10]])
   print(mat2)
   ```
-  - Output
-    ```
-    [[list([1, 2, 3]) list([4, 5, 6]) list([7, 8, 9, 10])]]
-    ```
 
   Note: When using uneven number of elements in the columns, the output will be a 1-d matrix, with each set of numbers interpreted as a list
 
@@ -134,32 +96,6 @@ This function should be called when,
   import numpy as np
   mat3 = np.asmatrix(1,2)
   ```
-  - Output
-      ```
-
-      ---------------------------------------------------------------------------
-      TypeError                                 Traceback (most recent call last)
-      <ipython-input-62-ade2d1f66754> in <module>()
-            1 # Example 3 - breaking
-      ----> 2 mat3 = np.asmatrix(1,2)
-
-      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in asmatrix(data, dtype)
-           69
-           70     """
-      ---> 71     return matrix(data, dtype=dtype, copy=False)
-           72
-           73
-
-      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in __new__(subtype, data, dtype, copy)
-          145
-          146         # now convert data to an array
-      --> 147         arr = N.array(data, dtype=dtype, copy=copy)
-          148         ndim = arr.ndim
-          149         shape = arr.shape
-
-      TypeError: data type not understood
-
-      ```
 
   Note: Again, when setting the values, it is important that you pass them as a single paramter either as a list or a tuple, otherwise the function will break.
 
@@ -177,12 +113,6 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
   f1 = np.fromfunction(lambda i,j: i==j, (3,3))
   print(f1)
   ```
-  - Output
-      ```
-      array([[ True, False, False],
-             [False,  True, False],
-             [False, False,  True]])
-      ```
 
   Note: i,j represent the coordinates in the matrix, and the values are generated based on whether the value of i matches j or not, i.e. the diagonal values will be returned as True while rest of the values will be returned as False
 
@@ -192,12 +122,6 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
   f2 = np.fromfunction(lambda i,j: i*(j+1), (3,3), dtype=int)
   print(f2)
   ```
-  - Output
-    ```
-    array([[0, 0, 0],
-           [1, 2, 3],
-           [2, 4, 6]])
-    ```
 
   Note: Using the lamba construct, we generate values of the form i*(j+1), and force the data type to be int
 
@@ -207,21 +131,6 @@ Matrices are a fundamental unit of data science. They are an easy to use and vis
   f2 = np.fromfunction(lambda i,j: i/j, (3,3), dtype=int)
   print(f2)
   ```
-  - Output
-      ```
-
-      /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: divide by zero encountered in true_divide
-
-      /usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
-      ```
-
-      ```
-
-      array([[nan, 0. , 0. ],
-             [inf, 1. , 0.5],
-             [inf, 2. , 1. ]])
-
-      ```
 
   Note: Even though the code executes successful, this would still be considered breaking logic. The reason is simple, when performing the operation, when dividing by 0, an exception will be thrown (as you cannot divide something by 0). Numpy handles the exception and puts in the 'nan' and 'inf' values in their place. nan: Not a Number, inf: Infinity
 
@@ -241,13 +150,6 @@ The function should be used whenever there is a requirement of generating values
   mean1 = np.mean(mat1)
   print(mean1)
   ```
-  - Output
-      ```
-      [[1 2]
-       [3 4]
-       [5 6]]
-      3.5
-      ```
 
   Note: Calculates sum of all value in the matrix (21) and divides them by the total number of values (6). 21/6 = 3.5 When axis is not specfied, mean is calculated over the flattened array.
 
@@ -258,10 +160,6 @@ The function should be used whenever there is a requirement of generating values
   mean2 = np.mean(mat1, axis=0)
   print(mean2)
   ```
-  - Output
-    ```
-    [[3. 4.]]
-    ```
 
   Note: Here we calculate mean over axis 0. The mean is calculated over each column individually. i.e. in our example, over (1,3,5) & (2,4,6).
 
@@ -272,49 +170,6 @@ The function should be used whenever there is a requirement of generating values
   mean3 = np.mean(mat1, axis=2)
   print(mean3)
   ```
-  - Output
-      ```
-
-      ---------------------------------------------------------------------------
-      IndexError                                Traceback (most recent call last)
-      <ipython-input-84-3b80448bf7f4> in <module>()
-            1 # Example 3 - breaking
-      ----> 2 mean3 = np.mean(mat1, axis=2)
-            3 print(mean3)
-
-      <__array_function__ internals> in mean(*args, **kwargs)
-
-      /usr/local/lib/python3.6/dist-packages/numpy/core/fromnumeric.py in mean(a, axis, dtype, out, keepdims)
-         3330             pass
-         3331         else:
-      -> 3332             return mean(axis=axis, dtype=dtype, out=out, **kwargs)
-         3333
-         3334     return _methods._mean(a, axis=axis, dtype=dtype,
-
-      /usr/local/lib/python3.6/dist-packages/numpy/matrixlib/defmatrix.py in mean(self, axis, dtype, out)
-          445
-          446         """
-      --> 447         return N.ndarray.mean(self, axis, dtype, out, keepdims=True)._collapse(axis)
-          448
-          449     def std(self, axis=None, dtype=None, out=None, ddof=0):
-
-      /usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py in _mean(a, axis, dtype, out, keepdims)
-          136
-          137     is_float16_result = False
-      --> 138     rcount = _count_reduce_items(arr, axis)
-          139     # Make this warning show up first
-          140     if rcount == 0:
-
-      /usr/local/lib/python3.6/dist-packages/numpy/core/_methods.py in _count_reduce_items(arr, axis)
-           55     items = 1
-           56     for ax in axis:
-      ---> 57         items *= arr.shape[ax]
-           58     return items
-           59
-
-      IndexError: tuple index out of range
-
-      ```
 
   Note: It is breaking because the axis value is more than the number of axes present in the input array. To fix, use the correct axis number. Note: first axis starts with 0
 
@@ -331,10 +186,6 @@ This function should be used whenever mean is required to be calculated over a g
   import numpy as np
   print(np.sin(np.pi/2))
   ```
-  - Output
-      ```
-      1.0
-      ```
 
   Note: The sine function takes input in the form of Radians i.e. pi*(somenumber) to generate angles. Hence, np.pi is used to calculate sin(90 degree) = 1. Note that pi = 180 degrees.
 
@@ -350,8 +201,6 @@ This function should be used whenever mean is required to be calculated over a g
   plt.show()
   plt.savefig('output.png')
   ```
-  - Output
-  ![Sine Plot](./sine_plot.png)
 
   Note:
   - To plot a graph we use the standard matplotlib library
@@ -363,18 +212,6 @@ This function should be used whenever mean is required to be calculated over a g
   import numpy as np
   np.sin('180')
   ```
-  - Output
-      ```
-
-      ---------------------------------------------------------------------------
-      TypeError                                 Traceback (most recent call last)
-      <ipython-input-91-794d04feb402> in <module>()
-            1 # Example 3 - breaking (to illustrate when it breaks)
-      ----> 2 np.sin('180')
-
-      TypeError: ufunc 'sin' not supported for the input types, and the inputs could not be safely coerced to any supported types according to the casting rule ''safe''
-
-      ```
 
   Note:
   - A mandatory input is requrired. Plus, the input should be a number (angle) that would be converted to the sine form.
