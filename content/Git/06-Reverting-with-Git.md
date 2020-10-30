@@ -55,3 +55,34 @@ git stash apply stash@{1}
 ```
 - Note: Mostly an unwanted stash pop would result in a merge conflict, due to which your stash will still be preserved
 - Still, it is better to stash the merge conflict as well, to avoid losing your stashed progress
+
+
+[Moving commits from one branch to another](https://stackoverflow.com/questions/3492536/point-branch-to-new-commit)
+
+Imaging that you want to raise a PR for a hotfix. So, you first the original work for tracking, and then commit the actual changes. That's a reasonable way to do things. However, when you push your changes, you realize, you never actually pushed the original work! In essence, what you want to do is, go from this state:
+
+```
+dev            C - D
+             /
+master A - B
+```
+
+to this state:
+```
+dev                D
+                 /
+master A - B - C
+```
+
+To do so, we can use the `merge` command, on a specific commit:
+```
+git checkout master
+git merge C
+
+# Result:
+                 D (dev)
+                /
+master A - B - C (move master HEAD)
+```
+
+Note: The solution for the opposite scenario can be found [here](https://stackoverflow.com/questions/1628563/move-the-most-recent-commits-to-a-new-branch-with-git)
