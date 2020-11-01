@@ -86,3 +86,17 @@ master A - B - C (move master HEAD)
 ```
 
 Note: The solution for the opposite scenario can be found [here](https://stackoverflow.com/questions/1628563/move-the-most-recent-commits-to-a-new-branch-with-git)
+
+[Cancelling a Merge](https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull)
+Sometimes, your dev branches are behind master branch, either because of directly commiting to master, or because the commits were made in devbranch2, and then pushed to master, making devbranch1 behind.
+Nevertheless, In such cases, you try to pull changes from master back to dev branch so you can continue working on a feature.
+And lo-behold, you get a merge conflict!
+You can either fix the conflicts, or cancel a merge by using `git merge --abort` to look for other methods.
+If you know that the merge should keep the pulled changes, and discard the local changes, you can specify the `--theirs` parameter
+```
+git pull -X theirs
+```
+If you are already in a conflicted state, worry not, just use
+```
+git checkout --theirs path/to/file
+```
