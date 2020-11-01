@@ -144,3 +144,13 @@ print(test_dict)
 del test_dict['one']
 print(test_dict)
 ```
+
+### [Get the first key from a dictionary](https://www.geeksforgeeks.org/python-get-the-first-key-in-dictionary/)
+#### Use dict.keys() get the keys and then fetch first one using index
+```py heading="First Key from Dictionary"
+test_dict = {'one': 'val1', 'two': 'val2'}
+print(test_dict)
+print(test_dict.keys())
+first_key = list(test_dict.keys())[0]
+print(first_key)
+```
