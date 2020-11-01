@@ -134,3 +134,13 @@ Output:
 - To create the fullpath, we would need to use `os.path.join` on current_dir and filename
 
 Note: The `glob` module uses the os and fnmatch module internally.
+
+### [Delete keys from dictionary](https://www.geeksforgeeks.org/python-ways-to-remove-a-key-from-dictionary/)
+#### You can use the `del` keyword to delete keys from dictionary
+
+```py heading="Delete Keys from dictionary"
+test_dict = {'one':"val1", 'two':'val2'}
+print(test_dict)
+del test_dict['one']
+print(test_dict)
+```
