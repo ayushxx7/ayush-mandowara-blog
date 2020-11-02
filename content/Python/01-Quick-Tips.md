@@ -22,7 +22,7 @@ subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 #### To access variables from parent class in child class,
 - Call the constructor (__init__ method) of the Parent class in the Child class's __init__ method.
 
-```
+```py heading="Accessing Parent Class variables in Child Class"
 # Example
 class Parent:
   def __init__(self):
@@ -51,7 +51,7 @@ child: Child
 - Use zfill, a standard string function specifically designed for this use case
 - For example, when calculating time differences and then printing the output
 
-```
+```py heading="Padding 0s with zfill"
 hrs = 4
 minutes = 3
 time = f"{str(hrs).zfill(2)} hour(s) {str(minutes).zfill(2)} min(s)"
@@ -64,14 +64,14 @@ The output will look like this:
 ```
 
 You could also general string formatting over numbers as well:
-```
+```py heading="Padding 0s with string formatting"
 print(f"{hrs:%02}")
 ```
 
 ### [Generating strings from lists after filtering False values](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
 #### In case you want to join a list of string values while ignoring values that will evaluate to False
 - use a filter over join
-```
+```py heading="Join a list value while ignoring None type values"
 x = ["a", "b", None, "4"]
 y = " | ".join(filter(None, x))
 ```
@@ -85,7 +85,7 @@ a | b | 4
 
 ### [Stripping values generated during a split operation](https://stackoverflow.com/a/4071407/7048915)
 - Use list comprehension
-```
+```py heading="Generate list of stripped values while splitting a string"
 test_str = "a, b,    c,d"
 out_list = [val.strip() for val in test_str.split(',')]
 print(out_list)
