@@ -75,6 +75,7 @@ print(f"{hrs:02} hour(s) {mins:02} min(s)")
 ```py heading="Join a list value while ignoring None type values"
 x = ["a", "b", None, "4"]
 y = " | ".join(filter(None, x))
+print(y)
 ```
 - Printing `y` will produce the following output:
 ```
