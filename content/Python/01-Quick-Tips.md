@@ -23,13 +23,12 @@ subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 - Call the constructor (__init__ method) of the Parent class in the Child class's __init__ method.
 
 ```py heading="Accessing Parent Class variables in Child Class"
-# Example
 class Parent:
   def __init__(self):
     self.parent_name = "Parent"
 
 class Child(Parent):
-  def __init__(sefl):
+  def __init__(self):
     self.child_name = "Child"
     Parent.__init__(self)
 
@@ -65,7 +64,9 @@ The output will look like this:
 
 You could also general string formatting over numbers as well:
 ```py heading="Padding 0s with string formatting"
-print(f"{hrs:%02}")
+hrs = 4
+mins = 3
+print(f"{hrs:02} hour(s) {mins:02} min(s)")
 ```
 
 ### [Generating strings from lists after filtering False values](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
