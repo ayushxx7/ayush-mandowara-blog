@@ -14,7 +14,7 @@ tags: ["python"]
 #### In case you call a process via subprocess, but do not wish to see the error in case it throws one,
 - Just redirect the standard error (stderr) to DEVNULL
 ```
-import subprocess as subp
+import subprocess
 subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 ```
 
