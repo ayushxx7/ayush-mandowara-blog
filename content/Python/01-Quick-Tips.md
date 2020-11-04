@@ -39,12 +39,6 @@ class Child(Parent):
 Child().print_all()
 ```
 
-```
-# Running this example will print the following output:
-parent: Parent
-child: Child
-```
-
 ### [Add 0 padding to strings](https://stackoverflow.com/questions/339007/how-to-pad-zeroes-to-a-string)
 #### There are times when you would need to add a padding zeroes to the numbers you were converting to strings.
 - Use zfill, a standard string function specifically designed for this use case
@@ -55,11 +49,6 @@ hrs = 4
 minutes = 3
 time = f"{str(hrs).zfill(2)} hour(s) {str(minutes).zfill(2)} min(s)"
 print(time)
-```
-
-The output will look like this:
-```
-04 hour(s) 03 min(s)
 ```
 
 You could also general string formatting over numbers as well:
@@ -77,10 +66,6 @@ x = ["a", "b", None, "4"]
 y = " | ".join(filter(None, x))
 print(y)
 ```
-- Printing `y` will produce the following output:
-```
-a | b | 4
-```
 - Note that the filter function can also take `functions` as filterers.
 - The passed function must return True/False over the passed sequence of values after evaluation.
 - [Read example here](https://thepythonguru.com/python-builtin-functions/filter/)
@@ -91,10 +76,6 @@ a | b | 4
 test_str = "a, b,    c,d"
 out_list = [val.strip() for val in test_str.split(',')]
 print(out_list)
-```
-- Output
-```
-['a', 'b', 'c', 'd']
 ```
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
