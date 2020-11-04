@@ -84,6 +84,12 @@ git merge C
                 /
 master A - B - C (move master HEAD)
 ```
+If you have raised a PR before doing these changes, chances are, you will not see the changes reflected after pushing them to master.
+To show the `true-diff` as it should be given that some changes have been merged in the base branch,
+- Use the Edit button when viewing the PR in GitHub
+- Change the base branch from master (if it was master) to some other branch
+- Change the base branch back to the original branch (master in our example)
+- [Reference](https://stackoverflow.com/a/46782679/7048915)
 
 Note: The solution for the opposite scenario can be found [here](https://stackoverflow.com/questions/1628563/move-the-most-recent-commits-to-a-new-branch-with-git)
 
