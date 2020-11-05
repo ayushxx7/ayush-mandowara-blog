@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import {Helmet} from "react-helmet"
+import {useStaticQuery, graphql} from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
+function SEO({description, lang, meta, title}) {
+  const {site} = useStaticQuery(
     graphql`
       query {
         site {
@@ -66,7 +66,7 @@ function SEO({ description, lang, meta, title }) {
       <title>{site.siteMetadata.title}</title>
       <meta
         name="google-site-verification"
-        content="8XINwkJ1ddUZTNLbqRwI0wqBIg6cwpTklXzLjQ6H4Bk"
+        content="e3vjadBE28jnNdb0Sa7GW8OyadoZb_kyJdo_Xh4jp48"
       />
     </Helmet>
   )
