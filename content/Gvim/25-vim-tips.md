@@ -192,3 +192,16 @@ Vim has an inbuilt set of symbols that you can enter in any document
 - <ctrl><k> + p*
 ```
 - Now, you would see the symbol entered in the cursor position
+
+
+## [Move Splits](https://stackoverflow.com/a/6071520)
+```
+If you have them split vertically `C-w`+`J` to move one to the bottom
+
+If you have them split horizontally `C-w`+`L` to move one to the right
+
+To rotate in a 'column' or 'row' of split windows, `C-w`+`C-r`
+
+Layout: Vertical Splits => Horizontal Splits `C-w`+`K`
+        Horizontal Splits => Vertical Splits `C-w`+`H`
+```
