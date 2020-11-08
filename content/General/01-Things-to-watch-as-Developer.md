@@ -4,7 +4,7 @@ description: General Tips
 date: "2020-11-07"
 image: "thoughts.jpg"
 author: "Ayush"
-tags: ["python", "data-analysis", "numpy"]
+tags: ["general", "thoughts"]
 ---
 
 ### Introduction
