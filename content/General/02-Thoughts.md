@@ -2,9 +2,9 @@
 title: Five Attributes of a Great Developer
 description: General Tips
 date: "2020-11-07"
-image: "thoughts.png"
+image: "thoughts.jpg"
 author: "Ayush"
-tags: ["python", "data-analysis", "numpy"]
+tags: ["general", "thoughts"]
 ---
 
 The following are the 5 qualities of a great software engineer
@@ -17,6 +17,7 @@ What ties these attributes together, is
 That's what makes a great Software Engineer.
 
 Someone who has these qualities will sometimes be referred to as a `Perfectionist`, and rightly so.
+
 These principles can be applied to other fields as well.
 
-Reference: Jiro Dreams of Sushi
+The original idea came from this movie: [Jiro Dreams of Sushi](https://www.imdb.com/title/tt1772925/). One of the qualities could also be that a good Software Developer knows how to copy and paste stuff effectively ;)

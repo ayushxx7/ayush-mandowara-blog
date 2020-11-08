@@ -2,7 +2,7 @@
 title: Collection of Good Programming Videos
 description: General Tips
 date: "2020-11-07"
-image: "thoughts.png"
+image: "thoughts.jpg"
 author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
 ---
@@ -32,4 +32,3 @@ To that end, I am listing below a variety of videos that you should watch, to be
 ### Rants
 - [Why React Native is Garbage](https://www.youtube.com/watch?v=NxJCSI7a8wk)
 - [Why React Native is NOT Garbage](https://www.youtube.com/watch?v=ptTfQvbu9Ko)
--
