@@ -2,7 +2,7 @@
 title: Five Attributes of a Great Developer
 description: General Tips
 date: "2020-11-07"
-image: "analysis.png"
+image: "thoughts.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
 ---
@@ -16,6 +16,7 @@ What ties these attributes together, is
 5. Passion
 That's what makes a great Software Engineer.
 
+Someone who has these qualities will sometimes be referred to as a `Perfectionist`, and rightly so.
 These principles can be applied to other fields as well.
 
 Reference: Jiro Dreams of Sushi

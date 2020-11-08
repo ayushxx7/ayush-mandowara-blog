@@ -2,7 +2,7 @@
 title: Collection of Good Programming Videos
 description: General Tips
 date: "2020-11-07"
-image: "analysis.png"
+image: "thoughts.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
 ---
