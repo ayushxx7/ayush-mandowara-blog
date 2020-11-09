@@ -98,6 +98,56 @@ comma,
 list
 ```
 
+[Convert new lines to comma separated list](https://github.com/ayushxx7)
+- For cases where you have rows of values that need to be part of a list (such as a comma-separated list)
+```
+AR
+DE
+IN
+```
+
+Assuming that we want to quote these words, and then join these new lines to `,` separated list of values
+a) Add quotes and commas at end of each word
+```
+:%s/$/",/g
+```
+
+  ```
+  AR",
+  DE",
+  IN",
+  ```
+
+b) Add quotes at start of each word
+```
+:%s/^/"/g
+```
+
+  ```
+  "AR",
+  "DE",
+  "IN",
+  ```
+
+Next we record a sequence of operation using macros
+- Go to first line
+- Press `qq` to start recording a macro and store it in `@q`
+- Press `I` (`<shift>`+`i`) to go to the beginning of the line
+- Press `<backspace>`
+- Hit `q` to stop recording the macro
+
+Essentially, we are going to the start of the line, and pressing backspace to delete the new line and join the two lines
+- Visually select all the lines using `vG`
+- Type `:norm @q` and hit enter
+- Voila!
+  ```
+  "AR","DE","IN",
+  ```
+- Now, just remove the extra comma, and put in the brackets
+  ```
+  ["AR","DE","IN"]
+  ```
+
 [Execute a vim command from the terminal](https://til.hashrocket.com/posts/aeeauzmhvv-run-vim-command-from-the-command-line)
 - Run a command while opening vim using the `-c` switch
 ```
