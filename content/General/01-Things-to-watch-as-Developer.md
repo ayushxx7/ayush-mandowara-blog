@@ -8,7 +8,17 @@ tags: ["general", "thoughts"]
 ---
 
 ### Introduction
-As a software developer, you have a ton of responsibilities. Moreover, you have to keep up with new things that keep coming every now and then. In this rush, we sometimes forget some of the core principles and reasons why we ended up choosing this field of work in the first place.
+As a software developer, we have a ton of responsibilities.
+- Finish your tasks on time
+- Maintain a strict routine
+- Never extend your deadlines
+- Always be cheerful, no matter how much pressure you feel on yourself. Afterall, the work can be done by anyone, what matters is your behavior/attitude towards your work and coworkers.
+- Stay up to date with the latest and greatest
+- Keep building side projects or you will loose that edge
+- Just keep grinding, day-in, day-out.
+
+In this rush, we sometimes forget some of the core principles and reasons why we ended up choosing this field of work in the first place.
+
 To that end, I am listing below a variety of videos that you should watch, to be develop better software, employ better coding practices, and be a good engineer in general.
 
 #### List of Videos
