@@ -7,8 +7,6 @@ author: "Ayush"
 tags: ["git"]
 ---
 
-<br />
-
 ###PURPOSE
 Reverting to a previous state of your codebase can be challenging and at times scary, but mistakes do happen and in times like those, Git's version history is our best bet at recovery.
 
