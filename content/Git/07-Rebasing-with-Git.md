@@ -25,6 +25,10 @@ git rebase -i HEAD~3
 
 Here, you will see a menu with a host of options.
 ```
+pick 298c042 fix(Gvim): delete the vim way :muscle:
+pick 5461769 feat(Git): rewriting history with Git rebase
+pick 325fae6 feat(Git): :construction: rebase with git
+
 # Commands:
 # p, pick <commit> = use commit
 # r, reword <commit> = use commit, but edit the commit message
@@ -54,4 +58,12 @@ Let's go over some of them.
 p (pick): this essentially means we want to use this commit as it is
 r (reword): the commit message can be changed easily of the commit on which this operation is performed
 f (fixup): join commits together
+```
+
+To reorder the commits, you can reorder them in the interactive window and it will refect when you save and quit (`:wq`).
+
+Further, there might be times when you have merge conflicts, resolve them as you would normally would and commit it back.
+Finally, force push so the rebase overrides the previous commits, `the history is rewriten` and the commits are exactly as you wanted them to be.
+```
+git push -f origin master
 ```
