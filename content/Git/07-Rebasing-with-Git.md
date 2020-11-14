@@ -67,3 +67,79 @@ Finally, force push so the rebase overrides the previous commits, `the history i
 ```
 git push -f origin master
 ```
+
+
+### Rewriting commit message
+In case you want to rewrite the commit message for the most recent commit, using `amend`
+```
+git commit --amend
+```
+This will show a window with your most recent commit, and you can rewrite the message as needed.
+If the default editor is vim, you would need to enter the `Insert` mode by hitting `i` and then make changes as required.
+Once you are satisfied with the message, then use the `esc` key to move back to normal mode so that you can save and quit using `:wq`
+That's it, your commit message is rewritten
+
+In case you want to change the commit message for a commit that was made before the most recent one, the `HEAD` is no longer attached to that commit.
+In that case, the easiest way to rewrite the commit message using the `reword` option in the `Interactive Rebase`.
+Assuming that the commit message that you want to rewrite is 3 commits behind `HEAD` (`HEAD`->`most-recent-commit(#1)`->`#2`->`#3`)
+First, enter rebase including the most recent 3 commits,
+```
+git rebase -i HEAD~3
+```
+You will see the commits in the reverse order.
+```
+pick 884e40a fix: remove pytube3
+pick a7ddcca fix(ffmpeg): :exclamation: wrapper taking too long
+pick e9036aa feat(run.bat): run in Admin mode by default
+```
+The top most commit will be the `#3` commit, or in other words, the commit that you want to operate upon.
+Change the `pick` keyword with the `reword` keyword. You can also the shorthand version, i.e, `r` as well.
+```
+reword 884e40a fix: remove pytube3
+pick a7ddcca fix(ffmpeg): :exclamation: wrapper taking too long
+pick e9036aa feat(run.bat): run in Admin mode by default
+```
+Note: You will have to use vim keybindings explained to make the changes, save and quit.
+Now, you will be shown a screen with the commit message on top
+```
+fix: remove pytube3
+
+# Please enter the commit message for your changes. Lines starting
+```
+Change this to whatever is required, save and quit.
+```
+fix(requirements): remove pytube3
+
+This library was interfering with the core library (`pytube`) and
+YouTube videos were not being extracted. Removing this dependency using
+`pip uninstall pytube3` fixed the issue.
+Note: If it doesn't work
+  - pip uninstall pytube3
+  - pip uninstall pytube
+  - pip install git+https://github.com/nficano/pytube
+
+# Please enter the commit message for your changes. Lines starting
+```
+You would see a message such as `Successfully rebased and updated refs/head/master`
+
+Now, if you were to do a `git status` or `git push`, you might see something like this:
+```
+Head: master
+Push: origin/master
+
+Unpulled from origin/master (3)
+e9036aa feat(run.bat): run in Admin mode by default
+a7ddcca fix(ffmpeg): :exclamation: wrapper taking too long
+884e40a fix: remove pytube3
+
+Unpushed to origin/master (3)
+b802313 feat(run.bat): run in Admin mode by default
+6e2da47 fix(ffmpeg): :exclamation: wrapper taking too long
+3ea09ae fix(requirements): remove pytube3
+```
+Not to worry, all you need to do here is force push to master (or whichever branch you are operting on)
+This is happening essentially because we have rewritten history (as can be seen from the commit hashes before and after rebase).
+However, since we know that the current changes are what we want to show in Git, we will push these changes and override the original commits.
+```
+git push -f origin master
+```
