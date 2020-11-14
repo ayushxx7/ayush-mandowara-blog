@@ -137,3 +137,21 @@ print(test_dict.keys())
 first_key = list(test_dict.keys())[0]
 print(first_key)
 ```
+
+### [Make multilevel directories](https://www.geeksforgeeks.org/python-os-makedirs-method/)
+Suppose you want to create folders in a path such as `test\inner_folder\main\`, but `inner_folder` does not exist,
+you can use `os.makedirs`
+```py
+import os
+
+base = os.getcwd()
+dir_structure = 'test/inner_folder/main/'
+print(base)
+
+path = os.path.join(base, dir_structure)
+os.makedirs(path, exist_ok=True)
+# Note: exist_ok -> suppress OSError if path already exists
+
+for d in os.walk('test'):
+    print(d)
+```
