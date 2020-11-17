@@ -155,3 +155,27 @@ os.makedirs(path, exist_ok=True)
 for d in os.walk('test'):
     print(d)
 ```
+
+### [Store tempoary information to Temp Folder](https://stackoverflow.com/questions/847850/cross-platform-way-of-getting-temp-directory-in-python)
+There could be situtation where you are generating files that are only relevant during the execution of your script and are not meant to be stored for long term purposes.
+Moreover, you don't want these files to be tracked by Git. While you could add these to .gitignore, a much cleaner way would be to use the Temp folder provided by the OS itself.
+Let's say you want to create a lock file during the execution of a particular script so that another instance of the script does not override current execution,
+```py
+import tempfile
+from os.path import join, exists
+
+tempfolder = tempfile.gettempdir() #Locate Temp Folder
+lock_file = 'script_lock.lck'
+lock_file_path = join(tempfolder, lock_file)
+with open(lock_file_path, 'w') as f:
+  f.write('Locking')
+
+if exists(lock_file_path):
+  print("Lock found.")
+```
+You can also use the `tempfile.TemporaryFile()` function to generate a temp file during run-time if you do not want a particular file name.
+```py
+import tempfile
+f = tempfile.TemporaryFile()
+f.write('temporary info')
+```
