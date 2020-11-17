@@ -70,3 +70,4 @@ git fetch -p
 #### [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
 #### [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
 #### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
+#### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
