@@ -179,3 +179,20 @@ import tempfile
 f = tempfile.TemporaryFile()
 f.write('temporary info')
 ```
+
+### [Load value during Class Initialization using own function](https://stackoverflow.com/questions/12646326/calling-a-class-function-inside-of-init)
+```py
+class A:
+  def __init__(self):
+    self.a = self.load_from_func()
+
+  def load_from_func(self):
+    return "test_value"
+
+  def print_a(self):
+    print(self.a)
+
+obj = A()
+obj.print_a()
+```
+This can be useful when you are going to read a file, such as a JSON, to fill values of your class variables.
