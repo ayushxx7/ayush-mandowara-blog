@@ -143,3 +143,75 @@ However, since we know that the current changes are what we want to show in Git,
 ```
 git push -f origin master
 ```
+
+### Delete commit from history
+In case you want to delete a commit (make it so it was never commited)
+1. Find out (approximately) how far back is the commit from HEAD. Let's assume that number to be 10.
+2. Open `interactive rebase`:
+```
+git rebase -i HEAD~10
+```
+You will see the last 10 commits in the reverse order.
+```
+pick ece4b89f feat(Robusta): Generate report and send mail
+pick f75894be feat(Robusta): +install test case
+pick 4da9b1dd feat(Robusta): move app installation to pagebase
+pick 916a62f4 feat(Robusta): +initiate fixture +dl-install TCs
+pick 06012a12 fix(Robusta): Play Store crashes on first launch
+pick beba603c fix(Robusta): verify_player_launch
+pick c85b27a1 fix(Robusta): url updated to latest
+pick 7d97d783 Revert "fix(Robusta): url updated to latest"
+pick 0ea8edff feat(Robusta): use email/pass from config
+pick 2d8466da Uploaded to Already Uploaded For Months
+pick a60b3592 feat(Robusta): use email/pass from config
+pick e65b6531 feat(Robusta): App Launch Among US TC
+
+# Rebase 5182efe3..0f330f45 onto 5182efe3 (12 commands)
+```
+Now, let's say that you want to remove the commits:
+- `2d8466da` Uploaded to Already Uploaded For Months
+- `a60b3592` feat(Robusta): use email/pass from config
+Change the `pick` keyword with the `drop` (or `d`) keyword.
+- Note: You can also comment out or delete the commits
+```
+pick ece4b89f feat(Robusta): Generate report and send mail
+pick f75894be feat(Robusta): +install test case
+pick 4da9b1dd feat(Robusta): move app installation to pagebase
+pick 916a62f4 feat(Robusta): +initiate fixture +dl-install TCs
+pick 06012a12 fix(Robusta): Play Store crashes on first launch
+pick beba603c fix(Robusta): verify_player_launch
+pick c85b27a1 fix(Robusta): url updated to latest
+pick 7d97d783 Revert "fix(Robusta): url updated to latest"
+pick 0ea8edff feat(Robusta): use email/pass from config
+drop 2d8466da Uploaded to Already Uploaded For Months
+d a60b3592 feat(Robusta): use email/pass from config
+pick e65b6531 feat(Robusta): App Launch Among US TC
+
+# Rebase 5182efe3..0f330f45 onto 5182efe3 (12 commands)
+```
+Once required changes have been made, save and quit (`:wq`)
+You would see a message such as `Successfully rebased and updated refs/head/robusta-dev`
+- Note: you might have to fix merge conflicts if new commits depended on the deleted ones in some way.
+
+Now, if you were to do a `git status` or `git push`, you might see something like this:
+```
+Head: robusta-dev
+Merge: origin/robusta-dev
+
+Unpulled from origin/robusta-dev (5)
+e65b6531 feat(Robusta): App Launch Among US TC
+a60b3592 feat(Robusta): use email/pass from config
+1b9cde13 Merge branch 'robusta-dev' of https://github.com/repo-full-path into robusta-dev
+9b2042e3 Merge branch 'robusta-dev' of https://github.com/bluestacks/repo-full-path into robusta-dev
+2d8466da Uploaded to Already Uploaded For Months
+
+Unpushed to origin/robusta-dev (2)
+e26ec27a feat(Robusta): App Launch Among US TC
+0ea8edff feat(Robusta): use email/pass from config
+```
+Not to worry, all you need to do here is force push to branch (or whichever branch you are operting on)
+This is happening essentially because we have rewritten history (as can be seen from the commit hashes before and after rebase).
+However, since we know that the current changes are what we want to show in Git, we will push these changes and override the original commits.
+```
+git push -f origin robusta-dev
+```
