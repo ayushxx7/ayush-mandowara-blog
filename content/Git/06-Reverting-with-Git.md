@@ -104,3 +104,23 @@ If you are already in a conflicted state, worry not, just use
 ```
 git checkout --theirs path/to/file
 ```
+
+[Move commit from one branch to another](https://stackoverflow.com/questions/2369426/how-to-move-certain-commits-to-be-based-on-another-branch-in-git/11965051)
+Firsty, identify the commit hash that you want to move.
+```
+git checkout feature_branch #branch from which commit will be picked
+git log #identify commit hash
+```
+Let's say the hash is `#0123456`
+Switch to the branch to which you want to move the commit.
+```
+git checkout master #branch to which commit will be applied
+```
+Use the `cherry-pick` command to apply the commit
+```
+git cherry-pick #0123456
+```
+This will apply the commit to the correct branch, after which you can push these changes
+```
+git push origin master #branch to which commit will be applied
+```
