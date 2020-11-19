@@ -28,3 +28,13 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 ```
 It will elevate to admin and also stay in the correct directory.
 If you want to kill the prompt after execution, you can add `exit` at the end of your `bat` file. [Source](https://stackoverflow.com/questions/6811372/how-to-code-a-bat-file-to-always-run-as-admin-mode/52517718#comment105688977_52517718)
+
+# [Store Powershell output](https://www.windowscentral.com/how-save-command-output-file-using-command-prompt-or-powershell)
+There might be times where you want to run a powershell command, and store it's output to be used in another script.
+You can use the Out-File parameter to store the output in a text file.
+For example, to store whether BIOS Virtualization is enabled or disabled in a system
+```
+Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled" | Out-File -FilePath $HOME\virtualization.txt
+# <powershell command> | Out-File -FilePath <FilePath>
+```
+The command out will be saved in the filepath mentioned (here: C:\users\<username>\virtualization.txt as $HOME is expanded automatically)
