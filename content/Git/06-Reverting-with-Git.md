@@ -10,7 +10,7 @@ tags: ["git"]
 ###PURPOSE
 Reverting to a previous state of your codebase can be challenging and at times scary, but mistakes do happen and in times like those, Git's version history is our best bet at recovery.
 
-# [Revert last commit](https://stackoverflow.com/a/2846154/7048915)
+### [Revert last commit](https://stackoverflow.com/a/2846154/7048915)
 ```
 # to uncommit but keep the changes intact
 git reset --soft HEAD^
@@ -18,7 +18,7 @@ git reset --soft HEAD^
 git reset --hard HEAD^
 ```
 
-# [Revert to a Commit](https://stackoverflow.com/a/21718540/7048915)
+### [Revert to a Commit](https://stackoverflow.com/a/21718540/7048915)
 
 ```
 # To see what commit you want to revert to, first check all the commits.
@@ -29,7 +29,7 @@ git revert --no-commit 0123456..HEAD
 git commit -m "some relevant message to why you reverted to this one. since you are essentially rewriting history"
 ```
 
-# [Reverting commits](http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html)
+### [Reverting commits](http://gitready.com/intermediate/2009/03/16/rolling-back-changes-with-revert.html)
 ```
 # To revert the most recent change
 git revert HEAD
@@ -41,7 +41,7 @@ git revert 12345678
 If you are reverting to a merge commit, add the -m flag, with the number specifying to which commit you want to go to
 ```
 
-# [Reverting a Git Stash Pop](https://stackoverflow.com/a/22207257/7048915)
+### [Reverting a Git Stash Pop](https://stackoverflow.com/a/22207257/7048915)
 - There are times when you accidentaly end up popping your git stash
 - For example, when you wanted to stash pop your changes to a different branch
 - Follow these steps to keep your stash saved, and remove the conflicts
@@ -55,7 +55,7 @@ git stash apply stash@{1}
 - Still, it is better to stash the merge conflict as well, to avoid losing your stashed progress
 
 
-[Moving commits from one branch to another](https://stackoverflow.com/questions/3492536/point-branch-to-new-commit)
+### [Moving commits from one branch to another](https://stackoverflow.com/questions/3492536/point-branch-to-new-commit)
 
 Imaging that you want to raise a PR for a hotfix. So, you first the original work for tracking, and then commit the actual changes. That's a reasonable way to do things. However, when you push your changes, you realize, you never actually pushed the original work! In essence, what you want to do is, go from this state:
 
@@ -91,7 +91,7 @@ To show the `true-diff` as it should be given that some changes have been merged
 
 Note: The solution for the opposite scenario can be found [here](https://stackoverflow.com/questions/1628563/move-the-most-recent-commits-to-a-new-branch-with-git)
 
-[Cancelling a Merge](https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull)
+### [Cancelling a Merge](https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull)
 Sometimes, your dev branches are behind master branch, either because of directly commiting to master, or because the commits were made in devbranch2, and then pushed to master, making devbranch1 behind.
 Nevertheless, In such cases, you try to pull changes from master back to dev branch so you can continue working on a feature.
 And lo-behold, you get a merge conflict!
@@ -105,7 +105,9 @@ If you are already in a conflicted state, worry not, just use
 git checkout --theirs path/to/file
 ```
 
-[Move commit from one branch to another](https://stackoverflow.com/questions/2369426/how-to-move-certain-commits-to-be-based-on-another-branch-in-git/11965051)
+### [Move commit from one branch to another](https://stackoverflow.com/questions/2369426/how-to-move-certain-commits-to-be-based-on-another-branch-in-git/11965051)
+
+#### Merge Commit onto the required branch
 Firsty, identify the commit hash that you want to move.
 ```
 git checkout feature_branch #branch from which commit will be picked
@@ -124,3 +126,32 @@ This will apply the commit to the correct branch, after which you can push these
 ```
 git push origin master #branch to which commit will be applied
 ```
+Now your commit has been copied to the required branch, however, it is still there in the original branch as well.
+
+#### Delete commit from the original branch
+To finish the move, we should delete the commit from the feature_branch (original branch).
+To do so, we can use git rebase and drop the commit.
+```
+git checkout feature_branch
+git rebase -i HEAD~3 #the number represents how far back the commit is from the head
+```
+The interactive rebase window will open up.
+```
+pick ece4b89f feat(Robusta): Generate report and send mail
+pick 0123456 feat(Robusta): +install test case
+pick 4da9b1dd feat(Robusta): move app installation to pagebase
+```
+Replace pick with drop
+```
+pick ece4b89f feat(Robusta): Generate report and send mail
+drop 0123456 feat(Robusta): +install test case
+pick 4da9b1dd feat(Robusta): move app installation to pagebase
+```
+Save and quit
+You would see a message such as `Successfully rebased and updated refs/head/robusta-dev`
+
+Now, push your changes to the feature branch
+```
+git push <remote> <branch>
+```
+Use force (`-f`) if required.
