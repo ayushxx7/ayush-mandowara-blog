@@ -196,3 +196,43 @@ obj = A()
 obj.print_a()
 ```
 This can be useful when you are going to read a file, such as a JSON, to fill values of your class variables.
+
+### [Getting System Details](https://stackoverflow.com/questions/3103178/how-to-get-the-system-info-with-python)
+```py
+import platform,socket,re,uuid,json,psutil,logging
+
+def getSystemInfo():
+    try:
+        info={}
+        info['platform']=platform.system()
+        info['platform-release']=platform.release()
+        info['platform-version']=platform.version()
+        info['architecture']=platform.machine()
+        info['hostname']=socket.gethostname()
+        info['ip-address']=socket.gethostbyname(socket.gethostname())
+        info['mac-address']=':'.join(re.findall('..', '%012x' % uuid.getnode()))
+        info['processor']=platform.processor()
+        info['ram']=str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB"
+        return json.dumps(info)
+    except Exception as e:
+        logging.exception(e)
+
+sys_info = json.loads(getSystemInfo())
+print(sys_info)
+```
+
+Note: If your OS is Windows, you can get GPU details like so:
+```
+import wmi
+computer = wmi.WMI()
+gpu_info = computer.Win32_VideoController()[0].name
+print(gpu_info)
+```
+
+Further, to get BIOS Virtualization info:
+```
+process = subprocess.Popen(["powershell",'Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled"'],stdout=subprocess.PIPE);
+decoded = process.communicate()[0].decode('utf-8')
+result = decoded.strip().split('\n')[2].strip()
+print(result)
+```
