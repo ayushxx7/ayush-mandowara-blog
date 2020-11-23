@@ -237,7 +237,7 @@ result = decoded.strip().split('\n')[2].strip()
 print(result)
 ```
 
-### [Get current function's name](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
+### [Get current function's name](https://stackoverflow.com/a/13514318/7048915)
 There may be times where you want to dynamically get the current function's name, for example, when trying add functionality to test suite such as pytest. The simplest way is to use the inspect module.
 ```py
 import inspect
@@ -252,3 +252,17 @@ parent_fn_name = inspect.stack()[2][3] #parent
 ```
 [Further Reading](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
 
+### [Accessing Function attributes if you know it's name](https://stackoverflow.com/a/3071/7048915)
+Suppose you have a function name which belongs to a class and you want to call it or access it's attributes, you can use the getattr method to generate the function from name.
+```py
+# Assuming that function belongs to class TestRobustaRegistry
+
+def fill_fn_dict(self, value):
+    fn_name = inspect.stack()[1][3]
+    fn = getattr(TestRobustaRegistry, fn_name) #`fn` becomes the function
+    fn.__dict__['value'] = value #Adding attributes to function dictionary
+    print(f"{value} added to {fn}.__dict__")
+    test_doc_string = fn.__doc__ #get the docstring of the function
+    print(f'Test docstring: {test_doc_string}')
+```
+[Further Reading](https://stackoverflow.com/questions/3061/calling-a-function-of-a-module-by-using-its-name-a-string)
