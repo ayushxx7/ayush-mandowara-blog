@@ -236,3 +236,19 @@ decoded = process.communicate()[0].decode('utf-8')
 result = decoded.strip().split('\n')[2].strip()
 print(result)
 ```
+
+### [Get current function's name](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
+There may be times where you want to dynamically get the current function's name, for example, when trying add functionality to test suite such as pytest. The simplest way is to use the inspect module.
+```py
+import inspect
+
+this_function_name = inspect.currentframe().f_code.co_name
+print(this_function_name)
+```
+You can also inspect the stack to get the complete function
+```py
+fn_name = inspect.stack()[1][3] #current
+parent_fn_name = inspect.stack()[2][3] #parent
+```
+[Further Reading](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
+
