@@ -7,6 +7,35 @@ author: "Ayush"
 tags: ["python"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Quick Tips](#quick-tips)
+      * [A collection of quick references for Python](#a-collection-of-quick-references-for-python)
+    * [Supress error of Subprocess check Output](#supress-error-of-subprocess-check-output)
+      * [In case you call a process via subprocess, but do not wish to see the error in case it throws one,](#in-case-you-call-a-process-via-subprocess-but-do-not-wish-to-see-the-error-in-case-it-throws-one)
+    * [Using variables of Parent Class](#using-variables-of-parent-class)
+      * [To access variables from parent class in child class,](#to-access-variables-from-parent-class-in-child-class)
+    * [Add 0 padding to strings](#add-0-padding-to-strings)
+      * [There are times when you would need to add a padding zeroes to the numbers you were converting to strings.](#there-are-times-when-you-would-need-to-add-a-padding-zeroes-to-the-numbers-you-were-converting-to-strings)
+    * [Generating strings from lists after filtering False values](#generating-strings-from-lists-after-filtering-false-values)
+      * [In case you want to join a list of string values while ignoring values that will evaluate to False](#in-case-you-want-to-join-a-list-of-string-values-while-ignoring-values-that-will-evaluate-to-false)
+    * [Stripping values generated during a split operation](#stripping-values-generated-during-a-split-operation)
+    * [Get files matching a regular expression](#get-files-matching-a-regular-expression)
+      * [We can use glob and fnmatch for extracting files that match a specific pattern](#we-can-use-glob-and-fnmatch-for-extracting-files-that-match-a-specific-pattern)
+    * [Delete keys from dictionary](#delete-keys-from-dictionary)
+      * [You can use the `del` keyword to delete keys from dictionary](#you-can-use-the-del-keyword-to-delete-keys-from-dictionary)
+    * [Get the first key from a dictionary](#get-the-first-key-from-a-dictionary)
+      * [Use dict.keys() get the keys and then fetch first one using index](#use-dictkeys-get-the-keys-and-then-fetch-first-one-using-index)
+    * [Make multilevel directories](#make-multilevel-directories)
+    * [Store tempoary information to Temp Folder](#store-tempoary-information-to-temp-folder)
+    * [Load value during Class Initialization using own function](#load-value-during-class-initialization-using-own-function)
+    * [Getting System Details](#getting-system-details)
+    * [Get current function's name](#get-current-functions-name)
+    * [Accessing Function attributes if you know it's name](#accessing-function-attributes-if-you-know-its-name)
+
+<!-- vim-markdown-toc -->
+
 # Quick Tips
 #### A collection of quick references for Python
 
