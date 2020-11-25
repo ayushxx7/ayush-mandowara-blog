@@ -176,7 +176,7 @@ Vim has an inbuilt set of symbols that you can enter in any document
 - Now, you would see the symbol entered in the cursor position
 
 
-## [Move Splits](https://stackoverflow.com/a/6071520)
+### [Move Splits](https://stackoverflow.com/a/6071520)
 ```
 If you have them split vertically `C-w`+`J` to move one to the bottom
 
@@ -186,4 +186,23 @@ To rotate in a 'column' or 'row' of split windows, `C-w`+`C-r`
 
 Layout: Vertical Splits => Horizontal Splits `C-w`+`K`
         Horizontal Splits => Vertical Splits `C-w`+`H`
+```
+
+### [Paste multiple times](https://stackoverflow.com/questions/16700989/paste-multiple-times-in-vim/24899228#24899228)
+There can be times where you want to copy a bunch lines multiple times in a document, for example, when writing test cases.
+Vim makes it easy for us to repeat any operation mutiple times.
+The most common example is when you want to jump (say) 10 lines below the current line `10j` comes to mind.
+The same logic can be applied to the `paste` operation as well.
+
+So, to copy a set of (say) 5 lines, you will visually select them
+```
+<shift>v+5j
+```
+Copy them,
+```
+y
+```
+Paste it (say) 10 times starting from where the cursor is currently located. (Ideally, this is where you want to paste the lines 10 times)
+```
+10p
 ```
