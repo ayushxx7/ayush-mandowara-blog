@@ -40,9 +40,9 @@ const IndexPage = () => {
           </div>
           <div className={style.content}>
             <span>
-              My name is Ayush Mandowara, I'm a Full Stack developer. I make YouTube
-              videos about various topics such as Software Development, Linux,
-              Neovim and Machine Learning. You can find me on the following
+              My name is Ayush Mandowara, I'm a Full Stack developer. I write about
+              about various topics such as Software Development, Windows,
+              (neo/g)vim and Machine Learning. You can find me on the following
               social media sites.
             </span>
             <div className={style.list}>
