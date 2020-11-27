@@ -41,7 +41,7 @@ const IndexPage = () => {
           <div className={style.content}>
             <span>
               My name is Ayush Mandowara, I'm a Full Stack developer. I write about
-              about various topics such as Software Development, Windows,
+              various topics such as Software Development, Windows,
               (neo/g)vim and Machine Learning. You can find me on the following
               social media sites.
             </span>
@@ -112,7 +112,7 @@ const IndexPage = () => {
           </div>
           <div className={style.content}>
             <span>
-              I have a pretty awesome (Neo|g)vim config over on Github if you're
+              I have a pretty awesome (neo/g)vim config over on Github if you're
               interested. The config was built on Windows, but should work on any OS.
               A lot of the process to create it has been documented{" "}
               <Link to={"/Gvim"}>here</Link>.
@@ -152,7 +152,7 @@ const IndexPage = () => {
           </div>
           <div className={style.content}>
             <span>
-              I current work @BlueStacks. The #1 Android emulator. I work with some awesome engineers on state-of-the-art technologies. While most my day is spent writing High Quality Python (&lt;3) code, I sometimes code in JS too. Get in touch with me on <Link to={"https://www.linkedin.com/in/ayushxx7/"}> LinkedIn </Link> to learn more about what I do.
+              I current work @BlueStacks. The #1 Android emulator. I work with some awesome engineers on state-of-the-art technologies. While most my day is spent writing High Quality Python (&lt;3) code, I sometimes code in JS too. Get in touch with me on <Link to={"https://www.linkedin.com/in/ayushxx7/"} style={{color: "#9cdcfe"}} > LinkedIn </Link> to learn more about what I do.
             </span>
           </div>
         </div>
