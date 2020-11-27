@@ -20,7 +20,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <h1 style={{textAlign: "center", marginTop: "80px"}}>Portfolio</h1>
-      <SEO title="Home" keywords={["ayush@machine"]} />
+      <SEO title="Home" keywords={["ayushxx7"]} />
       <div className={style.card}>
         <div className={style.post}>
           <div className={style.cover}>
@@ -85,15 +85,15 @@ const IndexPage = () => {
                     <FaLinkedin color="#3077B0" size="30" />
                   </a>
                 </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    href={"https://www.patreon.com/chrisatmachine"}
-                  >
-                    <FaPatreon color="#E8715C" size="30" />
-                  </a>
-                </li>
+                {/* <li> */}
+                {/*   <a */}
+                {/*     target="_blank" */}
+                {/*     rel="nofollow noopener noreferrer" */}
+                {/*     href={"https://www.patreon.com/chrisatmachine"} */}
+                {/*   > */}
+                {/*     <FaPatreon color="#E8715C" size="30" /> */}
+                {/*   </a> */}
+                {/* </li> */}
               </ul>
             </div>
           </div>
@@ -112,9 +112,10 @@ const IndexPage = () => {
           </div>
           <div className={style.content}>
             <span>
-              I have a pretty popular Neovim config over on Github if you're
-              interested. A lot of the process to create it has been documented{" "}
-              <Link to={"/neovim"}>here</Link>.
+              I have a pretty awesome (Neo|g)vim config over on Github if you're
+              interested. The config was built on Windows, but should work on any OS.
+              A lot of the process to create it has been documented{" "}
+              <Link to={"/Gvim"}>here</Link>.
             </span>
           </div>
         </div>
@@ -131,7 +132,8 @@ const IndexPage = () => {
             </a>
           </div>
           <div className={style.content}>
-            <span>Is available on my github you can fork it if you want.</span>
+            <span>Is available on my github. You can fork <Link to={'https://github.com/ayushxx7/ayush-mandowara-blog/fork'} style={{color: "#9cdcfe"}} > this blog </Link> it if you want.</span>
+
           </div>
         </div>
       </div>
@@ -150,8 +152,7 @@ const IndexPage = () => {
           </div>
           <div className={style.content}>
             <span>
-              During my time at BlueStacks, I worked with some awesome
-              engineers. I optimized everything related to the Tech Support using Automation. After which, I lead the project for Chat.
+              I current work @BlueStacks. The #1 Android emulator. I work with some awesome engineers on state-of-the-art technologies. While most my day is spent writing High Quality Python (&lt;3) code, I sometimes code in JS too. Get in touch with me on <Link to={"https://www.linkedin.com/in/ayushxx7/"}> LinkedIn </Link> to learn more about what I do.
             </span>
           </div>
         </div>
