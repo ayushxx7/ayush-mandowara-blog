@@ -1,5 +1,5 @@
 ---
-title: Five Attributes of a Great Developer
+title: Five Attributes of a Great Software Engineer
 description: General Tips
 date: "2020-11-07"
 image: "thoughts.jpg"
@@ -8,12 +8,13 @@ tags: ["general", "thoughts"]
 ---
 
 The following are the 5 qualities of a great software engineer
+
 1. They take their work very seriously and consistently perform on the highest level
 2. They aspire to improve their skills
 3. Cleanliness - If the restaurant doesn't look clean, the food isn't going to taste good
 4. Impatience - They are not prone to collaboration. They're stubborn and insist on having things their own way.
-                Now, this is not necessarily a good thing to be stubborn, but how else will you become a `BDFL`!
-What ties these attributes together, is
+   Now, this is not necessarily a good thing to be stubborn, but how else will you become a `BDFL`!
+   What ties these attributes together, is
 5. Passion
 
 That's what makes a great Software Engineer.
