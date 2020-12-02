@@ -7,10 +7,11 @@ author: "Ayush"
 tags: ["django"]
 ---
 
-<h2> PURPOSE </h2>
-<h3>To create a Web App that focuses on scalabality & securtiy, "Django" is the go to framework in Python. It's a feature rich solution that enforces best practices from the ground up.</h3>
+## PURPOSE
 
-<h4>The Author assumes that you have some basic understanding of working with Python 3.</h4>
+### To create a Web App that focuses on scalabality & securtiy, "Django" is the go to framework in Python. It's a feature rich solution that enforces best practices from the ground up.
+
+#### The Author assumes that you have some basic understanding of working with Python 3.
 
 ### Step 0: [Optional] Creating a virtual environment and activating it.
 
@@ -21,7 +22,6 @@ py -m venv django_env
 cd django_env/Scripts
 ./activate
 ```
-
 
 ## Step 1. Initial Setup:
 
@@ -51,6 +51,7 @@ py manage.py runserver
 ```
 djangoadmin startapp first_app
 ```
+
 - Take a look at your directory structure again. Wonderful, isn't it? Confusing, but wonderful!
 
 ## Step 2: Let's some write code:
@@ -76,6 +77,7 @@ Hello-World-Django
 ```
 
 #### Open it, and modify the code so it looks like this:
+
 ```
 from django.http import HttpResponse # simple html response. no templates.
 
@@ -88,9 +90,11 @@ def index(request): # our first view/function that will have some logic.
 
     return HttpResponse("Hello, world. You're at the first_app index.")
 ```
+
 - The comments can be ommited, they are for explanatory purposes only.
 
 ### Create & Open `first_app\urls.py`
+
 ```
 Hello-World-Django
 │
@@ -105,6 +109,7 @@ Hello-World-Django
 ```
 
 #### Add the following to it:
+
 ```
 from django.urls import path # standard django function for defining url paths
 
@@ -121,6 +126,7 @@ urlpatterns = [
 ## We must add `first_app` app's urls to our `learning_django` app's `urls.py` file
 
 ### Open `learning_django\urls.py`:
+
 ```
 Hello-World-Django
 │
@@ -134,6 +140,7 @@ Hello-World-Django
 ```
 
 #### Modify it to:
+
 ```
 from django.contrib import admin # for the admin routes
 from django.urls import include, path # include is used to include paths from other apps.
@@ -144,13 +151,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 ```
+
 - A separate `urls` file for each app adds clarity.
 - We can scan through all the `urls` files to know what all endpoints are there
 - To understand the routes, we don't need to view the internal logic (i.e. views) and vice-versa.
 - It is also easier to mantain and update paths this way.
 
-
 ### Open `learning_django\settings.py`
+
 ```
 Hello-World-Django
 │
@@ -162,7 +170,9 @@ Hello-World-Django
     │   urls.py
     └───first_app
 ```
+
 #### Add `first_app` to your installed apps:
+
 ```
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -176,9 +186,11 @@ INSTALLED_APPS = [
 ```
 
 ## Step 3: Now, run the server again and visit `localhost:8000\first_app`
+
 ```
 py manage.py runserver
 ```
+
 - You would be greeted with the `Hello World` message that you wrote in your views.
 
 # Voila! You have successfully hosted a Django Web App on your local machine and served your own response on an endpoint!
