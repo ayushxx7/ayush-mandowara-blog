@@ -396,3 +396,16 @@ requests.post(url, json=data, headers=headers)
 
 The `json` keyword will encode the data to (you guessed it) JSON. It will also set the `Content-Type` to `application/json`.
 I guess that's why `requests` has the tag line `HTTP for Humans`
+
+[Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
+There are times when you have a proper folder structure for a project, but python cannot interpret that you are importing a file from within the project directory.
+One way is to make calls from a proper starting point, which as the root of the directory and change your import statements relative to the starting point. However, this is a tedious process.
+A better hack is to append your project folder in system path using the `sys` module.
+In the file where you are importing the other file as a module, add this to the top:
+
+```
+import sys
+sys.path.append('/path/to/project_folder')
+```
+
+Now, Python will look for this folder when importing modules as well.
