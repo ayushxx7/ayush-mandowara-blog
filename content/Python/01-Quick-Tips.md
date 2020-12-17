@@ -409,3 +409,14 @@ sys.path.append('/path/to/project_folder')
 ```
 
 Now, Python will look for this folder when importing modules as well.
+
+[Pretty print dictionaries while logging](https://stackoverflow.com/questions/11093236/use-logging-print-the-output-of-pprint)
+When logging data structures such as dictionaries, you can't really decipher the contents unless you look very hard. This defeats the purpose of why you were logging in the first place.
+You might have used `pprint.pprint` for printing dictionaries to command line. Similary, we can use `pprint.pformat`. It takes the input, and generates a pretty printed string, which can then be passed to the logger.
+Furthermore, you can use the `\n` character, so that the dictionary is printed isn't awkwardly starting directly after the timestamp.
+
+```
+from pprint import pformat
+ds = [{'hello': 'there'}]
+logging.debug(f"logging datastructure:\n{pformat(ds)}")
+```
