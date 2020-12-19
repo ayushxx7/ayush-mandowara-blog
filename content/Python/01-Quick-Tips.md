@@ -32,6 +32,11 @@ tags: ["python"]
     * [Getting System Details](#getting-system-details)
     * [Get current function's name](#get-current-functions-name)
     * [Accessing Function attributes if you know it's name](#accessing-function-attributes-if-you-know-its-name)
+    * [Unpacking lists to individual values](#unpacking-lists-to-individual-values)
+    * [Combining lists together](#combining-lists-together)
+    * [Sending List/Array as data while making a request](#sending-listarray-as-data-while-making-a-request)
+    * [Python not able to detect folders as packages](#python-not-able-to-detect-folders-as-packages)
+    * [Pretty print dictionaries while logging](#pretty-print-dictionaries-while-logging)
 
 <!-- vim-markdown-toc -->
 
@@ -342,7 +347,8 @@ def fill_fn_dict(self, value):
 
 [Further Reading](https://stackoverflow.com/questions/3061/calling-a-function-of-a-module-by-using-its-name-a-string)
 
-[Unpacking lists to individual values](https://stackoverflow.com/a/34308407)
+### [Unpacking lists to individual values](https://stackoverflow.com/a/34308407)
+
 To unpack list and store in individual variables:
 
 ```py
@@ -351,7 +357,8 @@ title, url, price, title2, keyword = row
 print(title, url, price, title2, keyword)
 ```
 
-[Combining lists together]()
+### [Combining lists together]()
+
 To combine list together you can use the plus (+) operator
 
 ```py
@@ -371,7 +378,8 @@ b = a*n
 print(b)
 ```
 
-[Sending List/Array as data while making a request](https://stackoverflow.com/a/35535240/7048915)
+### [Sending List/Array as data while making a request](https://stackoverflow.com/a/35535240/7048915)
+
 Suppose you want to send something like:
 
 ```
@@ -397,7 +405,8 @@ requests.post(url, json=data, headers=headers)
 The `json` keyword will encode the data to (you guessed it) JSON. It will also set the `Content-Type` to `application/json`.
 I guess that's why `requests` has the tag line `HTTP for Humans`
 
-[Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
+### [Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
+
 There are times when you have a proper folder structure for a project, but python cannot interpret that you are importing a file from within the project directory.
 One way is to make calls from a proper starting point, which as the root of the directory and change your import statements relative to the starting point. However, this is a tedious process.
 A better hack is to append your project folder in system path using the `sys` module.
@@ -410,7 +419,8 @@ sys.path.append('/path/to/project_folder')
 
 Now, Python will look for this folder when importing modules as well.
 
-[Pretty print dictionaries while logging](https://stackoverflow.com/questions/11093236/use-logging-print-the-output-of-pprint)
+### [Pretty print dictionaries while logging](https://stackoverflow.com/questions/11093236/use-logging-print-the-output-of-pprint)
+
 When logging data structures such as dictionaries, you can't really decipher the contents unless you look very hard. This defeats the purpose of why you were logging in the first place.
 You might have used `pprint.pprint` for printing dictionaries to command line. Similary, we can use `pprint.pformat`. It takes the input, and generates a pretty printed string, which can then be passed to the logger.
 Furthermore, you can use the `\n` character, so that the dictionary is printed isn't awkwardly starting directly after the timestamp.
