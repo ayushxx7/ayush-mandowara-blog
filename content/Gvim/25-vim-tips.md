@@ -251,3 +251,5 @@ You will see the following information in the status line:
 - <current line number> of <total lines>
 - <current word position> of _<total words>_
 - <current byte> of <total bytes>
+
+Note: you can also use this in visual selection mode to get count of words in a particular selection.
