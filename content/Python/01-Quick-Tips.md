@@ -37,6 +37,7 @@ tags: ["python"]
     * [Sending List/Array as data while making a request](#sending-listarray-as-data-while-making-a-request)
     * [Python not able to detect folders as packages](#python-not-able-to-detect-folders-as-packages)
     * [Pretty print dictionaries while logging](#pretty-print-dictionaries-while-logging)
+    * [Use Copy to copy dictionaries](#use-copy-to-copy-dictionaries)
 
 <!-- vim-markdown-toc -->
 
@@ -430,3 +431,41 @@ from pprint import pformat
 ds = [{'hello': 'there'}]
 logging.debug(f"logging datastructure:\n{pformat(ds)}")
 ```
+
+### [Use Copy to copy dictionaries](https://www.programiz.com/python-programming/methods/dictionary/copy)
+
+There could be times when you want to compare if a dictionary is changed.
+For this you think that you will store the current state in a temp dictionary, and do operations in the original one.
+After the operation, you think you can use a simple `==` check. Overall, a reasonable approach.
+So you start by saying,
+
+```py
+current = {'1':'one'}
+temp = current
+current['2'] = {'two'}
+
+if temp == current:
+  print("Something's wrong I can feel it!")
+else:
+  print("State has changed")
+```
+
+You run the above code and you wonder, why the equality check is passing?
+The reason is, when you use the `=` operator to make a tempory copy, you are actually only creating a reference! _Pointer Nightmares intensify_
+
+For this specific purpose, what you want is a `shallow copy` of the original dictionary and not a reference.
+In Python, you can do that by using the copy function.
+
+```py
+current = {'1':'one'}
+temp = current.copy()
+current['2'] = {'two'}
+
+if temp == current:
+  print("Something's wrong I can feel it!")
+else:
+  print("State has changed")
+```
+
+Voila, you can now compare state between dictionaries!
+
