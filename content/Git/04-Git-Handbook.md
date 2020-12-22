@@ -64,6 +64,16 @@ To pull changes on a different machine, where the branch is deleted:
 git fetch -p
 ```
 
+# [Push a file to GitHub but do not track it for changes](https://compiledsuccessfully.dev/git-skip-worktree/)
+
+#### !NOTE! You should consider not using this method. Maybe there is something else you can do if you want to keep a static config file. Like, say, having a `config.prod` which is tracked and `config.dev` which is not tracked.
+
+If you want to keep a file in it's original state in Git, i.e., you don't want to update it even if it changes, you can use the `--skip-worktree` flag
+
+```
+git update-index --skip-worktree <file_name>
+```
+
 ### Further Reading
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 #### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
