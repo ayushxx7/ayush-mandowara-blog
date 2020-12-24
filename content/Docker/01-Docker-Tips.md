@@ -1,3 +1,12 @@
+---
+title: Docker Quick Tips
+description: commands I had to use before deploying on production
+date: "2020-12-24"
+image: "docker.png"
+author: "Ayush"
+tags: ["docker", "windows"]
+---
+
 # [Deleting all Images](https://stackoverflow.com/questions/44785585/how-to-delete-all-local-docker-images)
 
 Using the Docker Quick Start Terminal in Windows:
@@ -46,4 +55,9 @@ docker rm -f <image_id>
 ```
 
 Note that this will force remove any running containers as well (due the `-f` flag)
+
+# [Docker Images for Python](https://stackoverflow.com/questions/49037742/why-does-it-take-ages-to-install-pandas-on-alpine-linux)
+
+- Use Alpine for Python apps that have very limited dependencies, and the docker container size is to be kept at a bare minimum.
+- Use the full Image for python (such as `FROM python-3.8.3`) when you want to install something like Pandas/Numpy/SciPy etc.
 
