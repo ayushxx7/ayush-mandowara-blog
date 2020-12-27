@@ -24,8 +24,8 @@ git pull origin master --allow-unrelated-histories
 
 # [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
 
-There are times when you have made several changes in a file,
-but you only want to commit part of it at the moment.
+There are times when you have made several changes in a file, but you only want to commit part of it at the moment.
+
 You can stage your files using the -p (--patch) option:
 
 ```
@@ -33,9 +33,11 @@ git add -p <filename>
 ```
 
 This will show you a comprehensive menu, where your changes will be divided into so called `hunks`
-if you want to commit a specific hunk, press `y`, else press `n`
-To split the changes into even smaller hunks, press `s`
-Press `?` to know what each option does
+
+- Press `y` to commit current hunk
+- Press `n` to ignore the current hunk
+- Press `s` to split current hunk into smaller hunks
+- Press `?` to know more about what each of the options does
 
 If you use Vim, add the `fugitive` plugin
 
@@ -44,7 +46,9 @@ Plug 'tpope/vim-fugitive'  " git plugin
 ```
 
 Then you can see the diff using `:Gdiff`.
+
 Now, you can patch by copying contents from local pane to Git pane and saving.
+
 You can use `do` (diff obtain) or `dp` (diff paste) for staging hunks.
 
 # [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
@@ -55,13 +59,26 @@ Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 # [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
 
 Ex: Assume that you want to ignore all files from `test` folder but keep the folder in tracking.
-In your `.gitignore` file, add the following:
 
 - First, in the `test` folder, add a `.gitkeep` file
-- Next in your `.gitignore` add:
+
+  ```
+  test
+  │   .gitignore
+  └─── test
+      │   .gitkeep  <-- add this file
+      │   ignore-this-file
+      │   ignore-this-file-as-well
+  ```
+
+- In your `.gitignore` file, add the following:
+  ```
   test/\*
   !test/.gitkeep
-- Now commit the gitignore file. The required tracking will be put in place.
+  ```
+- Now commit the gitignore file.
+
+The required tracking will be put in place.
 
 # [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
 
@@ -101,9 +118,10 @@ git commit --amend --date="Wed Dec 25 16:00 2019 +0530"
 
 This will set your commit date to Dec 25, 2019 with the time as 4PM (IST)
 Pretty sweet hack if you want an all-green GitHub, no?
+
 Further, you can also use the `interactive rebase` to make changes in earlier commits as well.
 
-### Further Reading
+## Get better at Git
 
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 
