@@ -14,59 +14,69 @@ There are times when you have to do something related to your version history, b
 
 # [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 
-```
-# Sometimes you might want to merge two repos from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
-# In such cases, Git throws an error about unrelated histories.
+Sometimes you might want to merge two repos from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
+In such cases, Git throws an error about unrelated histories.
+To resolve the issue, type the following in your terminal:
 
+```
 git pull origin master --allow-unrelated-histories
 ```
 
 # [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
 
+There are times when you have made several changes in a file,
+but you only want to commit part of it at the moment.
+You can stage your files using the -p (--patch) option:
+
 ```
-# There are times when you have made several changes in a file, but you only want to commit part of it at the moment.
 git add -p <filename>
-# This will show you a comprehensive menu, where your changes will be divided into so called `hunks`
-# if you want to commit a specific hunk, press `y`, else press `n`
-# To split the changes into even smaller hunks, press `s`
-# Press `?` to know what each option does
+```
+
+This will show you a comprehensive menu, where your changes will be divided into so called `hunks`
+if you want to commit a specific hunk, press `y`, else press `n`
+To split the changes into even smaller hunks, press `s`
+Press `?` to know what each option does
 
 If you use Vim, add the `fugitive` plugin
-Plug 'tpope/vim-commentary' " to quickly comment and uncomment statements.
 
-Then you can see the diff using `:Gdiff`. Now, you can patch by copying contents from local pane to Git pane and saving.
 ```
+Plug 'tpope/vim-fugitive'  " git plugin
+```
+
+Then you can see the diff using `:Gdiff`.
+Now, you can patch by copying contents from local pane to Git pane and saving.
+You can use `do` (diff obtain) or `dp` (diff paste) for staging hunks.
 
 # [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
 
-```
-# Add the end of your Git Repo, just add /fork.
+Add the end of your Git Repo, just add /fork. (<git_repo_https_link>/fork)
 Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
-```
 
 # [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
 
-```
 Ex: Assume that you want to ignore all files from `test` folder but keep the folder in tracking.
 In your `.gitignore` file, add the following:
+
 - First, in the `test` folder, add a `.gitkeep` file
 - Next in your `.gitignore` add:
-test/*
-!test/.gitkeep
+  test/\*
+  !test/.gitkeep
 - Now commit the gitignore file. The required tracking will be put in place.
-```
 
 # [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
 
-```
 There will be times, where you created a branch just for a hotfix.
 In such cases, when the hotfix is merged into master, you can delete the branch.
 To completely remove the branch from local as well as remote, type in command prompt:
 
+```
 git branch –D branch-name #remove branch locally
 git push origin :branch-name #remove branch from online repo
+```
 
 To pull changes on a different machine, where the branch is deleted:
+
+```
 git fetch -p
 ```
 
@@ -91,6 +101,7 @@ git commit --amend --date="Wed Dec 25 16:00 2019 +0530"
 
 This will set your commit date to Dec 25, 2019 with the time as 4PM (IST)
 Pretty sweet hack if you want an all-green GitHub, no?
+Further, you can also use the `interactive rebase` to make changes in earlier commits as well.
 
 ### Further Reading
 
