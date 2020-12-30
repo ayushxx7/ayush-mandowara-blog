@@ -41,3 +41,17 @@ Save the below code in a test.html file and open it.
 
 A detailed example with multiple subheadings can also be found [here](http://jsfiddle.net/TLAV8/).
 
+
+### [Identifying when Enter key is pressed]()
+
+There can be situations where you are building a Search UI, and have a button which on clicking uses the input value for further processing.
+Naturally, you would want that the search should also be possible when the user presses enter as well.
+Fortunately, this is trivially easy. All you need to do, is capture all the keypress events, and target a specific one. In our case, that would be the enter key.
+The modern way to do this would be to capture the key name directly, using the event.key attribute.
+```
+if (event.key == "Enter") {console.log('captured enter');}
+```
+Older implementations might use the event.charCode event, however, it is *Deprecated*
+```
+if (even.charCode == '13') {console.log('captured enter using charCode');}
+```
