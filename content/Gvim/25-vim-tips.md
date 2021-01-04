@@ -117,9 +117,9 @@ Essentially, we are going to the start of the line, and pressing backspace to de
   ["AR","DE","IN"]
   ```
 
-[Execute a vim command from the terminal](https://til.hashrocket.com/posts/aeeauzmhvv-run-vim-command-from-the-command-line)
+[Execute a Vim command from the terminal](https://til.hashrocket.com/posts/aeeauzmhvv-run-vim-command-from-the-command-line)
 
-- Run a command while opening vim using the `-c` switch
+- Run a command while opening Vim using the `-c` switch
 
 ```
 Ex: run PlugInstall while opening gvim
@@ -172,7 +172,7 @@ set modelines=10
 # vim: shiftwidth=2:
 ```
 
-- Now, everytime you will open that file, your forced config will be set, without altering your whole ecosystem
+- Now, every time you will open that file, your forced config will be set, without altering your whole ecosystem
 
 ### [Pretty Print JSON in Vim](https://pascalprecht.github.io/posts/pretty-print-json-in-vim)
 
@@ -219,7 +219,7 @@ Layout: Vertical Splits => Horizontal Splits `C-w`+`K`
 ### [Paste multiple times](https://stackoverflow.com/questions/16700989/paste-multiple-times-in-vim/24899228#24899228)
 
 There can be times where you want to copy a bunch lines multiple times in a document, for example, when writing test cases.
-Vim makes it easy for us to repeat any operation mutiple times.
+Vim makes it easy for us to repeat any operation multiple times.
 The most common example is when you want to jump (say) 10 lines below the current line `10j` comes to mind.
 The same logic can be applied to the `paste` operation as well.
 
@@ -253,3 +253,35 @@ You will see the following information in the status line:
 - <current byte> of <total bytes>
 
 Note: you can also use this in visual selection mode to get count of words in a particular selection.
+
+### [Edit Macros](https://thoughtbot.com/blog/how-to-edit-an-existing-vim-macro)
+
+There are times when you have recorded a macro, but messed up a small part or it doesn't work on multiple lines at once (forgot to add that pesky `j`)
+You might say, eh, let's just record it again. But wait, there's a better way out of it!
+
+Macros are stored as simple strings of keys in the register where you recorded it.
+So, if you recorded the macro using `qq`, the macro is stored in the register `q` due to which you can play it using `@q`.
+
+You can access the contents of any register, including the ones in which you recorded your macros in vim using the `"` operator.
+In Normal mode, type `"qp`
+
+- `"q` -> contents of register `q`
+- `p` -> paste
+  Now you can see the whole macro string, and edit is as you wish.
+
+Original:
+
+```
+If"ilableel: ff,i, file: "No file selectedFbgelli{Ai}
+```
+
+Edited (added `j`) at the end:
+
+```
+If"ilableel: ff,i, file: "No file selectedFbgelli{Ai}j
+```
+
+Now to save it back in register `q` (or any register for that matter), just type `"qyy` on the macro line.
+This will copy the contents of the current line (which is the macro we edited), and store it in register q.
+Now you can play the macro using `@q` as you normally would.
+
