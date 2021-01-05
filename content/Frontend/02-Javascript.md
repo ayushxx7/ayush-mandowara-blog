@@ -54,3 +54,24 @@ check_empty = obj => {
 check_empty(empty_obj)
 check_empty(filled_obj)
 ```
+
+# Log Form Data(https://stackoverflow.com/questions/40062477/formdata-append-not-working)
+
+You cannot directly log a formData object.
+However, you can use the entries property to iterate over formdata values.
+Copy the below code in browser:
+
+```js heading="Logging Form Data"
+var form_data = new FormData()
+form_data.append("first_entry", "first_value")
+form_data.append("second_entry", "second_value")
+
+console.log("Directly Loggin FormData object with return empty object")
+console.log(form_data)
+
+console.log("Use the entries property to access the values and log them")
+for (var key of form_data.entries()) {
+  console.log(key[0] + ", " + key[1])
+}
+```
+
