@@ -102,9 +102,17 @@ Note: The solution for the opposite scenario can be found [here](https://stackov
 ### [Cancelling a Merge](https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull)
 
 Sometimes, your dev branches are behind master branch, either because of directly commiting to master, or because the commits were made in devbranch2, and then pushed to master, making devbranch1 behind.
+
 Nevertheless, In such cases, you try to pull changes from master back to dev branch so you can continue working on a feature.
 And lo-behold, you get a merge conflict!
-You can either fix the conflicts, or cancel a merge by using `git merge --abort` to look for other methods.
+
+You can either fix the conflicts, or cancel a merge by using `--abort` flag to look for other methods.
+
+```
+git merge --abort #when facing a merge conflict due to pull or merge
+git cherry-pick --abort #when conflict came due to cherry pick operation
+```
+
 If you know that the merge should keep the pulled changes, and discard the local changes, you can specify the `--theirs` parameter
 
 ```
@@ -195,3 +203,4 @@ There are times when you wish that only some files loose their changes and be re
 - `Git checkout` comes to rescue in such a situataion.
 - `Git checkout HEAD -- file_name.extension`
   The `--` operator implies that further arguments are filenames. Also, please mind the `space` after the `--`.
+
