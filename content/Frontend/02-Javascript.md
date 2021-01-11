@@ -140,3 +140,29 @@ getRows = (row) => {
 Note that there might be a warning about each element having a unique key prop
 Just add the key attribute in all your components don't currently have one, including the Fragment.
 
+### How to check whether a substring exists in an array elements
+
+You can use the `includes` method
+
+```js
+var test_arr = ["element", "another_element", "one_more_element"]
+
+//checking substring
+for (var i = 0; i < test_arr.length; i++) {
+  if (test_arr[i].includes("element")) {
+    console.log(`Yes: ${test_arr[i]}`)
+  }
+}
+
+//to check exact string, you can use simple equality check
+
+//writing the same method but with ES6 syntax
+test_arr.forEach((elem, index) => {
+  if (elem.includes("element")) {
+    console.log(`forEach method::${index}::${elem}`)
+  }
+  if (elem == "element") {
+    console.log(`Exact Match::${index}::${elem}`)
+  }
+})
+```
