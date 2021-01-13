@@ -204,3 +204,13 @@ There are times when you wish that only some files loose their changes and be re
 - `Git checkout HEAD -- file_name.extension`
   The `--` operator implies that further arguments are filenames. Also, please mind the `space` after the `--`.
 
+### Unstage deleted file (https://stackoverflow.com/questions/9591407/unstage-a-deleted-file-in-git)
+
+We can use the `--` operator to pass in file name in any git command.
+Here, we will use that feature to revert our accidental deletion.
+Note that you cannot use tab completion to fill in the file name because the file is deleted from the system.
+
+```
+git reset -- <name_of_file.extenstion>
+git checkout -- <name_of_file.extenstion>
+```
