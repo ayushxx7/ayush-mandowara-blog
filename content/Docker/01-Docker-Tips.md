@@ -61,3 +61,17 @@ Note that this will force remove any running containers as well (due the `-f` fl
 - Use Alpine for Python apps that have very limited dependencies, and the docker container size is to be kept at a bare minimum.
 - Use the full Image for python (such as `FROM python-3.8.3`) when you want to install something like Pandas/Numpy/SciPy etc.
 
+# [Remove volumes from Docker](https://docs.docker.com/engine/reference/commandline/volume_rm/)
+
+List all volumes using:
+
+```
+docker volume ls
+```
+
+Remove volume named "volume_abc" by using volume rm command
+
+```
+docker volume rm volume_abc
+```
+
