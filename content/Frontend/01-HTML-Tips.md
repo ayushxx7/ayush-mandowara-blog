@@ -84,3 +84,22 @@ To set the default state of checkbox to be `true` or `checked` we can pass in th
 
 ```
 
+### [Show Hand when hovering over a clickable element](https://www.w3schools.com/cssref/tryit.asp?filename=trycss_cursor)
+
+There are various properties you can apply to the mouse pointer.
+It's as simple as setting up a css style.
+For instance, to show a pointing hand on a clickable element such as a link,
+
+```
+a:hover {
+  cursor: pointer
+}
+```
+
+To try this, enter the following in an html file:
+
+```
+<a href="www.google.com" style="cursor:pointer">Google</a>
+```
+
+There are a lot of other styles you can try. Click the heading of this tip to see them all.
