@@ -134,4 +134,3 @@ Further, you can also use the `interactive rebase` to make changes in earlier co
 #### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
 
 #### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
-

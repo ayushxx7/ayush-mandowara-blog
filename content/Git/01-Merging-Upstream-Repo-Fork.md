@@ -40,4 +40,3 @@ git pull https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git BRANCH_NAME
 ```
 git push origin master
 ```
-

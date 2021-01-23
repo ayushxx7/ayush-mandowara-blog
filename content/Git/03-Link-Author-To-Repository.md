@@ -58,4 +58,3 @@ This helps skip the prompt for Sign In even if you don't have credentials config
 ### CREDITS
 
 [StackOverflow Answer](https://stackoverflow.com/a/55096250/7048915)
-

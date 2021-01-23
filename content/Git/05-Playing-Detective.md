@@ -20,6 +20,7 @@ tags: ["git"]
 There are times when you need to figure out exactly who made the changes in a file. Sometimes, the standard `git log` command will suffice, but there are times when you need to dig deeper and find out why a change was made.
 
 ## [Playing Detective](https://vimeo.com/280579162)
+
 ```
 # To check who changed what line in a file and when, use:
 git blame <filename>
