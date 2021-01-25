@@ -75,3 +75,10 @@ Remove volume named "volume_abc" by using volume rm command
 docker volume rm volume_abc
 ```
 
+# Start containers using docker compose
+
+To start all containers. It will also build the images if they are not present by reading the docker-compose.yml file.
+
+```
+docker-compose up -d
+```
