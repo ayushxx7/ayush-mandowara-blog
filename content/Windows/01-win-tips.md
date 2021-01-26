@@ -45,24 +45,3 @@ Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled" | Ou
 ```
 
 The command out will be saved in the filepath mentioned (here: C:\users\<username>\virtualization.txt as \$HOME is expanded automatically)
-
-# [Disabling Cursor Blink](https://stackoverflow.com/a/59807009)
-
-In apps such as command promt, inside which you can open programs such as nvim, you will see a blinking cursor.
-If you are like me, you don't really want the cursor to blink, it is visible on it's own.
-To disable cursor blink,
-
-1. Go to Run prompt (`Win+R`)
-2. Paste this in the prompt:
-   ```
-   control main.cpl keyboard
-   ```
-3. Press Enter/Ok to open the Keyboard Properties Dialogbox
-4. Set cursor blink rate to None in the slider
-5. Select Ok and the cursor will stop blinking.
-
-Note: In gVim, you can disable cursor blinking via adding the following in your .vimrc
-
-```
-set guicursor=a:blinkwait0      " remove cursor blinking
-```

@@ -150,30 +150,7 @@ Note: If it doesn't work
 
 You would see a message such as `Successfully rebased and updated refs/head/master`
 
-Now, if you were to do a `git status` or `git push`, you might see something like this:
-
-```
-Head: master
-Push: origin/master
-
-Unpulled from origin/master (3)
-e9036aa feat(run.bat): run in Admin mode by default
-a7ddcca fix(ffmpeg): :exclamation: wrapper taking too long
-884e40a fix: remove pytube3
-
-Unpushed to origin/master (3)
-b802313 feat(run.bat): run in Admin mode by default
-6e2da47 fix(ffmpeg): :exclamation: wrapper taking too long
-3ea09ae fix(requirements): remove pytube3
-```
-
-Not to worry, all you need to do here is `force push to master` (or whichever branch you are operting on)
-This is happening essentially because we have `rewritten history` (as can be seen from the commit hashes before and after rebase).
-However, since we know that the current changes are what we want to show in Git, we will push these changes and override the original commits.
-
-```
-git push -f origin master
-```
+##### [Why can't I push right after rebase?](#common-note)
 
 ### Delete commit from history
 
@@ -234,7 +211,9 @@ You would see a message such as `Successfully rebased and updated refs/head/robu
 
 - Note: you might have to fix merge conflicts if new commits depended on the deleted ones in some way.
 
-Now, if you were to do a `git status` or `git push`, you might see something like this:
+<h3 id="common-note">Common Note</h3>
+
+If you do `git status` or `git push` after a rebase, you might see something like this:
 
 ```
 Head: robusta-dev
@@ -259,4 +238,3 @@ However, since we know that the current changes are what we want to show in Git,
 ```
 git push -f origin robusta-dev
 ```
-
