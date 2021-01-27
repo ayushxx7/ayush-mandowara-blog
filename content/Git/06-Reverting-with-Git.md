@@ -214,3 +214,19 @@ Note that you cannot use tab completion to fill in the file name because the fil
 git reset -- <name_of_file.extenstion>
 git checkout -- <name_of_file.extenstion>
 ```
+
+### Undo a Commit (https://stackoverflow.com/questions/927358/how-do-i-undo-the-most-recent-local-commits-in-git)
+
+To undo the most recent commit,
+
+1. If you want to keep the commit as it is (the files will be in staged state)
+
+```
+git reset --soft HEAD~
+```
+
+2. If you want keep the changes intact, but remove the commit (files will be unstaged state)
+
+```
+git reset HEAD~
+```
