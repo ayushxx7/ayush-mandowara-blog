@@ -230,3 +230,19 @@ git reset --soft HEAD~
 ```
 git reset HEAD~
 ```
+
+### Undo an Ammend (https://stackoverflow.com/questions/1459150/how-to-undo-git-commit-amend-done-instead-of-git-commit/1459264)
+
+First, we update the ammended commit back to previous state
+
+```
+git reset --soft HEAD@{1}
+```
+
+Note that HEAD@{1} is different from HEAD~ in this case
+
+Then, we commit back the current tree with the original message
+
+```
+git commit -C HEAD@{1}
+```
