@@ -246,3 +246,13 @@ Then, we commit back the current tree with the original message
 ```
 git commit -C HEAD@{1}
 ```
+
+### Recover Git Index file (https://stackoverflow.com/questions/38274887/how-to-recover-git-index-locally)
+
+If you accidentally deleted your .git\index file, maybe because you wanted to remove the index.lock file,
+you can recover it back using the reset command.
+
+```
+git reset #re-scan the working directory
+git add -u #updated the index
+```
