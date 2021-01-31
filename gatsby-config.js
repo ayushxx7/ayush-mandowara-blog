@@ -42,6 +42,21 @@ module.exports = {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              exclude: "Table of Contents",
+              tight: false,
+              ordered: false,
+              fromHeading: 1,
+              toHeading: 2,
+              className: "table-of-contents",
+            },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: { elements: [`h1`, `h2`] },
+          },
           `gatsby-remark-codefence`,
           `gatsby-remark-katex`,
           {
@@ -67,8 +82,8 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
-            }
-          }
+            },
+          },
         ],
       },
     },
