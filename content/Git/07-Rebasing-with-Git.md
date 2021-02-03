@@ -238,3 +238,52 @@ However, since we know that the current changes are what we want to show in Git,
 ```
 git push -f origin robusta-dev
 ```
+
+### [Splitting commit into smaller commits](https://stackoverflow.com/questions/6217156/break-a-previous-commit-into-multiple-commits)
+
+There could be a situation where you committed a lot of changes as a signle commit, and later realized that they should be separate commits instead.
+To fix this, we can use interactive rebase.
+Suppose that you want to break the last commit into smaller commits.
+Start interactive rebase on HEAD~
+
+```
+git rebase -i HEAD~
+```
+
+Interative rebase window will show:
+
+```
+pick 12345 feat(my_feature): lots of changes
+```
+
+Change the pick keyword to edit:
+
+```
+edit 12345 feat(my_feature): lots of changes
+```
+
+At this point, your rebase will be in halted state.
+Here you can unstage the changes using `reset`
+
+```
+git reset HEAD~
+```
+
+`git status` will show something of this sort:
+
+```
+Unstaged:
+  modified: test.txt
+```
+
+Now, you can commit the changes as per your liking maybe using the patch option
+
+```
+git add test.txt -p
+```
+
+Once you made the commits as per your original requirement, you can continue the rebase opertaion
+
+```
+git rebase --continue
+```
