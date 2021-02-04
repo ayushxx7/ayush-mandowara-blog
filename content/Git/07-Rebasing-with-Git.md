@@ -287,3 +287,105 @@ Once you made the commits as per your original requirement, you can continue the
 ```
 git rebase --continue
 ```
+
+### [Combining Commits together](https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history)
+
+You can combine commits together using the interactive rebase.
+Suppose you run interactive rebase on 4 commits,
+
+```
+git rebase -i HEAD~4
+```
+
+The interactive rebase window will show:
+
+```
+pick 123 feat(123): 123's commit message
+pick 456 feat(456): 456's commit message
+pick 789 feat(789): 789's commit message
+pick 101112 feat(101112): 101112's commit message
+```
+
+Now if I want to combine commit 123, and 789 together
+
+- First I will reorder the commmits
+
+```
+pick 123 feat(123): 123's commit message
+pick 789 feat(789): 789's commit message
+pick 456 feat(456): 456's commit message
+pick 101112 feat(101112): 101112's commit message
+```
+
+- Then I will change the pick keyword for 789 commit to squash
+
+```
+pick 123 feat(123): 123's commit message
+squash 789 feat(789): 789's commit message
+pick 456 feat(456): 456's commit message
+pick 101112 feat(101112): 101112's commit message
+```
+
+Saving this state will open a window such as this:
+
+```
+# This is a combination of 2 commits.
+# This is the 1st commit message:
+
+fix(internal_notes): vm_name check for conf file
+
+checking for vm_name will return true since a tuple with following
+values: (False, False) will be returned. Hence, we should check for
+vm_name[0] entry.
+
+# This is the commit message #2:
+
+fix(internal_notes): vm_name[0] instead of vm_name
+
+since we only need the name of the vm in fill_dict function, and do not
+need information about where it is coming from, we will pass vm_name[0]
+directly instead of (vm_name, flag) tuple. This way, we can directly
+check for vm_name (instead of vm_name[0]), and don't need to convert the
+value to str once passed through the check.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Fri Feb 5 00:14:05 2021 +0530
+#
+# interactive rebase in progress; onto 69ffdf10
+# Last commands done (2 commands done):
+#    pick 6b1955a7 fix(internal_notes): vm_name check for conf file
+#    squash 4446ca98 fix(internal_notes): vm_name[0] instead of vm_name
+# Next commands to do (2 remaining commands):
+#    pick 7051983e fix(internal_notes): Installed Apps for Robusta
+#    pick 0096c78d feat(internal_notes): compliant with robusta build
+# You are currently rebasing branch 'robusta_notes' on '69ffdf10'.
+#
+# Changes to be committed:
+#	modified:   SupportZendesk/InternalNotes/EN/sandbox_windows.py
+#
+
+```
+
+Here, we can decide on what commit message we want to keep.
+Once the commit message is finalized,
+
+```
+fix(internal_notes): vm_name check for conf file
+
+checking for vm_name will return true since a tuple with following
+values: (False, False) will be returned. Hence, we should check for
+vm_name[0] entry.
+
+However, since we only need the name of the vm in fill_dict function,
+and do not need information about where it is coming from, we will
+pass vm_name[0] directly instead of (vm_name, flag) tuple. This way,
+we can directly check for vm_name (instead of vm_name[0]), and don't
+need to convert the value to str once passed through the check.
+```
+
+just save and quit
+
+You will see a message "Successfully rebased and updated refs"
+Finally, force push to master (if required), and you're done!
