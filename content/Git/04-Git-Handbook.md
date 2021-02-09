@@ -45,7 +45,7 @@ If you use Vim, add the `fugitive` plugin
 Plug 'tpope/vim-fugitive'  " git plugin
 ```
 
-Then you can see the diff using `:Gdiff`.
+Then you can see the diff using `:Gdiff`, or by pressing `dd` on any file in the status window (invoked by `:Gstatus`)
 
 Now, you can patch by copying contents from local pane to Git pane and saving.
 
@@ -120,6 +120,8 @@ This will set your commit date to Dec 25, 2019 with the time as 4PM (IST)
 Pretty sweet hack if you want an all-green GitHub, no?
 
 Further, you can also use the `interactive rebase` to make changes in earlier commits as well.
+
+> Take a look at [Rebasing with Git](../07-Rebasing-with-Git)
 
 # [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
 
