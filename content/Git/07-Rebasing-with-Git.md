@@ -389,3 +389,49 @@ just save and quit
 
 You will see a message "Successfully rebased and updated refs"
 Finally, force push to master (if required), and you're done!
+
+# [Change Commit Date of an Earlier Commit](https://stackoverflow.com/a/5017265/7048915)
+
+Open interactive rebase:
+
+```
+git rebase -i HEAD~4
+```
+
+```
+pick 123 feat(123): 123's commit message
+pick 789 feat(789): 789's commit message
+pick 456 feat(456): 456's commit message
+pick 101112 feat(101112): 101112's commit message
+```
+
+Change the pick keyword with `edit` (or `e`)
+
+```
+pick 123 feat(123): 123's commit message
+edit 789 feat(789): 789's commit message
+pick 456 feat(456): 456's commit message
+pick 101112 feat(101112): 101112's commit message
+```
+
+Now when I save this, the rebase prompt will close.
+Here, you would currently be in the commit "789" (i.e. the commit on which you wrote edit).
+Now, in your terminal you will type:
+
+```
+git commit --amend --date="Feb 08, 2021"
+```
+
+This will set the commit date to "Febuaray 8th, 2021"
+
+Finally, type the following in your terminal:
+
+```
+git rebase --continue
+```
+
+For the changes to reflect on remote branch, force push to master.
+
+Do note that this might cause other commit's to have the date of your rebase, since you are essentially rewriting history, so maybe you want to use the "edit" keyword on all the commits. You can also try to use the `--committer-date-is-author-date` flag, but I haven't tried this myself.
+
+You can also try the method mentioned in this [answer](https://stackoverflow.com/a/454750/7048915) for changing the commit date.
