@@ -121,6 +121,50 @@ Pretty sweet hack if you want an all-green GitHub, no?
 
 Further, you can also use the `interactive rebase` to make changes in earlier commits as well.
 
+# [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
+
+To store the current state of your work, so that you can take a pull of the latest changes from the remote repository,
+you can use the `git stash` command.
+It will remove all the current changes in your work tree and store it in a stash list.
+
+You can view the stash list using `git stash list`
+
+Many times, you stash your changes because you mostly want to discard all the changes, but sometimes,
+you may actually want to reapply the changes once you have taken a pull from remote repo.
+If you want to apply changes as soon as you stash and pull, you can go do so with `git stash pop`
+However, there may be times when you want to keep the stash as it is, and take a look at it later on.
+In such a case, it would be better to name your stash instead.
+To do so, you can:
+
+```
+git stash push -m "name_of_the_stash"
+```
+
+You can then later view the stash with the aforementioned `list` command:
+
+````
+stash@{0}: On update_passmarks: cpu scraping stash
+stash@{1}: WIP on update_passmarks: 8cb9b452 fix(passmarks): renamestash@{2}: WIP on update_passmarks: be334fb4 Merge branch 'update_passmarks' of https://github.com/bluestacks/automation into update_passmarks
+stash@{3}: WIP on update_passmarks: 651e83ee Merge branch 'master' of https://github.com/bluestacks/automation into update_passmarks
+stash@{4}: WIP on master: fff9583a Added Migration as jp , kr and tw will get approved automatically
+stash@{5}: WIP on navbar_lightbox: f2d672e9 fix(img): navbar + lightbox compatibility
+stash@{6}: WIP on master: ca85de4c feat(img): store docker settings as comment
+stash@{7}: WIP on master: 143edced fix(img): approve all toast message```
+````
+
+Do note that stashes are not specific to branches.
+Moreover, not naming the stash will store it in format such as this:
+
+```
+WIP on <branch_name>: <commit-hash> <commit-message>
+```
+
+While naming the stash will store it like:
+
+```
+On <branch_name>: <name of the stash you set using the -m flag>
+```
+
 ## Get better at Git
 
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
