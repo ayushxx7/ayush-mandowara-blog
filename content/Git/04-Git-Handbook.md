@@ -167,6 +167,23 @@ While naming the stash will store it like:
 On <branch_name>: <name of the stash you set using the -m flag>
 ```
 
+# Always pull with rebase
+
+It is generally good idea to pull with rebase flag,
+
+```
+git pull --rebase
+```
+
+As this will avoid the unncessary `merge` commit that always ends up being part of the git history whenever you pull from remote repository.
+
+You can also set the default behaviour of Git such that it automatically does that for you.
+Run this command in your terminal within the git repo you want to set this for:
+
+```
+git config --global pull.rebase true
+```
+
 ## Get better at Git
 
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
@@ -180,3 +197,7 @@ On <branch_name>: <name of the stash you set using the -m flag>
 #### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
 
 #### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
+
+```
+
+```
