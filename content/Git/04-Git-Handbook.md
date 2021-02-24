@@ -184,6 +184,16 @@ Run this command in your terminal within the git repo you want to set this for:
 git config --global pull.rebase true
 ```
 
+# Identify if you Commit Title is correct
+
+As a rule of thumb, you can see if your commit messages fits in the following sentence:
+
+```
+If applied, this commit will <your subject line here>
+```
+
+Do note that the title is always supposed be in imperative speech.
+
 ## Get better at Git
 
 #### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
@@ -197,7 +207,3 @@ git config --global pull.rebase true
 #### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
 
 #### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
-
-```
-
-```
