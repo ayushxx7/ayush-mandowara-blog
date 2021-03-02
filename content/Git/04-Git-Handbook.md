@@ -192,6 +192,14 @@ As a rule of thumb, you can see if your commit messages fits in the following se
 If applied, this commit will <your subject line here>
 ```
 
+# [Extract commits after a specific date](https://stackoverflow.com/questions/37311494/how-to-get-git-to-show-commits-in-a-specified-date-range-for-author-date)
+
+If you want to see commits after a certain date:
+
+```
+git log --oneline --after="2021-02-23"
+```
+
 Do note that the title is always supposed be in imperative speech.
 
 ## Get better at Git
