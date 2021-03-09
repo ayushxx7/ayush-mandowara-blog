@@ -285,3 +285,14 @@ Now to save it back in register `q` (or any register for that matter), just type
 This will copy the contents of the current line (which is the macro we edited), and store it in register q.
 Now you can play the macro using `@q` as you normally would.
 
+### [Substitue multiple spaces with a single space](https://superuser.com/a/719186)
+
+Run the following command in Vim, to convert multiple spaces to single spaces.
+
+```
+:%s# \+# #g
+```
+
+Note that since we need to escape `+` to make it a regex, we are using `#` for the separator.
+Further, the `g` flag is used so that if the pattern `1 or more spaces` is found multiple times in a line,
+all those get substituted to single spaces as well. (`g` => `global`)
