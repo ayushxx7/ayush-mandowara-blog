@@ -200,6 +200,25 @@ If you want to see commits after a certain date:
 git log --oneline --after="2021-02-23"
 ```
 
+# [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
+
+To remove/delete untracked files from your local repo, we can use `git clean`
+First, check what will be removed
+
+```
+git clean -n #files
+git clean -nd #directory
+```
+
+Once sure, run
+
+```
+git clean -f #remove files
+git clean -fd #remove directory
+git clean -fX #removed ignored files
+git clean -fx #remove ignored and untracked files
+```
+
 Do note that the title is always supposed be in imperative speech.
 
 ## Get better at Git
