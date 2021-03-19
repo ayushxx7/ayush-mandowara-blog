@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2020-10-09"
+date: "2021-03-19"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -450,3 +450,25 @@ The `key` param can also be passed in `max` function
 list_of_elems = ['ccc', 'aaaa', 'd', 'bb']
 print(max(list_of_elems, key=len))
 ```
+
+# [Upgrade Pip in Venv](https://stackoverflow.com/a/58627923/7048915)
+
+While using Python, you will see the warning about how you are using an old version of pip quite a lot.
+This is especially annoying because you cannot seemingly upgrade pip in a venv due to an `Acess Denied` eror.
+Well worry not, the fix is more simple than you think.
+
+Just run this
+
+```
+py -m pip install --upgrade pip #this is correct
+```
+
+Instead of this
+
+```
+pip install --upgrade pip
+```
+
+This is because when you run without the `py` command, `pip` is trying replace itself,
+i.e. a running process is supposed to be uninstalled, which is denied by some Operating Systems.
+When you use it with `py`, the upgrade command is running inside a python shell, and hence this problem is avoided.
