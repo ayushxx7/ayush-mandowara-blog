@@ -472,3 +472,41 @@ pip install --upgrade pip
 This is because when you run without the `py` command, `pip` is trying replace itself,
 i.e. a running process is supposed to be uninstalled, which is denied by some Operating Systems.
 When you use it with `py`, the upgrade command is running inside a python shell, and hence this problem is avoided.
+
+# [Restore Timestams of Extracted Files](https://stackoverflow.com/a/48129136/7048915)
+
+Usually when a zip is extracted, the timestamps of the files are the ones corresponding
+to the time the file was extracted at. This causes problems when we want to find out the
+most recent file from a list of files. To fix this problem, we can restore the timestamps
+of the file by reading them from the original zip file.
+
+Just call the `restore_timestamps_of_zip_contents` function after extraction is done:
+
+```
+def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
+    """Restores the timestamps of zipfile contents after extraction
+
+    Parameters
+    ----------
+    zipname: str
+        zipname path which was extracted
+    extract_dir: str
+        where the zip was extracted
+
+    Returns
+    -------
+    None
+    """
+
+    try:
+        for f in ZipFile(zipname, 'r').infolist():
+            # path to this extracted f-item
+            fullpath = os.path.join(extract_dir, f.filename)
+            # still need to adjust the dt o/w item will have the current dt
+            date_time = time.mktime(f.date_time + (0, 0, -1))
+            # update dt
+            os.utime(fullpath, (date_time, date_time))
+    except:
+        logging.warning(traceback.print_exc())
+
+```
