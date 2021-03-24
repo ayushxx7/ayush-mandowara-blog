@@ -510,3 +510,19 @@ def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
         logging.warning(traceback.print_exc())
 
 ```
+
+# [Convert Numbers to Hex](https://stackoverflow.com/a/45640808/7048915)
+
+The `int` method used for converting values to numbers also supports base conversion.
+To convert any string to hexadecimal number, just pass in the base number as 16.
+
+```py heading="Converting numbers to Hex"
+num_hex = int('fff', 16)
+print(num_hex)
+
+#Similarly for octal numbers, we can pass base 8
+num_oct = int('66', 8)
+print(num_oct)
+```
+
+Note that the number should be a valid hexadecimal (i.e. chars 0-9 & letters a-f are allowed when forming the number)
