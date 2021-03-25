@@ -526,3 +526,27 @@ print(num_oct)
 ```
 
 Note that the number should be a valid hexadecimal (i.e. chars 0-9 & letters a-f are allowed when forming the number)
+
+# [Convert bytes to Human Readable format](https://stackoverflow.com/a/49361727)
+
+To convert bytes to human readable format, we simply divide the number by 2 (pow) 10 until we can no longer divide.
+This way, we can obtain the power label (KB/MB/GB) from the original input bytes.
+
+```py heading="Bytes to KB/MB/GB"
+def format_bytes(self, size):
+    """Convert bytes to Human Readable Sizes"""
+    try:
+        power = 2**10
+        n = 0
+        power_labels = {0 : '', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
+        while size > power:
+            size /= power
+            n += 1
+        return f"{size:.2f} {power_labels[n]}B"
+    except:
+        logging.error(f"{traceback.format_exc()}")
+        return size
+
+print(format_bytes(12345))
+print(format_bytes(12345678910))
+```
