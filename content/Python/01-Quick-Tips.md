@@ -550,3 +550,14 @@ def format_bytes(self, size):
 print(format_bytes(12345))
 print(format_bytes(12345678910))
 ```
+
+# [Number formatting in f-string](https://stackoverflow.com/questions/45310254/fixed-digits-after-decimal-with-f-strings)
+
+To format numbers such that they have a fixed floating point value, pass in the format specifier like so:
+
+```py heading="Fixed formatting f-string"
+a = 10.12345
+print(f"{a:.2f}")
+b = 10
+print(f"{a:.2f}")
+```
