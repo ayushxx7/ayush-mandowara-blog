@@ -1,6 +1,7 @@
 build.bat
 server.bat
 build_and_serve.bat
+serve.bat
 # Logs
 logs
 *.log
