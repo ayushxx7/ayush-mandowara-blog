@@ -1,9 +1,9 @@
 {
-  "name": "chrisatmachine_blog",
+  "name": "ayushmandowara_blog",
   "private": true,
   "description": "A simple blog where I keep all of my notes",
   "version": "2.0.0",
-  "author": "Christian Chiarull <chrisatmachine@gmail.com>",
+  "author": "Ayush Mandowara <ayushxx7@gmail.com>",
   "dependencies": {
     "@deckdeckgo/highlight-code": "^2.3.2",
     "gatsby": "^2.32.3",
@@ -54,9 +54,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChristianChiarulli/blog"
+    "url": "https://github.com/ayushxx7/ayush-mandowara-blog"
   },
   "bugs": {
-    "url": "https://github.com/ChristianChiarulli/blog/issues"
+    "url": "https://github.com/ayushxx7/ayush-mandowara-blog/issues"
   }
 }
