@@ -2,7 +2,7 @@ import React, { Component } from "react"
 export default class Comments extends Component {
   constructor(props) {
     super(props)
-    this.commentBox = React.createRef() // Creates a reference to inject the <script> element
+    this.commentBox = React.createRef()
   }
   componentDidMount() {
     let scriptEl = document.createElement("script")
@@ -10,18 +10,16 @@ export default class Comments extends Component {
     scriptEl.setAttribute("crossorigin", "anonymous")
     scriptEl.setAttribute("async", true)
     scriptEl.setAttribute("repo", "ayushxx7/ayush-mandowara-blog")
-    scriptEl.setAttribute("issue-term", "pathname")
-    scriptEl.setAttribute("theme", "dark-blue")
+    scriptEl.setAttribute("issue-term", "og:title")
+    scriptEl.setAttribute("theme", "photon-dark")
+    scriptEl.setAttribute("label", "comment")
     this.commentBox.current.appendChild(scriptEl)
   }
 
   render() {
     return (
       <div className="comment-box-wrapper container pt-7">
-        {/* <h1 className="mb-0">Comments</h1> */}
-        {/* <hr className="my-0" /> */}
         <div ref={this.commentBox} className="comment-box" />
-        {/* Above element is where the comments are injected */}
       </div>
     )
   }

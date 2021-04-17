@@ -1,10 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import {Helmet} from "react-helmet"
-import {useStaticQuery, graphql} from "gatsby"
+import { Helmet } from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({description, lang, meta, title}) {
-  const {site} = useStaticQuery(
+function SEO({ description, lang, meta, title, keywords }) {
+  const { site } = useStaticQuery(
     graphql`
       query {
         site {
@@ -19,6 +19,7 @@ function SEO({description, lang, meta, title}) {
   )
 
   const metaDescription = description || site.siteMetadata.description
+  const author = site.siteMetadata.author || "Ayush Mandowara (ayushxx7)"
 
   return (
     <Helmet
@@ -50,7 +51,7 @@ function SEO({description, lang, meta, title}) {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: site.siteMetadata.author || "Ayush",
         },
         {
           name: `twitter:title`,
@@ -63,11 +64,18 @@ function SEO({description, lang, meta, title}) {
       ].concat(meta)}
     >
       <html lang="en" />
-      <title>{site.siteMetadata.title}</title>
+      <title>{title}</title>
       <meta
         name="google-site-verification"
         content="e3vjadBE28jnNdb0Sa7GW8OyadoZb_kyJdo_Xh4jp48"
       />
+
+      {title && <meta property="og:title" content={title} />}
+      {metaDescription && (
+          <meta property="og:description" content={metaDescription} />
+        ) && <meta name="description" content={metaDescription} />}
+      {keywords && <meta property="keywords" content={keywords} />}
+      {author && <meta property="author" content={author} />}
     </Helmet>
   )
 }
