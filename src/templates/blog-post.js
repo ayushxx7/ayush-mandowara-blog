@@ -7,12 +7,15 @@ import style from "./blog-post.module.less"
 import "katex/dist/katex.min.css"
 import Footer from "../components/footer"
 import "../style/prism-darcula.less"
+import Comments from "../components/comments"
+import SEO from "../components/seo"
 
 function BlogPost(props) {
   const {title, image, tags} = props.data.markdownRemark.frontmatter
   const {prev, next} = props.pageContext
   return (
     <Layout>
+      <SEO title={title} keywords={tags} />
       <div>
         {image && (
           <Img
@@ -29,6 +32,7 @@ function BlogPost(props) {
         />
         <div className={style.markdownBody}>
           <Footer />
+          <Comments />
         </div>
         <div className={style.markdownBody}>
           <br />
