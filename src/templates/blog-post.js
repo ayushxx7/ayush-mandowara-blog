@@ -7,6 +7,7 @@ import style from "./blog-post.module.less"
 import "katex/dist/katex.min.css"
 import Footer from "../components/footer"
 import "../style/prism-darcula.less"
+import Comments from "../components/comments"
 
 function BlogPost(props) {
   const {title, image, tags} = props.data.markdownRemark.frontmatter
@@ -29,6 +30,7 @@ function BlogPost(props) {
         />
         <div className={style.markdownBody}>
           <Footer />
+          <Comments />
         </div>
         <div className={style.markdownBody}>
           <br />
