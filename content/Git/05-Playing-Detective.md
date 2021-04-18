@@ -1,7 +1,7 @@
 ---
 title: Git-Fu - How to be a Git Detective
 description: Playing detective.
-date: "2020-09-17"
+date: "2021-04-18"
 image: "git.png"
 author: "Ayush"
 tags: ["git"]
@@ -14,16 +14,16 @@ There are times when you need to figure out exactly who made the changes in a fi
 #### [Playing Detective](https://vimeo.com/280579162)
 
 ```
-# To check who changed what line in a file and when, use:
-git blame <filename>
-# This will show you who made the last change in a file, when and with what commit.
+git blame <file_name> # line by line commit history of the current state of a file
+git log -p <file_name> # shows history per commit for a file
 
-# To search for a string, like a function name, in your entire git commit history:
-git log -S "search_string"
-# This will show a complete history of when this line was introduced, along with
-# every time it was changed, who changed it and with what commit hash.
+git log --grep "search_string" # searches for the commit messages containing string
+git log -S "search_string" # searches for actual code within any commit, like function_name()
+git log --oneline # short commit history
+git log --author="partial name of author" # commits by a particular user
 
 # Once you have a commit hash, you can use:
 git diff <commit_hash>
+git show <commit_hash>
 # to learn what all changes were part of the commit history.
 ```
