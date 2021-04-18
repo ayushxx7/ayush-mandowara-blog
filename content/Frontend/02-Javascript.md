@@ -1,13 +1,17 @@
 ---
 title: JavaScript QuickTips
 description: Collection of Tips for JS based on my personal work experience
-date: "2021-01-01"
-image: "html5.png"
+date: "2021-04-18"
+image: "javascript.png"
 author: "Ayush"
-tags: ["html", "javascript"]
+tags: ["javascript"]
 ---
 
-# [Iterating over Objects](https://stackoverflow.com/questions/14379274/how-to-iterate-over-a-javascript-object)
+# PURPOSE
+
+To show that I do actually use Javascript sometimes. Although I may not be as succesful in convincing someone because I am not updating this often!
+
+## [Iterating over Objects](https://stackoverflow.com/questions/14379274/how-to-iterate-over-a-javascript-object)
 
 Copy the below code in console of your browser:
 
@@ -36,7 +40,7 @@ Object.keys(obj).forEach((key, index) => {
 })
 ```
 
-# Check if Object is Empty(https://www.samanthaming.com/tidbits/94-how-to-check-if-object-is-empty/)
+## [Check if Object is Empty](https://www.samanthaming.com/tidbits/94-how-to-check-if-object-is-empty/)
 
 Copy the below code in browser console:
 
@@ -56,7 +60,7 @@ check_empty(empty_obj)
 check_empty(filled_obj)
 ```
 
-# Log Form Data(https://stackoverflow.com/questions/40062477/formdata-append-not-working)
+## [Log Form Data](https://stackoverflow.com/questions/40062477/formdata-append-not-working)
 
 You cannot directly log a formData object.
 However, you can use the entries property to iterate over formdata values.
@@ -76,75 +80,11 @@ for (var key of form_data.entries()) {
 }
 ```
 
-# Returning Multiple Rows in same Function without warning or error(https://stackoverflow.com/a/51875412)
-
-When we have to render multiple trs inside of a function and we try something like
-
-```
-getRows = (row) => {
-  return (
-    <tr>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-  )
-}
-```
-
-React will throw error about JSX expressions having one parent element
-
-If we wrap it inside a `div`
-
-```
-getRows = (row) => {
-  return (
-  <div>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-  </div>
-  )
-}
-```
-
-We get a warning about how divs cannot be children of table elements
-
-The correct way to do this would be using `Fragments`, which was introduced in React 16
-
-```
-getRows = (row) => {
-  return (
-  <React.Fragment>
-    <tr>
-      <td>1</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>4</td>
-    </tr>
-  </React.Fragment>
-  )
-}
-```
-
-Note that there might be a warning about each element having a unique key prop
-Just add the key attribute in all your components don't currently have one, including the Fragment.
-
-### How to check whether a substring exists in an array elements
+## How to check whether a substring exists in an array elements
 
 You can use the `includes` method
 
-```js
+```js heading="Using includes to ceck subtring in Javascript"
 var test_arr = ["element", "another_element", "one_more_element"]
 
 //checking substring
