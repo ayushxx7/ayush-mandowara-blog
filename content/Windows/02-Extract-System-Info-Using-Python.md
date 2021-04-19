@@ -1,0 +1,99 @@
+---
+title: Get Machine Information using Python
+description: A collection of commands required to be run using Python 3 to extract all relevant Information about a user's machine
+date: "2021-04-19"
+image: "windows.png"
+author: "Ayush"
+tags: ["windows", "python"]
+---
+
+# PUPROSE
+
+Extracting Information such as OS, RAM, Virtualization State, GPU.
+
+There are a couple of modules in Python that we will require to extract information about user's machine.
+
+```py
+import ctypes
+import locale
+import platform
+import subprocess
+import requests
+import psutil #ram
+import wmi #gpu
+```
+
+### Subprocess
+
+- Subprocess is a module that helps us run commands like we were running them in the Windows sheel (Command Prompt)
+- We can use this feature to run Powershell Commands for information that cannot be directly or reliably extracted using Python modules
+
+Whenever using the subprocess module, the approach will be:
+A) Create a list like command
+B) Pass the list to subprocess.Popen
+C) PIPE out the standard output
+D) Decoded the response using `utf-8`
+E) Use Split operation to extract the relevant portion of the output
+F) Strip the output received
+
+```py heading='Extracting RAM (excludes ram consumed by Partitions)'
+process = subprocess.Popen('systeminfo', stdout=subprocess.PIPE)
+decoded = process.communicate()[0].decode('utf-8')
+ram = decoded.split('Total Physical Memory:')[1].split('MB')[0].strip().replace(',', '')
+```
+
+```py heading="GPU Driver Version"
+subprocess.Popen(["powershell", "Get-WmiObject Win32_PnPSignedDriver | select devicename, driverversion"], stdout=subprocess.PIPE)
+decoded = process.communicate()[0].decode('utf-8')
+gpu_ver = decoded.split(self.machine_info['GPU'])[1].split('\n')[0].strip()
+```
+
+```py heading="locale"
+windll = ctypes.windll.kernel32
+current_locale = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+```
+
+```py heading="OS Version"
+uname = platform.uname()
+os_ver = str(float(uname.release))
+```
+
+```py heading="Public IP Address"
+ip_address = requests.get("https://api.ipify.org/?format=json").json()['ip']
+```
+
+```py heading="Virtualization"
+process = subprocess.Popen(["powershell",'Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled"'],stdout=subprocess.PIPE);
+decoded = process.communicate()[0].decode('utf-8')
+result = decoded.strip().split('\n')[2].strip()
+
+if "HyperVRequirementVirtualizationFirmwareEnabled" in decoded and not result:
+virtualization = "Raw Mode"
+else:
+virtualization = "Plus Mode"
+```
+
+```py heading="GPU Name"
+computer = wmi.WMI()
+gpu_info = computer.Win32_VideoController()[0].name
+```
+
+```py heading="Dot Net Version"
+process = subprocess.Popen(["powershell", r'Get-ChildItem "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP" -Recurse | Get-ItemProperty -Name version -EA 0 | Where { $_.PSChildName -Match "^(?!S)\p{L}"} | Select PSChildName, version | grep "Full"'], stdout=subprocess.PIPE)
+decoded = process.communicate()[0].decode('utf-8')
+dot_net_ver = decoded.split('Full ')[1].strip()
+```
+
+```py heading="Full Operating System Name"
+process = subprocess.Popen(["powershell", "Get-WmiObject Win32_OperatingSystem | select Caption -ExpandProperty Caption"], stdout=subprocess.PIPE)
+operating_sytem = process.communicate()[0].decode('utf-8').strip()
+```
+
+```py heading="RAM (Total Machine Ram)"
+ram = str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB"
+arch = platform.machine()
+```
+
+```py heading="CPU"
+cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').split('\n')[1].strip()
+```
