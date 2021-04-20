@@ -18,6 +18,8 @@ Suffice to say, it is really helpful in cases when you mess up history, or even 
 
 Ready? Run the following in your command to see what I mean:
 
+### How to access reflog?
+
 ```
 git reflog
 ```
@@ -34,6 +36,8 @@ c9c7021 HEAD@{7}: commit: feat(Python): restore timestamps after extraction
 ```
 
 Here, you can see all of what you have done in your local repository.
+
+### Recover a lost commit due to accidental reset
 
 Now, let's take an example.
 Your current repository looks like this:
@@ -146,3 +150,54 @@ You can reset back to this commit. It will make so as if you never deleted the c
 ```
 git reset --hard 0d818eb
 ```
+
+### Recover lost commit due to force push [Reflog + Cherry Pick]
+
+Suppose your colleague didn't know that you pushed some commits, and they are trying to fix their commit history.
+They amend their most recent commit (which was already pushed), now, when try to push normally, they will see a message about diverged histories.
+They force push out of habit, which fixed their commit history, but had the accidental effect of losing your commit.
+Now, you have pulled from the remote repository and you lost the commit as well.
+What a mess! Now you feel the only option left is to redo whatever you original committed.
+Fear not, `reflog` comes to rescue.
+
+Assuming you have lost the commit after pull.
+
+```
+git reflog
+```
+
+You can see the original commit that was made by you.
+
+```
+4c74a2e3 HEAD@{5}: pull (finish): returning to refs/heads/robusta-dev
+4c74a2e3 HEAD@{6}: pull (start): checkout 4c74a2e33552463cdc9f5f9dd4c6b1f9e28ca7ca
+7d9dc22f HEAD@{7}: pull (finish): returning to refs/heads/robusta-dev
+7d9dc22f HEAD@{8}: pull (pick): fix(robusta): os_locale stat #<--- commit you were looking for
+7bd8a090 HEAD@{9}: pull (start): checkout 7bd8a0900b7642daf36db0597a654bddbb8e728a
+dcd6ff55 HEAD@{10}: commit: fix(robusta): os_locale stat
+ba346631 HEAD@{11}: checkout: moving from master to robusta-dev
+```
+
+Now, since you have the commit hash, you can apply it using cherry-pick.
+
+```
+git cherry-pick 7d9dc22f
+```
+
+You will see a message such as the patch was successfully applied.
+
+```
+git reflog
+```
+
+```
+62bb7cd3 HEAD@{4}: cherry-pick: fix(robusta): os_locale stat
+4c74a2e3 HEAD@{5}: pull (finish): returning to refs/heads/robusta-dev
+4c74a2e3 HEAD@{6}: pull (start): checkout 4c74a2e33552463cdc9f5f9dd4c6b1f9e28ca7ca
+7d9dc22f HEAD@{7}: pull (finish): returning to refs/heads/robusta-dev
+7d9dc22f HEAD@{8}: pull (pick): fix(robusta): os_locale stat
+7bd8a090 HEAD@{9}: pull (start): checkout 7bd8a0900b7642daf36db0597a654bddbb8e728a
+dcd6ff55 HEAD@{10}: commit: fix(robusta): os_locale stat
+```
+
+Your lost changes have now been recovered!
