@@ -42,14 +42,23 @@ process = subprocess.Popen(["powershell", "Get-WmiObject Win32_OperatingSystem |
 operating_sytem = process.communicate()[0].decode('utf-8').strip()
 ```
 
-```py heading="OS Version"
+```py heading="OS Version (like 10.0, 8.1)"
 uname = platform.uname()
 os_ver = str(float(uname.release))
 ```
 
+```py heading="OS Version (similar to `ver` command)"
+
+# To get Version that will be received when enter the `ver` command in command prompt, we can use platform.platform()
+
+ver_list = platform.platform().split('-')[2].split('.')
+os_ver = f"{ver_list[0]}.{ver_list[1]}"
+
+````
+
 ```py heading="CPU"
 cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').split('\n')[1].strip()
-```
+````
 
 ```py heading="GPU Name"
 computer = wmi.WMI()
@@ -73,10 +82,11 @@ ram = str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB"
 ram = platform.machine()
 ```
 
-```py heading="locale"
+```py heading="OS Locale (like en-in)"
 windll = ctypes.windll.kernel32
 current_locale = locale.windows_locale[windll.GetUserDefaultUILanguage()]
 
+# To get output similar what you will get in C# current system culture library
 localization = locale.getdefaultlocale()
 ```
 
@@ -84,7 +94,7 @@ localization = locale.getdefaultlocale()
 ip_address = requests.get("https://api.ipify.org/?format=json").json()['ip']
 ```
 
-```py heading="Virtualization"
+```py heading="Virtualization (Raw/Plus)"
 process = subprocess.Popen(["powershell",'Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled"'],stdout=subprocess.PIPE);
 decoded = process.communicate()[0].decode('utf-8')
 result = decoded.strip().split('\n')[2].strip()
@@ -95,7 +105,7 @@ else:
   virtualization = "Plus Mode"
 ```
 
-```py heading="Dot Net Version"
+```py heading="Dot Net Version (Full)"
 process = subprocess.Popen(["powershell", r'Get-ChildItem "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP" -Recurse | Get-ItemProperty -Name version -EA 0 | Where { $_.PSChildName -Match "^(?!S)\p{L}"} | Select PSChildName, version | grep "Full"'], stdout=subprocess.PIPE)
 decoded = process.communicate()[0].decode('utf-8')
 dot_net_ver = decoded.split('Full ')[1].strip()
