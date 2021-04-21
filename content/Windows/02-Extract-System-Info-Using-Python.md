@@ -21,7 +21,10 @@ import subprocess
 import requests
 import psutil
 import wmi
+import os
 ```
+
+## About the Libraries
 
 ### [subprocess](https://docs.python.org/3/library/subprocess.html)
 
@@ -53,7 +56,6 @@ Whenever using the subprocess module, the approach will be:
 
 - A wrapper for pywin32
 - WMI stands for Windows Mangement Instrumentation, and it helps in managing devices and applications
-- [WMI Python Library](https://pypi.org/project/WMI/)
 
 ### [ctypes](https://docs.python.org/3/library/ctypes.html)
 
@@ -66,6 +68,19 @@ Whenever using the subprocess module, the approach will be:
 - Things like Case Convention, Numberic Formatting, Date-Time Formats etc. depend on user's locale
 - The locale module exposes POSIX locale database
 - It simplifies issues when developing an app/system that can be used by people with different cultural backgrounds/locations
+
+### [os](https://docs.python.org/3/library/os.html)
+
+Provides common utility functions such as
+
+- listing files in a directory,
+- changing/removing/adding directories
+- extracting file paths
+- joining paths (OS independent)
+- checking if a file exists
+- and many more...
+
+## Extracting Machine Information
 
 ```py heading="Full Operating System Name"
 process = subprocess.Popen(["powershell", "Get-WmiObject Win32_OperatingSystem | select Caption -ExpandProperty Caption"], stdout=subprocess.PIPE)
@@ -84,8 +99,12 @@ ver_list = platform.platform().split('-')[2].split('.')
 os_ver = f"{ver_list[0]}.{ver_list[1]}"
 ```
 
-```py heading="CPU"
+```py heading="CPU Name"
 cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').split('\n')[1].strip()
+```
+
+```py heading="Number of Processors"
+num_cpus = os.cpu_count()
 ```
 
 ```py heading="GPU Name"
