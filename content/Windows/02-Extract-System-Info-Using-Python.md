@@ -23,7 +23,7 @@ import psutil
 import wmi
 ```
 
-### Subprocess
+### [subprocess](https://docs.python.org/3/library/subprocess.html)
 
 - Subprocess is a module that helps us run commands like we were running them in the Windows sheel (Command Prompt)
 - We can use this feature to run Powershell Commands for information that cannot be directly or reliably extracted using Python modules
@@ -37,6 +37,36 @@ Whenever using the subprocess module, the approach will be:
 - Use Split operation to extract the relevant portion of the output
 - Strip the output received
 
+### [platform](https://docs.python.org/3/library/platform.html)
+
+- Provides system level information
+
+### [requests](https://pypi.org/project/requests/)
+
+- to make HTTP requests (GET/POST)
+
+### [psutil](https://psutil.readthedocs.io/en/latest/)
+
+- To get information about running processes & system utilization (CPU, memory, disk space, network usage etc.)
+
+### [wmi](https://pypi.org/project/WMI/)
+
+- A wrapper for pywin32
+- WMI stands for Windows Mangement Instrumentation, and it helps in managing devices and applications
+- [WMI Python Library](https://pypi.org/project/WMI/)
+
+### [ctypes](https://docs.python.org/3/library/ctypes.html)
+
+- call functions from DLLs or shared libraries
+- It provides C Compatible [data types](https://docs.python.org/3/library/ctypes.html#fundamental-data-types) for Python
+
+### [locale](https://docs.python.org/3/library/locale.html)
+
+- A locale is the definition of the subset of a user's environment that depends on language and cultural conventions.
+- Things like Case Convention, Numberic Formatting, Date-Time Formats etc. depend on user's locale
+- The locale module exposes POSIX locale database
+- It simplifies issues when developing an app/system that can be used by people with different cultural backgrounds/locations
+
 ```py heading="Full Operating System Name"
 process = subprocess.Popen(["powershell", "Get-WmiObject Win32_OperatingSystem | select Caption -ExpandProperty Caption"], stdout=subprocess.PIPE)
 operating_sytem = process.communicate()[0].decode('utf-8').strip()
@@ -47,18 +77,16 @@ uname = platform.uname()
 os_ver = str(float(uname.release))
 ```
 
-```py heading="OS Version (similar to `ver` command)"
-
+```py heading="OS Version (similar to running version on cmd)"
 # To get Version that will be received when enter the `ver` command in command prompt, we can use platform.platform()
 
 ver_list = platform.platform().split('-')[2].split('.')
 os_ver = f"{ver_list[0]}.{ver_list[1]}"
-
-````
+```
 
 ```py heading="CPU"
 cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').split('\n')[1].strip()
-````
+```
 
 ```py heading="GPU Name"
 computer = wmi.WMI()
