@@ -146,7 +146,7 @@ process = subprocess.Popen(["powershell",'Get-ComputerInfo -property "HyperVRequ
 decoded = process.communicate()[0].decode('utf-8')
 result = decoded.strip().split('\n')[2].strip()
 
-if "HyperVRequirementVirtualizationFirmwareEnabled" in decoded and not result:
+if "HyperVRequirementVirtualizationFirmwareEnabled" in decoded and not str(result) == "False":
   virtualization = "Raw Mode"
 else:
   virtualization = "Plus Mode"
