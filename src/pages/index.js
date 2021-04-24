@@ -11,7 +11,6 @@ import {
   FaGithub,
   FaLinkedin,
   FaYoutube,
-  FaDiscord,
 } from "react-icons/fa"
 
 const IndexPage = () => {
@@ -61,15 +60,6 @@ const IndexPage = () => {
                     href={"https://www.youtube.com/c/AyushMandowara_xx7"}
                   >
                     <FaYoutube color="#EB3323" size="30" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    href={"https://discord.gg/Xb9B4Ny"}
-                  >
-                    <FaDiscord color="#768AD4" size="30" />
                   </a>
                 </li>
                 <li>

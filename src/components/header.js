@@ -6,8 +6,6 @@ import {
   FaYoutube,
   FaBars,
   FaTimes,
-  FaDiscord,
-  FaPatreon,
 } from "react-icons/fa"
 import style from "./header.module.less"
 
@@ -78,27 +76,9 @@ const Header = () => {
             <a
               target="_blank"
               rel="nofollow noopener noreferrer"
-              href={"https://discord.gg/Xb9B4Ny"}
-            >
-              <FaDiscord color="#768AD4" size="30" />
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
               href={"https://www.linkedin.com/in/ayushxx7/"}
             >
               <FaLinkedin color="#3077B0" size="30" />
-            </a>
-          </li>
-          <li>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              href={"https://www.patreon.com/chrisatmachine"}
-            >
-              <FaPatreon color="#E8715C" size="30" />
             </a>
           </li>
         </ul>
