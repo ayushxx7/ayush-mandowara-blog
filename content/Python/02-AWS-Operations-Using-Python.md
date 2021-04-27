@@ -64,8 +64,6 @@ class AWSActions:
             self.s3.upload_file(local_file, bucket, s3_file, ExtraArgs={
                                     'CacheControl' : 'max-age=1209600',
                                     'ContentType': 'application/json',
-                                    'ACL': 'public-read'                                    'CacheControl' : 'max-age=1209600',
-                                    'ContentType': 'application/json',
                                     'ACL': 'public-read'})
             return True
         except FileNotFoundError:
@@ -87,7 +85,7 @@ if __name__ == '__main__':
     print('Uploaded:', uploaded)
 ```
 
-**Note**: If you don't want the access to be public, remove the "ACL" argument in upload_file function
+**Note**: If you don't want the access to be public, remove the `ACL` key in the `ExtraArgs` dictionary passed to `upload_file` function.
 
 ---
 
