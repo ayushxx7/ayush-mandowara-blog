@@ -114,14 +114,17 @@ gpu_info = computer.Win32_VideoController()[0].name
 
 ```py heading="GPU Driver Version"
 subprocess.Popen(["powershell", "Get-WmiObject Win32_PnPSignedDriver | select devicename, driverversion"], stdout=subprocess.PIPE)
-decoded = process.communicate()[0].decode('utf-8')
+decoded = process.communicate()[0].decode('utf-8', 'ignore')
 gpu_ver = decoded.split(gpu_name)[1].split('\n')[0].strip()
 ```
 
 ```py heading='Extracting RAM (excludes ram consumed by Partitions)'
 process = subprocess.Popen('systeminfo', stdout=subprocess.PIPE)
-decoded = process.communicate()[0].decode('utf-8')
-ram = decoded.split('Total Physical Memory:')[1].split('MB')[0].strip().replace(',', '')
+decoded = process.communicate()[0].decode('utf-8', 'ignore')
+if 'Mmoire physique totale:' in decoded:
+  ram = decoded.split('Mmoire physique totale:')[1].split('Mo')[0].strip().replace(',', '')
+else:
+  ram = decoded.split('Total Physical Memory:')[1].split('MB')[0].strip().replace(',', '')
 ```
 
 ```py heading="RAM (Total Machine Ram)"
