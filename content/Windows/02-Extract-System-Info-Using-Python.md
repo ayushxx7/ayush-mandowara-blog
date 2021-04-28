@@ -1,7 +1,7 @@
 ---
 title: Get Machine Information using Python
 description: A collection of commands required to be run using Python 3 to extract all relevant Information about a user's machine
-date: "2021-04-19"
+date: "2021-04-28"
 image: "windows.png"
 author: "Ayush"
 tags: ["windows", "python"]
@@ -9,7 +9,9 @@ tags: ["windows", "python"]
 
 # PUPROSE
 
-Extracting Information such as OS, RAM, Virtualization State, GPU.
+Extracting Information such as OS, RAM, Virtualization State, GPU from a Windows Machine.
+
+## Prerequisites
 
 There are a couple of modules in Python that we will require to extract information about user's machine.
 
@@ -28,59 +30,72 @@ import os
 
 ### [subprocess](https://docs.python.org/3/library/subprocess.html)
 
-- Subprocess is a module that helps us run commands like we were running them in the Windows sheel (Command Prompt)
-- We can use this feature to run Powershell Commands for information that cannot be directly or reliably extracted using Python modules
+- Simulate running commands in Windows Command Prompt
+- Run Powershell Commands for information that cannot be directly or reliably extracted using Python modules
 
-Whenever using the subprocess module, the approach will be:
+Usage can be broken down into these steps:
 
-- Create a list like command
-- Pass the list to subprocess.Popen
-- PIPE out the standard output
-- Decoded the response using `utf-8`
+- Create a list filled with parameters that would be joined to form a command such as:
+
+  `os_info_cmd = ["powershell", "Get-WmiObject Win32_OperatingSystem | select Caption -ExpandProperty Caption"]`
+
+- Pass the list to subprocess.Popen & Open a pipe to standard stream
+
+  `subprocess.Popen(os_info_cmd, stdout=subprocess.PIPE)`
+
+- Decode the response and ignore errors
+
+  `decode('utf-8', 'ignore')`
+
 - Use Split operation to extract the relevant portion of the output
 - Strip the output received
 
 ### [platform](https://docs.python.org/3/library/platform.html)
 
 - Provides system level information
+- Provides access to underlying platform's identifying data
 
 ### [requests](https://pypi.org/project/requests/)
 
-- to make HTTP requests (GET/POST)
+- HTTP for Humans
+- Make GET/POST/PUT/DELETE requests with ease
 
 ### [psutil](https://psutil.readthedocs.io/en/latest/)
 
-- To get information about running processes & system utilization (CPU, memory, disk space, network usage etc.)
+- To get information about running processes
+- Get system utilization details such as CPU, memory, disk space, network usage etc.
 
 ### [wmi](https://pypi.org/project/WMI/)
 
-- A wrapper for pywin32
-- WMI stands for Windows Mangement Instrumentation, and it helps in managing devices and applications
+- WMI stands for Windows Mangement Instrumentation
+- wmi library is a wrapper for pywin32
+- Helps in managing devices and applications
 
 ### [ctypes](https://docs.python.org/3/library/ctypes.html)
 
-- call functions from DLLs or shared libraries
-- It provides C Compatible [data types](https://docs.python.org/3/library/ctypes.html#fundamental-data-types) for Python
+- provides C Compatible [data types](https://docs.python.org/3/library/ctypes.html#fundamental-data-types) for Python
+- Helps in calling functions from DLLs or shared libraries
 
 ### [locale](https://docs.python.org/3/library/locale.html)
 
-- A locale is the definition of the subset of a user's environment that depends on language and cultural conventions.
-- Things like Case Convention, Numberic Formatting, Date-Time Formats etc. depend on user's locale
-- The locale module exposes POSIX locale database
-- It simplifies issues when developing an app/system that can be used by people with different cultural backgrounds/locations
+- [`LOCALE`](<https://en.wikipedia.org/wiki/Locale_(computer_software)>) is a set of parameters that defines the user's language, region and any special variant preferences that the user wants to see in their user interface. Usually a locale identifier consists of at least a language code and a country/region code.
+- Things like Case Convention, Number Formatting, Date-Time Formats etc. depend on user's locale
+- The `locale` module exposes POSIX locale database
+- It simplifies the process of developing an app or system that can be used by people with different cultural backgrounds and/or locations.
 
 ### [os](https://docs.python.org/3/library/os.html)
 
-Provides common utility functions such as
+Provides OS independent utility functions such as:
 
-- listing files in a directory,
+- listing files in a directory
 - changing/removing/adding directories
 - extracting file paths
-- joining paths (OS independent)
+- joining paths
 - checking if a file exists
-- and many more...
 
 ## Extracting Machine Information
+
+### OS
 
 ```py heading="Full Operating System Name"
 process = subprocess.Popen(["powershell", "Get-WmiObject Win32_OperatingSystem | select Caption -ExpandProperty Caption"], stdout=subprocess.PIPE)
@@ -99,6 +114,8 @@ ver_list = platform.platform().split('-')[2].split('.')
 os_ver = f"{ver_list[0]}.{ver_list[1]}"
 ```
 
+### CPU
+
 ```py heading="CPU Name"
 cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').split('\n')[1].strip()
 ```
@@ -107,16 +124,20 @@ cpu = subprocess.check_output(["wmic","cpu","get", "name"]).decode('utf-8').spli
 num_cpus = os.cpu_count()
 ```
 
+### GPU
+
 ```py heading="GPU Name"
 computer = wmi.WMI()
 gpu_info = computer.Win32_VideoController()[0].name
 ```
 
 ```py heading="GPU Driver Version"
-subprocess.Popen(["powershell", "Get-WmiObject Win32_PnPSignedDriver | select devicename, driverversion"], stdout=subprocess.PIPE)
+process = subprocess.Popen(["powershell", "Get-WmiObject Win32_PnPSignedDriver | select devicename, driverversion"], stdout=subprocess.PIPE)
 decoded = process.communicate()[0].decode('utf-8', 'ignore')
 gpu_ver = decoded.split(gpu_name)[1].split('\n')[0].strip()
 ```
+
+### RAM
 
 ```py heading='Extracting RAM (excludes ram consumed by Partitions)'
 process = subprocess.Popen('systeminfo', stdout=subprocess.PIPE)
@@ -132,6 +153,8 @@ ram = str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB"
 ram = platform.machine()
 ```
 
+### LOCALE
+
 ```py heading="OS Locale (like en-in)"
 windll = ctypes.windll.kernel32
 current_locale = locale.windows_locale[windll.GetUserDefaultUILanguage()]
@@ -140,9 +163,13 @@ current_locale = locale.windows_locale[windll.GetUserDefaultUILanguage()]
 localization = locale.getdefaultlocale()
 ```
 
+### IP
+
 ```py heading="Public IP Address"
 ip_address = requests.get("https://api.ipify.org/?format=json").json()['ip']
 ```
+
+### VIRTUALIZATION
 
 ```py heading="Virtualization (Raw/Plus)"
 process = subprocess.Popen(["powershell",'Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled"'],stdout=subprocess.PIPE);
@@ -154,6 +181,8 @@ if "HyperVRequirementVirtualizationFirmwareEnabled" in decoded and not str(resul
 else:
   virtualization = "Plus Mode"
 ```
+
+### DOT NET VERSION
 
 ```py heading="Dot Net Version (Full)"
 process = subprocess.Popen(["powershell", r'Get-ChildItem "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP" -Recurse | Get-ItemProperty -Name version -EA 0 | Where { $_.PSChildName -Match "^(?!S)\p{L}"} | Select PSChildName, version | grep "Full"'], stdout=subprocess.PIPE)
