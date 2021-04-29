@@ -296,3 +296,12 @@ Run the following command in Vim, to convert multiple spaces to single spaces.
 Note that since we need to escape `+` to make it a regex, we are using `#` for the separator.
 Further, the `g` flag is used so that if the pattern `1 or more spaces` is found multiple times in a line,
 all those get substituted to single spaces as well. (`g` => `global`)
+
+### [Print Current File Name with Full Path in the current buffer](https://vim.fandom.com/wiki/Get_the_name_of_the_current_file)
+
+```
+:put =expand('%:p') # full file path
+:put =@%            # relative file path from current dir
+:put =expand('%:t') # file name
+:put =expand('%:e') # file extension
+```
