@@ -182,6 +182,39 @@ else:
 
 Voila, you can now compare state between dictionaries!
 
+### Dictionary to JSON
+
+```py heading="Convert Dictionary to JSON"
+import json
+
+data = {
+    'catbs5': {
+        'en': [
+            {'article_id': '123', 'title': '123title'},
+            {'article_id': '1234', 'title': '1234title'},
+        ],
+        'tw': [
+            {'article_id': '123', 'title': '123title'},
+            {'article_id': '1234', 'title': '1234title'},
+        ],
+    },
+    'catbs4': {
+        'en': [
+            {'article_id': '123', 'title': '123title'},
+            {'article_id': '1234', 'title': '1234title'},
+        ],
+        'tw': [
+            {'article_id': '123', 'title': '123title'},
+            {'article_id': '1234', 'title': '1234title'},
+        ],
+    }
+}
+
+json_data = json.dumps(data)
+
+print(json_data)
+```
+
 ## LISTS
 
 ### [Unpacking lists to individual values](https://stackoverflow.com/a/34308407)
