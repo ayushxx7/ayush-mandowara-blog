@@ -201,3 +201,49 @@ dcd6ff55 HEAD@{10}: commit: fix(robusta): os_locale stat
 ```
 
 Your lost changes have now been recovered!
+
+### Identifying commits made in the current machine
+
+I wanted to figure out what commits were made by using a particular machine.
+The problem was that a large file was commited by mistake and was not pushed.
+We did not realize this at the moment, but afterwards we kept pulling changes from other machines.
+One day, it so happened, that we needed to push from the "Server" Machine and this is when we realized, that it won't be possible to do so because of the large file.
+The first approach we thought of, was to rebase to the last good commit i.e. the commit before the "large file commit".
+However, this proved to be very problematic. The reason:
+
+```
+there were more than 200 commits that needed to be rebased and as you can expect there were a lot of conflicts.
+```
+
+So we abandoned this approach and searched the internet for answers, but to no avail.
+Finally, we decided, that the best thing to do was to reset to the original commit and pull the other changes into machine.
+This posed another problem, there were some commits that were part of the server machine and still needed to be pushed!
+So, now, we needed to identify commits made from the current machine.
+
+```
+When you dig through the ground, sometimes, you get GOLD!
+```
+
+---
+
+With a little bit of thinking and trying different things, the solution was found.
+
+#### Enter `REFLOG`
+
+```
+git reflog --author="kunal" | grep "commit: "
+```
+
+- reflog: shows all changes (including commits) made in the current machine
+- author: this identifies the user from which commits were made. In our case, each machine only has one account associated with them. For the server machine, that happened to be Kunal's Git account.
+- grep: this is a command line utility which lets us filter out response from a command based on the search string we pass to it. In reflog, the commits made can be identified by the following pattern "._commit:._"
+
+Now, we had all the commits that were not pushed to master branch because of the "large file commit".
+The remaining steps can be summed up as:
+
+- reset to last good commit
+- pull changes from master branch
+- cherry-pick the commits collected in previous step
+- push to master
+
+This is how Reflog ended this Git nightmare and saved the day!
