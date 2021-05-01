@@ -37,6 +37,7 @@ c9c7021 HEAD@{7}: commit: feat(Python): restore timestamps after extraction
 
 Here, you can see all of what you have done in your local repository.
 
+---
 ### Recover a lost commit due to accidental reset
 
 Now, let's take an example.
@@ -151,6 +152,7 @@ You can reset back to this commit. It will make so as if you never deleted the c
 git reset --hard 0d818eb
 ```
 
+---
 ### Recover lost commit due to force push [Reflog + Cherry Pick]
 
 Suppose your colleague didn't know that you pushed some commits, and they are trying to fix their commit history.
@@ -202,29 +204,38 @@ dcd6ff55 HEAD@{10}: commit: fix(robusta): os_locale stat
 
 Your lost changes have now been recovered!
 
+---
 ### Identifying commits made in the current machine
 
-I wanted to figure out what commits were made by using a particular machine.
-The problem was that a large file was commited by mistake and was not pushed.
-We did not realize this at the moment, but afterwards we kept pulling changes from other machines.
-One day, it so happened, that we needed to push from the "Server" Machine and this is when we realized, that it won't be possible to do so because of the large file.
+#### What to do when you have committed large files in a repository
+
+I wanted to figure out what commits were made by using a particular machine.  
+The problem was that a large file was commited by mistake and was not pushed. We did not realize this at the moment, but afterwards we kept pulling changes from other machines. One day, it so happened, that we needed to push from the "Server" Machine and this is when we realized, that it won't be possible to do so because of the large file.  
+
 The first approach we thought of, was to rebase to the last good commit i.e. the commit before the "large file commit".
 However, this proved to be very problematic. The reason:
 
 ```
-there were more than 200 commits that needed to be rebased and as you can expect there were a lot of conflicts.
+there were more than 200 commits that needed to be rebased and
+as you can expect there were a lot of conflicts
 ```
 
-So we abandoned this approach and searched the internet for answers, but to no avail.
+So we abandoned this approach and searched the internet for answers, but to no avail.  
+
 Finally, we decided, that the best thing to do was to reset to the original commit and pull the other changes into machine.
-This posed another problem, there were some commits that were part of the server machine and still needed to be pushed!
+This posed another problem, 
+```
+there were some commits that were made on the server machine 
+and still needed to be pushed!
+```
+
 So, now, we needed to identify commits made from the current machine.
 
 ```
-When you dig through the ground, sometimes, you get GOLD!
+When you dig through the ground, 
+sometimes, 
+you get GOLD!
 ```
-
----
 
 With a little bit of thinking and trying different things, the solution was found.
 
@@ -234,16 +245,54 @@ With a little bit of thinking and trying different things, the solution was foun
 git reflog --author="kunal" | grep "commit: "
 ```
 
-- reflog: shows all changes (including commits) made in the current machine
-- author: this identifies the user from which commits were made. In our case, each machine only has one account associated with them. For the server machine, that happened to be Kunal's Git account.
-- grep: this is a command line utility which lets us filter out response from a command based on the search string we pass to it. In reflog, the commits made can be identified by the following pattern "._commit:._"
+| Keyword  | Description                                                                                                                                                                                  |
+|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `reflog` | shows all changes (including commits) made in the current machine                                                                                                                            |
+| `author` | this identifies the user from which commits were made. In our case, each machine only has one account associated with them. For the server machine, that happened to be Kunal's Git account. |
+| `grep`   | this is a command line utility which lets us filter out response from a command based on the search string we pass to it.
+
+In reflog, the commits made can be identified by the following pattern:
+```
+.*commit:.*"
+```
+So channeling the output to grep can help us identify the commits easily.
+
+```
+c63c4c3d HEAD@{13}: commit: feat(virus_scan): add gitignore
+4215aa60 HEAD@{298}: commit: feat(chat-bs5): Adding script for BS5 Chat suite
+f07351b2 HEAD@{345}: commit: updated gitignore for adding brawlstars.xapk
+592e1d78 HEAD@{346}: commit: commiting brawl_stars.xapk for test data record <-- the bad large file commit
+```
 
 Now, we had all the commits that were not pushed to master branch because of the "large file commit".
 The remaining steps can be summed up as:
 
 - reset to last good commit
-- pull changes from master branch
+    ```
+    git reset --hard 592e1d78~
+    ```
+- pull<sup>[1](#1)</sup> changes from master branch
+    ```
+    git pull
+    ```
 - cherry-pick the commits collected in previous step
+    ```
+    git cherry-pick c63c4c3d
+    git cherry-pick 4215aa60
+    ```
 - push to master
+    ```
+    git push
+    ```
+#####
+##### <a name="1">[1]:</a> When pulling I was getting an error 
+  ```
+  Unlink of file {file_name} failed. Should I try again? (y/n)` on many files.
+  ```
+I followed the solution mentioned in this [answer](https://stackoverflow.com/questions/4389833/unlink-of-file-failed-should-i-try-again) and ran 
+```
+git gc
+```
+After which I was able to pull without issues. However, as a side effect, `reflog` was lost.
 
-This is how Reflog ended this Git nightmare and saved the day!
+This is how Reflog ended this Git nightmare and saved the day! Albeit, it was sacrificed in the process.
