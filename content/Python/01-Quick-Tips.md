@@ -11,26 +11,13 @@ tags: ["python"]
 
 Sharing a collection of quick references for common issues encountered when coding in Python
 
-## SUBPROCESS
-
-### [Supress error of Subprocess check Output](https://stackoverflow.com/a/31683402/7048915)
-
-#### In case you call a process via subprocess, but do not wish to see the error in case it throws one,
-
-- Just redirect the standard error (stderr) to DEVNULL
-
-```
-import subprocess
-subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
-```
-
 ## CLASSES
 
 ### [Using variables of Parent Class](https://www.geeksforgeeks.org/python-access-parent-class-attribute/#:~:text=Accessing%20Parent%20Class%20Functions&text=This%20is%20really%20simple%2C%20you,attributes%20of%20the%20parent%20class.&text=%23%20how%20parent%20constructors%20are%20called.)
 
-#### To access variables from parent class in child class,
+To access variables from parent class in child class,
 
-- Call the constructor (**init** method) of the Parent class in the Child class's **init** method.
+- Call the constructor (`__init__` method) of the Parent in the Child class's `__init__` method.
 
 ```py heading="Accessing Parent Class variables in Child Class"
 class Parent:
@@ -48,6 +35,8 @@ class Child(Parent):
 
 Child().print_all()
 ```
+
+---
 
 ### [Load value during Class Initialization using own function](https://stackoverflow.com/questions/12646326/calling-a-class-function-inside-of-init)
 
@@ -90,6 +79,8 @@ parent_fn_name = inspect.stack()[2][3] #parent
 
 [Further Reading](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
 
+---
+
 ### [Accessing Function attributes if you know it's name](https://stackoverflow.com/a/3071/7048915)
 
 Suppose you have a function name which belongs to a class and you want to call it or access it's attributes, you can use the getattr method to generate the function from name.
@@ -112,7 +103,7 @@ def fill_fn_dict(self, value):
 
 ### [Delete keys from dictionary](https://www.geeksforgeeks.org/python-ways-to-remove-a-key-from-dictionary/)
 
-#### You can use the `del` keyword to delete keys from dictionary
+You can use the `del` keyword to delete keys from dictionary
 
 ```py heading="Delete Keys from dictionary"
 test_dict = {'one':"val1", 'two':'val2'}
@@ -121,9 +112,11 @@ del test_dict['one']
 print(test_dict)
 ```
 
+---
+
 ### [Get the first key from a dictionary](https://www.geeksforgeeks.org/python-get-the-first-key-in-dictionary/)
 
-#### Use dict.keys() get the keys and then fetch first one using index
+Use `dict.keys()` get the keys and then fetch first one using index
 
 ```py heading="First Key from Dictionary"
 test_dict = {'one': 'val1', 'two': 'val2'}
@@ -132,6 +125,8 @@ print(test_dict.keys())
 first_key = list(test_dict.keys())[0]
 print(first_key)
 ```
+
+---
 
 ### [Pretty print dictionaries while logging](https://stackoverflow.com/questions/11093236/use-logging-print-the-output-of-pprint)
 
@@ -145,7 +140,9 @@ ds = [{'hello': 'there'}]
 logging.debug(f"logging datastructure:\n{pformat(ds)}")
 ```
 
-### [Use Copy to copy dictionaries](https://www.programiz.com/python-programming/methods/dictionary/copy)
+---
+
+### [Use `copy` to make duplicate dictionaries](https://www.programiz.com/python-programming/methods/dictionary/copy)
 
 There could be times when you want to compare if a dictionary is changed.
 For this you think that you will store the current state in a temp dictionary, and do operations in the original one.
@@ -181,6 +178,8 @@ else:
 ```
 
 Voila, you can now compare state between dictionaries!
+
+---
 
 ### Dictionary to JSON
 
@@ -227,6 +226,8 @@ title, url, price, title2, keyword = row
 print(title, url, price, title2, keyword)
 ```
 
+---
+
 ### Combining lists together
 
 To combine list together you can use the plus (+) operator
@@ -248,9 +249,11 @@ b = a*n
 print(b)
 ```
 
+---
+
 ### [Generating strings from lists after filtering False values](https://stackoverflow.com/questions/8626694/joining-multiple-strings-if-they-are-not-empty-in-python)
 
-#### In case you want to join a list of string values while ignoring values that will evaluate to False
+In case you want to join a list of string values while ignoring values that will evaluate to False
 
 - use a filter over join
 
@@ -263,6 +266,8 @@ print(y)
 - Note that the filter function can also take `functions` as filterers.
 - The passed function must return True/False over the passed sequence of values after evaluation.
 - [Read example here](https://thepythonguru.com/python-builtin-functions/filter/)
+
+---
 
 ### [Sort by length](https://developers.google.com/edu/python/sorting)
 
@@ -280,11 +285,11 @@ list_of_elems = ['ccc', 'aaaa', 'd', 'bb']
 print(max(list_of_elems, key=len))
 ```
 
-## STRING FORMATTING
+## FORMATTING
 
 ### [Add 0 padding to strings](https://stackoverflow.com/questions/339007/how-to-pad-zeroes-to-a-string)
 
-#### There are times when you would need to add a padding zeroes to the numbers you were converting to strings.
+There are times when you would need to add a padding zeroes to the numbers you were converting to strings.
 
 - Use zfill, a standard string function specifically designed for this use case
 - For example, when calculating time differences and then printing the output
@@ -304,6 +309,8 @@ mins = 3
 print(f"{hrs:02} hour(s) {mins:02} min(s)")
 ```
 
+---
+
 ### [Stripping values generated during a split operation](https://stackoverflow.com/a/4071407/7048915)
 
 - Use list comprehension
@@ -313,6 +320,8 @@ test_str = "a, b,    c,d"
 out_list = [val.strip() for val in test_str.split(',')]
 print(out_list)
 ```
+
+---
 
 ### [Convert Numbers to Hex](https://stackoverflow.com/a/45640808/7048915)
 
@@ -329,6 +338,8 @@ print(num_oct)
 ```
 
 Note that the number should be a valid hexadecimal (i.e. chars 0-9 & letters a-f are allowed when forming the number)
+
+---
 
 ### [Convert bytes to Human Readable format](https://stackoverflow.com/a/49361727)
 
@@ -354,7 +365,7 @@ print(format_bytes(12345))
 print(format_bytes(12345678910))
 ```
 
-## FILE SEARCH
+## MISC UTIL
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
 
@@ -406,7 +417,7 @@ Output:
 
 Note: The `glob` module uses the os and fnmatch module internally.
 
-## HTTP Requests
+---
 
 ### [Sending List/Array as data while making a request](https://stackoverflow.com/a/35535240/7048915)
 
@@ -435,7 +446,20 @@ requests.post(url, json=data, headers=headers)
 The `json` keyword will encode the data to (you guessed it) JSON. It will also set the `Content-Type` to `application/json`.
 I guess that's why `requests` has the tag line `HTTP for Humans`
 
-## MISC UTIL
+---
+
+### [Supress error of Subprocess check Output](https://stackoverflow.com/a/31683402/7048915)
+
+In case you call a process via subprocess, but do not wish to see the error in case it throws one,
+
+- Just redirect the standard error (`stderr`) to `DEVNULL`
+
+```
+import subprocess
+subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
+```
+
+---
 
 ### [Make multilevel directories](https://www.geeksforgeeks.org/python-os-makedirs-method/)
 
@@ -456,6 +480,8 @@ os.makedirs(path, exist_ok=True)
 for d in os.walk('test'):
     print(d)
 ```
+
+---
 
 ### [Store tempoary information to Temp Folder](https://stackoverflow.com/questions/847850/cross-platform-way-of-getting-temp-directory-in-python)
 
@@ -485,6 +511,8 @@ f = tempfile.TemporaryFile()
 f.write('temporary info')
 ```
 
+---
+
 ### [Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
 
 There are times when you have a proper folder structure for a project, but python cannot interpret that you are importing a file from within the project directory.
@@ -498,6 +526,8 @@ sys.path.append('/path/to/project_folder')
 ```
 
 Now, Python will look for this folder when importing modules as well.
+
+---
 
 ### [Upgrade Pip in Venv](https://stackoverflow.com/a/58627923/7048915)
 
@@ -520,6 +550,8 @@ pip install --upgrade pip
 This is because when you run without the `py` command, `pip` is trying replace itself,
 i.e. a running process is supposed to be uninstalled, which is denied by some Operating Systems.
 When you use it with `py`, the upgrade command is running inside a python shell, and hence this problem is avoided.
+
+---
 
 ### [Restore Timestams of Extracted Files](https://stackoverflow.com/a/48129136/7048915)
 
