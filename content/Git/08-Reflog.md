@@ -1,6 +1,6 @@
 ---
 title: The power of Git Reflog
-description:
+description: How to use Reflog to solve problems in Git
 date: "2021-04-16"
 image: "git.png"
 author: "Ayush"
