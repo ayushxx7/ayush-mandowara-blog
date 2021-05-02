@@ -1,15 +1,67 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout"
 import Post from "../components/post"
 import Pager from "../components/pager"
 import { graphql } from "gatsby"
 
-const postList = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges
+const PostList = ({ data, pageContext }) => {
+  const allPosts = data.allMarkdownRemark.edges
+
+  //
+  const emptyQuery = ""
+  const [state, setState] = useState({
+    filteredData: [],
+    query: emptyQuery,
+  })
+  //
+    //
+  const handleInputChange = event => {
+    console.log(event.target.value)
+    const query = event.target.value
+
+    // this is how we get all of our posts
+    const posts = data.allMarkdownRemark.edges || []
+
+
+     // return all filtered posts
+    const filteredData = posts.filter(post => {
+      // destructure data from post frontmatter
+      const { description, title, tags } = post.node.frontmatter
+      return (
+        // standardize data with .toLowerCase()
+        // return true if the description, title or tags
+        // contains the query string
+        description && description.toLowerCase().includes(query.toLowerCase()) ||
+        title.toLowerCase().includes(query.toLowerCase()) ||
+        (tags && tags
+          .join("") // convert tags from an array to string
+          .toLowerCase()
+          .includes(query.toLowerCase()))
+      )
+    })
+
+    // update state according to the latest query and results
+    setState({
+      query, // with current query string from the `Input` event
+      filteredData, // with filtered data from posts.filter(post => (//filteredData)) above
+    })
+  }
+
+  const { filteredData, query } = state
+  const hasSearchResults = filteredData && query !== emptyQuery
+  const posts = hasSearchResults ? filteredData : allPosts
 
   return (
     <Layout>
       <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
+          <input
+              type="text"
+              aria-label="Search"
+              placeholder="Type to filter posts..."
+              onChange={handleInputChange}
+          />
+
+
       {posts.map(({ node }) => (
         <Post
           title={node.frontmatter.title}
@@ -62,4 +114,4 @@ export const PostListQuery = graphql`
   }
 `
 
-export default postList
+export default PostList
