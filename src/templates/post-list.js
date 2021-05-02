@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import Post from "../components/post"
 import Pager from "../components/pager"
 import { graphql } from "gatsby"
+import customStyle from "../components/post.module.less"
 
 const PostList = ({ data, pageContext }) => {
   const allPosts = data.allMarkdownRemark.edges
@@ -54,13 +55,19 @@ const PostList = ({ data, pageContext }) => {
   return (
     <Layout>
       <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
-          <input
-              type="text"
-              aria-label="Search"
-              placeholder="Type to filter posts..."
-              onChange={handleInputChange}
-          />
-
+      <input
+        style={{
+          width: "98%", 
+          color: "cadetblue", 
+          fontSize: "1em",
+        }}
+      className={customStyle.card}
+      type="text"
+      aria-label="Search"
+      placeholder="Type to filter posts..."
+      onChange={handleInputChange}
+      />
+      <h1/>
 
       {posts.map(({ node }) => (
         <Post
@@ -79,10 +86,9 @@ const PostList = ({ data, pageContext }) => {
 }
 
 export const PostListQuery = graphql`
-  query PostListQuery($skip: Int!, $limit: Int!) {
+  query PostListQuery($skip: Int!) {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      limit: $limit
       skip: $skip
     ) {
       edges {
