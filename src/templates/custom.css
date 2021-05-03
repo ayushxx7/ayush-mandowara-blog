@@ -1,0 +1,9 @@
+.searchContainer {
+  display: grid;
+  grid-template-columns: 8fr 1fr;
+}
+
+.searchH3 {
+  margin-right: 2rem;
+  margin-top: 2rem;
+}

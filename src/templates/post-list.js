@@ -4,47 +4,36 @@ import Post from "../components/post"
 import Pager from "../components/pager"
 import { graphql } from "gatsby"
 import customStyle from "../components/post.module.less"
+import "./custom.css"
 
 const PostList = ({ data, pageContext }) => {
   const allPosts = data.allMarkdownRemark.edges
 
-  //
   const emptyQuery = ""
   const [state, setState] = useState({
     filteredData: [],
     query: emptyQuery,
   })
-  //
-    //
+
   const handleInputChange = event => {
     console.log(event.target.value)
     const query = event.target.value
 
-    // this is how we get all of our posts
-    const posts = data.allMarkdownRemark.edges || []
-
-
-     // return all filtered posts
-    const filteredData = posts.filter(post => {
-      // destructure data from post frontmatter
+    const filteredData = allPosts.filter(post => {
       const { description, title, tags } = post.node.frontmatter
       return (
-        // standardize data with .toLowerCase()
-        // return true if the description, title or tags
-        // contains the query string
         description && description.toLowerCase().includes(query.toLowerCase()) ||
         title.toLowerCase().includes(query.toLowerCase()) ||
         (tags && tags
-          .join("") // convert tags from an array to string
+          .join("")
           .toLowerCase()
           .includes(query.toLowerCase()))
       )
     })
 
-    // update state according to the latest query and results
     setState({
-      query, // with current query string from the `Input` event
-      filteredData, // with filtered data from posts.filter(post => (//filteredData)) above
+      query,
+      filteredData,
     })
   }
 
@@ -55,10 +44,12 @@ const PostList = ({ data, pageContext }) => {
   return (
     <Layout>
       <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
+    <div class="searchContainer">
+    <div>
       <input
         style={{
-          width: "98%", 
-          color: "cadetblue", 
+          width: "95%",
+          color: "cadetblue",
           fontSize: "1em",
         }}
       className={customStyle.card}
@@ -67,6 +58,11 @@ const PostList = ({ data, pageContext }) => {
       placeholder="Type to filter posts..."
       onChange={handleInputChange}
       />
+    </div>
+    <div>
+    <h3 class="searchH3">{posts.length}/{allPosts.length}</h3>
+    </div>
+    </div>
       <h1/>
 
       {posts.map(({ node }) => (
