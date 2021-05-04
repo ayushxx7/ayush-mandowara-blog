@@ -1,7 +1,7 @@
 ---
 title: Vim Quicktips
 description: You don't always need to write a script to do some automation, sometimes, "Vim" is enough.
-date: "2020-09-09"
+date: "2021-05-03"
 image: "gvim-intro.png"
 author: "Ayush"
 tags: ["gvim"]
@@ -304,4 +304,31 @@ all those get substituted to single spaces as well. (`g` => `global`)
 :put =@%            # relative file path from current dir
 :put =expand('%:t') # file name
 :put =expand('%:e') # file extension
+```
+
+### [Remove Trailing Whitespace when saving](https://stackoverflow.com/a/19936807/7048915)
+
+The basic command to use would be:
+```
+:%s/\s\+$//e
+```
+- On all lines, search for pattern [one or more spaces followed by end of the line] and replace it will null
+
+If we chain it with BufWritePre:
+```
+autocmd BufWritEpre * :%s/\s\+$//e
+```
+- We can execute the substitution on save
+
+However, there might be certain filetypes on which you want to keep the trailing spaces, such as markdown.
+For such a scenario, we can create a function which executes this substitution, by checking if the filetype is allowed.
+```
+fun! StripTrailingWhiteSpace()
+  " don't strip on these filetypes
+  if &ft =~ 'markdown'
+    return
+  endif
+  %s/\s\+$//e
+endfun
+autocmd BufWritEpre * :call StripTrailingWhiteSpace()
 ```
