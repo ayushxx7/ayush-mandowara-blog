@@ -3,7 +3,16 @@
   grid-template-columns: 8fr 1fr;
 }
 
-.searchH3 {
-  margin-right: 2rem;
-  margin-top: 2rem;
+.counter {
+  color: turquoise;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.searchInput {
+  width: 95%;
+  color: cadetblue;
+  font-size: 1em;
 }

@@ -22,12 +22,10 @@ const PostList = ({ data, pageContext }) => {
     const filteredData = allPosts.filter(post => {
       const { description, title, tags } = post.node.frontmatter
       return (
-        description && description.toLowerCase().includes(query.toLowerCase()) ||
+        (description &&
+          description.toLowerCase().includes(query.toLowerCase())) ||
         title.toLowerCase().includes(query.toLowerCase()) ||
-        (tags && tags
-          .join("")
-          .toLowerCase()
-          .includes(query.toLowerCase()))
+        (tags && tags.join("").toLowerCase().includes(query.toLowerCase()))
       )
     })
 
@@ -44,26 +42,23 @@ const PostList = ({ data, pageContext }) => {
   return (
     <Layout>
       <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
-    <div class="searchContainer">
-    <div>
-      <input
-        style={{
-          width: "95%",
-          color: "cadetblue",
-          fontSize: "1em",
-        }}
-      className={customStyle.card}
-      type="text"
-      aria-label="Search"
-      placeholder="Type to filter posts..."
-      onChange={handleInputChange}
-      />
-    </div>
-    <div>
-    <h3 class="searchH3">{posts.length}/{allPosts.length}</h3>
-    </div>
-    </div>
-      <h1/>
+      <div className="searchContainer">
+        <div>
+          <input
+            className={customStyle.card + " " + "searchInput"}
+            type="text"
+            aria-label="Search"
+            placeholder="Type to filter posts..."
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <div className={customStyle.card + " " + "counter"}>
+            {posts.length}/{allPosts.length}
+          </div>
+        </div>
+      </div>
+      <h1 />
 
       {posts.map(({ node }) => (
         <Post
