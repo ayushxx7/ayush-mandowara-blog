@@ -1,15 +1,64 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout"
 import Post from "../components/post"
-import Pager from "../components/pager"
 import { graphql } from "gatsby"
+import customStyle from "../components/post.module.less"
+import "./custom.css"
 
-const postList = ({ data, pageContext }) => {
-  const posts = data.allMarkdownRemark.edges
+const PostList = ({ data }) => {
+  const allPosts = data.allMarkdownRemark.edges
+
+  const emptyQuery = ""
+  const [state, setState] = useState({
+    filteredData: [],
+    query: emptyQuery,
+  })
+
+  const handleInputChange = event => {
+    console.log(event.target.value)
+    const query = event.target.value
+
+    const filteredData = allPosts.filter(post => {
+      const { description, title, tags } = post.node.frontmatter
+      return (
+        (description &&
+          description.toLowerCase().includes(query.toLowerCase())) ||
+        title.toLowerCase().includes(query.toLowerCase()) ||
+        (tags && tags.join("").toLowerCase().includes(query.toLowerCase()))
+      )
+    })
+
+    setState({
+      query,
+      filteredData,
+    })
+  }
+
+  const { filteredData, query } = state
+  const hasSearchResults = filteredData && query !== emptyQuery
+  const posts = hasSearchResults ? filteredData : allPosts
 
   return (
     <Layout>
       <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
+      <div className="searchContainer">
+        <div>
+          <input
+            className={customStyle.card + " " + "searchInput"}
+            type="text"
+            aria-label="Search"
+            placeholder="Type to filter posts..."
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <div className={customStyle.card + " " + "counter"}>
+            {posts.length}/{allPosts.length}
+          </div>
+        </div>
+      </div>
+      <h1 />
+
       {posts.map(({ node }) => (
         <Post
           title={node.frontmatter.title}
@@ -21,16 +70,14 @@ const postList = ({ data, pageContext }) => {
           fluid={node.frontmatter.image.childImageSharp.fluid}
         />
       ))}
-      <Pager pageContext={pageContext} />
     </Layout>
   )
 }
 
 export const PostListQuery = graphql`
-  query PostListQuery($skip: Int!, $limit: Int!) {
+  query PostListQuery($skip: Int!) {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date] }
-      limit: $limit
       skip: $skip
     ) {
       edges {
@@ -62,4 +109,4 @@ export const PostListQuery = graphql`
   }
 `
 
-export default postList
+export default PostList
