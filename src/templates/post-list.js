@@ -1,12 +1,11 @@
 import React, { useState } from "react"
 import Layout from "../components/layout"
 import Post from "../components/post"
-import Pager from "../components/pager"
 import { graphql } from "gatsby"
 import customStyle from "../components/post.module.less"
 import "./custom.css"
 
-const PostList = ({ data, pageContext }) => {
+const PostList = ({ data }) => {
   const allPosts = data.allMarkdownRemark.edges
 
   const emptyQuery = ""
@@ -71,7 +70,6 @@ const PostList = ({ data, pageContext }) => {
           fluid={node.frontmatter.image.childImageSharp.fluid}
         />
       ))}
-      <Pager pageContext={pageContext} />
     </Layout>
   )
 }
