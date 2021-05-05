@@ -142,3 +142,15 @@ const App = props => {
 
 export default App
 ```
+
+---
+
+## [Adding multiple classNames to an element](https://stackoverflow.com/a/39053038/7048915)
+
+The simplest approach is to use concatenation:
+
+```
+import style from '/css/style.css';
+
+<div className={style.style1+ ' ' + style.style2} />
+```
