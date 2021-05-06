@@ -70,10 +70,10 @@ function SEO({ description, lang, meta, title, keywords }) {
         content="e3vjadBE28jnNdb0Sa7GW8OyadoZb_kyJdo_Xh4jp48"
       />
 
-      {title && <meta property="og:title" content={title} />}
+      {title && (<meta name="title" property="og:title" content={title} />)}
       {metaDescription && (
-          <meta property="og:description" content={metaDescription} />
-        ) && <meta name="description" content={metaDescription} />}
+          <meta name="description" property="og:description" content={metaDescription} />
+        )}
       {keywords && <meta property="keywords" content={keywords} />}
       {author && <meta property="author" content={author} />}
     </Helmet>

@@ -11,11 +11,11 @@ import Comments from "../components/comments"
 import SEO from "../components/seo"
 
 function BlogPost(props) {
-  const {title, image, tags} = props.data.markdownRemark.frontmatter
+  const {title, image, tags, description} = props.data.markdownRemark.frontmatter
   const {prev, next} = props.pageContext
   return (
     <Layout>
-      <SEO title={title} keywords={tags} />
+      <SEO title={title} keywords={tags} description={description} />
       <div>
         {image && (
           <Img
@@ -60,6 +60,7 @@ export const query = graphql`
       frontmatter {
         title
         tags
+        description
         image {
           childImageSharp {
             resize(width: 1000, height: 420) {
