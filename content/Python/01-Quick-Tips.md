@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2021-03-19"
+date: "2021-05-12"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -40,7 +40,7 @@ Child().print_all()
 
 ### [Load value during Class Initialization using own function](https://stackoverflow.com/questions/12646326/calling-a-class-function-inside-of-init)
 
-```py
+```py heading="Load value during Class INIT"
 class A:
   def __init__(self):
     self.a = self.load_from_func()
@@ -63,7 +63,7 @@ This can be useful when you are going to read a file, such as a JSON, to fill va
 
 There may be times where you want to dynamically get the current function's name, for example, when trying add functionality to test suite such as pytest. The simplest way is to use the inspect module.
 
-```py
+```py heading="Using inspect to get function name"
 import inspect
 
 this_function_name = inspect.currentframe().f_code.co_name
@@ -72,9 +72,10 @@ print(this_function_name)
 
 You can also inspect the stack to get the complete function
 
-```py
-fn_name = inspect.stack()[1][3] #current
-parent_fn_name = inspect.stack()[2][3] #parent
+```py heading="Using inspect to get function name from call stack"
+import inspect
+fn_name = inspect.stack()[0][3] #here 0 represents the depth of stack
+print(fn_name)
 ```
 
 [Further Reading](https://stackoverflow.com/questions/251464/how-to-get-a-function-name-as-a-string)
@@ -85,7 +86,7 @@ parent_fn_name = inspect.stack()[2][3] #parent
 
 Suppose you have a function name which belongs to a class and you want to call it or access it's attributes, you can use the getattr method to generate the function from name.
 
-```py
+```py heading="Access attributes such as dictionary of a function in a class"
 # Assuming that function belongs to class TestRobustaRegistry
 
 def fill_fn_dict(self, value):
@@ -134,7 +135,8 @@ When logging data structures such as dictionaries, you can't really decipher the
 You might have used `pprint.pprint` for printing dictionaries to command line. Similary, we can use `pprint.pformat`. It takes the input, and generates a pretty printed string, which can then be passed to the logger.
 Furthermore, you can use the `\n` character, so that the dictionary is printed isn't awkwardly starting directly after the timestamp.
 
-```
+```py heading="Pretty Print dictionary"
+import logging
 from pprint import pformat
 ds = [{'hello': 'there'}]
 logging.debug(f"logging datastructure:\n{pformat(ds)}")
@@ -149,7 +151,7 @@ For this you think that you will store the current state in a temp dictionary, a
 After the operation, you think you can use a simple `==` check. Overall, a reasonable approach.
 So you start by saying,
 
-```py
+```py heading="Snippet to show failing scenario of making duplicate dictionary"
 current = {'1':'one'}
 temp = current
 current['2'] = {'two'}
@@ -166,7 +168,7 @@ The reason is, when you use the `=` operator to make a tempory copy, you are act
 For this specific purpose, what you want is a `shallow copy` of the original dictionary and not a reference.
 In Python, you can do that by using the copy function.
 
-```py
+```py heading="Using inbuilt 'copy' method to make duplicate dictionary"
 current = {'1':'one'}
 temp = current.copy()
 current['2'] = {'two'}
@@ -220,7 +222,7 @@ print(json_data)
 
 To unpack list and store in individual variables:
 
-```py
+```py heading='Unpack list to individual values'
 row = ["Title", "url", 33, "title2", "keyword"]
 title, url, price, title2, keyword = row
 print(title, url, price, title2, keyword)
@@ -232,7 +234,7 @@ print(title, url, price, title2, keyword)
 
 To combine list together you can use the plus (+) operator
 
-```py
+```py heading='Combining lists using "+" operator'
 a = [1, 2]
 b = [3, 4]
 c = a + b
@@ -242,7 +244,7 @@ print(c)
 
 Bonus: You can also use the multiply (\*) operator to generate a list with duplicate elements
 
-```py
+```py heading="Generating lists with duplicate values by overloading multiplication"
 n = 10
 a = [0]
 b = a*n
@@ -273,16 +275,42 @@ print(y)
 
 There is a pythonic way to sort elements by their length, and it is to use the `key` param in the `sorted` function.
 
-```py
+```py heading="Sort list elements by length"
 list_of_elems = ['ccc', 'aaaa', 'd', 'bb']
 print(sorted(list_of_elems, key=len))
+
+data = [
+  {
+    'len': 12,
+    'name': 33
+  },
+  {
+    'len': 1,
+    'name': 33
+  }
+]
+
+print(sorted(data, key=lambda elem: elem['len']))
 ```
 
 The `key` param can also be passed in `max` function
 
-```py
+```py heading="Using 'key' attribute in 'max' function"
 list_of_elems = ['ccc', 'aaaa', 'd', 'bb']
 print(max(list_of_elems, key=len))
+
+data = [
+  {
+    'len': 12,
+    'name': 33
+  },
+  {
+    'len': 1,
+    'name': 33
+  }
+]
+
+print(max(data, key=lambda elem: elem['len']))
 ```
 
 ## FORMATTING
@@ -347,7 +375,7 @@ To convert bytes to human readable format, we simply divide the number by 2 (pow
 This way, we can obtain the power label (KB/MB/GB) from the original input bytes.
 
 ```py heading="Bytes to KB/MB/GB"
-def format_bytes(self, size):
+def format_bytes(size):
     """Convert bytes to Human Readable Sizes"""
     try:
         power = 2**10
@@ -386,30 +414,24 @@ or in other words, files that match the pattern: `test*`
 
 - Using glob
 
-```
-files = glob.glob(os.getcwd()+'/test*')
+```py heading="Get files using glob module"
+import glob, os
+with open('test.py', 'w') as f:
+  f.write('import os')
+files = glob.glob(os.getcwd()+'/*.py')
 print(files)
-```
-
-Output:
-
-```
-['C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test.py', 'C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test.txt', 'C:\\Users\\ayush\\OneDrive\\Desktop\\blog\\test\\test2.txt']
 ```
 
 - We get a list of files with their exact paths
 
 - Using fnmatch
 
-```
-files = fnmatch.filter(os.listdir(), 'test*')
+```py heading="Get files using fnmatch"
+import fnmatch, os
+with open('test.py', 'w') as f:
+  f.write('import os')
+files = fnmatch.filter(os.listdir(), '*.py')
 print(files)
-```
-
-Output:
-
-```
-['test.py', 'test.txt', 'test2.txt']``
 ```
 
 - We can see that fnmatch returns the filename only
@@ -423,13 +445,15 @@ Note: The `glob` module uses the os and fnmatch module internally.
 
 Suppose you want to send something like:
 
-```
-[{'name': 'ayush'}, {'name': 'mandowara'}]
+```json heading="Sample JSON"
+[{"name": "ayush"}, {"name": "mandowara"}]
 ```
 
 as data, when making a request. You can do this very easily with the `requests` library.
 
-```
+```py heading="Making post request with array in request body"
+import requests
+
 url = 'https://thaturlwhichneeds.array/asparam'
 headers = {"auth-token": "xyz-auth-token"}
 data = [
@@ -454,7 +478,7 @@ In case you call a process via subprocess, but do not wish to see the error in c
 
 - Just redirect the standard error (`stderr`) to `DEVNULL`
 
-```
+```py heading="Supress subprocess error output"
 import subprocess
 subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 ```
@@ -466,7 +490,7 @@ subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
 Suppose you want to create folders in a path such as `test\inner_folder\main\`, but `inner_folder` does not exist,
 you can use `os.makedirs`
 
-```py
+```py heading="Multilevel dictionary generation using 'os' module"
 import os
 
 base = os.getcwd()
@@ -483,13 +507,13 @@ for d in os.walk('test'):
 
 ---
 
-### [Store tempoary information to Temp Folder](https://stackoverflow.com/questions/847850/cross-platform-way-of-getting-temp-directory-in-python)
+### [Store temporary information to Temp Folder](https://stackoverflow.com/questions/847850/cross-platform-way-of-getting-temp-directory-in-python)
 
 There could be situtation where you are generating files that are only relevant during the execution of your script and are not meant to be stored for long term purposes.
 Moreover, you don't want these files to be tracked by Git. While you could add these to .gitignore, a much cleaner way would be to use the Temp folder provided by the OS itself.
 Let's say you want to create a lock file during the execution of a particular script so that another instance of the script does not override current execution,
 
-```py
+```py heading="Creating lock file in temporary folder"
 import tempfile
 from os.path import join, exists
 
@@ -505,10 +529,50 @@ if exists(lock_file_path):
 
 You can also use the `tempfile.TemporaryFile()` function to generate a temp file during run-time if you do not want a particular file name.
 
-```py
+```py heading="Creating tempory file using 'tempfile.TemporaryFile'"
 import tempfile
 f = tempfile.TemporaryFile()
 f.write('temporary info')
+```
+
+---
+
+### [Restore Timestamps of Extracted Files](https://stackoverflow.com/a/48129136/7048915)
+
+Usually when a zip is extracted, the timestamps of the files are the ones corresponding
+to the time the file was extracted at. This causes problems when we want to find out the
+most recent file from a list of files. To fix this problem, we can restore the timestamps
+of the file by reading them from the original zip file.
+
+Just call the `restore_timestamps_of_zip_contents` function after extraction is done:
+
+```py heading="Restore Timestamps of extracted files"
+def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
+    """Restores the timestamps of zipfile contents after extraction
+
+    Parameters
+    ----------
+    zipname: str
+        zipname path which was extracted
+    extract_dir: str
+        where the zip was extracted
+
+    Returns
+    -------
+    None
+    """
+
+    try:
+        for f in ZipFile(zipname, 'r').infolist():
+            # path to this extracted f-item
+            fullpath = os.path.join(extract_dir, f.filename)
+            # still need to adjust the dt o/w item will have the current dt
+            date_time = time.mktime(f.date_time + (0, 0, -1))
+            # update dt
+            os.utime(fullpath, (date_time, date_time))
+    except:
+        logging.warning(traceback.print_exc())
+
 ```
 
 ---
@@ -520,7 +584,7 @@ One way is to make calls from a proper starting point, which as the root of the 
 A better hack is to append your project folder in system path using the `sys` module.
 In the file where you are importing the other file as a module, add this to the top:
 
-```
+```py heading="Add project root to Python Path during run-time"
 import sys
 sys.path.append('/path/to/project_folder')
 ```
@@ -553,40 +617,3 @@ When you use it with `py`, the upgrade command is running inside a python shell,
 
 ---
 
-### [Restore Timestams of Extracted Files](https://stackoverflow.com/a/48129136/7048915)
-
-Usually when a zip is extracted, the timestamps of the files are the ones corresponding
-to the time the file was extracted at. This causes problems when we want to find out the
-most recent file from a list of files. To fix this problem, we can restore the timestamps
-of the file by reading them from the original zip file.
-
-Just call the `restore_timestamps_of_zip_contents` function after extraction is done:
-
-```
-def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
-    """Restores the timestamps of zipfile contents after extraction
-
-    Parameters
-    ----------
-    zipname: str
-        zipname path which was extracted
-    extract_dir: str
-        where the zip was extracted
-
-    Returns
-    -------
-    None
-    """
-
-    try:
-        for f in ZipFile(zipname, 'r').infolist():
-            # path to this extracted f-item
-            fullpath = os.path.join(extract_dir, f.filename)
-            # still need to adjust the dt o/w item will have the current dt
-            date_time = time.mktime(f.date_time + (0, 0, -1))
-            # update dt
-            os.utime(fullpath, (date_time, date_time))
-    except:
-        logging.warning(traceback.print_exc())
-
-```
