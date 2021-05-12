@@ -11,6 +11,12 @@ tags: ["markdown"]
 
 Tips for writing a blog using Markdown
 
+---
+
+### You can learn Markdown Syntax from [this guide](https://guides.github.com/features/mastering-markdown/).
+
+---
+
 ## [Adding a superscript in Markdown](https://stackoverflow.com/a/15156585/7048915)
 
 Markdown supports the use of certain HTML tags such as <sup>`<sup>`</sup> & <sub>`<sub>`</sub> to create superscript and subscript elements.
