@@ -38,7 +38,6 @@ class AWSActions:
     def __init__(self):
         self.ACCESS_KEY = '--your key--'
         self.SECRET_KEY = '--your secret key--'
-                               aws_secret_access_key=self.SECRET_KEY)
         self.s3 = boto3.client('s3', aws_access_key_id=self.ACCESS_KEY,
                                aws_secret_access_key=self.SECRET_KEY)
 
