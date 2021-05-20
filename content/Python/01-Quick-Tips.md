@@ -393,6 +393,36 @@ print(format_bytes(12345))
 print(format_bytes(12345678910))
 ```
 
+## Testing via Python
+
+### [Skip Test Cases based on command line arguments in Pytest](https://stackoverflow.com/a/55769818/7048915)
+We can use pytest hook (`pytest_collection_modifyitems`) to dynamically skip test cases based on argument values.
+
+```py heading="Pytest skipif based on arguments"
+# In conftest.py
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--host", action="store_true", default=False, help="Environment Prod or Engg"
+    )
+
+def pytest_collection_modifyitems(config, items):
+    host_marker = config.getoption("--host"):
+    if host_marker in ['prod', '']:
+        return
+    skip_if_host_engg = pytest.mark.skip(reason="host should be prod")
+    for item in items:
+        if "skip_if_host_engg" in item.keywords:
+            item.add_marker(skip_if_host_engg)
+
+
+# In testfile
+
+@pytest.mark.skip_if_host_engg
+def test_stats_for_live_chat():
+  pass
+```
+
 ## MISC UTIL
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
