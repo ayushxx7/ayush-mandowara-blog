@@ -17,7 +17,7 @@ const Header = () => {
   }
 
   return (
-    <div className={style.container}>
+    <div className={style.container_not_fixed}>
       <div className={style.titleContainer}>
         <div className={style.title}>
           <Link to={"/"}>
