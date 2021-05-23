@@ -1,7 +1,7 @@
 ---
 title: JavaScript QuickTips
 description: Collection of Tips for JS based on my personal work experience
-date: "2021-04-18"
+date: "2021-05-24"
 image: "javascript.png"
 author: "Ayush"
 tags: ["javascript"]
@@ -105,4 +105,30 @@ test_arr.forEach((elem, index) => {
     console.log(`Exact Match::${index}::${elem}`)
   }
 })
+```
+
+## Comparing version values in Javascript
+
+```js heading="Comparing a.b.c.d version"
+function check_version() {
+  flag = true
+  try {
+    threshold_ver = "5.0.50.1000"
+    currList = urlParams.split('.')
+    compList = threshold_ver.split('.')
+    for (i=0; i<4; i++) {
+      if (parseInt(currList[i]) < parseInt(compList[i])) {
+        flag = false
+        break;
+      } else if (parseInt(currList[i]) > parseInt(compList[i])) {
+        flag = true
+        break;
+      } else {
+        continue;
+      }
+    }
+  } finally {
+    return flag;
+  }
+}
 ```
