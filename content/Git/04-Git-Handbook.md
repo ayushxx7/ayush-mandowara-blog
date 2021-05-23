@@ -1,7 +1,7 @@
 ---
 title: Tips and references for Git
 description:
-date: "2020-12-22"
+date: "2021-05-25"
 image: "git.png"
 author: "Ayush"
 tags: ["git"]
@@ -220,6 +220,28 @@ git clean -fx #remove ignored and untracked files
 ```
 
 Do note that the title is always supposed be in imperative speech.
+
+# Resolving another process is running
+
+Suppose that you are trying to commit a file in git, but you face the error:
+```
+another git process is already running
+```
+First, close all active command prompts.  
+Then, go to the root folder of the repository.  
+Suppose that your repo is cloned at `C:\automation`  
+
+In you command prompt:
+```
+cd C:\automation
+cd .git #.git folder is present in root of repo
+ls -al #show all files (including hidden)
+# check if index.lock is present
+rm index.lock
+```
+
+This should solve the problem.
+
 
 ## Get better at Git
 
