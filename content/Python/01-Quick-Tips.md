@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2021-05-12"
+date: "2021-05-25"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -217,6 +217,21 @@ print(json_data)
 ```
 
 ## LISTS
+
+### [Convert list to indexed tuple list](https://www.geeksforgeeks.org/python-convert-list-to-indexed-tuple-list/)
+
+Say you want to sort the elements of a list, but don't want to lose the original index,   
+you can convert your list to an indexed tuple list.
+
+```py heading="list to indexed tuple list"
+num_list = [0, 1, 2, 3, 3, 4, 3]
+indexed_num_list = list(enumerate(num_list))
+print(num_list)
+print(indexed_num_list)
+
+sorted_list_with_index_stored = sorted(indexed_num_list, key=lambda tuple_elem: tuple_elem[1], reverse=True)
+print(sorted_list_with_index_stored)
+```
 
 ### [Unpacking lists to individual values](https://stackoverflow.com/a/34308407)
 
