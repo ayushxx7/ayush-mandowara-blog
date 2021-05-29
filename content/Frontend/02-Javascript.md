@@ -1,7 +1,7 @@
 ---
 title: JavaScript QuickTips
 description: Collection of Tips for JS based on my personal work experience
-date: "2021-05-24"
+date: "2021-05-29"
 image: "javascript.png"
 author: "Ayush"
 tags: ["javascript"]
@@ -131,4 +131,78 @@ function check_version() {
     return flag;
   }
 }
+```
+
+## MutationObserver
+- The user's email is given to me through a separate process
+- I needed to auto fill email this email in Pre Chat form for Kommunicate Chat
+- KommunicateChat loads externally as an iframe
+
+### First, we observe the whole body to get iframe
+- we create a mutation observer object
+- we observe the whole document body and set the childList tracking true
+- we track only those mutations where a node is added
+- once Kommunicate widget is found, we stop the observer and start tracking the widget itself
+
+```js heading="Using Mutation Observer to locate iframe"
+
+function autoPopulateEmailInPreChatForm() {
+  /* Observe body to check if Kommunicate widget is loaded */
+  try {
+    var observer = new MutationObserver(function (mutations) {
+      for (let mutation of mutations) {
+        if (mutation.addedNodes) {
+          node = mutation.addedNodes[0];
+          console.debug("autopop:", node);
+          if (node.id == "kommunicate-widget-iframe") {
+            kommunicateIframe = node.contentWindow.document;
+            observer.disconnect();
+            observeFrameUpdateEmail(kommunicateIframe);
+            return;
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+    });
+  } catch (e) {
+    console.error("auto pop email:", e);
+  }
+}
+```
+
+### Then, we observe the whole iframe to get the email element
+- we create a new mutation observer
+- we start tracking with childList & subtree true
+- we track only those mutations where a node is added
+- if email element is found, we set the value
+
+```js heading="Using Mutation to track iframe changes and fill in email"
+
+function observeFrameUpdateEmail(targetNode) {
+  /* observe Kommunicate iframe & update email field in pre chat form */
+  var observer = new MutationObserver(function (mutations) {
+    for (let mutation of mutations) {
+      if (mutation.addedNodes) {
+        var email =
+          window.KommunicateGlobal &&
+          window.KommunicateGlobal.document.getElementById("km-email");
+        if (email) {
+          console.debug(email);
+          email.value = urlParams.email;
+          observer.disconnect();
+          return;
+        }
+      }
+    }
+  });
+
+  observer.observe(targetNode, {
+    childList: true,
+    subtree: true,
+  });
+}
+
 ```
