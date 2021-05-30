@@ -14,7 +14,7 @@ Storing Python solutions for questions that I solve on HackerRank
 ## [Return reverse of Array](https://www.hackerrank.com/challenges/arrays-ds/problem)
 
 Using list slicing to reverse array
-```py
+```py heading="Reversing an Array using List Slicing"
 def reverseArray(a):
     """reverse of input list
 
@@ -59,7 +59,7 @@ arr = [[]]*10
 print(arr)
 arr[0].append('this will be added to all the elements, even though I am specifying index 0')
 print(arr)
-``
+```
 
 ```py heading="Dynamic Arrays Solution"
 def dynamicArray(n, queries):
