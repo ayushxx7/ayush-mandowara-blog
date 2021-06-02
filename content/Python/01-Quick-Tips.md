@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2021-05-25"
+date: "2021-06-02"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -439,6 +439,20 @@ def test_stats_for_live_chat():
 ```
 
 ## MISC UTIL
+
+### Using map to get sum of a 2D array
+
+```py heading="use map to get sum of 2d array"
+arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+sum_arr = sum(map(sum, arr))
+print('Sum of 2D Array:', sum_arr)
+```
+
+```py heading="Using map to get count of elements starting with specified letter"
+test_list = ['Start', 'SSS', 'Strong', 'Table']
+total_elems_starting_with_S = sum(map(lambda x:1 if x[0] == "S" else 0, test_list))
+print(total_elems_starting_with_S)
+```
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
 
