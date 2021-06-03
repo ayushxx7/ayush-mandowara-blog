@@ -1,7 +1,7 @@
 ---
 title: Tips and references for Git
 description:
-date: "2021-05-25"
+date: "2021-06-03"
 image: "git.png"
 author: "Ayush"
 tags: ["git"]
@@ -242,6 +242,17 @@ rm index.lock
 
 This should solve the problem.
 
+# [Unable to merge branch due to untracked files](https://stackoverflow.com/a/51177844/7048915)
+- To `git merge` while overwriting untracked files
+- The files of interest (FOI) that we are going to remove:
+  1. exist in the upstream repository,
+  1. do not exist in the current branch,
+  1. and are blocking the merge because they are present and untracked in your working directory.
+```
+git checkout -f donor-branch   # replace FOI with tracked `donor` versions
+git checkout receiving-branch  # FOI are not in `receiving`, so they disapppear
+git merge donor-branch  # now the merge works
+```
 
 ## Get better at Git
 
