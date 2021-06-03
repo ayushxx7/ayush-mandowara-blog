@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2021-06-02"
+date: "2021-06-03"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -217,6 +217,25 @@ print(json_data)
 ```
 
 ## LISTS
+
+### List slicing
+
+Lists have special property where you can specify index from which you want to access the list.
+```
+[start:stop:step]
+```
+- start: read list starting from this index (inclusive)
+- stop: stop reading list just before this index (exclusive)
+- step: by default, lists will be iterated one element at time. To increase the step size, pass in the this input.
+
+```py heading="List start, stop, step"
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(a)
+print(a[1:])
+print(a[1:3])
+print(a[4:-2])
+print(a[1::2])
+```
 
 ### [Convert list to indexed tuple list](https://www.geeksforgeeks.org/python-convert-list-to-indexed-tuple-list/)
 
