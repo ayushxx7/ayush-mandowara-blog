@@ -7,7 +7,16 @@ author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
 ---
 
-1. Create a 3*3 array using predefined lists
+# Why Numpy over Lists?
+1. Speed of computation is faster
+1. Designed for data analysis
+1. Vector operations can be performed
+1. Concise and easy to read/write
+
+
+# Learn By Examples
+
+## Create a 3*3 array using predefined lists
 
 ```py heading='Create 3x3 Array'
 import numpy as np
