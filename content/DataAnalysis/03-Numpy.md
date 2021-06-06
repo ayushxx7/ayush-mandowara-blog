@@ -29,3 +29,21 @@ out = np.array([list_1, list_2, list_3])
 
 print(out)
 ```
+
+## Element Wise Multiplication
+
+```py heading="Element wise multiplication"
+import numpy as np
+
+list_1 = [1,2,3] 
+list_2 = [4,5,6] 
+
+arr1 = np.array(list_1)
+arr2 = np.array(list_2)
+
+mul = arr1 * arr2
+print(mul)
+
+list_mul = list(mul)
+print(list_mul)
+```
