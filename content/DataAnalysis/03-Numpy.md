@@ -47,3 +47,27 @@ print(mul)
 list_mul = list(mul)
 print(list_mul)
 ```
+
+## Create array of given dimension filled with given integer value
+
+```py heading="Creating nump array filled with given data"
+import numpy as np
+
+rows = 5
+columns = 3
+value = 15
+
+# using np.full
+
+arr = np.full((rows, columns), value)
+print(arr)
+
+# using np.tile
+arr = np.tile(value, (rows, columns))
+print(arr)
+
+# using np.ones + multiplicationm
+# note that here we need to specify dtype=int as float is default for this function
+arr = np.ones((rows, columns), dtype=int)*value
+print(arr)
+```
