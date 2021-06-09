@@ -50,7 +50,7 @@ print(list_mul)
 
 ## Create array of given dimension filled with given integer value
 
-```py heading="Creating nump array filled with given data"
+```py heading="Creating numpy array filled with given data"
 import numpy as np
 
 rows = 5
@@ -69,5 +69,18 @@ print(arr)
 # using np.ones + multiplicationm
 # note that here we need to specify dtype=int as float is default for this function
 arr = np.ones((rows, columns), dtype=int)*value
+print(arr)
+```
+
+## Create array filled with multiples of given number
+
+```py heading="Creating a numpy array filled with multiples of 5"
+import numpy as np
+
+start = 5
+stop = 51
+step = 5
+
+arr = np.arange(start, stop, step)
 print(arr)
 ```
