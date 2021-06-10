@@ -459,6 +459,39 @@ def test_stats_for_live_chat():
 
 ## MISC UTIL
 
+### Round Robin Ticket Assigner
+
+We have an `{agent_name:weightage}` dictionary with us based on which we need to assign tickets in a round robin manner.
+
+1. go over each agent one by one
+1. if agent has capacity to accept ticket
+    1. give them one ticket
+    1. reduce capacity by one
+1. repeat step 1 & 2 till all agents have reached 0 capacity
+
+```py heading="Round Robin Assigner"
+agent_ticket_dict = {'Rahul': 3, 'Ramesh': 1, 'Rajesh': 0, 'Rakesh': 3, 'Brijesh': 4}
+tags_list = []
+sum_counts = sum(agent_ticket_dict.values())
+print("Agent:Number of Tickets:"+ str(agent_ticket_dict))
+print(f"Number of Agents for this run: {len(agent_ticket_dict)}")
+print(f"Total Tickets that will be assigned: {sum_counts}")
+
+assigner_exhausted = False
+while not assigner_exhausted:
+    for agent in agent_ticket_dict:
+        if agent_ticket_dict[agent]:
+            tags_list.append('to_do_'+agent)
+            agent_ticket_dict[agent] -= 1
+    print(f"Assigner State:\n{agent_ticket_dict}")
+    sum_counts = sum(agent_ticket_dict.values())
+    print(f"Remaining Tickets that will be assigned: {sum_counts}")
+    if not sum_counts:
+        assigner_exhausted = True
+```
+
+---
+
 ### Using map to get sum of a 2D array
 
 ```py heading="use map to get sum of 2d array"
@@ -472,6 +505,8 @@ test_list = ['Start', 'SSS', 'Strong', 'Table']
 total_elems_starting_with_S = sum(map(lambda x:1 if x[0] == "S" else 0, test_list))
 print(total_elems_starting_with_S)
 ```
+
+---
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
 
@@ -694,4 +729,3 @@ i.e. a running process is supposed to be uninstalled, which is denied by some Op
 When you use it with `py`, the upgrade command is running inside a python shell, and hence this problem is avoided.
 
 ---
-
