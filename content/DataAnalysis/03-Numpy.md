@@ -84,3 +84,25 @@ step = 5
 arr = np.arange(start, stop, step)
 print(arr)
 ```
+
+## Create a checkerboard matrix of size n*n
+
+```py heading="Creating a Checkerboard matrix using numpy"
+import numpy as np
+
+board_size = 5
+out = np.tile([[0, 1], [1, 0]], (board_size//2, board_size//2))
+print(out)
+```
+
+#### Explanation
+- `np.tile` can be used to repeat an array any number of times across any number of dimensions 
+- Checkerboard's smallest unit is 
+  ```
+  [0, 1], 
+  [1, 0]
+  ```
+- Since smallest unit is already 2x2, whatever is this required board_size, we will divide it by 2
+
+#### Reference
+- https://stackoverflow.com/a/56887785/7048915
