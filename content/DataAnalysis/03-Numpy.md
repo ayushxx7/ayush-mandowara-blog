@@ -106,3 +106,10 @@ print(out)
 
 #### Reference
 - https://stackoverflow.com/a/56887785/7048915
+
+## Reshape the array to a desired size
+```py heading="Using numpy to reshape array"
+import numpy as np
+arr_3d = np.arange(24).reshape(2, 3, 4)
+print(arr_3d)
+```
