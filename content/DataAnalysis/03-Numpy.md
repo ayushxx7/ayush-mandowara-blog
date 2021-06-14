@@ -128,3 +128,10 @@ print('dimension:', np.ndim(arr))
 print('data type:', arr.dtype)
 print('length of one array element (bytes):', arr.itemsize)
 ```
+
+## Extract all elements of 2nd column in 2D array
+```py heading="Use list slicing to get elements of the second column of a 2d array"
+arr = np.arange(24).reshape(6, 4)
+print(arr)
+print(arr[:, 1])
+```
