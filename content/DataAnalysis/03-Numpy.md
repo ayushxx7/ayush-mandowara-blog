@@ -113,3 +113,18 @@ import numpy as np
 arr_3d = np.arange(24).reshape(2, 3, 4)
 print(arr_3d)
 ```
+
+## Print the shape and dimension of an array
+```py heading="Get the shape and dimension of a numpy array"
+import numpy as np
+list_1 = [10,11,12,13]
+list_2 = [15,12,13,14]
+
+arr = np.array([list_1, list_2])
+
+print(arr)
+print('shape:', np.shape(arr))
+print('dimension:', np.ndim(arr))
+print('data type:', arr.dtype)
+print('length of one array element (bytes):', arr.itemsize)
+```
