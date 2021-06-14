@@ -150,3 +150,9 @@ print(row_first)
 print(col_last)
 print(row_last)
 ```
+
+## Conclusion
+1. Numpy arrays are significantly faster than lists when it comes to mathematical operations
+2. Numpy operations are concise, and easy to read & write.
+3. Numpy arrays are built for vector mathematics so that element wise calculations can be easily carried out. 
+4. While in lists, one would have to write a for-loop or list comprehension for basic things like squaring all numbers in the list, the equivalent on a numpy array will simply be "array_name * 2". 
