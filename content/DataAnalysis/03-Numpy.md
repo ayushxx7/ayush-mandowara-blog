@@ -135,3 +135,18 @@ arr = np.arange(24).reshape(6, 4)
 print(arr)
 print(arr[:, 1])
 ```
+
+## Extract border row, column of numpy array
+```py heading="First, Last Row and Column of Numpy Array"
+import numpy as np
+array_2d = np.arange(24).reshape(6, 4)
+col_first = array_2d[:, 0]
+row_first = array_2d[0, :]
+col_last = array_2d[:, array_2d.shape[1]-1]
+row_last = array_2d[array_2d.shape[0]-1, :]
+
+print(col_first)
+print(row_first)
+print(col_last)
+print(row_last)
+```
