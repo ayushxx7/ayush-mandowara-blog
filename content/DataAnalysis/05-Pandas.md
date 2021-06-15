@@ -24,3 +24,16 @@ series_2 = series_1.apply(lambda x: x**2)
 print(series_1)
 print(series_2)
 ```
+
+## Converting CSV to DataFrame and getting metadata information
+
+```py heading="Creating and Describing dataframe from CSV using Pandas"
+import pandas as pd
+
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+print(df.describe()) # gives mean, standard deviation, max, min of numeric values
+print(df.columns) # lists all column names of dataframe
+print(df.shape) # lists rows x columns
+```
+
+Note: Use `df.describe()` to get general information mean, std, max, min values of a dataframe
