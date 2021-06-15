@@ -18,7 +18,7 @@ print(arr_auto_reshape)
 print(arr_auto_reshape.shape)
 ```
 
-Note: we can use '-1' as the last dimension during reshape and numpy will figure out the required dimension automatically.
+Note: We can use '-1' as the last dimension during reshape and numpy will figure out the required dimension automatically.
 
 ## Stacking arrays horizontally and vertically
 ```py heading="Using numpy to stack arrays"
@@ -54,3 +54,21 @@ print(fn(arr_1))
 ```
 
 Note: If you want to apply a customized function on arrays, make sure to vectorize the function and apply it like inbuilt functions. If you use for loops the power of numpy is lost.
+
+## Linear Algebra - Inverse, Determinant, Eigen Values, Dot Product
+```py heading="Using numpy to perform linear algebra operations"
+import numpy as np
+
+matrix_1 = np.array([[1, 2, 3], [0, 1, 4], [5, 1, 0]])
+matrix_2 = np.arange(12).reshape(3, 4)
+
+inverse = np.linalg.inv(matrix_1)
+determinant = np.linalg.det(matrix_1)
+eigen = np.linalg.eig(matrix_1)
+dot_product = np.dot(matrix_1, matrix_2)
+
+print('inverse:', inverse)
+print('determinant:', inverse)
+print('eigen:', eigen)
+print('dot product:', dot_product)
+```
