@@ -57,3 +57,16 @@ print(df)
 df2 = df.set_index('X')
 print(df2)
 ```
+Note: If you want to overwrite the original dataframe:  
+```df.set_index('X', inplace=True)```
+
+## Sorting DataFrame 
+```py heading="Sorting Pandas DataFrame based on Month and Day"
+import pandas as pd
+
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+df_2 = df.sort_values(by=['month', 'day'])
+print(df_2.head(20))
+```
+Note: If you want to sort in descending order:  
+```df_2 = df.sort_values(by=['month', 'day'], ascending=False)```
