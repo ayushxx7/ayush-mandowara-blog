@@ -37,3 +37,13 @@ print(df.shape) # lists rows x columns
 ```
 
 Note: Use `df.describe()` to get general information mean, std, max, min values of a dataframe
+
+## Create a Series with custom indexing using Pandas
+```py heading="pd.Series using custom indexing"
+import numpy as np
+import pandas as pd
+
+n = 10
+series = pd.Series(np.arange(1, n+1)**2, index=range(1, n+1))
+print(series)
+```
