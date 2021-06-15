@@ -47,3 +47,13 @@ n = 10
 series = pd.Series(np.arange(1, n+1)**2, index=range(1, n+1))
 print(series)
 ```
+
+## Custom Index for Pandas DataFrame
+```py heading="Change index of Pandas DataFrame"
+import pandas as pd
+
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+print(df)
+df2 = df.set_index('X')
+print(df2)
+```
