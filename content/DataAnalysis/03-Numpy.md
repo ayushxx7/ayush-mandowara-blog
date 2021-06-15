@@ -1,7 +1,7 @@
 ---
 title: Numpy Basics
 description: Beginner's gold mine to understand the power of Numpy
-date: "2021-06-13"
+date: "2021-06-14"
 image: "data-analysis.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
@@ -107,13 +107,6 @@ print(out)
 #### Reference
 - https://stackoverflow.com/a/56887785/7048915
 
-## Reshape the array to a desired size
-```py heading="Using numpy to reshape array"
-import numpy as np
-arr_3d = np.arange(24).reshape(2, 3, 4)
-print(arr_3d)
-```
-
 ## Print the shape and dimension of an array
 ```py heading="Get the shape and dimension of a numpy array"
 import numpy as np
@@ -153,6 +146,6 @@ print(row_last)
 
 ## Conclusion
 1. Numpy arrays are significantly faster than lists when it comes to mathematical operations
-2. Numpy operations are concise, and easy to read & write.
-3. Numpy arrays are built for vector mathematics so that element wise calculations can be easily carried out. 
-4. While in lists, one would have to write a for-loop or list comprehension for basic things like squaring all numbers in the list, the equivalent on a numpy array will simply be "array_name * 2". 
+1. Numpy operations are concise, and easy to read & write.
+1. Numpy arrays are built for vector mathematics so that element wise calculations can be easily carried out. 
+1. While in lists, one would have to write a for-loop or list comprehension for basic things like squaring all numbers in the list, the equivalent on a numpy array will simply be "array_name * 2". 
