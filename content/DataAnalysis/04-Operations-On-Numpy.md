@@ -34,3 +34,23 @@ vstack = np.hstack([arr_2, arr_3])
 print(hstack)
 print(vstack)
 ```
+
+## Mathematical Operations on arrays
+```py heading="Using numpy to perform operations on each element of array"
+import numpy as np
+
+arr_1 = np.arange(10)
+print(arr_1)
+
+sin_arr = np.sin(arr_1)
+print(sin_arr)
+
+cos_arr = np.cos(arr_1)
+print(cos_arr)
+
+# Custom vectorized function
+fn = np.vectorize(lambda x: x/5)
+print(fn(arr_1))
+```
+
+Note: If you want to apply a customized function on arrays, make sure to vectorize the function and apply it like inbuilt functions. If you use for loops the power of numpy is lost.
