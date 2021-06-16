@@ -58,7 +58,9 @@ df2 = df.set_index('X')
 print(df2)
 ```
 Note: If you want to overwrite the original dataframe:  
-```df.set_index('X', inplace=True)```
+```
+df.set_index('X', inplace=True)
+```
 
 ## Sorting DataFrame 
 ```py heading="Sorting Pandas DataFrame based on Month and Day"
@@ -69,7 +71,9 @@ df_2 = df.sort_values(by=['month', 'day'])
 print(df_2.head(20))
 ```
 Note: If you want to sort in descending order:  
-```df_2 = df.sort_values(by=['month', 'day'], ascending=False)```
+```
+df_2 = df.sort_values(by=['month', 'day'], ascending=False)
+```
 
 ## Selecting Even Rows of Pandas DataFrame
 ```py heading='Selecting Even Rows of pd.DataFrame excluding the 0th row'
@@ -80,7 +84,7 @@ print(df_2.head(20))
 ```
 
 ## Accessing parts of the dataframes
-```py heading="Access DataFrame via Positions (Index)"
+```py heading="Access DataFrame via Positions (Index) using df.iloc"
 import pandas as pd
 df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
 
@@ -95,3 +99,13 @@ print(df.iloc[3:4])
 print(df.iloc[2:5, 3:6])
 ```
 Note: We can use `df.iloc[x, y]` to get indexed based selection on dataframe. `x` represents rows & `y` represents columns. Standard indexing and slicing techniques apply.
+
+```py heading="Label based indexing on Pandas DataFrame using df.loc"
+import pandas as pd
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+
+# print the 2nd to 20th rows in dataframe via label
+df_2 = df.loc[2:20]
+print(df_2)
+```
+Note: `df.loc` is similar to df.iloc except that it works on labels instead of indexes
