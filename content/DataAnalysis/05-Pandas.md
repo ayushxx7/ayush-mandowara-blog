@@ -7,6 +7,22 @@ author: "Ayush"
 tags: ["python", "data-analysis", "pandas"]
 ---
 
+# Table of Contents
+<!-- vim-markdown-toc Marked -->
+
+* [What is Pandas](#what-is-pandas)
+* [Apply lambda functions to Pandas Series](#apply-lambda-functions-to-pandas-series)
+* [Converting CSV to DataFrame and getting metadata information](#converting-csv-to-dataframe-and-getting-metadata-information)
+* [Create a Series with custom indexing using Pandas](#create-a-series-with-custom-indexing-using-pandas)
+* [Custom Index for Pandas DataFrame](#custom-index-for-pandas-dataframe)
+* [Sorting DataFrame](#sorting-dataframe)
+* [Selecting Even Rows of Pandas DataFrame](#selecting-even-rows-of-pandas-dataframe)
+* [Accessing parts of the dataframes](#accessing-parts-of-the-dataframes)
+    * [Difference between iloc & loc](#difference-between-iloc-&-loc)
+* [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
+
+<!-- vim-markdown-toc -->
+
 ## What is Pandas
 1. Pandas is a library specifically aimed at simplifying the process of Data Analysis.
 1. It provides a number of functions that come in handy whenever working with a data set.
