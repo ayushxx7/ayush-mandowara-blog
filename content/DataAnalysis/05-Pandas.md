@@ -18,7 +18,7 @@ tags: ["python", "data-analysis", "pandas"]
 * [Sorting DataFrame](#sorting-dataframe)
 * [Selecting Even Rows of Pandas DataFrame](#selecting-even-rows-of-pandas-dataframe)
 * [Accessing parts of the dataframes](#accessing-parts-of-the-dataframes)
-    * [Difference between iloc & loc](#difference-between-iloc-&-loc)
+        * [Difference between iloc & loc](#difference-between-iloc-&-loc)
 * [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
 
 <!-- vim-markdown-toc -->
@@ -27,8 +27,8 @@ tags: ["python", "data-analysis", "pandas"]
 1. Pandas is a library specifically aimed at simplifying the process of Data Analysis.
 1. It provides a number of functions that come in handy whenever working with a data set.
 1. There are two types of data structures in Pandas
-  - Series: similar to a 1d numpy array except it is indexed and can store values other than numbers
-  - DataFrame: The Pandas way of representing a table. Consists of Series (columns) stored as objects (rows)
+    - Series: similar to a 1d numpy array except it is indexed and can store values other than numbers
+    - DataFrame: The Pandas way of representing a table. Consists of Series (columns) stored as objects (rows)
 
 ## Apply lambda functions to Pandas Series
 ```py heading="Using Pandas apply method on Series object"
