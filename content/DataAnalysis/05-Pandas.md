@@ -1,7 +1,7 @@
 ---
 title: Pandas Basics
 description: Series and DataFrames
-date: "2021-06-15"
+date: "2021-06-16"
 image: "data-analysis.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "pandas"]
@@ -78,3 +78,20 @@ df = pd.read_csv('https://query.data.world/s/vbdcsohcytuslkklvq851k2b8jockf')
 df_2 = df[2::2]
 print(df_2.head(20))
 ```
+
+## Accessing parts of the dataframes
+```py heading="Access DataFrame via Positions (Index)"
+import pandas as pd
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+
+# print the columns 3, 4, 5 of dataframe
+df_2 = df.iloc[:, [3, 4, 5]]
+print(df_2.head(20))
+
+# print value at 3rd row, 4th column
+print(df.iloc[3:4])
+
+# print row range + column range based selection
+print(df.iloc[2:5, 3:6])
+```
+Note: We can use `df.iloc[x, y]` to get indexed based selection on dataframe. `x` represents rows & `y` represents columns. Standard indexing and slicing techniques apply.
