@@ -109,3 +109,11 @@ df_2 = df.loc[2:20]
 print(df_2)
 ```
 Note: `df.loc` is similar to df.iloc except that it works on labels instead of indexes
+
+#### Difference between iloc & loc
+
+| iloc                                                                            | loc                                                                         |
+|---------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
+| Position-based indexing.                                                        | Label-based indexing.                                                       |
+| __Upper bounds__ for row and columns are __not included__ if we specify by some number. | __Upper bounds__ for row and columns are __included__ if we specify by some number. |
+
