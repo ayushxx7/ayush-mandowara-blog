@@ -70,3 +70,11 @@ print(df_2.head(20))
 ```
 Note: If you want to sort in descending order:  
 ```df_2 = df.sort_values(by=['month', 'day'], ascending=False)```
+
+## Selecting Even Rows of Pandas DataFrame
+```py heading='Selecting Even Rows of pd.DataFrame excluding the 0th row'
+import pandas as pd
+df = pd.read_csv('https://query.data.world/s/vbdcsohcytuslkklvq851k2b8jockf')
+df_2 = df[2::2]
+print(df_2.head(20))
+```
