@@ -117,3 +117,13 @@ Note: `df.loc` is similar to df.iloc except that it works on labels instead of i
 | Position-based indexing.                                                        | Label-based indexing.                                                       |
 | __Upper bounds__ for row and columns are __not included__ if we specify by some number. | __Upper bounds__ for row and columns are __included__ if we specify by some number. |
 
+## Selecting DataFrame based on conditions applied over the columns
+```py heading="Selecting specific rows of dataframe by applying boolean operations on the columns"
+import pandas as pd
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+df_2 = df.loc[(df.area > 0) & (df.wind > 1) & (df.temp > 15)]
+print(df_2.head(20))
+
+allowed_months = ['jul', 'aug']
+print(df.loc[df['month'].isin(allowed_months), :].head(10))
+```
