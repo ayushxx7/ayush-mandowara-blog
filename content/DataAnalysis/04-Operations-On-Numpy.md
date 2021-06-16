@@ -72,3 +72,32 @@ print('determinant:', inverse)
 print('eigen:', eigen)
 print('dot product:', dot_product)
 ```
+
+## Swapping elements of numpy array
+```py heading="Swap elements of array"
+import numpy as np
+m = 0
+n = 2
+a = np.arange(11*12).reshape(11, 12) + 1
+print(a)
+a[[m,n]] = a[[n,m]]
+print(a)
+```
+
+## Print Matrix such that borders are filled with ones, and rest of elements are filled with zero
+
+```py heading='Slicing and setting value of np matrix'
+import numpy as np
+
+n = 5
+
+# Method One
+a = np.ones(n*n, dtype=int).reshape(n,n)
+a[1:a.shape[0]-1, 1:a.shape[1]-1] = 0
+print(a)
+
+# Method Two
+border_array = np.ones((n, n), dtype = int)
+border_array[1:-1, 1:-1] = 0
+print(border_array)
+```
