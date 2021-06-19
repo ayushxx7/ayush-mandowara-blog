@@ -20,6 +20,7 @@ tags: ["python", "data-analysis", "pandas"]
 * [Accessing parts of the dataframes](#accessing-parts-of-the-dataframes)
         * [Difference between iloc & loc](#difference-between-iloc-&-loc)
 * [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
+* [Dropping duplicate rows](#dropping-duplicate-rows)
 
 <!-- vim-markdown-toc -->
 
@@ -142,4 +143,15 @@ print(df_2.head(20))
 
 allowed_months = ['jul', 'aug']
 print(df.loc[df['month'].isin(allowed_months), :].head(10))
+```
+
+## Dropping duplicate rows
+```py heading="Drop duplicate rows from dataset using Pandas"
+import pandas as pd
+rating = pd.read_csv('https://query.data.world/s/EX0EpmqwfA2UYGz1Xtd_zi4R0dQpog')
+
+rating_update = rating.drop_duplicates()
+
+print(rating.shape)
+print(rating_update.shape)
 ```
