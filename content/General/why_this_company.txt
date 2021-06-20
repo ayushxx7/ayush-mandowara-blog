@@ -1,0 +1,669 @@
+# Adyen
+Digital Payments are a thing of the future and Adyen is a global leader in the field. I also admire the one system, one process, one contract approach that Adyen has, be it a brick-and-mortar business, or online, or both. I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as Adyen.
+
+Github: github.com/ayushxx7
+Personal Website: ayushxx7.github.io
+Tech Blog: ayush-blog.netlify.app
+
+# Algolia
+
+Hi Zaviear,
+
+Artificial Intelligence combined with Search is one of the greatest things to be ever invented by mankind, and to do it as well as Algolia does is remarkable. I also admire the open-source tools and APIs it provides. Moreover, I have experienced the speed of the service first hand as my team uses Zendesk for their support needs, which in turn uses Algolia at their backend.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as Adyen.
+
+Give me any challenge to solve, and I'll prove my worth to you.
+
+Regards,
+Ayush
+
+Github: github.com/ayushxx7
+Personal Website: ayushxx7.github.io
+Tech Blog: ayush-blog.netlify.app
+
+
+#### About the Job
+Algolia was built to help product teams deliver fast and relevant search in their websites and mobile apps with flexible resources & tools. We provide a hosted search API used by thousands of customers in more than 100 countries. Billions of search queries are answered every month thanks to the code we push every day into production. Our tools allow product teams to focus on building great experiences without having to worry about maintaining their infrastructure.
+
+We're looking for a Senior Software Engineer to join the Solutions Strategy team at Algolia. We are responsible for developing industry solutions to create the best developer experience for our users through building on Algolia’s raw API, open source UI libraries, and other third party integrations. We are a cross functional team that works closely with the product, marketing, solutions engineering and architecture team to drive feature adoption and growth in the developer community.
+
+As a senior member of the Solutions Strategy team, you have the opportunity to drive the technical strategy on how Algolia integrates with other technologies in the ecosystem. You will be building proof of concepts on different system applications and connectors using our API. This will heavily influence how our users apply our technology in solutions domains such as search, voice, ecommerce, AI & personalization, analytics and CMS. This is a highly versatile role that leads the creation and publication of technical best practice through incorporating industry research and delivering sample code. You will enjoy this role if you enjoy experimenting with new technologies and working in a highly collaborative environment. Your work will be heavily used in client facing and technical marketing campaigns. We are at the frontline of the developer experience at Algolia, a great position to have a big impact for both developers and end-users. This is an opportunity for someone to make an immense impact at a fast growing company. You should value and practice transparency, have the humility to accept your weaknesses and continuously strive to improve both personally and professionally.
+
+Do you like, or would you like to, craft code, tools and libraries for developers? Do you love to design a clean API solving real-world use cases? Then apply and let's chat about it.
+
+Coming right from an engineer in the team : “As a developer, I use a ton of different libraries to achieve my goals of building applications. Now I can go to the next level and learn how to build tools for developers to build their applications. It's a whole different challenge, I do it in the open source world and engage with my users.”.
+
+YOUR ROLE WILL CONSIST OF:
+
+Develop open source custom applications using our API Clients and so much more with the help of the team
+Take ownership, research, explore and deliver novel experiences
+Teach us what we don't know and how you want to improve the search and discovery experience
+Participate (new features, bug fixes) to other popular open-source projects related to our project needs
+Help define engineering best practices and processes
+YOU MIGHT BE A FIT IF YOU HAVE:
+
+Experience working with web technologies including, but not limited to: HTML, CSS, JavaScript and HTTP.
+Coding experience with a general purpose programming language (ie. PHP, Ruby, Java, C/C++, Python).Familiarity with Python, SQL and Unix/Linux operating systems/commands.
+A passion for shipping quality code
+You have an eye for great user experiences (UX)
+Willingness to go beyond what you know todayYou like to help, teach and mentor your colleagues
+Ability to interact with contributors and customers
+Good oral and written communication in English
+Overall we care about your current and future skillset. Not where you studied or who do you know. We care about what you like to do and about what you'd like to do in the future here at Algolia.
+NICE TO HAVE:
+
+You have built search and discovery experiences
+You have some UI design skills
+You are able to show empathy towards your colleagues
+We are not specifically looking for very active GitHub profiles (that's only a plus). We're looking for developers who have an interest in creating tools for others developers
+WE’RE LOOKING FOR SOMEONE WHO CAN LIVE OUR VALUES:
+
+GRIT - Problem-solving and perseverance capability in an ever-changing and growing environment
+TRUST - Willingness to trust our co-workers and to take ownership
+CANDOR - Ability to receive and give constructive feedback
+CARE - Genuine care about other team members, our clients and the decisions we make in the company
+HUMILITY - Aptitude for learning from others, putting ego aside
+
+
+
+
+
+
+# Github
+
+Why you want to work at Github?
+I visit GitHub every day. It's the place to be for anyone who wants to keep a version history of their work be it development, keeping notes, blogs, and anything else. I understand that all of these are features of `Git`, but Github makes it trivially easy to do many of these things. It would be an honor working at the OG Open Source solution for all.
+
+Why do you feel fit for role?
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as Github.
+
+Give me any challenge to solve, and I'll prove my worth to you.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+# DeepSync
+
+Hi Ishaan,
+
+I think what you and the team are doing with Deepsync is simply remarkable. I am one of those people who would rather listen to some music audio while doing some form of exercise such as walking (yes, walking for more than an hour can feel like exercise). I often wonder if there was a way for me to gain knowledge while I walk, and the only solution I can think of is using headphones and listening to a podcast. The only problem is, there aren't many podcasts out there, and part of the reason is that Videos are more interactive, and the other part is because creating content in itself is hard. I think that having a platform such as yours will help people a lot for the second scenario. All of this to say, that I believe in the product, and I believe that I can be a good fit for the company too.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+I have an unpublished paper in the field of AI, specifically Game Playing AI. I learned about things like alpha-beta cut-off, and how we can use techniques such as unsupervised learning & reinforcement learning to make the computer train itself.
+I have another one in ML, where I created a Phone Recommendation system using Sentiment Analysis as a base feeder.
+In the past, I have created several automation projects, most of them using Python. They are listed on my Github.
+
+Give me any challenge to solve, and I'll prove my worth to you.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# AiDash
+
+#### About the Job
+Responsibilities:
+
+Drive product roadmap and take ownership of several core components of the product.
+Play key role in design and implementation of new products and features
+Translate requirements and mock-ups into fully functional features by working closely with product managers and creative designers to solve challenging usability problems.
+Build rich, modern web and mobile web experiences that are progressive and responsive
+Rapidly learn and master new technologies to improve usability and performance.
+Key skills:
+
+2+ years of experience designing and building scalable reusable products/components as a Fullstack Engineer.
+Sound with data structures and algorithms
+Strong understanding of UI/UX, responsive design, cross-browser compatibility, AJAX and general web standards.
+Tech Stack experience with React.js or Vue.js, HTML5, CSS3, Javascript/Typescript, Bootstrap, Use of RESTful/Graphql APIs
+Tech Stack experience with Node.js/Typescript or Python/Django stack, PostGres/MySQL
+Strong grasp of Node.js/Python/Java is a must. Since these will be our primary languages of choice, prior work experience in these languages will help you ramp up quickly with the rest of the team.
+An extremely good working knowledge of relational database systems (MySQL/PostgreSQL) or NoSQL databases such as MongoDB. Experience with TypeORM/Sequelize
+Being able to design, develop and maintain Restful APIs is critical to ensure any reasonably complex functionality within the product.
+Operational experience with CI/CD and Docker and orchestration/Kubernetes; deployments on AWS, GCP or Heroku based platforms
+Comfortable across any one flavor of Linux with shell scripting
+Nice to have:
+
+Experience with geospatial concepts and visualization concepts and libraries like GeoServer, PostGIS Database, Shapefiles, Projections, Rasters.
+Experience with ElasticSearch, Redis, Memcached
+Qualifications
+
+B Tech/BE degree with a specialization in computer science or equivalent degree from Tier 1 or Tier 2 colleges.
+2-6 years solid experience designing and developing scalable cloud based services and modules.
+
+
+# My Response:
+Hi Rahul,
+
+I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC. Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration. I try to jump in and help my teammates whenever possible, and even inspire them to incorporate better habits while writing code. Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward. An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+To prove my skillset, I'm willing to solve any challenge or assignment that you have.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+
+
+# Emittr --- this one is basically all that I did these past two years except for the JS Part xD
+
+Why apply?
+
+To become jack of all trades along with master of one. Everyone in the team talks to customers so they can empathize with them better. So apart from developing good engineer skills you will also get to wear multiple other hats.
+We do not differentiate between roles like software engineer, data scientist, data analyst etc as we believe they are just different names of an engineer and a good engineer with a super power of learning things fast can do anything. So being a founding member you will get to work on different fields at times.
+We work on trending and scalable technologies along with using good engineering practices while building things. So an opportunity to get to work on that.
+About the platform:
+Emitrr is a 24/7 backup receptionist for small businesses globally. We are changing the way people communicate with the small businesses.
+
+Requirements:
+
+Bachelor's/Masters or PhD degree in Computer Science, Data Science, Statistics or related discipline is NOT MANDATORY. Skills and passion to build product that people love is mandatory. :)
+Eager to learn new things and motivated to work in the conversational AI space.
+Strong proficiency in JavaScript, including DOM manipulation and the JavaScript object model
+Knowledge of Node.js and frameworks available for it {{such as Express, StrongLoop, etc depending on your technology stack}}
+Good understanding of React.js and its core principles with experience with working on popular React.js workflows (such as Flux or Redux) is a plus
+Familiarity with RESTful APIs
+Having an experience of working on NLP engines like Rasa, wit.ai, dialogflow, etc. is a plus
+Minimum 1 year experience is preferred. (We also love people who have prior experience of starting up on their own)
+
+
+# Emittr
+Hi Pulkit,
+
+One of my core projects this year has been integrating a Conversational AI solution that uses DialogFlow at its core into the BlueStacks App Player. I have a stronghold on Python and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling the application and adding features such as limiting the number of open conversations any agent will receive and providing an automated tagging solution based on scenarios such as when the agent does not reply on time during Live Chat.
+I have even worked as a customer support representative (email-based) for a short time to truly grasp the inner workings of the field. Eventually, I was preparing tools for the team that would help them to focus on the customers while the system can take care of providing the necessary abstractions. General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do. Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination because of it, since the scope of this App is massive.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+I am willing to solve any assignments that you give me to prove my worth.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+Why you would be good fit? (Asked in survey by Emittr)
+Here's my tech blog: https://ayush-blog.netlify.app/ & corresponding Github: https://github.com/ayushxx7/ayush-mandowara-blog. I mostly write about the challenges I faced during the day (ex: If I looked up how to do "X", there's a chance I will end up writing the solution as part of a blog post).
+
+I have a strong hold on Vim (have a custom .vimrc: https://github.com/ayushxx7/dotfiles), Git (can use interactive rebase), and other tools such as GSheets, Google BigQuery.
+
+I've been coding in Python for 4+ years (1.5 years as a full-time employee, did a bit of freelancing, internships, and some other personal projects).
+
+I also understand JS (have integrated a live chat solution on the support page of BlueStacks, customized zendesk search, autogenerated popular section in Help Center etc.).
+I have created a dashboard using React.js+Redux combination (learned everything from scratch) and implemented a solution in record time.
+
+Some of my projects:
+- facebook autoliker: https://github.com/ayushxx7/Facebook-Auto-Liker
+- whatsapp web automation: https://github.com/ayushxx7/Whatsapp_Web
+- verifying zipf's law: https://github.com/ayushxx7/Zipfs_Law
+- url shortner app: https://github.com/ayushxx7/url_shortner
+
+Github: https://github.com/ayushxx7
+
+Which superhero would you be?
+Doctor Strange.
+1. Magical artifacts - Eye of Agamotto (view & change past)
+2. can summon elemental powers
+3. can control dreams (self as well as others)
+4. can steal bodies and powers
+5. Benedict Cumberbatch played the character fabulously
+
+
+# Rocket Learning
+
+Hi Siddhant,
+
+I am inspired by what your organization aims to do. Not many step up to the tasks involving helping people at scale, especially those from the weaker sections of society. I would love to make an impact myself and given my skillset for the past 5 years (2 years professionally) has been developed in Python (scripts, tests, full-stack apps, automation, APIs, data analysis), I would be a great fit.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Give me a test, and I promise I will pass with flying colors.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# GoComet
+
+About the job
+Desired Candidate
+
+The ideal candidate is a self-motivated, multi-tasker, and demonstrated team-player. You will be a senior developer responsible for the development of new software products and enhancements to existing products.
+You should excel in working with large-scale applications and frameworks and have outstanding communication and leadership skills.
+Responsibilities
+
+Writing clean, high-quality, high-performance, maintainable code
+Develop and support software including applications, database integration, interfaces, and new functionality enhancements
+Own and complete full projects beginning with identifying and communicating the problems to be solved, getting and incorporating feedback on proposed architectural solutions, and making a final decision as the owner of a project.
+Show curiosity to not only learn new things but fully understand how they work
+Be highly productive - have a reputation for getting things done quickly and efficiently
+Be a mentor for other engineers
+Deconstruct a problem into an executable action plan for themselves and other engineers - also perform them in a high-quality way without issue
+Set and maintain high individual and team expectations
+Actively participate in frequent code/design/architecture reviews
+Be able to communicate well with all engineers regardless of seniority
+Generate support for a company/team decision
+Requirements
+
+At least 2 years experience in Development with extensive experience using Ruby/Golang/Python/Nodejs.
+Excellent understanding of Object Oriented Programming
+Ability to self-manage and work autonomously in a collaborative environment
+A focus on detail including around automated tests and documenting your code
+An agile mindset and the ability to adapt to changing priorities and requirements
+Good in analyzing and solving problems
+Passionate to work in a start-up
+What you will get
+
+Product ownership - take autonomy over core products & product features
+Be a part of early tech team
+Stock options
+Our stack
+Microservice Architecture, Kubernetes, PostgreSQL, MongoDB, Redis, Ruby on Rails, ReactJs, Nodejs, Jenkins, RabbitMQ, Flutter, Apache Kafka
+Our continuous releases are integrated with Jenkins, Bitbucket & Kubernetes. On the frontend, we use React for the views, organize the data flow with Flux architecture, and test our application with RSpec.
+On the backend, we're a Rails shop (ROR) riding on AWS/GCP and Postgres RDS.
+
+
+#### My response
+Hi Ayush,
+
+I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC. Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration. I try to jump in and help my teammates whenever possible, and even inspire them to incorporate better habits while writing code. Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward. An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+To prove my skillset, I'm willing to solve any challenge or assignment that you have.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+# Airblack
+
+Hi Vaibhav,
+
+I have a stronghold on Python and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination because, since the scope of the project was massive.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Why pick me among hundred applicants?
+- Ability to self-manage and work autonomously in a collaborative environment
+- A focus on detail including automated tests and documentation
+- An agile mindset and the ability to adapt to changing priorities and requirements
+- Good in analyzing and solving problems
+- Passionate to work in a start-up
+
+I am willing to solve any assignments that you give me to prove my worth.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# Bijnis
+
+About the job
+Job Description :
+
+We are looking for a great JavaScript developer who is proficient with React. Your primary focus will be on developing user interface components and implementing them following well-known React.js workflows (such as Flux or Redux). You will ensure that these components and the overall application are robust and easy to maintain. You will coordinate with the rest of the team working on different layers of the infrastructure. Therefore, a commitment to collaborative problem solving, sophisticated design and quality product is important.
+
+Responsibilities :
+
+Developing new user-facing features using React
+Building documented and reusable components for future use
+Translating designs and wireframes into high quality code
+Optimizing components for maximum performance across a vast array of web-capable devices and browsers
+Working across various customer facing as well as internal products at Bijnis.
+Skills :
+
+Strong proficiency in JavaScript, including DOM Manipulation & the JavaScript Object Model
+Familiarity with ES6 and above
+A Good understanding of React.js and its core principles
+Knowledge of isomorphic React & popular React workflows (such as Flux or Redux) is a plus
+A thorough understanding of HTML5 and its APIs
+Proficiency with CSS3 to build responsive templates (experience with CSS preprocessor - SASS, LESS, etc. a plus )
+Familiarity with RESTful APIs
+Experience with common front-end development tools such as Babel, Webpack, NPM, etc.
+Familiarity with Git
+A knack for learning and building on new and upcoming technologies
+
+### My Application
+
+Dear Sir/Madam,
+
+I have a stronghold on Python(Flask/Django/Django Rest Framework) and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination since the scope of the project was massive.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Why pick me among hundred applicants?
+- Ability to self-manage and work autonomously in a collaborative environment
+- A focus on detail including automated tests and documentation
+- An agile mindset and the ability to adapt to changing priorities and requirements
+- Good in analyzing and solving problems
+- Passionate to work in a start-up
+
+I am willing to solve any assignments that you give me to prove my worth.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# CimpiTech
+
+Hi Amit,
+
+I have a stronghold on Python(Flask/Django/Django Rest Framework) and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination since the scope of the project was massive.
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Why pick me among hundred applicants?
+- Ability to self-manage and work autonomously in a collaborative environment
+- A focus on detail including automated tests and documentation
+- An agile mindset and the ability to adapt to changing priorities and requirements
+- Good in analyzing and solving problems
+- Passionate to work in a start-up
+
+I am willing to solve any assignments that you give me to prove my worth.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# Symbl
+
+About the job
+Symbl.ai is looking for a Software Quality Assurance Engineer in the process of building a complex system that involves cutting-edge Front-end and Back-end technology stack involving the Machine learning and Deep learning techniques in NLP space. This role will be responsible for defining the testing strategy and testing automation framework of the end to end Back-end and Front-end systems to ensure the highest quality of our software systems. You will work with a brilliant set of people to define the fundamental software processes to ensure software quality.
+
+Who
+
+Symbl is looking for a QA Engineer who can work independently with little supervision, excellent organization & problem-solving skills. You should be able to cope up with the changing needs with high agility.
+The goal will be to ensure the high-quality of the software that is aligned with user needs and business goals. We seek someone with:
+
+Minimum 3 years of relevant work experience.
+Experience in software testing with manual testing as well as automation testing in the various testing phases - Functional Testing, Non-Functional - - Testing, UAT, Contract Testing, Unit Testing, Component Testing, A/B Testing, Usability Testing etc.
+Experience in operating in a self-managed environment with minimum guidance.
+Proficiency in various software testing tools like Selenium, Rest Assured, JMeter etc.and reporting tools.
+Proficiency in using various CI/CD tools like CircleCI, Jenkins, Docker and Kubernetes.
+Proficiency in at least one programming language, preferred are Java, Python, JavaScript ( is plus ).
+Experience in working with at least one of the public/private Cloud Platform – AWS, Google Cloud, Azure to build cloud-native applications. - - - Hands-on experience on Google Cloud is preferred.
+In-depth understanding of the testing methodologies and best practices.
+Experience working in Machine learning/Deep learning space would be a plus.
+Very good understanding of the fundamentals of software development and computer science.
+Familiarity with various operating systems (Linux, Mac OS, Windows).
+Strong analytical and rational mind with problem-solving aptitude.
+Ability to work independently.
+Bachelors or Masters degree in Computer Science or a related degree
+What
+
+As a QA Engineer, you will accomplish:
+
+Develop Test Cases for various business scenarios.
+Develop Test Automation tools and scripts for automation of testing.
+Define testing standards to ensure high quality.
+Execute and capture the test case results and generate and manage test reports.
+Understand business requirements and contribute to requirement gathering and definition.
+Identify, prioritize and execute tasks in the software development lifecycle.
+Leader and SQA expert in the software development team.
+Work directly with the existing and potential customers.
+Collaborate with vendors to enhance the product.
+Automate tasks through appropriate tools and scripting.
+Perform validation and verification testing.
+Document development phases and monitor systems.
+
+### My Answer
+
+Hi Swara,
+
+One of my core projects this year has been integrating a Conversational AI solution that uses DialogFlow at its core into the BlueStacks App Player.
+I have a stronghold on Python and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling the application and adding features such as limiting the number of open conversations any agent will receive and providing an automated tagging solution based on scenarios such as when the agent does not reply on time during Live Chat.
+I even prepared tools for the team that would help them to focus on the customers while the system can take care of providing the necessary abstractions.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do. Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination because of it, since the scope of this App is massive.
+
+As a QA-Automation Engineer, I ensured that the existing systems are always up and running mostly through automated test suites written in Python (PyTest, Selenium, Appium,  PyAutoGUI).
+I wrote test scenarios for new & upcoming features in alignment with the project scope, and even identified scenarios that the developers should take care of during the POC phases. Once the test scenarios and project scope would be finalized, I built suites keeping reusability and scalability in mind.
+
+What unique things do I bring to the table?
+
+- I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC.
+Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration.
+
+- I try to jump in and help my teammates whenever possible and even inspire them to incorporate better habits while writing code.
+
+- Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward.
+An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+- Ability to self-manage and work autonomously in a collaborative environment
+
+- A focus on detail including automated tests and documentation
+
+- Good in analyzing and solving problems
+
+- Passionate about working in startups and building the future
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Kindly consider me for the role of QA Engineer at Symbl, and, if selected, I promise to become an asset rather than a resource.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+# Ula
+
+About the job
+Work with the Product and UX functions to craft innovative solutions to solve real customer pain points
+Work with Engineering and DevOps functions to ensure system reliability, availability and scalability
+Continuously champion high quality software engineering practices - from planning, implementation, test automation, documentation, code reviews, scaling, performance, metrics, logging, and monitoring - essentially the entire software development lifecycle
+Evaluate existing and future cloud-based services to increase the efficiency of our team and/or business
+Grow yourself and your team - mentorship enables everyone to learn and improve
+Requirements
+
+Proficient in any of the major programming or scripting languages (Java, Python, JavaScript, Golang, Ruby on Rails, etc.)
+Experience with MySQL and PostgreSQL or similar relational databases (non-relational databases a plus)
+Familiarity with agile software development processes for building distributed systems, Android applications, and/or e-commerce platforms
+Self-driven to tackle challenges head-on and achieve goals
+Able to troubleshoot complex systems problems, debug, and find root causes
+Excel at working in small, dynamic, and fast-paced groups
+Ability to communicate in written and spoken English
+Curiosity and capacity to learn
+Position(s) available for SDE-I, SDE-II and SDE-III
+
+### My Answer
+
+Hi Haekel,
+
+I have a stronghold on Python(Flask/Django/Django Rest Framework) and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination since the scope of the project was massive.
+
+What do I bring to the table?
+- I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC.
+Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration.
+
+- I try to jump in and help my teammates whenever possible and even inspire them to incorporate better habits while writing code.
+
+- Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward.
+An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+- Ability to self-manage and work autonomously in a collaborative environment
+
+- A focus on detail including automated tests and documentation
+
+- Good in analyzing and solving problems
+
+- Passionate about working in startups and building the future
+
+
+I am willing to solve any assignments that you give me to prove my worth.
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+
+# Mudrex
+
+About the job
+What you will be working on:
+You will take up the responsibility of building out scalable, high performance, robust and reliable backend systems for the Mudrex platform. like...
+• Wallet services Infrastructure -- Build core reusable infrastructure that provides a unified access layer for colelcting and disbusring payments. The walletervice is a shared multi-tenant service that forms the backbone of several of Mudrex features.
+• Trading Infrastructure –- Build Mudrex's core trading platform infrastructure for all cryptocurrencies.
+
+What we are looking for in you:
+• 2+ years of experience in Python and backend technologies
+• Design and architect performant, reliable, secure apis and data management systems
+• Good working knowledge of design patterns
+• Excellent analytical and problem-solving skills
+• The skills that we consider: Python, Flask, MySQL, MongoDB, Redis, Kafka, Elasticsearch, AWS
+• Ability to thrive in a dynamic, fast-paced, collaborative, and high-growth environment.
+
+Bonus Points:
+• Experience designing fault-tolerant distributed systems
+• Experience with data pipelines
+• Experience with Celery
+• Experience with Cassandra, Redis, Memcached or MySQL
+• Contributions to the open-source community
+
+### My Answer
+
+Hi Edul,
+
+I have a stronghold on Python(Flask/Django/Django Rest Framework) and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination since the scope of the project was massive.
+
+What do I bring to the table?
+- I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC.
+Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration.
+
+- I try to jump in and help my teammates whenever possible and even inspire them to incorporate better habits while writing code.
+
+- Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward.
+An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+- Ability to self-manage and work autonomously in a collaborative environment
+
+- A focus on detail including automated tests and documentation
+
+- Good in analyzing and solving problems
+
+- Passionate about working in startups and building the future
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Kindly consider me for the role of Backend Engineer, and, if selected, I promise to become an asset to the organization!
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+# Clarisights
+
+
+I have a stronghold on Python(Flask/Django/Django Rest Framework) and Javascript (React/Redux/Vanilla JS) and both of these helped in quickly scaling various applications that the company uses internally.
+General Purpose scripting is a suit that I wear with pride, and it's truly a game-changer when it comes to improving the quality of work that we do.
+Recently, I have also developed a full-stack web app with Django on the backend, and React-Redux on the frontend. I truly grasped the power of the react-redux combination since the scope of the project was massive.
+
+What do I bring to the table?
+- I am a passionate engineer who has a reputation for getting things done quickly while keeping high QOC.
+Part of the speed + accuracy comes from my extensive investment of time in improving my tooling (.vimrc, git, shell scripting), while the rest of it is simply because I have strong fundamentals and enjoy working at hard problems that take enormous concentration.
+
+- I try to jump in and help my teammates whenever possible and even inspire them to incorporate better habits while writing code.
+
+- Working in a startup, I have learned the importance of quickly iterating through multiple POCs and selecting the best way forward.
+An ability to incorporate the many changes that a project might go through, with minimal delay, is what makes me a good pick for the position.
+
+- Ability to self-manage and work autonomously in a collaborative environment
+
+- A focus on detail including automated tests and documentation
+
+- Good in analyzing and solving problems
+
+- Passionate about working in startups and building the future
+
+I believe having someone with a strong foundation in fundamental concepts of programming, a knack for learning, a vast range of projects under his belt, a sharp focus, and someone who exhibits leadership qualities would be a good fit for an organization such as yours.
+
+Kindly consider me for the role of Backend Engineer, and, if selected, I promise to become an asset to the organization!
+
+Regards,
+Ayush
+
+Github: https://github.com/ayushxx7
+Personal Website: https://ayushxx7.github.io
+Tech Blog: https://ayush-blog.netlify.app
+
+
+# LimeChat
+
+Hi Nikhil,
+
+The problem you are trying to solve is indeed something that excites me as a developer as well as a consumer. I've joined groups on Telegram that help me spot deals (huge discounts, pricing errors, what have you) I would otherwise miss, and it's a treat!
+I've worked on live chat solutions, automation, testing, internal tooling, among other things. Python is my language of choice (4 years and counting), while I am also comfortable with Javascript.
+
+I would love the opportunity to share with you why I might be a great fit for the LimeChat team. Looking forward to hearing from you!
+
+Regards,
+Ayush
+
+
+# Trakinvest
+
+Hi Urvi,
+
+I am looking for a full-time role as a backend + frontend developer. I am skilled in Python, while I also have a stronghold on Javascript. I recently developed a couple of apps using React.js + Redux stack.
+
+Let me know if you find my profile interesting.
+
+Regards,
+Ayush
+Github: https://github.com/ayushxx7
+blog: https://ayush-blog.netlify.app/
