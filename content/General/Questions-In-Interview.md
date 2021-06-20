@@ -145,12 +145,13 @@ To put it simply, when 8GB worth of processes are running, some of them shift to
 
 ## What is Multithreading? What is the difference between a thread and a process?
 
-Multithreading is the process of running multiple threads in a single process.   
-| Thread                                                                                                                                | Process                                                                                             |
-|---------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+Multithreading is the process of running multiple threads in a single process.
+
+| Thread | Process |
+|--------|---------|
 | Thread is a "subset" of a process i.e. one process consists of multiple threads.                                                      | Process is superset of threads, one process can have multiple threads. |
 | Each thread has it's own set of operations to perform, but shares the memory with other threads that are running in the same process. | Processes are independent from one another, i.e. one process's memory is not shared with another's. |
-| Communication between threads is faster                                                                                               | Inter Process commincation (IPC) is slower                                                          |
+| Communication between threads is faster                                                                                               | Inter Process commincation (IPC) is slower|
 
 ---
 
