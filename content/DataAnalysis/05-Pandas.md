@@ -21,6 +21,7 @@ tags: ["python", "data-analysis", "pandas"]
         * [Difference between iloc & loc](#difference-between-iloc-&-loc)
 * [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
 * [Dropping duplicate rows](#dropping-duplicate-rows)
+* [Selecting values of a particular quantile in Pandas DataFrame](#selecting-values-of-a-particular-quantile-in-pandas-dataframe)
 
 <!-- vim-markdown-toc -->
 
@@ -154,4 +155,16 @@ rating_update = rating.drop_duplicates()
 
 print(rating.shape)
 print(rating_update.shape)
+```
+
+## Selecting values of a particular quantile in Pandas DataFrame
+```py heading="Quantile based segmentation of DataFrame in Pandas"
+import pandas as pd
+
+df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+print(df.shape)
+cols = ['X']
+quantile_95th_percentile = df[cols].quantile(0.95)
+df = df[~(df[cols] > quantile_95th_percentile).any(axis=1)]
+print(df.shape)
 ```
