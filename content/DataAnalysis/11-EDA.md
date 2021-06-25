@@ -101,3 +101,36 @@ Standard Deviation is a common approach to identify the spread of a dataset. How
   - IQR = value at 75th percentile - value at 25th percentile
 - One can extract meaningful insight from unordered categorical data by generating a rank-frequency plot. When plotting log-log rank-frequency graph, power law is observed on most data sets.
 
+---
+
+# Segmented Univariate Analysis
+- Performing Univariate Analysis on a subset of the data
+
+## Question: How to group data into smaller buckets? 
+- business driven decision
+- data can be grouped by categorical variables
+
+## Process of Segmenting data
+- Take raw data
+- Group by dimensions
+- Summarise using a relevant metric such as mean, median, etc.
+- Compare the aggregated metric across groups/categories
+
+## Comparision of Averages
+- Don’t blindly believe in the averages of the buckets — you need to observe the distribution of each bucket closely and ask yourself if the difference in means is significant enough to draw a conclusion. If the difference in means is small, you may not be able to draw inferences. In such cases, a technique called hypothesis testing is used to ascertain whether the difference in means is significant or due to randomness. 
+- Potential is not a guarantee
+- A metric can be an `enabler` yet not be a `driver` 
+  - Ex: education of parents impacting marks of students
+- Other variables such as Median, Quartiles, Upper Fence & Lower Fence should also be considered
+  - Box Plots are a powerful way to do this
+
+### Note:
+- Besides finding the segments and comparing the metrics, your primary focus should be on understanding the results arising from the segments.
+
+<!-- ## Analyzing box plots -->
+<!-- - The median for degree & above is higher than all other categories, implying that mother's education can have a signifcant impact on marks -->
+<!-- - The 25th percentile is lowest amongst the illterate mothers, i.e. if mother is not educated marks are lower -->
+<!-- - The 75th percentile for sr. secondary & degree and above is similar, hence, if mother has completed schooling, that is a good enough driver for students getting bettter marks. -->
+
+---
+
