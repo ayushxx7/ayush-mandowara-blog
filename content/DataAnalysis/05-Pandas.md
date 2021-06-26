@@ -10,18 +10,20 @@ tags: ["python", "data-analysis", "pandas"]
 # Table of Contents
 <!-- vim-markdown-toc Marked -->
 
-* [What is Pandas](#what-is-pandas)
-* [Apply lambda functions to Pandas Series](#apply-lambda-functions-to-pandas-series)
-* [Converting CSV to DataFrame and getting metadata information](#converting-csv-to-dataframe-and-getting-metadata-information)
-* [Create a Series with custom indexing using Pandas](#create-a-series-with-custom-indexing-using-pandas)
-* [Custom Index for Pandas DataFrame](#custom-index-for-pandas-dataframe)
-* [Sorting DataFrame](#sorting-dataframe)
-* [Selecting Even Rows of Pandas DataFrame](#selecting-even-rows-of-pandas-dataframe)
-* [Accessing parts of the dataframes](#accessing-parts-of-the-dataframes)
-        * [Difference between iloc & loc](#difference-between-iloc-&-loc)
-* [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
-* [Dropping duplicate rows](#dropping-duplicate-rows)
-* [Selecting values of a particular quantile in Pandas DataFrame](#selecting-values-of-a-particular-quantile-in-pandas-dataframe)
+    * [What is Pandas](#what-is-pandas)
+    * [Apply lambda functions to Pandas Series](#apply-lambda-functions-to-pandas-series)
+    * [Converting CSV to DataFrame and getting metadata information](#converting-csv-to-dataframe-and-getting-metadata-information)
+    * [Create a Series with custom indexing using Pandas](#create-a-series-with-custom-indexing-using-pandas)
+    * [Custom Index for Pandas DataFrame](#custom-index-for-pandas-dataframe)
+    * [Sorting DataFrame](#sorting-dataframe)
+    * [Selecting Even Rows of Pandas DataFrame](#selecting-even-rows-of-pandas-dataframe)
+    * [Accessing parts of the dataframes](#accessing-parts-of-the-dataframes)
+            * [Difference between iloc & loc](#difference-between-iloc-&-loc)
+    * [Selecting DataFrame based on conditions applied over the columns](#selecting-dataframe-based-on-conditions-applied-over-the-columns)
+    * [Dropping duplicate rows](#dropping-duplicate-rows)
+    * [Selecting values of a particular quantile in Pandas DataFrame](#selecting-values-of-a-particular-quantile-in-pandas-dataframe)
+    * [Create Day column from Date Time column in Pandas](#create-day-column-from-date-time-column-in-pandas)
+* [References](#references)
 
 <!-- vim-markdown-toc -->
 
@@ -161,10 +163,26 @@ print(rating_update.shape)
 ```py heading="Quantile based segmentation of DataFrame in Pandas"
 import pandas as pd
 
-df = pd.read_csv('https://query.data.world/s/vBDCsoHCytUSLKkLvq851k2b8JOCkF')
+df = pd.read_csv('https://query.data.world/s/vbdcsohcytuslkklvq851k2b8jockf')
 print(df.shape)
 cols = ['X']
 quantile_95th_percentile = df[cols].quantile(0.95)
 df = df[~(df[cols] > quantile_95th_percentile).any(axis=1)]
 print(df.shape)
 ```
+
+## Create Day column from Date Time column in Pandas
+```py heading="Create Day column from Date Time column in Pandas"
+import pandas as pd
+order = pd.read_csv('https://query.data.world/s/3hIAtsCE7vYkPEL-O5DyWJAeS5Af-7')
+order['Order_Date'] = pd.to_datetime(order['Order_Date'])
+
+order['day'] = pd.DatetimeIndex(order['Order_Date']).day
+
+print(order.head(10))
+```
+
+
+
+# References
+- [Selecting Subsets using loc & iloc](https://medium.com/dunder-data/selecting-subsets-of-data-in-pandas-6fcd0170be9c)
