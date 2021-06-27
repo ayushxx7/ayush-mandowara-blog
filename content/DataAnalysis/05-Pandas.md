@@ -23,6 +23,7 @@ tags: ["python", "data-analysis", "pandas"]
     * [Dropping duplicate rows](#dropping-duplicate-rows)
     * [Selecting values of a particular quantile in Pandas DataFrame](#selecting-values-of-a-particular-quantile-in-pandas-dataframe)
     * [Create Day column from Date Time column in Pandas](#create-day-column-from-date-time-column-in-pandas)
+    * [Percentage Wise column distribution](#percentage-wise-column-distribution)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -182,7 +183,14 @@ order['day'] = pd.DatetimeIndex(order['Order_Date']).day
 print(order.head(10))
 ```
 
+## Percentage Wise column distribution
 
+```py heading="Using normalize with value_counts in Pandas"
+import pandas as pd
+
+df = pd.read_csv('https://query.data.world/s/vbdcsohcytuslkklvq851k2b8jockf')
+print(round(df.X.value_counts(normalize=True)*100,2))
+```
 
 # References
 - [Selecting Subsets using loc & iloc](https://medium.com/dunder-data/selecting-subsets-of-data-in-pandas-6fcd0170be9c)
