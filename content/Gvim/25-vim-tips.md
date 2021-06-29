@@ -332,3 +332,15 @@ fun! StripTrailingWhiteSpace()
 endfun
 autocmd BufWritEpre * :call StripTrailingWhiteSpace()
 ```
+
+### [How to modify a file if is not modifiable using Vim](https://stackoverflow.com/questions/5745506/vim-modifiable-is-off)
+
+1. Buffer is not modifiable
+```
+:set ma
+```
+
+2. Cannot write, 'buftype' option is set
+```
+:set buftype: " "
+```
