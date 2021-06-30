@@ -9,10 +9,10 @@ tags: ["git"]
 
 <br />
 
-###PURPOSE
+# PURPOSE
 There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those.
 
-# [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
+## [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 
 Sometimes you might want to merge two repos from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
 In such cases, Git throws an error about unrelated histories.
@@ -22,7 +22,7 @@ To resolve the issue, type the following in your terminal:
 git pull origin master --allow-unrelated-histories
 ```
 
-# [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
+## [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
 
 There are times when you have made several changes in a file, but you only want to commit part of it at the moment.
 
@@ -51,12 +51,12 @@ Now, you can patch by copying contents from local pane to Git pane and saving.
 
 You can use `do` (diff obtain) or `dp` (diff paste) for staging hunks.
 
-# [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
+## [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
 
 Add the end of your Git Repo, just add /fork. (<git_repo_https_link>/fork)
 Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 
-# [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
+## [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
 
 Ex: Assume that you want to ignore all files from `test` folder but keep the folder in tracking.
 
@@ -80,7 +80,7 @@ Ex: Assume that you want to ignore all files from `test` folder but keep the fol
 
 The required tracking will be put in place.
 
-# [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
+## [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
 
 There will be times, where you created a branch just for a hotfix.
 In such cases, when the hotfix is merged into master, you can delete the branch.
@@ -97,7 +97,7 @@ To pull changes on a different machine, where the branch is deleted:
 git fetch -p
 ```
 
-# [Push a file to GitHub but do not track it for changes](https://compiledsuccessfully.dev/git-skip-worktree/)
+## [Push a file to GitHub but do not track it for changes](https://compiledsuccessfully.dev/git-skip-worktree/)
 
 #### !NOTE! You should consider not using this method. Maybe there is something else you can do if you want to keep a static config file. Like, say, having a `config.prod` which is tracked and `config.dev` which is not tracked.
 
@@ -123,7 +123,7 @@ Further, you can also use the `interactive rebase` to make changes in earlier co
 
 > Take a look at [Rebasing with Git](../07-Rebasing-with-Git)
 
-# [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
+## [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
 
 To store the current state of your work, so that you can take a pull of the latest changes from the remote repository,
 you can use the `git stash` command.
@@ -167,7 +167,7 @@ While naming the stash will store it like:
 On <branch_name>: <name of the stash you set using the -m flag>
 ```
 
-# Always pull with rebase
+## Always pull with rebase
 
 It is generally good idea to pull with rebase flag,
 
@@ -184,7 +184,7 @@ Run this command in your terminal within the git repo you want to set this for:
 git config --global pull.rebase true
 ```
 
-# Identify if you Commit Title is correct
+## Identify if you Commit Title is correct
 
 As a rule of thumb, you can see if your commit messages fits in the following sentence:
 
@@ -192,7 +192,7 @@ As a rule of thumb, you can see if your commit messages fits in the following se
 If applied, this commit will <your subject line here>
 ```
 
-# [Extract commits after a specific date](https://stackoverflow.com/questions/37311494/how-to-get-git-to-show-commits-in-a-specified-date-range-for-author-date)
+## [Extract commits after a specific date](https://stackoverflow.com/questions/37311494/how-to-get-git-to-show-commits-in-a-specified-date-range-for-author-date)
 
 If you want to see commits after a certain date:
 
@@ -200,7 +200,7 @@ If you want to see commits after a certain date:
 git log --oneline --after="2021-02-23"
 ```
 
-# [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
+## [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
 
 To remove/delete untracked files from your local repo, we can use `git clean`
 First, check what will be removed
@@ -221,7 +221,7 @@ git clean -fx #remove ignored and untracked files
 
 Do note that the title is always supposed be in imperative speech.
 
-# Resolving another process is running
+## Resolving another process is running
 
 Suppose that you are trying to commit a file in git, but you face the error:
 ```
@@ -242,7 +242,7 @@ rm index.lock
 
 This should solve the problem.
 
-# [Unable to merge branch due to untracked files](https://stackoverflow.com/a/51177844/7048915)
+## [Unable to merge branch due to untracked files](https://stackoverflow.com/a/51177844/7048915)
 - To `git merge` while overwriting untracked files
 - The files of interest (FOI) that we are going to remove:
   1. exist in the upstream repository,
@@ -254,16 +254,10 @@ git checkout receiving-branch  # FOI are not in `receiving`, so they disapppear
 git merge donor-branch  # now the merge works
 ```
 
-## Get better at Git
-
-#### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
-
-#### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
-
-#### [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
-
-#### [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
-
-#### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
-
-#### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
+# References
+- [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
+- [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
+- [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
+- [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
+- [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
+- [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
