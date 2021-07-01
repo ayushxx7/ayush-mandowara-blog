@@ -14,7 +14,7 @@ There are times when you have to do something related to your version history, b
 
 ## [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 
-Sometimes you might want to merge two repos from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
+Sometimes you might want to merge two repositories from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
 In such cases, Git throws an error about unrelated histories.
 To resolve the issue, type the following in your terminal:
 
@@ -51,9 +51,9 @@ Now, you can patch by copying contents from local pane to Git pane and saving.
 
 You can use `do` (diff obtain) or `dp` (diff paste) for staging hunks.
 
-## [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
+## [Quick Fork Hyper Link](https://stackoverflow.com/a/32460729/7048915)
 
-Add the end of your Git Repo, just add /fork. (<git_repo_https_link>/fork)
+Add the end of your Git Repository, just add /fork. (<git_repo_https_link>/fork)
 Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 
 ## [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
@@ -76,7 +76,7 @@ Ex: Assume that you want to ignore all files from `test` folder but keep the fol
   test/\*
   !test/.gitkeep
   ```
-- Now commit the gitignore file.
+- Now commit the `.gitignore` file.
 
 The required tracking will be put in place.
 
@@ -132,7 +132,7 @@ It will remove all the current changes in your work tree and store it in a stash
 You can view the stash list using `git stash list`
 
 Many times, you stash your changes because you mostly want to discard all the changes, but sometimes,
-you may actually want to reapply the changes once you have taken a pull from remote repo.
+you may actually want to reapply the changes once you have taken a pull from remote repository.
 If you want to apply changes as soon as you stash and pull, you can go do so with `git stash pop`
 However, there may be times when you want to keep the stash as it is, and take a look at it later on.
 In such a case, it would be better to name your stash instead.
@@ -169,16 +169,16 @@ On <branch_name>: <name of the stash you set using the -m flag>
 
 ## Always pull with rebase
 
-It is generally good idea to pull with rebase flag,
+It is generally good idea to pull with the `rebase` flag,
 
 ```
 git pull --rebase
 ```
 
-As this will avoid the unncessary `merge` commit that always ends up being part of the git history whenever you pull from remote repository.
+As this will avoid the unnecessary `merge` commit that always ends up being part of the git history whenever you pull from remote repository.
 
 You can also set the default behaviour of Git such that it automatically does that for you.
-Run this command in your terminal within the git repo you want to set this for:
+Run this command in your terminal within the git repository you want to set this for:
 
 ```
 git config --global pull.rebase true
@@ -202,7 +202,7 @@ git log --oneline --after="2021-02-23"
 
 ## [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
 
-To remove/delete untracked files from your local repo, we can use `git clean`
+To remove/delete untracked files from your local repository, we can use `git clean`
 First, check what will be removed
 
 ```
@@ -229,7 +229,7 @@ another git process is already running
 ```
 First, close all active command prompts.  
 Then, go to the root folder of the repository.  
-Suppose that your repo is cloned at `C:\automation`  
+Suppose that your repository is cloned at `C:\automation`  
 
 In you command prompt:
 ```
@@ -244,7 +244,7 @@ This should solve the problem.
 
 ## [Unable to merge branch due to untracked files](https://stackoverflow.com/a/51177844/7048915)
 - To `git merge` while overwriting untracked files
-- The files of interest (FOI) that we are going to remove:
+- The files of interest (`FOI`) that we are going to remove:
   1. exist in the upstream repository,
   1. do not exist in the current branch,
   1. and are blocking the merge because they are present and untracked in your working directory.
