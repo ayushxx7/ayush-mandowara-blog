@@ -32,9 +32,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     - [Iterative Method](#iterative-method)
 - [Gradient Descent](#gradient-descent)
     - [Effect of Learning Rate](#effect-of-learning-rate)
-- [R Squared](#r-squared)
+- [Stats that Explain Variance of a Model](#stats-that-explain-variance-of-a-model)
     - [Total Sum of Squares](#total-sum-of-squares)
     - [Residual Sum of Squares](#residual-sum-of-squares)
+    - [R Squared](#r-squared)
     - [Residual Square Error](#residual-square-error)
     - [Note](#note)
 - [Summary](#summary)
@@ -219,11 +220,9 @@ If the learning late is large, it may result in oscillation and we may miss the 
 ![Effect of Learning Rate](./effect_of_learning_rate.png)
 
 
-# R Squared
-$R^2 = 1 - \frac{Residual\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} = 1-\frac{RSS}{TSS} = \frac{MSS}{TSS} = \frac{variability\;in\;Y\;explained\;by\;model}{Total\;variability\;in\;Y}$
+# Stats that Explain Variance of a Model
 
-It measures the strength of the best fit line  
-$Higher \;R^2 \implies \;higher \;strength$
+![TSS_RSS_MSS](.\tss_rss_mss.png)
 
 ## Total Sum of Squares
 It is calculated by subtracting $y_{actual} - y_{mean}$ value for each of the data points and taking a sum of it.  
@@ -231,6 +230,16 @@ Formula: $\sum_{i=1}^{N} (y_{i}-\bar y)^2$
 
 ## Residual Sum of Squares
 Formula: $\sum_{i=1}^{N}(y_{i}−y_{i}pred)^2$
+
+## R Squared
+$R^2 = \frac{variability\;in\;Y\;explained\;by\;model}{Total\;variability\;in\;Y} = \frac{Explained\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} = \frac{ESS}{TSS} = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS} = 1 - \frac{Residual\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} $
+
+Note: ESS or Explained Sum of Squares is also called as MSS or Model Sum of Squares 
+
+It measures the strength of the best fit line  
+$Higher \;R^2 \implies \;higher \;strength$
+
+If model is worse than average model, then $R^2$ will be negative because RSS will be &gt; TSS.
 
 ## Residual Square Error
 $RSE = \sqrt{\frac{RSS}{df}}; \;df = n-2;\;$ where n = number of data points
@@ -322,7 +331,10 @@ $H_{a}: \beta_{1} \neq 0$
 - The basic idea behind the F-test is that it is a relative comparison between the model that you've built and the model without any of the coefficients except for $β_{0}$. 
 - If the value of the F-statistic is high, it would mean that the Prob(F) would be low and hence, you can conclude that the model is significant. 
 - On the other hand, if the value of F-statistic is low, it might lead to the value of Prob(F) being higher than the significance level (taken 0.05, usually) which in turn would conclude that the overall model fit is insignificant and the intercept-only model can provide a better fit.
-
+- $H_{0}: Model = Average Model$
+- $H_{1}: Model \neq Average Model$
+- p-value (F-stats) &lt; 0.05 - accept the alternate hypothesis - it is preferred that this is the outcome
+- p-value (F-stats) &gt; 0.05 - fail to reject the null hypothesis
 
 # Residual Analysis
 Plotting a Histogram of the residues helps us analyze whether
@@ -405,3 +417,4 @@ A: As per assumptions of linear regression model, the residuals are normally dis
 - https://www.youtube.com/watch?v=78YNvrsRzVw&t=269s
 - https://en.wikipedia.org/wiki/F-test
 - https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html
+- https://www.riskprep.com/component/exam/?view=exam&layout=detail&id=131
