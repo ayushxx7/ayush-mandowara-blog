@@ -690,6 +690,17 @@ def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
 
 ---
 
+### [Binomial Coefficent - <sup>n</sup>C<sub>r</sub>](https://stackoverflow.com/a/4941932/7048915)
+
+To calculate `nCr`, use the inbuilt moduel in the math library:
+
+```py
+from math import comb
+comb(10,3)
+```
+
+---
+
 ### [Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
 
 There are times when you have a proper folder structure for a project, but python cannot interpret that you are importing a file from within the project directory.
