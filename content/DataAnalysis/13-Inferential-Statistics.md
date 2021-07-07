@@ -1,34 +1,38 @@
 ---
 title: Inferential Statistics
 description: general information about inferential statistics
-date: "2021-07-04"
+date: "2021-07-11"
 image: "statistics.jpg"
 author: "Ayush"
 tags: ["data-analysis", "statistics"]
 ---
 
 # Purpose of Inferential Statistics
-From a small dataset, we have to figure out information such that it applies to the whole population from the small dataset was obtained.
-We will be to estimate population data from sample data but not find the exact values. We can make reasonable assumptions with limited level of certainty. 
+From a small dataset, we have to figure out information such that it applies to the whole population.  
+We will be able to estimate population data from sample data but not find the exact values.  
+We can make reasonable assumptions with limited level of certainty. 
+
 ## Expected Value
-Expected Value is the average value that any random variable X will take, given it's probability of occurence.  
+Expected Value is the average value that any random variable X will take, given it's probability of occurrence.  
 EV(x) = x1 * P(X=x1) + x2 * P(x=x2) + x3  * P(x=x3) + ... + xn * P(x=xn)  
 
 ### In Casinos, why does the house always win?
-Answer: House always wins because Casions have an expected value which is negative. This way, in the long run, even though some players might win large sums of money, the loosers collective will lose a lot more money, eventually making the house win in terms of total cash flow.
+Answer: House always wins because Casinos have an expected value which is negative. This way, in the long run, even though some players might win large sums of money, the losers collective will lose a lot more money, eventually making the house win in terms of total cash flow.
 
 ## Probability Distribution
-Probability distribution is defined as the probabilities of any random variable X taking any of the outcomes from the sample space
+It is the mathematical function that gives the probabilities of occurrence of different possible outcomes for an experiment.   
+It is a mathematical description of a random phenomenon in terms of its sample space and the probabilities of events.  
+The probabilities of occurrence of any random variable X taking any of the outcomes from the sample space
 
 ## The goals of inference
 - Estimate and quantify the uncertainty of an estimate of a population quantity (the proportion of people who will vote for a candidate).
 - Determine whether a population quantity is a benchmark value (“is the treatment effective?”).
-- Infer a mechanistic relationship when quantities are measured with noise (“What is the slope for Hooke’s law?”)
+- Infer a mechanistic relationship when quantities are measured with noise (“What is the slope for Hooke's law?”)
 - Determine the impact of a policy? (“If we reduce pollution levels, will asthma rates decline?”)
 - Talk about the probability that something occurs.
 
 ## Concerns
-- Is the sample representative of the population that we’d like to draw inferences about?
+- Is the sample representative of the population that we'd like to draw inferences about?
 - Are there known and observed, known and unobserved or unknown and unobserved variables that contaminate our conclusions?
 - Is there systematic bias created by missing data or the design or conduct of the study?
 - What randomness exists in the data and how do we use or adjust for it? Here randomness can either be explicit via randomization or random sampling, or implicit as the aggregation of many complex unknown processes.
@@ -47,7 +51,7 @@ Probability distribution is defined as the probabilities of any random variable 
 ### Conditions for Binomial distribution
 1. Total number of trials is fixed at n
 1. Each trial is binary i.e. has only two possible outcomes - success or failure
-1. Probability of scuss is same in all trails, denoted by p
+1. Probability of success is same in all trails, denoted by p
 1. **Formula:** P(X=r) = P(Getting r successes in n trials) = **<sup>n</sup>C<sub>r</sub>\(p\)<sup>r</sup>(1-p)<sup>n-r</sup>**
 
 ### Examples
@@ -57,7 +61,7 @@ Probability distribution is defined as the probabilities of any random variable 
 | 2.  | Asking 200 randomly selected people if they are older than 21 or not    | Asking 200 randomly selected people how old they are                           |
 | 3.  | Drawing 4 red balls from a bag, putting each ball back after drawing it | Drawing 4 red balls from a bag, not putting each ball back after drawing it    |
 
-### Explanatiaon
+### Explanation
 If you toss a coin 20 times to see how many tails occur, you are following all the conditions required for a binomial distribution. The total number of trials is fixed (20), and you can only have two outcomes, i.e. a tails or a heads. The probability of getting a tails is equal to 0.5 each time you toss the coin.
 
 In a way, this is similar to drawing 20 balls out of a bag, replacing each ball after drawing it, and seeing how many of the balls are red. Here, the probability of getting a red ball in one trial is 0.5.
@@ -102,10 +106,10 @@ P(x, &#181;) = e<sup>-&#181;</sup>&#181;<sup>x</sup>/x!
 ---
 
 ## Negative Binomial Distribution
-- Also callsed Pascal Distribution
+- Also called Pascal Distribution
 - There are 3 ways on defining Negative Binomial Distribution, hence we should ask for clarification when someone uses that term
-    1. Number of trials to produce r sucesses in a negative binomial experiment:w
-    1. Number of successes before binomial experiment results in k failues
+    1. Number of trials to produce r successes in a negative binomial experiment
+    1. Number of successes before binomial experiment results in k failures
     1. Number of failures before binomial experiment results in r successes
 
 ### Why is it called Negative Binomial Distribution?
@@ -152,7 +156,7 @@ where,
 
 ## Geometric Distribution
 The geometric distribution represents the number of failures before you get a success in a series of Bernoulli trials.   
-Note: Special case of Negative Binomial Distribution, where 'r' i.e. number of sucessess is 1  
+Note: Special case of Negative Binomial Distribution, where 'r' i.e. number of successes is 1  
 
 ### Assumptions for the Geometric Distribution
 - There are two possible outcomes for each trial (success or failure).
@@ -162,6 +166,8 @@ Note: Special case of Negative Binomial Distribution, where 'r' i.e. number of s
 ### Formula
 P(x) = (1 − p)<sup>x-1</sup>p
 
+---
+---
 
 
 # References
