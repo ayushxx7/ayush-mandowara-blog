@@ -1,7 +1,7 @@
 ---
 title: Numpy Basics
 description: Beginner's gold mine to understand the power of Numpy
-date: "2021-06-14"
+date: "2021-07-07"
 image: "data-analysis.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "numpy"]
@@ -144,8 +144,37 @@ print(col_last)
 print(row_last)
 ```
 
+## Binomial Distribution
+### Problem Statement
+Generate a binomial distribution, tested 10 times, given the number of trials(n) and probability\(p\) of each trial.
+
+### Input
+The input will contain seed, n and p in the same order.
+
+### Output
+The output should contain a numpy array with 10 numbers representing the required binomial distribution.
+
+```py heading="binomial distribution sampling via Numpy"
+import numpy as np 
+# seed=int(input())
+# n=int(input())
+# p=float(input())
+seed=10
+n=10
+p=0.5
+np.random.seed(seed)
+s = np.random.binomial(n, p, 10)
+print(s)
+```
+
 ## Conclusion
 1. Numpy arrays are significantly faster than lists when it comes to mathematical operations
 1. Numpy operations are concise, and easy to read & write.
 1. Numpy arrays are built for vector mathematics so that element wise calculations can be easily carried out. 
 1. While in lists, one would have to write a for-loop or list comprehension for basic things like squaring all numbers in the list, the equivalent on a numpy array will simply be "array_name * 2". 
+
+
+# References
+- https://numpy.org/doc/stable/reference/random/generated/numpy.random.seed.html
+- https://numpy.org/doc/stable/reference/random/index.html
+- https://numpy.org/doc/stable/reference/random/generated/numpy.random.binomial.html
