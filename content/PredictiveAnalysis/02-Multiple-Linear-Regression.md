@@ -30,8 +30,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [MinMaxScaling](#minmaxscaling)
     * [Standardization](#standardization)
     * [Scaling Categorical Variables](#scaling-categorical-variables)
-* [Model Assessment and Comparison](#model-assessment-and-comparison)
-    * [Key Idea: Penalize models for using higher number of predictors](#key-idea-penalize-models-for-using-higher-number-of-predictors)
+* [Model Assessment and Comparison - Selecting the best model](#model-assessment-and-comparison---selecting-the-best-model)
+    * [$Adjusted\;R^2$](#adjustedr2)
+    * [$Akaike\;Information\;Criterion $](#akaikeinformationcriterion-)
+    * [Others](#others)
     * [Adjusted $R^2$ vs $R^2$](#adjusted-r2-vs-r2)
 * [Feature Selection](#feature-selection)
     * [Recursive Feature Elimination](#recursive-feature-elimination)
@@ -149,6 +151,8 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 | R-squared      | No     |
 | Coefficients   | Yes    |
 
+- If target variable is scaled then in final prediction, it should be rescaled for interpretation
+
 ## MinMaxScaling
 - get the values between 0 and 1
 - $X_{changed} = \frac{X-X_{min}}{X_{max}-X_{min}}$
@@ -161,23 +165,26 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 ## Scaling Categorical Variables 
 For categorical variables, in general, it is better to not perform any scaling especially if we want to interpret the data since the values are already between 0 and 1.
 
-# Model Assessment and Comparison
-Sleecting the best model: Trade off between explaining highest variable and keeping it simple
-- bias vs variance trade-off 
+# Model Assessment and Comparison - Selecting the best model
+- Trade off between explaining highest variable and keeping it simple [<a href="#bias-vs-variance---infographic">Bias vs Variance Tradeoff</a>]
+- Penalize models for using higher number of predictors
 
-## Key Idea: Penalize models for using higher number of predictors
+## $Adjusted\;R^2$
+- $Adj\;R^2= 1 - \frac{(1-R^2)(N-1)}{N-p-1}$; where n = sample size, p = number of predictors
 
-- $Adjusted\;R^2 = 1 - \frac{(1-R^2)(N-1)}{N-p-1}$
-- $Akaike\;Information\;Criterion = AIC = n*\log(\frac{RSS}{n})+2p$
+## $Akaike\;Information\;Criterion $
+- $AIC = n*\log(\frac{RSS}{n})+2p$; where n = sample size, RSS = Residual Sum of Squares
+
+## Others
 - $BIC = Bayesian\;Information\;Criterion$
 - $Mallow's\;Cp$
-
-where n is the sample size (number of rows in the dataset) and p is the number of predictor variables
 
 ## Adjusted $R^2$ vs $R^2$
 The major difference between R-squared and Adjusted R-squared is that R-squared doesn't penalise the model for having more number of variables. Thus, if you keep on adding variables to the model, the R-squared will always increase (or remain the same in the case when the value of correlation between that variable and the dependent variable is zero). Thus, R-squared assumes that any variable added to the model will increase the predictive power.
 
 Adjusted R-squared on the other hand, penalises models based on the number of variables present in it. So if you add a variable and the Adjusted R-squared drops, you can be certain that that variable is insignificant to the model and shouldn't be used. So in the case of multiple linear regression, you should always look at the adjusted R-squared value in order to keep redundant variables out from your regression model.
+
+<a href="../01-Linear-Regression/#r-squared" target="_blank">Read more about $R^2$</Link>
 
 # Feature Selection
 Try all possible combinations? 
@@ -242,7 +249,7 @@ Stability selection is a relatively novel method for feature selection, based on
 - Penalizing models for using high number of predictor variables will help in getting a better model both in terms of reduced number of predictors and in terms of generalization.
 
 # Questions
-Q: What is the effect of number of data points on Overfitting?  
+Q: What is the effect of number of data points on Overfitting?
 - Overfitting is the condition wherein the model is so complex that it ends up memorising almost all the data points on the train set. Hence, this condition is more probable if the number of data points is less since the model passing through almost every point becomes easier.
 <br/><br/>
 
@@ -259,7 +266,7 @@ Q: Suppose you were predicting the sales of a company using two variables 'Socia
 - VIF will therefore by $\frac{1}{1-0.81} = 5.26$
 <br/><br/>
 
-Q: Suppose you have 'n' categorical variables, each with 'm' levels. How many dummy variables would you need to represent all the levels of all the categorical variables?  
+Q: Suppose you have 'n' categorical variables, each with 'm' levels. How many dummy variables would you need to represent all the levels of all the categorical variables?
 - Each of the dummy variables has 'm' levels. So to represent one categorical variable, you would require (m-1) levels. Hence, to represent 'n' categorical variables, you would need `(m-1)*n` dummy variables.
 <br/><br/>
 
@@ -293,6 +300,30 @@ Q: Given different Rsq values of linear regression models on the same dataset, w
 - Rsq values alone are insufficient to answer this question. 
 - Rsq values are sometimes too high even due to overfitting. You cannot compare models with a different number of features/predictors without the rsq adjusted value.
 <br><br>
+
+Q: Why p-value has higher importance than VIF?
+- p-value tells us whether a variable is significant or not. If a variable is not significant (p>0.05), then there no point of checking multicollinearity (VIF) against other variables.
+- Process
+    - p-value > 0.05 - drop column
+    - p-value < 0.05 - check the VIF
+        - if VIF > 5 - drop
+        - if VIF < 5 - keep
+<br><br>
+
+Q: What is the use of Effect Encoding?  
+- Effect encoding is used when different weightage is to be given for categorical variables (dummies).
+<br><br>
+
+Q: When will you use Label Encoding?
+- If categorical variable has order associated with it, we will use Label Encoding. 
+
+    | Column | Label |
+    |--------|-------|
+    | Gold   | 1     |
+    | Silver | 2     |
+    | Bronze | 3     |
+
+- If variables don't have an inherent order, for example Month (each month is equally important), then we cannot use label encoding. We can use one-hot encoding or dummy encoding in such a case.
 
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
