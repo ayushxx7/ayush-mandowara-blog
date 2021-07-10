@@ -429,6 +429,21 @@ print(format_bytes(12345678910))
 
 ## Testing via Python
 
+### Good Testcase pattern to follow
+```py heading="Testcase Structure to follow"
+import traceback
+
+try:
+  status = False
+  # verification logic
+  # if required, use internal try/except clause
+  # if happy, then set status to true and break out of any loop that is running
+except:
+  log.error(traceback.format_exc())
+
+return status
+```
+
 ### [Skip Test Cases based on command line arguments in Pytest](https://stackoverflow.com/a/55769818/7048915)
 We can use pytest hook (`pytest_collection_modifyitems`) to dynamically skip test cases based on argument values.
 
