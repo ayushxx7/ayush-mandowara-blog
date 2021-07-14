@@ -254,6 +254,11 @@ git checkout receiving-branch  # FOI are not in `receiving`, so they disapppear
 git merge donor-branch  # now the merge works
 ```
 
+## [Undo an amend](https://stackoverflow.com/questions/38001038/how-to-undo-a-git-commit-amend)
+To get back to previous state before amending your commit:
+```
+git reset --soft @{1}
+```
 # References
 - [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 - [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
