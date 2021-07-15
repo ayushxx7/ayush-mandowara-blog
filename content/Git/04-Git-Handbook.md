@@ -259,6 +259,28 @@ To get back to previous state before amending your commit:
 ```
 git reset --soft @{1}
 ```
+
+## Commits are missing from Local Repository
+Sometimes, due to merges & rebases, older commits which are part of cloud repo, get removed from the local repo.
+The best way to get those commits back is:
+
+Before performing any steps,
+- Make sure that there are no commits in local repo that are not part of cloud repo
+    - If there are such commits, create a separate branch and cherry-pick those commits in that branch for recovery later
+
+- Step 1: `hard reset` your local branch back by some large number of commits:
+    ```
+    git reset --hard HEAD~100
+    ```
+
+- Step 2: fetch changes from cloud repo using git pull
+    ```
+    git pull
+    ```
+
+You will see all commits (including the missing ones), are present in your local repository now.
+
+
 # References
 - [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 - [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
