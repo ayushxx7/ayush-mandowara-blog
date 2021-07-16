@@ -7,10 +7,32 @@ author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Purpose](#purpose)
+    - [What are some examples of Machine Learning](#what-are-some-examples-of-machine-learning)
+    - [Model](#model)
+        - [Types of Models](#types-of-models)
+    - [Supervised vs Unsupervised Learning](#supervised-vs-unsupervised-learning)
+        - [Which learning method will you use](#which-learning-method-will-you-use)
+    - [Training Data vs Testing Data](#training-data-vs-testing-data)
+- [Regression Line](#regression-line)
+        - [Types](#types)
+    - [Simple Linear Regression](#simple-linear-regression)
+    - [Best Fit Line](#best-fit-line)
+        - [Least Squares Regression Line](#least-squares-regression-line)
+            - [Residual](#residual)
+            - [Ordinary Least Squares Method](#ordinary-least-squares-method)
+- [References](#references)
+
+<!-- vim-markdown-toc -->
+
+
 # Purpose
 An Introduction to Machine Learning, especially focusing on Linear Regression
 
-## What are some examples of Machine Learning?
+## What are some examples of Machine Learning
 - You speak to your phone, and your phone understands the command. This is called speech recognition. The underlying technique used for this is Machine Learning.
 - Recognizing objects from image / video data
 - Predicting requirement of emergency service
@@ -19,7 +41,7 @@ An Introduction to Machine Learning, especially focusing on Linear Regression
 ## Model
 Modeling uses machine learning algorithms, in which the machine learns from the data just like humans learn from their experiences.
 
-### Types of Models:
+### Types of Models
 - Regression
     - What score will student get in 12th if we know their marks in 10th
     - Output variable to be predicted is a continuous/numeric variable
@@ -42,7 +64,7 @@ Modeling uses machine learning algorithms, in which the machine learns from the 
 | Classification - Categorical Label                   |                                                 |
 | Past data with labels is used for building the model | No pre-defined labels are assigned to past data |
 
-### Which learning method will you use (Supervised / Unsupervised)
+### Which learning method will you use
 Q1: You have the past data of two cricket teams on the performance of the teams based on different parameters and the match results. You have to predict which team will win.
 
 A1: You have the data of the past few years to train your model on. Since you know the results of different games based on different performance parameters, it would be a supervised learning problem — more specifically, a classification problem since your output variable (i.e. the name of the team) is categorical.
@@ -85,7 +107,7 @@ y-axis - Dependent Variable - Output Variable
 - Measured Value - Predicted Value
 - `ei = yi - ypred`
 
-#### Ordinary Least Squares Method:
+#### Ordinary Least Squares Method
 - The coefficients of the least squares regression line are determined by the Ordinary Least Squares method — which basically means minimising the sum of the squares of the y-coordinates of actual data - y-coordinates of predicted data.  
 - The Ordinary Least Squares method has the criterion of the minimisation of the sum of squares of residuals. 
 - Residual sum of all squares (e1^2 + e2^2 + ... + en^2)
