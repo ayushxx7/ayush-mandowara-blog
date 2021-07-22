@@ -280,6 +280,33 @@ Before performing any steps,
 
 You will see all commits (including the missing ones), are present in your local repository now.
 
+## [Show what Stash contains without applying it](https://stackoverflow.com/questions/10725729/see-whats-in-a-stash-without-applying-it)
+First, look the stash number using: 
+```
+git stash list
+```
+
+```
+stash@{0}: WIP on thinvirt_fix: a0ad7550 feat(robusta): default shared mem should be >0
+stash@{1}: WIP on thinvirt_fix: a0ad7550 feat(robusta): default shared mem should be >0
+stash@{2}: WIP on sanity: 7df37924 WIP
+stash@{3}: WIP on sanity: 0283067e feat(robusta):TC adb should be disabled by default
+stash@{4}: WIP on sanity: 0283067e feat(robusta):TC adb should be disabled by default
+stash@{5}: WIP on robusta-dev: 4240cd37 Merge branch 'master' into robusta-dev
+stash@{6}: WIP on RP_tool_integration: 3d5ff6c2 fix(chatbot): Report Problem tool trigger
+stash@{7}: WIP on RP_tool_integration: 3d5ff6c2 fix(chatbot): Report Problem tool trigger
+```
+
+Then, locate the stash you want. Suppose it is the second stash in the list. 
+Then, we can identify the stash like so: `stash@{1}`
+
+To view the contents of the stash without applying it:
+```
+git stash show stash@{1} -p
+```
+
+Note: if you are using powershell, see [this](https://stackoverflow.com/a/43386603/7048915).
+
 
 # References
 - [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
