@@ -280,7 +280,7 @@ Before performing any steps,
 
 You will see all commits (including the missing ones), are present in your local repository now.
 
-## [Show what Stash contains without applying it](https://stackoverflow.com/questions/10725729/see-whats-in-a-stash-without-applying-it)
+## [Show what a stash contains without applying it](https://stackoverflow.com/questions/10725729/see-whats-in-a-stash-without-applying-it)
 First, look the stash number using: 
 ```
 git stash list
@@ -307,6 +307,18 @@ git stash show stash@{1} -p
 
 Note: if you are using powershell, see [this](https://stackoverflow.com/a/43386603/7048915).
 
+
+## [Drop a stash](https://stackoverflow.com/questions/5737002/how-to-delete-a-stash-created-with-git-stash-create)
+
+To delete the topmost stash:
+```
+git stash drop 
+```
+
+To delete a specific stash, say 'n':
+```
+git stash drop stash@{n}
+```
 
 # References
 - [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
