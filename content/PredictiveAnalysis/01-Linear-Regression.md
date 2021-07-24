@@ -24,6 +24,21 @@ tags: ["python", "machine-learning", "predictive-analysis"]
         - [Least Squares Regression Line](#least-squares-regression-line)
             - [Residual](#residual)
             - [Ordinary Least Squares Method](#ordinary-least-squares-method)
+    - [Cost Function](#cost-function)
+            - [Differenetiation](#differenetiation)
+- [Minimise / Maximize a cost function](#minimise--maximize-a-cost-function)
+    - [Unconstrained and Constrained Minimization](#unconstrained-and-constrained-minimization)
+    - [Solving Unconstrained Minimization Problems](#solving-unconstrained-minimization-problems)
+        - [Closed form method](#closed-form-method)
+        - [Iterative Method](#iterative-method)
+        - [Gradient Descent](#gradient-descent)
+        - [Effect of Learning Rate](#effect-of-learning-rate)
+- [R Squared ($R^2$)](#r-squared-r2)
+    - [Total Sum of Squares](#total-sum-of-squares)
+    - [Residual Sum of Squares](#residual-sum-of-squares)
+    - [Residual Square Error (RSE)](#residual-square-error-rse)
+    - [Note](#note)
+- [Summary](#summary)
 - [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -115,5 +130,124 @@ y-axis - Dependent Variable - Output Variable
 Q: What is the main criterion used to determine the best-fitting regression line?  
 A: The line that minimises the sum of squares of distances of points from the regression line
 
+Q: Does changing units change the RSS (Residual Sum of Squares)  
+A: Yes, changing units will change RSS  
+
+**Explanation**  
+The RSS for any regression line is given by this expression: $\sum(y_{i}−y_{i}pred)^2$. RSS is the sum of the squared difference between the actual and the predicted values, and its value will change if the units change since it has units of $y^2$. For example, (140 rupees - 70 rupees)^2 = 4900, whereas (2 USD - 1 USD)^2 = 1. So value of RSS is different in both the cases because of different units.
+
+---
+
+## Cost Function
+- Helps us reach the optimal solution
+- minimize error
+
+#### Differenetiation
+| Equation | Derivative (dy/dx) |
+|----------|--------------------|
+| $ax^b$   | $bxax^t; t=b-1$    |
+| $sinx$   | $cosx$             |
+| $cosx$   | $-sinx$            |
+| $e^x$    | $e^x$              |
+| $ln(x)$  | $1/x; if x > 0$    |
+
+# Minimise / Maximize a cost function
+- Differentiate the function w.r.t the parameter and equate to 0.
+- For Minimisation 
+    - the function value of the double differential should be greater than 0.
+- For Maximisation 
+    - the function value of the double differential should be less than 0.
+
+## Unconstrained and Constrained Minimization
+| Unconstrained                          | Constrained                                                   |
+|----------------------------------------|---------------------------------------------------------------|
+| x can take any value.                  | the minimum value of x is given                               |
+| solution can be obtained eqauting to 0 | solution can be obtained by considering the constraints given |
+| no constraint on value of m & c        |                                                               |
+
+## Solving Unconstrained Minimization Problems
+### Closed form method
+- The function to be minimised is simply differentiated and equated to 0 to achieve a solution.   
+- The solution is also double differentiated to check if the solution is greater than 0.
+
+**Steps:**
+- The equation to be differentiated will look something like this:  
+       > $ \sum_{n=1}^{N} (y_{i} - (mx_{i}+c))^2 $
+- Differentiate it w.r.t to m, and w.r.t to c
+- Equate both with 0
+- Solve the two equations obtained for m an c
+
+### Iterative Method
+- First Order (Gradient Descent) - $\frac{\partial}{\partial \theta} J(\theta)$
+
+- Second Order (Newton's method) - $\frac{\partial^2}{\partial \theta^2} J(\theta)$
+
+### Gradient Descent
+- Gradient Descent is an optimisation algorithm which optimises the objective function (for linear regression it's cost function) to reach to the optimal solution.
+- To find a local minimum of a function using gradient descent, one takes steps proportional to the negative of the gradient of the function at the current point.
+- It is an iterative minimisation method which reaches the minima step by step (as shown in the figure below). 
+    - You start with an initial assumed value of the parameter. This initial assumed value can be anything (say $X_{0}$). 
+    - Then you assume $\alpha$ which is rate of learning. For that value ($X_{0}$), you calculate the output of the differentiated function which we denote as $f^{'}(x)$. 
+    -  Then the new value of the parameter becomes $x -f^{'}(x)*\alpha$.
+    -  You continue the process untill the algorithm reaches an optimum point ($X_{4}$); i.e the value of the parameter does not change effectively after this point. 
+
+Gradient descent is an iterative method of optimising an objective function, in our case the cost function, by moving toward the negative of the gradient.
+To compute $\theta_{1}$, the equation looks like this, 
+> $\theta^{1} = \theta^0 - \eta \frac{\partial}{\partial \theta}J(\theta)$  
+ 
+Where $\eta$ is known as the learning rate, which defines the speed at which we want to move towards negative of the gradient.
+
+![Iterative Minimisations](./IterativeMinimisations.png)
+
+The parameter $\alpha$ is the learning rate and its magnitude decides the magnitude of the iterative steps (refer to the figure below). The range of α is (0,1] however large values of $\alpha$ for example, $\alpha > 0.5$ are not preferred as the algorithm might miss the minima. As you can see in the figure below, if the alpha value is too large then the gradient descent algorithm might miss the minima and start the iterative search again.
+
+### Effect of Learning Rate
+If the learning late is large, it may result in oscillation and we may miss the minima
+![Effect of Learning Rate](./effect_of_learning_rate.png)
+
+
+# R Squared ($R^2$)
+Formula: $1 - \frac{Residual Sum of Squares}{Total Sum of Squares} \; or 1-\frac{RSS}{TSS}$  
+
+It measures the strength of the best fit line  
+$Higher \;R^2 \implies \;higher \;strength$
+
+## Total Sum of Squares
+It is calculated by subtracting $y_{actual} - y_{mean}$ value for each of the data points and taking a sum of it.  
+Formula: $\sum_{i=1}^{N} (y_{i}-\bar y)^2$
+
+## Residual Sum of Squares
+Formula: $\sum_{i=1}^{N}(y_{i}−y_{i}pred)^2$
+
+## Residual Square Error (RSE)
+Formula: $\sqrt{\frac{RSS}{df}}; \;df = n-2;\;$ where n = number of data points
+
+## Note
+Both RSE & RSS are absolute quantities and hence are affected by units. Hence, it is better to use $R^2$ which is a relative quantity
+
+# Summary
+1. Machine learning models can be classified into following two categories on the basis of learning algorithm:
+    1. Supervised learning method: Past data with labels is available to build the model
+        1. Regression: The output variable is continuous in nature
+        2. Classification: The output variable is categorical in nature
+    2. Unsupervised learning method: Past data with labels are not available
+        1. Clustering: No pre-defined notion of labels is there
+2. Past data set is divided into two parts during supervised learning method: 
+    1. Training data  is used for the model to learn during modelling
+    2. Testing data is used by the trained model for prediction and model evaluation
+3. Linear regression models can be classified into two types depending upon the number of independent variables: 
+    1. Simple linear regression: When the number of independent variables is 1
+    2. Multiple linear regression: When the number of independent variables is more than 1
+4. The equation of the best fit regression line Y = β₀ + β₁X can be found by minimising the cost function (RSS in this case, using the Ordinary Least Squares method) which is done using the following two methods:
+    1. Differentiation
+    2. Gradient descent method
+5. The strength of a linear regression model is mainly explained by R²,  where R² = 1 - (RSS / TSS)
+    1. RSS: Residual Sum of Squares
+    2. TSS: Total Sum of Squares
+
+
 # References
 - https://www.mathsisfun.com/equation_of_line.html
+- https://www.youtube.com/watch?v=euhATa4wgzo&list=PLNlkREaquqc6WUPMRicPbEvLyZe-7b-GT
+- https://towardsdatascience.com/implement-gradient-descent-in-python-9b93ed7108d1
+- https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/why-the-gradient-is-the-direction-of-steepest-ascent
