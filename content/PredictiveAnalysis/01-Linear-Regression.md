@@ -250,7 +250,7 @@ Both RSE & RSS are absolute quantities and hence are affected by units. Hence, i
 - Regression is a supervised learning method in Machine Learning
 - Linear Regression is the most common method of solving a regression problem, where our model is simply a straight line $Y = \beta_{0} + \beta_{1}X + \epsilon$
 - To test the strength of our model, we can calculate R^2 which is a relative term
-
+- Predicting the value of y for new value of x: $\hat{y} = \hat{\beta_{0}} + \hat{\beta_{1}}x\;where\;\hat{\;} \implies estimate$
 
 ## Additional Information
 - The value of the correlation coefficient will always be between -1 to 1, where a negative value implies a negative correlation, a positive value shows a positive correlation, and a zero value shows no correlation.
