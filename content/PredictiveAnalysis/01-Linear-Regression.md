@@ -41,6 +41,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 - [Takeaways](#takeaways)
     - [Additional Information](#additional-information)
     - [Questions](#questions)
+- [Assumptions for Linear Regression](#assumptions-for-linear-regression)
 - [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -263,9 +264,37 @@ Both RSE & RSS are absolute quantities and hence are affected by units. Hence, i
 2. The independent variable X from a linear regression is measured in miles. If you convert it to kilometres (keeping the unit of the dependent variable Y the same), how will the slope coefficient change? (Note: 1 mile = 1.6 km)
     - In the linear regression equation, X gets multiplied by 1.6 with no change in Y. So, the slope will be divided by 1.6.
 
+# Assumptions for Linear Regression
+![Assumptions of Linear Regression](./assumptions_linear_regression.png)
+The image shows:
+- Error terms are normally distributed
+- Error terms have mean 0
+- Error terms have constant variance
+
+Assumptions:
+- There are no assumptions on distributions on X and Y
+- Linear Relation ship between X and Y
+
+![LinearRelationship](./Linearity Assumption.jpg)
+
+
+- Error terms are normally distributed
+
+![Normality](./Normality Assumption.jpg)
+
+- Error terms are independent of each other
+
+![ErrorTermsIndependent](./Error Terms Independent Assumption.jpg)
+
+- Error terms have constant variance (homoscedasticity)
+
+![ConstantVariance](./Constant Variance Assumption.jpg)
+
 # References
 - https://www.mathsisfun.com/equation_of_line.html
 - https://www.youtube.com/watch?v=euhATa4wgzo&list=PLNlkREaquqc6WUPMRicPbEvLyZe-7b-GT
 - https://towardsdatascience.com/implement-gradient-descent-in-python-9b93ed7108d1
 - https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/why-the-gradient-is-the-direction-of-steepest-ascent
 - https://github.com/kirtiraj23/Machine_Learning
+- https://reliawiki.org/index.php/Simple_Linear_Regression_Analysis
+- https://people.duke.edu/~rnau/testing.htm
