@@ -42,6 +42,8 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     - [Additional Information](#additional-information)
     - [Questions](#questions)
 - [Assumptions for Linear Regression](#assumptions-for-linear-regression)
+- [Hypothesis Testing in Linear Regression](#hypothesis-testing-in-linear-regression)
+- [F Statistic](#f-statistic)
 - [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -290,6 +292,22 @@ Assumptions:
 
 ![ConstantVariance](./Constant Variance Assumption.jpg)
 
+# Hypothesis Testing in Linear Regression
+To test the significance of $\beta_{1}$, we can perform hypothesis testing.
+Here, the null hypothesis ($H_{0}$) will be that $\beta_{1}$ is 0  
+$H_{0}: \beta_{1} = 0$  
+$H_{a}: \beta_{1} \neq 0$  
+
+- If we fail to reject the Null hypothesis, $\beta_{1}$ and thus, the independent variable it is associated with is insignificant in the prediction of the dependent variable. 
+- The t-statistic along with the t-distribution table is used to determine the p-value of the coefficient.
+-  t-score for $\beta_{1}$ is given as $\frac{\beta_{1}}{Standard\;Error(\beta_{1})}$
+
+# F Statistic
+- It helps in determining the significance of the whole model i.e. whether the line fit was by coincidence or not.  
+    - If probability of f-statistic is low, then we can say that the overall model fit is significant.  
+    - If probability of f-statistic is greater than 0.05, then review the model as the fit might be by chance, i.e. the line may have just luckily fit the data.  
+- This parameter is examined because many a times it happens that even though all of the betas are significant, the overall model fit happened just by chance.
+
 # References
 - https://www.mathsisfun.com/equation_of_line.html
 - https://www.youtube.com/watch?v=euhATa4wgzo&list=PLNlkREaquqc6WUPMRicPbEvLyZe-7b-GT
@@ -298,3 +316,5 @@ Assumptions:
 - https://github.com/kirtiraj23/Machine_Learning
 - https://reliawiki.org/index.php/Simple_Linear_Regression_Analysis
 - https://people.duke.edu/~rnau/testing.htm
+- https://tex.stackexchange.com/questions/63781/how-to-write-a-not-equal-to-sign-in-latex-pseudocode?newreg=befc856dd6494d82a2d5e72299f80008
+- https://www.youtube.com/watch?v=78YNvrsRzVw&t=269s
