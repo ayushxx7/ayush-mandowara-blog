@@ -47,6 +47,12 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 - [Residual Analysis](#residual-analysis)
 - [Root Mean Squared Error](#root-mean-squared-error)
 - [R-squared Model Comparision](#r-squared-model-comparision)
+- [Fit a line](#fit-a-line)
+    - [sklearn](#sklearn)
+    - [statsmodel](#statsmodel)
+- [Prediction](#prediction)
+- [Takeaways](#takeaways-1)
+- [Questions](#questions-1)
 - [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -269,6 +275,8 @@ Both RSE & RSS are absolute quantities and hence are affected by units. Hence, i
 2. The independent variable X from a linear regression is measured in miles. If you convert it to kilometres (keeping the unit of the dependent variable Y the same), how will the slope coefficient change? (Note: 1 mile = 1.6 km)
     - In the linear regression equation, X gets multiplied by 1.6 with no change in Y. So, the slope will be divided by 1.6.
 
+---
+
 # Assumptions for Linear Regression
 ![Assumptions of Linear Regression](./assumptions_linear_regression.png)
 The image shows:
@@ -311,6 +319,11 @@ $H_{a}: \beta_{1} \neq 0$
     - If probability of f-statistic is greater than 0.05, then review the model as the fit might be by chance, i.e. the line may have just luckily fit the data.  
 - This parameter is examined because many a times it happens that even though all of the betas are significant, the overall model fit happened just by chance.
 
+- The basic idea behind the F-test is that it is a relative comparison between the model that you've built and the model without any of the coefficients except for $β_{0}$. 
+- If the value of the F-statistic is high, it would mean that the Prob(F) would be low and hence, you can conclude that the model is significant. 
+- On the other hand, if the value of F-statistic is low, it might lead to the value of Prob(F) being higher than the significance level (taken 0.05, usually) which in turn would conclude that the overall model fit is insignificant and the intercept-only model can provide a better fit.
+
+
 # Residual Analysis
 Plotting a Histogram of the residues helps us analyze whether
 - error terms are normally distributed
@@ -323,6 +336,63 @@ It is a metric that tells you the deviation of the predicted values by a model f
 When comparing different models, we can use R-squared to determine whether model is generalizing the information well or not.  
 Check the R-squared on train and test set. If the R-squared value drops significantly between training and test set, we can say that the model is not generalizing well.
 
+# Fit a line 
+## sklearn
+```py heading='Linear Regression Model using sklearn'
+from sklearn.linear_model import LinearRegression
+
+lm = LinearRegression()   # Create a linear regression object
+lm.fit(X_train, y_train)
+```
+
+- `lm.coeff_` gives you the value of $\beta_{1}$ which is the slope of the fitted line.
+- lm.intercept_ gives you the value of $c$ which is the intercept of the fitted line.
+
+## statsmodel
+In statsmodel, one can use the Ordinary Least Squares (OLS) module to fit a line. 
+
+```py heading="Linear Regression Model using OLS"
+import statsmodel.api as sm
+lr = sm.OLS(X_train, y_train).fit()
+```
+- `lr.params` gives coefficient and intercept
+- one has to add constant using `sm.add_constant(X_train)` to get intercept
+- `lr.summary()` gives summary statistics such as $R^2$, $Prob(F-statistic)$, $p-value$ etc.
+
+# Prediction
+To predict values, use `lr.predict()` function
+
+# Takeaways
+1. For linear regression predictions, certain assumptions need to be met. 
+    - X and y should be linearly related
+    - Error terms should be normally distributed, have constant variance, have mean 0, and be independent of each other
+2. The null hypothesis for Linear Regression states that beta (coeffecient) has no impact on prediction.
+    - we can use f-statistic, r-squared and t-test to determine the strength of line
+3. sklearn and statsmodel can be used for generating linear regression model. 
+    - sklearn is quicker to implement
+    - statsmodel gives detailed statistics
+
+# Questions
+
+Q: Why is $R^2$ called $R-Squared$?  
+A: It is the literal square of the correlation coefficient (Pearson's R)
+
+```py
+corrs = np.corrcoef(X_train, y_train)
+print(corrs)
+
+print(corrs[0,1]**2)
+```
+
+Q: What is a good RMSE value?  
+A: RSME depends on units of Y variable and it is not a normalized value. Hence, there is no notion of standard/good RMSE. However, it can help in comparison (Lower RSME => Better model).
+
+Q: What is the effect of scaling?  
+A: The coefficients will change, but the r-squared, f-statistic, t-value and p-value will remain the same. The goodness of fit remains unchanged. Faster convergence of gradient descent is also seen due to scaling.
+
+Q: What should be the ideal value of the sum of residuals?  
+A: As per assumptions of linear regression model, the residuals are normally distributed around zero, i.e. their mean is equal to zero. Hence, the sum of residuals should also be zero.
+
 # References
 - https://www.mathsisfun.com/equation_of_line.html
 - https://www.youtube.com/watch?v=euhATa4wgzo&list=PLNlkREaquqc6WUPMRicPbEvLyZe-7b-GT
@@ -334,3 +404,4 @@ Check the R-squared on train and test set. If the R-squared value drops signific
 - https://tex.stackexchange.com/questions/63781/how-to-write-a-not-equal-to-sign-in-latex-pseudocode?newreg=befc856dd6494d82a2d5e72299f80008
 - https://www.youtube.com/watch?v=78YNvrsRzVw&t=269s
 - https://en.wikipedia.org/wiki/F-test
+- https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.linregress.html
