@@ -44,6 +44,9 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 - [Assumptions for Linear Regression](#assumptions-for-linear-regression)
 - [Hypothesis Testing in Linear Regression](#hypothesis-testing-in-linear-regression)
 - [F Statistic](#f-statistic)
+- [Residual Analysis](#residual-analysis)
+- [Root Mean Squared Error](#root-mean-squared-error)
+- [R-squared Model Comparision](#r-squared-model-comparision)
 - [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -308,6 +311,18 @@ $H_{a}: \beta_{1} \neq 0$
     - If probability of f-statistic is greater than 0.05, then review the model as the fit might be by chance, i.e. the line may have just luckily fit the data.  
 - This parameter is examined because many a times it happens that even though all of the betas are significant, the overall model fit happened just by chance.
 
+# Residual Analysis
+Plotting a Histogram of the residues helps us analyze whether
+- error terms are normally distributed
+- error terms are centered around zero
+
+# Root Mean Squared Error
+It is a metric that tells you the deviation of the predicted values by a model from the actual observed values. So, since it is a sort of error term, it is better to have a low RMSE.
+
+# R-squared Model Comparision
+When comparing different models, we can use R-squared to determine whether model is generalizing the information well or not.  
+Check the R-squared on train and test set. If the R-squared value drops significantly between training and test set, we can say that the model is not generalizing well.
+
 # References
 - https://www.mathsisfun.com/equation_of_line.html
 - https://www.youtube.com/watch?v=euhATa4wgzo&list=PLNlkREaquqc6WUPMRicPbEvLyZe-7b-GT
@@ -318,3 +333,4 @@ $H_{a}: \beta_{1} \neq 0$
 - https://people.duke.edu/~rnau/testing.htm
 - https://tex.stackexchange.com/questions/63781/how-to-write-a-not-equal-to-sign-in-latex-pseudocode?newreg=befc856dd6494d82a2d5e72299f80008
 - https://www.youtube.com/watch?v=78YNvrsRzVw&t=269s
+- https://en.wikipedia.org/wiki/F-test
