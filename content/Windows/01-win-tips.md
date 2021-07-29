@@ -21,6 +21,8 @@ Note: If you don't want see the UAC prompt all the time,
   -> Lower the setting to `Never Notify`
 ```
 
+---
+
 # [Run BAT files with Admin Privileges](https://stackoverflow.com/a/52517718/7048915)
 
 At the top your `bat` file, add the following:
@@ -32,6 +34,8 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 
 It will elevate to admin and also stay in the correct directory.
 If you want to kill the prompt after execution, you can add `exit` at the end of your `bat` file. [Source](https://stackoverflow.com/questions/6811372/how-to-code-a-bat-file-to-always-run-as-admin-mode/52517718#comment105688977_52517718)
+
+---
 
 # [Store Powershell output](https://www.windowscentral.com/how-save-command-output-file-using-command-prompt-or-powershell)
 
@@ -45,6 +49,8 @@ Get-ComputerInfo -property "HyperVRequirementVirtualizationFirmwareEnabled" | Ou
 ```
 
 The command out will be saved in the filepath mentioned (here: C:\users\<username>\virtualization.txt as \$HOME is expanded automatically)
+
+---
 
 # [Disabling Cursor Blink](https://stackoverflow.com/a/59807009)
 
@@ -66,6 +72,8 @@ Note: In gVim, you can disable cursor blinking via adding the following in your 
 ```
 set guicursor=a:blinkwait0      " remove cursor blinking
 ```
+
+---
 
 # [Enable/Disable BlueTooth using Command Line](https://superuser.com/a/1293303/1242234)
 
@@ -121,7 +129,9 @@ powershell -command bl.ps1 -BluetoothStatus On
 powershell -command bl.ps1 -BluetoothStatus Off
 ```
 
-### [Change PowerShell Theme to Dracula](https://github.com/dracula/powershell)
+---
+
+# [Change PowerShell Theme to Dracula](https://github.com/dracula/powershell)
 
 Note: Run all the commands in an elevated session of PowerShell (i.e. Admin mode)
 

@@ -1,7 +1,7 @@
 ---
 title: Python Tips
 description: Easy fixes to common problems
-date: "2021-05-12"
+date: "2021-06-03"
 image: "python.png"
 author: "Ayush"
 tags: ["python"]
@@ -218,6 +218,40 @@ print(json_data)
 
 ## LISTS
 
+### List slicing
+
+Lists have special property where you can specify index from which you want to access the list.
+```
+[start:stop:step]
+```
+- start: read list starting from this index (inclusive)
+- stop: stop reading list just before this index (exclusive)
+- step: by default, lists will be iterated one element at time. To increase the step size, pass in the this input.
+
+```py heading="List start, stop, step"
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(a)
+print(a[1:])
+print(a[1:3])
+print(a[4:-2])
+print(a[1::2])
+```
+
+### [Convert list to indexed tuple list](https://www.geeksforgeeks.org/python-convert-list-to-indexed-tuple-list/)
+
+Say you want to sort the elements of a list, but don't want to lose the original index,   
+you can convert your list to an indexed tuple list.
+
+```py heading="list to indexed tuple list"
+num_list = [0, 1, 2, 3, 3, 4, 3]
+indexed_num_list = list(enumerate(num_list))
+print(num_list)
+print(indexed_num_list)
+
+sorted_list_with_index_stored = sorted(indexed_num_list, key=lambda tuple_elem: tuple_elem[1], reverse=True)
+print(sorted_list_with_index_stored)
+```
+
 ### [Unpacking lists to individual values](https://stackoverflow.com/a/34308407)
 
 To unpack list and store in individual variables:
@@ -393,7 +427,86 @@ print(format_bytes(12345))
 print(format_bytes(12345678910))
 ```
 
+## Testing via Python
+
+### [Skip Test Cases based on command line arguments in Pytest](https://stackoverflow.com/a/55769818/7048915)
+We can use pytest hook (`pytest_collection_modifyitems`) to dynamically skip test cases based on argument values.
+
+```py heading="Pytest skipif based on arguments"
+# In conftest.py
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--host", action="store_true", default=False, help="Environment Prod or Engg"
+    )
+
+def pytest_collection_modifyitems(config, items):
+    host_marker = config.getoption("--host"):
+    if host_marker in ['prod', '']:
+        return
+    skip_if_host_engg = pytest.mark.skip(reason="host should be prod")
+    for item in items:
+        if "skip_if_host_engg" in item.keywords:
+            item.add_marker(skip_if_host_engg)
+
+
+# In testfile
+
+@pytest.mark.skip_if_host_engg
+def test_stats_for_live_chat():
+  pass
+```
+
 ## MISC UTIL
+
+### Round Robin Ticket Assigner
+
+We have an `{agent_name:weightage}` dictionary with us based on which we need to assign tickets in a round robin manner.
+
+1. go over each agent one by one
+1. if agent has capacity to accept ticket
+    1. give them one ticket
+    1. reduce capacity by one
+1. repeat step 1 & 2 till all agents have reached 0 capacity
+
+```py heading="Round Robin Assigner"
+agent_ticket_dict = {'Rahul': 3, 'Ramesh': 1, 'Rajesh': 0, 'Rakesh': 3, 'Brijesh': 4}
+tags_list = []
+sum_counts = sum(agent_ticket_dict.values())
+print("Agent:Number of Tickets:"+ str(agent_ticket_dict))
+print(f"Number of Agents for this run: {len(agent_ticket_dict)}")
+print(f"Total Tickets that will be assigned: {sum_counts}")
+
+assigner_exhausted = False
+while not assigner_exhausted:
+    for agent in agent_ticket_dict:
+        if agent_ticket_dict[agent]:
+            tags_list.append('to_do_'+agent)
+            agent_ticket_dict[agent] -= 1
+    print(f"Assigner State:\n{agent_ticket_dict}")
+    sum_counts = sum(agent_ticket_dict.values())
+    print(f"Remaining Tickets that will be assigned: {sum_counts}")
+    if not sum_counts:
+        assigner_exhausted = True
+```
+
+---
+
+### Using map to get sum of a 2D array
+
+```py heading="use map to get sum of 2d array"
+arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+sum_arr = sum(map(sum, arr))
+print('Sum of 2D Array:', sum_arr)
+```
+
+```py heading="Using map to get count of elements starting with specified letter"
+test_list = ['Start', 'SSS', 'Strong', 'Table']
+total_elems_starting_with_S = sum(map(lambda x:1 if x[0] == "S" else 0, test_list))
+print(total_elems_starting_with_S)
+```
+
+---
 
 ### [Get files matching a regular expression](https://docs.python.org/3/library/glob.html)
 
@@ -577,6 +690,17 @@ def restore_timestamps_of_zip_contents(self, zipname, extract_dir):
 
 ---
 
+### [Binomial Coefficent - <sup>n</sup>C<sub>r</sub>](https://stackoverflow.com/a/4941932/7048915)
+
+To calculate `nCr`, use the inbuilt moduel in the math library:
+
+```py
+from math import comb
+comb(10,3)
+```
+
+---
+
 ### [Python not able to detect folders as packages](https://stackoverflow.com/questions/24722212/python-cant-find-module-in-the-same-folder)
 
 There are times when you have a proper folder structure for a project, but python cannot interpret that you are importing a file from within the project directory.
@@ -616,4 +740,3 @@ i.e. a running process is supposed to be uninstalled, which is denied by some Op
 When you use it with `py`, the upgrade command is running inside a python shell, and hence this problem is avoided.
 
 ---
-

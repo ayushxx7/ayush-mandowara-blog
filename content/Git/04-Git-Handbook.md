@@ -1,7 +1,7 @@
 ---
 title: Tips and references for Git
 description:
-date: "2020-12-22"
+date: "2021-06-03"
 image: "git.png"
 author: "Ayush"
 tags: ["git"]
@@ -9,12 +9,12 @@ tags: ["git"]
 
 <br />
 
-###PURPOSE
+# PURPOSE
 There are times when you have to do something related to your version history, but you forget which command to use. This is Handy Guide for times like those.
 
-# [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
+## [Merging when Git says that the histories are unrelated](https://www.educative.io/edpresso/the-fatal-refusing-to-merge-unrelated-histories-git-error)
 
-Sometimes you might want to merge two repos from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
+Sometimes you might want to merge two repositories from different sources, or you might have a situation where both your local and cloud have some commits for the same project in the initial stages.
 In such cases, Git throws an error about unrelated histories.
 To resolve the issue, type the following in your terminal:
 
@@ -22,7 +22,7 @@ To resolve the issue, type the following in your terminal:
 git pull origin master --allow-unrelated-histories
 ```
 
-# [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
+## [Commit a portion instead of the whole file](https://filip-prochazka.com/blog/git-commit-only-parts-of-a-file)
 
 There are times when you have made several changes in a file, but you only want to commit part of it at the moment.
 
@@ -51,12 +51,12 @@ Now, you can patch by copying contents from local pane to Git pane and saving.
 
 You can use `do` (diff obtain) or `dp` (diff paste) for staging hunks.
 
-# [Quick Fork HyperLink](https://stackoverflow.com/a/32460729/7048915)
+## [Quick Fork Hyper Link](https://stackoverflow.com/a/32460729/7048915)
 
-Add the end of your Git Repo, just add /fork. (<git_repo_https_link>/fork)
+Add the end of your Git Repository, just add /fork. (<git_repo_https_link>/fork)
 Ex: https://github.com/ayushxx7/ayush-mandowara-blog/fork
 
-# [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
+## [Ignore all files in a folder, but not the folder itself](https://stackoverflow.com/a/4250082)
 
 Ex: Assume that you want to ignore all files from `test` folder but keep the folder in tracking.
 
@@ -76,11 +76,11 @@ Ex: Assume that you want to ignore all files from `test` folder but keep the fol
   test/\*
   !test/.gitkeep
   ```
-- Now commit the gitignore file.
+- Now commit the `.gitignore` file.
 
 The required tracking will be put in place.
 
-# [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
+## [Remove a branch from Git completely](https://stackoverflow.com/questions/5094293/git-remote-branch-deleted-but-still-it-appears-in-branch-a)
 
 There will be times, where you created a branch just for a hotfix.
 In such cases, when the hotfix is merged into master, you can delete the branch.
@@ -97,7 +97,7 @@ To pull changes on a different machine, where the branch is deleted:
 git fetch -p
 ```
 
-# [Push a file to GitHub but do not track it for changes](https://compiledsuccessfully.dev/git-skip-worktree/)
+## [Push a file to GitHub but do not track it for changes](https://compiledsuccessfully.dev/git-skip-worktree/)
 
 #### !NOTE! You should consider not using this method. Maybe there is something else you can do if you want to keep a static config file. Like, say, having a `config.prod` which is tracked and `config.dev` which is not tracked.
 
@@ -123,7 +123,7 @@ Further, you can also use the `interactive rebase` to make changes in earlier co
 
 > Take a look at [Rebasing with Git](../07-Rebasing-with-Git)
 
-# [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
+## [Stashing with Git](https://stackoverflow.com/a/15197232/7048915)
 
 To store the current state of your work, so that you can take a pull of the latest changes from the remote repository,
 you can use the `git stash` command.
@@ -132,7 +132,7 @@ It will remove all the current changes in your work tree and store it in a stash
 You can view the stash list using `git stash list`
 
 Many times, you stash your changes because you mostly want to discard all the changes, but sometimes,
-you may actually want to reapply the changes once you have taken a pull from remote repo.
+you may actually want to reapply the changes once you have taken a pull from remote repository.
 If you want to apply changes as soon as you stash and pull, you can go do so with `git stash pop`
 However, there may be times when you want to keep the stash as it is, and take a look at it later on.
 In such a case, it would be better to name your stash instead.
@@ -167,24 +167,24 @@ While naming the stash will store it like:
 On <branch_name>: <name of the stash you set using the -m flag>
 ```
 
-# Always pull with rebase
+## Always pull with rebase
 
-It is generally good idea to pull with rebase flag,
+It is generally good idea to pull with the `rebase` flag,
 
 ```
 git pull --rebase
 ```
 
-As this will avoid the unncessary `merge` commit that always ends up being part of the git history whenever you pull from remote repository.
+As this will avoid the unnecessary `merge` commit that always ends up being part of the git history whenever you pull from remote repository.
 
 You can also set the default behaviour of Git such that it automatically does that for you.
-Run this command in your terminal within the git repo you want to set this for:
+Run this command in your terminal within the git repository you want to set this for:
 
 ```
 git config --global pull.rebase true
 ```
 
-# Identify if you Commit Title is correct
+## Identify if you Commit Title is correct
 
 As a rule of thumb, you can see if your commit messages fits in the following sentence:
 
@@ -192,7 +192,7 @@ As a rule of thumb, you can see if your commit messages fits in the following se
 If applied, this commit will <your subject line here>
 ```
 
-# [Extract commits after a specific date](https://stackoverflow.com/questions/37311494/how-to-get-git-to-show-commits-in-a-specified-date-range-for-author-date)
+## [Extract commits after a specific date](https://stackoverflow.com/questions/37311494/how-to-get-git-to-show-commits-in-a-specified-date-range-for-author-date)
 
 If you want to see commits after a certain date:
 
@@ -200,9 +200,9 @@ If you want to see commits after a certain date:
 git log --oneline --after="2021-02-23"
 ```
 
-# [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
+## [Remove Untracked files](https://koukia.ca/how-to-remove-local-untracked-files-from-the-current-git-branch-571c6ce9b6b1)
 
-To remove/delete untracked files from your local repo, we can use `git clean`
+To remove/delete untracked files from your local repository, we can use `git clean`
 First, check what will be removed
 
 ```
@@ -221,16 +221,109 @@ git clean -fx #remove ignored and untracked files
 
 Do note that the title is always supposed be in imperative speech.
 
-## Get better at Git
+## Resolving another process is running
 
-#### [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
+Suppose that you are trying to commit a file in git, but you face the error:
+```
+another git process is already running
+```
+First, close all active command prompts.  
+Then, go to the root folder of the repository.  
+Suppose that your repository is cloned at `C:\automation`  
 
-#### [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
+In you command prompt:
+```
+cd C:\automation
+cd .git #.git folder is present in root of repo
+ls -al #show all files (including hidden)
+# check if index.lock is present
+rm index.lock
+```
 
-#### [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
+This should solve the problem.
 
-#### [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
+## [Unable to merge branch due to untracked files](https://stackoverflow.com/a/51177844/7048915)
+- To `git merge` while overwriting untracked files
+- The files of interest (`FOI`) that we are going to remove:
+  1. exist in the upstream repository,
+  1. do not exist in the current branch,
+  1. and are blocking the merge because they are present and untracked in your working directory.
+```
+git checkout -f donor-branch   # replace FOI with tracked `donor` versions
+git checkout receiving-branch  # FOI are not in `receiving`, so they disapppear
+git merge donor-branch  # now the merge works
+```
 
-#### [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
+## [Undo an amend](https://stackoverflow.com/questions/38001038/how-to-undo-a-git-commit-amend)
+To get back to previous state before amending your commit:
+```
+git reset --soft @{1}
+```
 
-#### [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
+## Commits are missing from Local Repository
+Sometimes, due to merges & rebases, older commits which are part of cloud repo, get removed from the local repo.
+The best way to get those commits back is:
+
+Before performing any steps,
+- Make sure that there are no commits in local repo that are not part of cloud repo
+    - If there are such commits, create a separate branch and cherry-pick those commits in that branch for recovery later
+
+- Step 1: `hard reset` your local branch back by some large number of commits:
+    ```
+    git reset --hard HEAD~100
+    ```
+
+- Step 2: fetch changes from cloud repo using git pull
+    ```
+    git pull
+    ```
+
+You will see all commits (including the missing ones), are present in your local repository now.
+
+## [Show what a stash contains without applying it](https://stackoverflow.com/questions/10725729/see-whats-in-a-stash-without-applying-it)
+First, look the stash number using: 
+```
+git stash list
+```
+
+```
+stash@{0}: WIP on thinvirt_fix: a0ad7550 feat(robusta): default shared mem should be >0
+stash@{1}: WIP on thinvirt_fix: a0ad7550 feat(robusta): default shared mem should be >0
+stash@{2}: WIP on sanity: 7df37924 WIP
+stash@{3}: WIP on sanity: 0283067e feat(robusta):TC adb should be disabled by default
+stash@{4}: WIP on sanity: 0283067e feat(robusta):TC adb should be disabled by default
+stash@{5}: WIP on robusta-dev: 4240cd37 Merge branch 'master' into robusta-dev
+stash@{6}: WIP on RP_tool_integration: 3d5ff6c2 fix(chatbot): Report Problem tool trigger
+stash@{7}: WIP on RP_tool_integration: 3d5ff6c2 fix(chatbot): Report Problem tool trigger
+```
+
+Then, locate the stash you want. Suppose it is the second stash in the list. 
+Then, we can identify the stash like so: `stash@{1}`
+
+To view the contents of the stash without applying it:
+```
+git stash show stash@{1} -p
+```
+
+Note: if you are using powershell, see [this](https://stackoverflow.com/a/43386603/7048915).
+
+
+## [Drop a stash](https://stackoverflow.com/questions/5737002/how-to-delete-a-stash-created-with-git-stash-create)
+
+To delete the topmost stash:
+```
+git stash drop 
+```
+
+To delete a specific stash, say 'n':
+```
+git stash drop stash@{n}
+```
+
+# References
+- [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
+- [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
+- [How to write a Git commit message](https://chris.beams.io/posts/git-commit/)
+- [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
+- [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
+- [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
