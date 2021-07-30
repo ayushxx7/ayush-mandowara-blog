@@ -30,6 +30,9 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [MinMaxScaling](#minmaxscaling)
     * [Standardization](#standardization)
     * [Scaling Categorical Variables](#scaling-categorical-variables)
+* [Model Assessment and Comparison](#model-assessment-and-comparison)
+    * [Key Idea: Penalize modesl for using higher number of predictors](#key-idea-penalize-modesl-for-using-higher-number-of-predictors)
+    * [Adjusted $R^2$ vs $R^2$](#adjusted-r2-vs-r2)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -152,6 +155,24 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 ## Scaling Categorical Variables 
 For categorical variables, in general, it is better to not perform any scaling especially if we want to interpret the data since the values are already between 0 and 1.
 
+# Model Assessment and Comparison
+Sleecting the best model: Trade off between explaining highest variable and keeping it simple
+- bias vs variance trade-off 
+
+## Key Idea: Penalize modesl for using higher number of predictors
+
+- $Adjusted\;R^2 = 1 - \frac{(1-R^2)(N-1)}{N-p-1}$
+- $Akaike\;Information\;Criterion = AIC = n*\log(\frac{RSS}{n})+2p$
+- $BIC = Bayesian\;Information\;Criterion$
+- $Mallow's\;Cp$
+
+where n is the sample size (number of rows in the dataset) and p is the number of predictor variables
+
+## Adjusted $R^2$ vs $R^2$
+The major difference between R-squared and Adjusted R-squared is that R-squared doesn't penalise the model for having more number of variables. Thus, if you keep on adding variables to the model, the R-squared will always increase (or remain the same in the case when the value of correlation between that variable and the dependent variable is zero). Thus, R-squared assumes that any variable added to the model will increase the predictive power.
+
+Adjusted R-squared on the other hand, penalises models based on the number of variables present in it. So if you add a variable and the Adjusted R-squared drops, you can be certain that that variable is insignificant to the model and shouldn't be used. So in the case of multiple linear regression, you should always look at the adjusted R-squared value in order to keep redundant variables out from your regression model.
+
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
 - https://elitedatascience.com/bias-variance-tradeoff
@@ -163,3 +184,6 @@ For categorical variables, in general, it is better to not perform any scaling e
 - https://stackoverflow.com/questions/32108179/linear-regression-normalization-vs-standardization
 - https://en.wikipedia.org/wiki/Feature_scaling
 - https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqwhat-is-effect-coding/
+- https://en.wikipedia.org/wiki/Akaike_information_criterion
+- https://en.wikipedia.org/wiki/Bayesian_information_criterion
+- https://en.wikipedia.org/wiki/Mallows%27s_Cp
