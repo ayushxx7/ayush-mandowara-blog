@@ -1,7 +1,7 @@
 ---
 title: Linear Regression
 description: Fundamentals of Linear Regression
-date: "2021-07-22"
+date: "2021-07-29"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -46,7 +46,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 - [F Statistic](#f-statistic)
 - [Residual Analysis](#residual-analysis)
 - [Root Mean Squared Error](#root-mean-squared-error)
-- [R-squared Model Comparision](#r-squared-model-comparision)
+- [R-squared Model Comparison](#r-squared-model-comparison)
 - [Fit a line](#fit-a-line)
     - [sklearn](#sklearn)
     - [statsmodel](#statsmodel)
@@ -332,7 +332,7 @@ Plotting a Histogram of the residues helps us analyze whether
 # Root Mean Squared Error
 It is a metric that tells you the deviation of the predicted values by a model from the actual observed values. So, since it is a sort of error term, it is better to have a low RMSE.
 
-# R-squared Model Comparision
+# R-squared Model Comparison
 When comparing different models, we can use R-squared to determine whether model is generalizing the information well or not.  
 Check the R-squared on train and test set. If the R-squared value drops significantly between training and test set, we can say that the model is not generalizing well.
 
@@ -366,7 +366,7 @@ To predict values, use `lr.predict()` function
 1. For linear regression predictions, certain assumptions need to be met. 
     - X and y should be linearly related
     - Error terms should be normally distributed, have constant variance, have mean 0, and be independent of each other
-2. The null hypothesis for Linear Regression states that beta (coeffecient) has no impact on prediction.
+2. The null hypothesis for Linear Regression states that beta (coefficient) has no impact on prediction.
     - we can use f-statistic, r-squared and t-test to determine the strength of line
 3. sklearn and statsmodel can be used for generating linear regression model. 
     - sklearn is quicker to implement
