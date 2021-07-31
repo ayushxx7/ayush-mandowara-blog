@@ -38,6 +38,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [Stability Selection](#stability-selection)
 * [Summary](#summary)
 * [Takeways](#takeways)
+* [Questions](#questions)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -239,6 +240,59 @@ Stability selection is a relatively novel method for feature selection, based on
 - In many ways, MLR is just an extension of SLR. For instance, assumptions for MLR are similar to SLR.
 - When dealing with multiple variables, overfitting and correlation can cause problems. Overfitting affects the model, it won't be able to generalize the information and hence perform poorly on actual data. Correlation will increase complexity and processing time. 
 - Penalizing models for using high number of predictor variables will help in getting a better model both in terms of reduced number of predictors and in terms of generalization.
+
+# Questions
+Q: What is the effect of number of data points on Overfitting?  
+- Overfitting is the condition wherein the model is so complex that it ends up memorising almost all the data points on the train set. Hence, this condition is more probable if the number of data points is less since the model passing through almost every point becomes easier.
+<br/><br/>
+
+Q: What is the effect of adding more variables on $R^2$ and Adjusted $R^2$
+ 
+- The R-squared value will either increase or remain the same
+- The Adjusted R-squared value may increase or decrease
+<br/><br/>
+
+Q: Suppose you were predicting the sales of a company using two variables 'Social Media Marketing' and 'TV Marketing'. You found out that the correlation between 'Social Media Marketing' and 'TV Marketing' is 0.9. What will be the approximate value of VIF for either of them?
+
+- Formula for VIF: $VIF = \frac{1}{1-R^2}$
+- The R-squared variable will simply be the correlation coefficient squared since we have only 2 variables i.e $R^2 = 0.9^2 = 0.81$
+- VIF will therefore by $\frac{1}{1-0.81} = 5.26$
+<br/><br/>
+
+Q: Suppose you have 'n' categorical variables, each with 'm' levels. How many dummy variables would you need to represent all the levels of all the categorical variables?  
+- Each of the dummy variables has 'm' levels. So to represent one categorical variable, you would require (m-1) levels. Hence, to represent 'n' categorical variables, you would need `(m-1)*n` dummy variables.
+<br/><br/>
+
+Q: After performing inferences on a linear model built with several variables, you concluded that the variable ‘r’ was almost being described by other feature variables. This meant that the variable ‘r’:
+
+  | Option             | Y/N |
+  |--------------------|-----|
+  | Had a high p-value | No  |
+  | Had a low p-value  | No  |
+  | Had a high VIF     | Yes |
+  | Had a low VIF      | No  |
+If the feature variable A is being well explained by the other feature variables, this would mean that A has a high VIF. This is also evident from the formula for VIF: $\frac{1}{1 − R^2_{i}}$. 
+Now, if A is being explained by some of the other feature variables, this would mean that the R-squared value is pretty high, which would make the denominator which is $1-R^2_{i}$ very low, which again, in turn, would make the VIF value high. 
+<br><br>
+
+Q: If  $β_{1} = β_{2} = 0$ holds and $β_{3} = 0$ fails to hold, then what can you conclude?
+- Since, $β_{3}=0$ fails to hold, this means that $x_{3}$ is a significant variable in this linear regression model. Thus, we can say that there is a linear relationship between the outcome variable(Y) and $x_{3}$
+<br><br>
+
+Q: An analyst observes a positive relationship between digital marketing expenses and online sales for a firm. However, she intuitively feels that she should add an additional predictor variable, one which has a high correlation with marketing expenses. If the analyst adds this independent variable to the model, which of the following could happen? More than one choices could be correct.
+
+| Option                                                                          | Y/N |
+|---------------------------------------------------------------------------------|-----|
+| The model's R-squared will decrease                                             | N   |
+| The model's adjusted R-squared could decrease                                   | Y   |
+| The Beta-coefficient for predictor - digital marketing expense will remain same | N   |
+| The relationship between marketing expenses and sales can become insignificant  | Y   |
+<br>
+
+Q: Given different Rsq values of linear regression models on the same dataset, which model would you choose as the best predictor?
+- Rsq values alone are insufficient to answer this question. 
+- Rsq values are sometimes too high even due to overfitting. You cannot compare models with a different number of features/predictors without the rsq adjusted value.
+<br><br>
 
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
