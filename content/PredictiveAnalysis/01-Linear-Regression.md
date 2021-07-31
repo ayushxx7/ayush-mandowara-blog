@@ -222,7 +222,7 @@ If the learning late is large, it may result in oscillation and we may miss the 
 
 # Stats that Explain Variance of a Model
 
-![TSS_RSS_MSS](.\tss_rss_mss.png)
+![TSS_RSS_MSS](./tss_rss_mss.png)
 
 ## Total Sum of Squares
 It is calculated by subtracting $y_{actual} - y_{mean}$ value for each of the data points and taking a sum of it.  
