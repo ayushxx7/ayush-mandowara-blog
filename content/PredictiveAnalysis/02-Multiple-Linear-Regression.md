@@ -31,8 +31,13 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [Standardization](#standardization)
     * [Scaling Categorical Variables](#scaling-categorical-variables)
 * [Model Assessment and Comparison](#model-assessment-and-comparison)
-    * [Key Idea: Penalize modesl for using higher number of predictors](#key-idea-penalize-modesl-for-using-higher-number-of-predictors)
+    * [Key Idea: Penalize models for using higher number of predictors](#key-idea-penalize-models-for-using-higher-number-of-predictors)
     * [Adjusted $R^2$ vs $R^2$](#adjusted-r2-vs-r2)
+* [Feature Selection](#feature-selection)
+    * [Recursive Feature Elimination](#recursive-feature-elimination)
+    * [Stability Selection](#stability-selection)
+* [Summary](#summary)
+* [Takeways](#takeways)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -59,7 +64,7 @@ Change in mean response, E(Y), per unit change in the variable when other predic
     - As you keep adding the variables, the model may become far too complex
     - It may end up memorising the training data and will fail to generalise
     - A model is generally said to overfit when the training accuracy is high while the test accuracy is very low
-    - Refert [this article](https://elitedatascience.com/overfitting-in-machine-learning) for more details.
+    - Refer [this article](https://elitedatascience.com/overfitting-in-machine-learning) for more details.
 2. Multicollinearity
     - Associations between predictor variables
 3. Feature selection
@@ -102,7 +107,7 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 
 - Dropping variables
     - Drop the variable that is highly correlated with others
-    - Pick the business interpetable variable (if interpretation and explicability important)
+    - Pick the business interpretable variable (if interpretation and explicability important)
 
 - Create new variable using the interactions of the older variables
     - Add interaction features, drop original features
@@ -159,7 +164,7 @@ For categorical variables, in general, it is better to not perform any scaling e
 Sleecting the best model: Trade off between explaining highest variable and keeping it simple
 - bias vs variance trade-off 
 
-## Key Idea: Penalize modesl for using higher number of predictors
+## Key Idea: Penalize models for using higher number of predictors
 
 - $Adjusted\;R^2 = 1 - \frac{(1-R^2)(N-1)}{N-p-1}$
 - $Akaike\;Information\;Criterion = AIC = n*\log(\frac{RSS}{n})+2p$
@@ -172,6 +177,68 @@ where n is the sample size (number of rows in the dataset) and p is the number o
 The major difference between R-squared and Adjusted R-squared is that R-squared doesn't penalise the model for having more number of variables. Thus, if you keep on adding variables to the model, the R-squared will always increase (or remain the same in the case when the value of correlation between that variable and the dependent variable is zero). Thus, R-squared assumes that any variable added to the model will increase the predictive power.
 
 Adjusted R-squared on the other hand, penalises models based on the number of variables present in it. So if you add a variable and the Adjusted R-squared drops, you can be certain that that variable is insignificant to the model and shouldn't be used. So in the case of multiple linear regression, you should always look at the adjusted R-squared value in order to keep redundant variables out from your regression model.
+
+# Feature Selection
+Try all possible combinations? 
+- $2^p$ models for p features
+- not a good approach
+
+Manual feature elimination:
+- Build model
+- Drop features that are least helpful in prediction (high p-value)
+- Drop features that are redundant (using correlations, VIF)
+- Rebuild model and repeat
+
+Automated approach - Rules
+- Top 'n' features: RFE (Recursive Feature Elimination)
+- Forward / Backward / Stepwise selection: based on AIC
+- Regularization (Lasso)
+
+A balanced approach: use a combination of automated (coarse tuning) + manual (fine tuning) selection.
+
+## Recursive Feature Elimination
+- Start with all the features
+- Compute coefficients for each feature based on model such as SVM, Regression etc.
+- Remove feature which has the least significance
+- Repeat the process on pruned data set until there are desired number of features
+
+Q: Suppose you have to build five multiple linear regression models for five different datasets. You're planning to use about 10 variables for each of these models. The number of potential variables in each of these datasets are 15, 30, 65, 10, and 100. In which of these cases you would definitely need to use RFE?
+
+A: Though you might be thinking that while you would definitely need RFE in the 3rd and 5th cases, feature elimination in the 2nd dataset can be performed manually. But please note that while performing a manual elimination, you need to drop features one by one and bringing down the number from 30 to 10 can be very time-consuming. So it might be a good idea a perform an RFE to bring the number down to, say, 15, and then perform a manual feature elimination.
+
+## Stability Selection
+Stability selection is a relatively novel method for feature selection, based on subsampling in combination with selection algorithms (which could be regression, SVMs or other similar method). The high level idea is to apply a feature selection algorithm on different subsets of data and with different subsets of features. After repeating the process a number of times, the selection results can be aggregated, for example by checking how many times a feature ended up being selected as important when it was in an inspected feature subset. We can expect strong features to have scores close to 100%, since they are always selected when possible. Weaker, but still relevant features will also have non-zero scores, since they would be selected when stronger features are not present in the currently selected subset, while irrelevant features would have scores (close to) zero, since they would never be among selected features.
+
+# Summary
+1. When one variable might not be enough
+    1. A lot of variance isn’t explained by just one feature
+    2. Inaccurate predictions
+2. Formulation of MLR: MLR  helps us to understand how much will the dependent variable change when we change the independent variables.
+3. New considerations to be made when moving from SLR to MLR
+    1. Overfitting - When the model becomes complex and gives very good results in training data and fails in the testing data.
+    2. Multicollinearity - To identify if there is any dependency within the pool of independent variables to remove redundancy.
+    3. Feature selection - Out of the pool of many features what features are considered to be most important. We drop the redundant features and those features that are not helpful in prediction. 
+4. Dealing with categorical variables
+    1. Dummy variables - USed when there are fewer levels. You learnt about it using the marital status example.
+5. Feature Scaling
+    1. Standardisation - Method used to make sure that data is internally consistent.
+    2. MinMax scaling - Method used to make sure that data is internally consistent.
+    3. Scaling for categorical variables - Categorical variables cannot used as they are so they are converted to numeric format.
+6. Model Assessment and Comparison
+    1. Adjusted R-squared - The adjusted R-squared value increases only if the new term improves the model more than would be expected by chance.
+    2. AIC, BIC - Various types of criteria used for automatic feature selection 
+7. Feature Selection
+    1. Manual feature selection - A very tedious task in order to select the correct set of features.
+    2. Automated feature selection - The three step process is involved.
+        1. Select top 'n' features
+        2. Forward/backward/Stepwise selection based on AIC
+        3. Regularization  
+    3. Finding a balance between the two - A balance of both manual and automatic feature selection is required to attain the features.
+
+# Takeways
+- In many ways, MLR is just an extension of SLR. For instance, assumptions for MLR are similar to SLR.
+- When dealing with multiple variables, overfitting and correlation can cause problems. Overfitting affects the model, it won't be able to generalize the information and hence perform poorly on actual data. Correlation will increase complexity and processing time. 
+- Penalizing models for using high number of predictor variables will help in getting a better model both in terms of reduced number of predictors and in terms of generalization.
 
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
@@ -187,3 +254,5 @@ Adjusted R-squared on the other hand, penalises models based on the number of va
 - https://en.wikipedia.org/wiki/Akaike_information_criterion
 - https://en.wikipedia.org/wiki/Bayesian_information_criterion
 - https://en.wikipedia.org/wiki/Mallows%27s_Cp
+- https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html
+- https://blog.datadive.net/selecting-good-features-part-iv-stability-selection-rfe-and-everything-side-by-side/
