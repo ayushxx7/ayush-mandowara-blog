@@ -312,6 +312,9 @@ Assumptions:
 
 ![ConstantVariance](./Constant Variance Assumption.jpg)
 
+<br><br>
+To read more about the assumptions and why they are important [visit this page](https://people.duke.edu/~rnau/testing.htm).
+
 # Hypothesis Testing in Linear Regression
 To test the significance of $\beta_{1}$, we can perform hypothesis testing.
 Here, the null hypothesis ($H_{0}$) will be that $\beta_{1}$ is 0  
