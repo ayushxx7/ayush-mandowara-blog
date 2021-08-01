@@ -1,7 +1,7 @@
 ---
 title: Multiple Linear Regression
 description: Fundamentals of Multiple Linear Regression
-date: "2021-07-30"
+date: "2021-08-01"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -164,8 +164,10 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 - If target variable is scaled then in final prediction, it should be rescaled for interpretation
 
 ## MinMaxScaling
+- also called Normalization
 - get the values between 0 and 1
 - $X_{changed} = \frac{X-X_{min}}{X_{max}-X_{min}}$
+- Generally Min-Max Scaling is preferred when there are outliers in the data
 
 ## Standardization
 - also called Z-score Normalization
@@ -255,8 +257,10 @@ Stability selection is a relatively novel method for feature selection, based on
 
 # Takeways
 - In many ways, MLR is just an extension of SLR. For instance, assumptions for MLR are similar to SLR.
-- When dealing with multiple variables, overfitting and correlation can cause problems. Overfitting affects the model, it won't be able to generalize the information and hence perform poorly on actual data. Correlation will increase complexity and processing time. 
 - Penalizing models for using high number of predictor variables will help in getting a better model both in terms of reduced number of predictors and in terms of generalization.
+- In model building process, the initial steps are what one can call "Exploratory Data Analysis". Here we find out if any data is missing, any null value analysis is required, if any variables have high correlation, the distribution of the data etc. It is preferred that the scatter plot of some independent variables has linear relation with the predicted variable.
+- Categorical variables should be dummy or label encoded so that Linear Regression can work on it. It is a requirement for linear regression that all data be of numeric type.
+- Using p-value and VIF, one can determine which of the variables are important for our model. 
 
 # Questions
 Q: What is the effect of number of data points on Overfitting?
@@ -316,7 +320,7 @@ Q: Why p-value has higher importance than VIF?
 - Process
     - p-value > 0.05 - drop column
     - p-value < 0.05 - check the VIF
-        - if VIF > 5 - drop
+        - if VIF > 5 (i.e. $R^2 > 0.8$) - drop
         - if VIF < 5 - keep
 <br><br>
 
@@ -334,6 +338,55 @@ Q: When will you use Label Encoding?
     | Bronze | 3     |
 
 - If variables don't have an inherent order, for example Month (each month is equally important), then we cannot use label encoding. We can use one-hot encoding or dummy encoding in such a case.
+<br><br>
+
+Q: After you performed binary encoding of the variable ‘MaritalStatus’ with, ‘Married’ corresponding to 1 and ‘Unmarried’ corresponding to 0, you found out that the mean of the variable ‘MaritalStatus’ was 0.6. What does this statement indicate?
+- Notice that when you perform a binary encoding, the only values present in the variable are 0 and 1. So if you calculate the mean, it is only the 1s which will contribute towards it. Since the value '1' corresponds to 'Married', a mean of 0.6 indicates that 60% of the people in the list are married.
+<br><br>
+
+Q: If there is no change in $R^2$ how does Adjusted\;R^2 change when adding more variables?
+- Adjusted $R^2$ will decrease as model will be penalized due to addition of parameter
+<br><br>
+
+Q: In regression analysis, which of the statements is true?
+
+| Option                                                | Y/N |
+|-------------------------------------------------------|-----|
+| The mean of residuals is always equal to zero.        | Y   |
+| The mean of residuals is less than zero at all times. | N   |
+| The sum of residuals is more than zero at all times.  | N   |
+| The sum of residuals is always equal to zero.         | Y   |
+
+
+Q: Suppose you're trying to predict the gross collection of a movie based on the following five factors: 'Budget', 'Average Critic Score', 'Facebook Likes', 'Number of Tweets', and 'Number of Screens'.
+
+You obtained the following p-values for the five variables after fitting a regression line. Assuming you're only using p-value as a criteria to drop the variables and a p-value > 0.05 is not acceptable, which of these variables do you think is not significant in the prediction of gross collections and should be definitely dropped? Only one option is correct.
+
+| Variable              | p-value |
+|-----------------------|---------|
+| Budget                | 0.03    |
+| Average Critic Review | 0.21    |
+| Facebook Likes        | 0.11    |
+| Number of Tweets      | 0.32    |
+| Number of Screens     | 0.01    |
+
+As you can see, the p-value of 'Number of Tweets' is very high and thus, this variable is insignificant. Now, there are other variables in the list which also have a high p-value but we don't drop these simultaneously as it might happen that dropping 'Number of Tweets' might reduce the p-value of the other variables and make them significant.
+<br><br>
+
+Q: Should scaling be performed before the train-test split or after?
+- Scaling should always be done after the test-train split since you don't want the test dataset to learn anything from the train data. So if you're performing the test-train split earlier, the test data will then have information regarding the data like the minimum and maximum values, etc.
+<br><br>
+
+Q: Which option between Standard Scaling and MinMax Scaling is better when dealing with dummy variables? (Which of these will affect the value of the dummy variables)
+- MinMax scaling scales in such a way that all the values lie between 0 and 1 using the formula:
+> $X_{changed} = \frac{X-X_{min}}{X_{max}-X_{min}}$
+- So if you have dummy variables, which can only take the values 0 and 1, you can notice that for the case of zero, the variable remains zero and for the case of 1, the variable remains 1.
+- On the other hand, the standard scaler scales in such a way that the mean of the dataset becomes zero and standard deviation becomes one. So this will clearly distort the values of the dummy variables since some of the variables will become negative.
+<br><br>
+
+Q: Consider you are performing multiple linear regression where X1 and X2 are independent variables and Y is the dependent variable. What can you say about the coefficient of X1 and value of y in the regression equation?   
+$y = \beta_{0} + \beta_{1}*X_{1} + \beta_{2}*X_{2}$
+- The predicted value of Y increases by $β_{1}$ for a unit increase in X1, given X2 does not change.
 
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
@@ -351,3 +404,4 @@ Q: When will you use Label Encoding?
 - https://en.wikipedia.org/wiki/Mallows%27s_Cp
 - https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html
 - https://blog.datadive.net/selecting-good-features-part-iv-stability-selection-rfe-and-everything-side-by-side/
+- https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
