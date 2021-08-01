@@ -16,6 +16,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Interpretation of the coefficients](#interpretation-of-the-coefficients)
 * [Some aspects of MLR are similar to Simple Linear Regression](#some-aspects-of-mlr-are-similar-to-simple-linear-regression)
 * [New considerations when moving from SLR to MLR](#new-considerations-when-moving-from-slr-to-mlr)
+* [MLR vs SLR](#mlr-vs-slr)
 * [Bias vs Variance - Infographic](#bias-vs-variance---infographic)
 * [Multicollinearity](#multicollinearity)
     * [Multicollinearity affects](#multicollinearity-affects)
@@ -73,6 +74,14 @@ Change in mean response, E(Y), per unit change in the variable when other predic
 3. Feature selection
     - Selecting the optimal set from a pool of given features, many of which might be redundant becomes an important task
 
+# MLR vs SLR
+| Unchanged                    | Changed                        |
+|------------------------------|--------------------------------|
+| Asummptions on residuals     | Interpretation of coefficients |
+| Arriving at coefficients     | Multicollinearity              |
+| Hypothesis Testing Framework | Model Complexity               |
+|                              | Feature Selection              |
+
 # Bias vs Variance - Infographic
 ![BiasVsVariance](./bias_vs_variance.png)
 Source: https://elitedatascience.com/bias-variance-tradeoff
@@ -122,6 +131,7 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 - Few Levels: Create 'dummy'/indicator variables
 - Good for interpretation (effect of state vs base state)
 - When you have a categorical variable with say 'n' levels, the idea of dummy variable creation is to build 'n-1' variables, indicating the levels. 
+- Dummy variables can be created by `pd.get_dummies()` which will give one hot encoding data. To get n-1 variables, pass `drop_first=True`.
 
 
     | Value  | Indicator Variable |
