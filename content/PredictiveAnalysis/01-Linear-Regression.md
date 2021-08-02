@@ -232,7 +232,7 @@ Formula: $\sum_{i=1}^{N} (y_{i}-\bar y)^2$
 Formula: $\sum_{i=1}^{N}(y_{i}−y_{i}pred)^2$
 
 ## R Squared
-$R^2 = \frac{variability\;in\;Y\;explained\;by\;model}{Total\;variability\;in\;Y} = \frac{Explained\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} = \frac{ESS}{TSS} = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS} = 1 - \frac{Residual\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} $
+$R^2 = \frac{variability\;in\;Y\;explained\;by\;model}{Total\;variability\;in\;Y} = \frac{Explained\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares} = \frac{ESS}{TSS} = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS} = 1 - \frac{Residual\;Sum\;of\;Squares}{Total\;Sum\;of\;Squares}$
 
 Note: ESS or Explained Sum of Squares is also called as MSS or Model Sum of Squares 
 
