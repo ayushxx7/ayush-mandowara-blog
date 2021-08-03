@@ -405,3 +405,5 @@ $y = \beta_{0} + \beta_{1}*X_{1} + \beta_{2}*X_{2}$
 - https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html
 - https://blog.datadive.net/selecting-good-features-part-iv-stability-selection-rfe-and-everything-side-by-side/
 - https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
+- https://www.kaggle.com/shrutimechlearn/step-by-step-assumptions-linear-regression
+- https://jeffmacaluso.github.io/post/LinearRegressionAssumptions/
