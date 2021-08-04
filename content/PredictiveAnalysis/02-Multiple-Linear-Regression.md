@@ -1,7 +1,7 @@
 ---
 title: Multiple Linear Regression
 description: Fundamentals of Multiple Linear Regression
-date: "2021-08-01"
+date: "2021-08-03"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]

@@ -1,7 +1,7 @@
 ---
 title: Linear Regression
 description: Fundamentals of Linear Regression
-date: "2021-07-31"
+date: "2021-08-02"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
