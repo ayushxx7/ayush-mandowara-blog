@@ -320,6 +320,16 @@ To delete a specific stash, say 'n':
 git stash drop stash@{n}
 ```
 
+## GitHub pull request showing commits that are already in target branch
+If commits from base branch are visible in the pull request you can do the following:
+```
+git fetch origin
+git checkout feature-01
+git rebase origin/<base_branch_name>
+git push --force
+```
+See [this question on StackOverflow](https://stackoverflow.com/questions/16306012/github-pull-request-showing-commits-that-are-already-in-target-branch) for more solutions.
+
 # References
 - [Every line of code is always documented](https://mislav.net/2014/02/hidden-documentation/)
 - [Getting more from Git](https://www.youtube.com/watch?v=FQ4IdcrOUz0)
