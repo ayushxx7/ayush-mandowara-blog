@@ -7,71 +7,101 @@ author: "Ayush"
 tags: ["general", "soft-skills"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Power Communication](#power-communication)
+   * [4 Power Listening Tools](#4-power-listening-tools)
+* [Tools](#tools)
+   * [Ask](#ask)
+      * [Strategy](#strategy)
+      * [Approach](#approach)
+      * [Examples](#examples)
+   * [Mirror](#mirror)
+      * [Strategy](#strategy-1)
+      * [Approach](#approach-1)
+      * [Examples](#examples-1)
+   * [Paraphrase](#paraphrase)
+      * [Strategy](#strategy-2)
+      * [Approach](#approach-2)
+      * [Examples](#examples-2)
+   * [Prime](#prime)
+      * [Strategy](#strategy-3)
+      * [Approach](#approach-3)
+      * [Examples](#examples-3)
+* [Questions](#questions)
+   * [Responsive Body Language](#responsive-body-language)
+   * [What to do if The other person is yelling](#what-to-do-if-the-other-person-is-yelling)
+   * [What if you are managing someone and they did not like the feedback you gave?](#what-if-you-are-managing-someone-and-they-did-not-like-the-feedback-you-gave)
+   * [What to do if you know you are arrogant when speaking with someone who is potentially less smarter than you](#what-to-do-if-you-know-you-are-arrogant-when-speaking-with-someone-who-is-potentially-less-smarter-than-you)
+
+<!-- vim-markdown-toc -->
+
 # Power Communication
+Listen Better, Influence Better
 
-## Listen Better, Influence Better
-
-# 4 Power Listening Tools
-- Manage conflicts bettter
+## 4 Power Listening Tools
+- Manage conflicts better
 - Become a better persuader
 - Become better leaders
 
-# Tool #1: Ask
-## Strategy 
+# Tools
+## Ask
+### Strategy 
 - show genuine concern and open mindset to know more
-## Approach
+### Approach
 - Invite them to express themselves
 - Break an awkward silence and shyness
-## Examples
+### Examples
 - I would appreciate your inputs
 
-# Tool #2: Mirror
-## Strategy
+## Mirror
+### Strategy
 - Mirror the observation
 - Show respect and concern with managed tone and voice delivery
 
-## Approach
+### Approach
 - Our tone of voice should make them comfortable
 - It should make them believe that we want to understand and connect with them
 - Use curiosity and observation and not judgement
 
-## Examples
+### Examples
 - You say you are okay, but I am sensing there is something else you want to share
 
-# Tool #3: Paraphrase
-## Strategy
+## Paraphrase
+### Strategy
 - Paraphrasing to create additional safety
 - Makes the other person feel understood
 
-## Approach
-- Repating the message in a shorter form and in our own words
+### Approach
+- Repeating the message in a shorter form and in our own words
 - Remain calm and collected
 - Don't push too hard and take it slow and pace yourself
 
-## Examples
+### Examples
 - Allow me to share what I understand, you would like to stop working on this project?
 - Have I captured it correctly?
 
-# Tool #4: Prime
-## Strategy
+## Prime
+### Strategy
 Offer your best guess at what the other person is thinking or feeling, before you expect them to do the same
 Useful for Awkward silence
 
-## Approach
+### Approach
 - an act of good faith, taking risks, becoming vulnerable and building safetly
 - This helps in others sharing the meaning
 
-## Examples
+### Examples
 - Are you finding these points I just shared, a bit confusing?
 - Would you need more time to process this?
 - Can I clarify or share more information?
 
-# Responsive Body Language
+# Questions
+
+## Responsive Body Language
 - smile
 - nodding
 - leading in
-
-# Questions
 
 ## What to do if The other person is yelling
 - I can't have this conversation with this tone. Let's postpone this.
