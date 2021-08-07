@@ -4,7 +4,7 @@ description: usage of data science and ai in various industries.
 date: "2021-08-07"
 image: "thoughts.jpg"
 author: "Ayush"
-tags: ["general", "soft-skills"]
+tags: ["general", "data-analytics", "machine-learning"]
 ---
 
 
