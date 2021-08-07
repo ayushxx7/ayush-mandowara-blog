@@ -20,6 +20,8 @@ My notes on Logistic Regression
 - $\frac{1}{x^a}=x^{-a}; x \neq 0$
 - $(x^a)^b = x^{a*b}$
 
+---
+
 # Logarithm Property
 
 Logarithm helps us redefine exponents.
@@ -58,6 +60,76 @@ where a,b,c are positive numbers, $b \neq 1$
 #### Power Property
 ##### $\log_{b}a^c = c.\log_{b}a$
 where c is a real number, a and b are positive numbers, $b \neq 1$
+
+#### More Rules
+$\log_{b}c = \frac{log_{z}c}{log_{z}b}$
+
+---
+
+# Linear Regression vs Logistic Regression
+
+| Linear Regression | Logistic Regression |
+|-------------------|---------------------|
+| numeric output    | categorical output  |
+
+# Examples of Logistic Regression
+1. Finance Company want sto know whether a customer will default or not
+2. Predicting an email is spam or not
+3. Cateogrizing email into promotional, personal and official
+
+# Binary classification
+1. Two possible outputs
+2. Examples:
+    - customer will default or not
+    - email spam or not
+    - a user is a robot or not
+
+# Sigmoid function
+sigmoid curve has all the properties you would want in a binary classification problem and hence it's good for such models.
+- extremely low values in the start
+- extremely high values in the end
+- intermediate values in the middle 
+
+## Formula
+$y = prob(x) = \frac{1}{1+e^{(-\beta_{0} + \beta_{1}x)}}$
+
+## Best fit Sigmoid Curve
+### Likelihood function
+Product of $(1-P_{ineg})(P_{ipos})$ for i = 1 to N, is called the Likelihood function
+
+
+# Building a logistic regression model in Python
+We can use statsmodel to build a logistic regression model
+
+```py heading="Logistic Regression using statsmodel"
+import statsmodel.api as sm
+logm1 = sm.GLM(y,(sm.add_constant(X)), family = sm.families.Binomial())
+logm1.fit().summary()
+```
+
+The `coef` column gives us the value of $\beta_{0}$ and $\beta_{1}$
+
+# Odds and Log Odds
+This equation: $P = \frac{1}{1+e^{(-\beta_{0} + \beta_{1}x)}}$ is difficult to interpet.  
+We can simplify it by using `Odds` which is given as:  
+> $\frac{P}{1-P} = e^{\beta_{0} + \beta_{1}x}$  
+
+We interpret odds as:  
+
+$\newline P(EventHappens) = Odds*P(EventDoesNotHappen)\newline or\;P = Odds*(1-P)$
+
+The `Log Odds` can then be obtained by applying $\ln$ (i.e. natural log or log with base e or $\log_{e}$)  
+> $\ln{\frac{P}{1-P}} = \beta_{0} + \beta_{1}x$
+
+As we can see the RHS is the equation of a straight line, hence Log Odds follows a linear relationship w.r.t X.
+
+# Summary
+- Simply boundary decision approach is not good for classification problems
+- Sigmoid function gives us a good approximation of the probability of one of the classes being selected based on the input
+- The process where you vary the betas until you find the best fit curve for the probability of an event occuring, is called logistic regression.
+- The equation for likelihood is complex, and hard to interpret, hence we use Odds $(\frac{1}{1-P})$
+and Log Odds $(\ln\frac{1}{1-P})$
+- The Log Odds vs X graph is linear in nature as it follows the equation of a straight line
 
 # References
 - https://www.mathplanet.com/education/algebra-1/exponents-and-exponential-functions/properties-of-exponents
