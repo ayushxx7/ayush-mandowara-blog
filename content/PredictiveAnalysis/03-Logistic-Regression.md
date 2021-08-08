@@ -34,13 +34,13 @@ $log_{b}(a) = c \Leftrightarrow b^c = a;$ where
 
 ![Rules](./constraints_of_log.png)
 
-#### Note
+## Note
 When rewriting an exponential equation in log form or a log equation in exponential form, it is helpful to remember that the base of the logarithm is the same as the base of the exponent.
 
 Read more about logarithms [here](https://www.mathplanet.com/education/algebra-2/exponential-and-logarithmic-functions/logarithm-and-logarithm-functions) and [here](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/v/logarithms?modal=1)
 
-## Solving Equations containing exponents
-#### Q: $6^x = 20$
+## Solving Equations containing exponents  
+**Q: $6^x = 20$**
 - $6 = 10^{log6}$
 - $20 = 10^{log20}$
 - $(10^{log6})^x = 10^{log20}$
@@ -50,15 +50,15 @@ Read more about logarithms [here](https://www.mathplanet.com/education/algebra-2
 
 ## Properties of Logarithms
 #### Product Property
-##### $\log_{b}ac = \log_{b}a + log_{b}c;$ 
+**$\log_{b}ac = \log_{b}a + log_{b}c;$**
 where a,b,c are positive numbers, $b \neq 1$
 
 #### Quotient Property
-##### $\log_{b}\frac{a}{c} = \log_{b}a - log_{b}c;$ 
+**$\log_{b}\frac{a}{c} = \log_{b}a - log_{b}c;$** 
 where a,b,c are positive numbers, $b \neq 1$
 
 #### Power Property
-##### $\log_{b}a^c = c.\log_{b}a$
+**$\log_{b}a^c = c.\log_{b}a$**
 where c is a real number, a and b are positive numbers, $b \neq 1$
 
 #### More Rules
@@ -75,7 +75,7 @@ $\log_{b}c = \frac{log_{z}c}{log_{z}b}$
 # Examples of Logistic Regression
 1. Finance Company want sto know whether a customer will default or not
 2. Predicting an email is spam or not
-3. Cateogrizing email into promotional, personal and official
+3. Categorizing email into promotional, personal and official
 
 # Binary classification
 1. Two possible outputs
@@ -94,12 +94,12 @@ sigmoid curve has all the properties you would want in a binary classification p
 $y = prob(x) = \frac{1}{1+e^{(-\beta_{0} + \beta_{1}x)}}$
 
 ## Best fit Sigmoid Curve
-### Likelihood function
+**Likelihood function**
 Product of $(1-P_{ineg})(P_{ipos})$ for i = 1 to N, is called the Likelihood function
 
 
 # Building a logistic regression model in Python
-We can use statsmodel to build a logistic regression model
+We can use `statsmodel` to build a logistic regression model
 
 ```py heading="Logistic Regression using statsmodel"
 import statsmodel.api as sm
