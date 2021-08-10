@@ -7,6 +7,58 @@ author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
+
+<!-- vim-markdown-toc GitLab -->
+
+* [Purpose](#purpose)
+* [Exponential Functions](#exponential-functions)
+  * [Laws of Exponents](#laws-of-exponents)
+* [Logarithm Property](#logarithm-property)
+  * [Note](#note)
+  * [Solving Equations containing exponents](#solving-equations-containing-exponents)
+  * [Properties of Logarithms](#properties-of-logarithms)
+      * [Product Property](#product-property)
+      * [Quotient Property](#quotient-property)
+      * [Power Property](#power-property)
+      * [More Rules](#more-rules)
+* [Linear Regression vs Logistic Regression](#linear-regression-vs-logistic-regression)
+* [Examples of Logistic Regression](#examples-of-logistic-regression)
+* [Binary classification](#binary-classification)
+* [Sigmoid function](#sigmoid-function)
+  * [Formula](#formula)
+  * [Best fit Sigmoid Curve](#best-fit-sigmoid-curve)
+* [Building a logistic regression model in Python](#building-a-logistic-regression-model-in-python)
+* [Odds and Log Odds](#odds-and-log-odds)
+* [Summary](#summary)
+* [Multivariate Logistic Regression](#multivariate-logistic-regression)
+  * [Why checking Churn Rate is Important](#why-checking-churn-rate-is-important)
+  * [Why we only use transform on test set](#why-we-only-use-transform-on-test-set)
+* [Model Building](#model-building)
+* [Confusion Matrix and Accuracy](#confusion-matrix-and-accuracy)
+  * [Accuracy](#accuracy)
+  * [Creating confusion matrix](#creating-confusion-matrix)
+* [Interpreting the Model](#interpreting-the-model)
+  * [Questions](#questions)
+* [Summary - Multivariate Logistic Regression](#summary-multivariate-logistic-regression)
+* [Metrics](#metrics)
+  * [Confusion Matrix](#confusion-matrix)
+  * [Accuracy](#accuracy-1)
+  * [Sensitivity](#sensitivity)
+  * [Specificity](#specificity)
+  * [False Positive Rate](#false-positive-rate)
+  * [Negative Predictive Value](#negative-predictive-value)
+  * [Positive Predictive Value](#positive-predictive-value)
+  * [Receiver Operating Characteristic Curve - ROC Curve](#receiver-operating-characteristic-curve-roc-curve)
+  * [Questions](#questions-1)
+  * [Precision](#precision)
+  * [Recall](#recall)
+  * [Questions](#questions-2)
+* [Summary - Steps of Building a Classification Model](#summary-steps-of-building-a-classification-model)
+* [Takeaways](#takeaways)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Purpose
 My notes on Logistic Regression
 
