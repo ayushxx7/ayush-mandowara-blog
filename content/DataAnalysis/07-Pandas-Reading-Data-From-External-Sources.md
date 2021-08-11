@@ -7,6 +7,15 @@ author: "Ayush"
 tags: ["python", "data-analysis", "pandas"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Reading from text file](#reading-from-text-file)
+* [Reading from Database](#reading-from-database)
+* [Scraping data using bs4](#scraping-data-using-bs4)
+* [Reading data from PDF files (pyPDF2)](#reading-data-from-pdf-files-pypdf2)
+
+<!-- vim-markdown-toc -->
+
 ## Reading from text file
 ```py
 # Using encoding = "ISO-8859-1"
@@ -45,6 +54,9 @@ df = pd.DataFrame(list(all_rows), columns=["ID", "Name", "Country", "District", 
 df.head()
 ```
 
-## Scaping data using bs4
+## Scraping data using bs4
+- Refer [Lyrics Extraction](https://github.com/ayushxx7/LyricsExtraction) and [Auto File Renamer](https://github.com/ayushxx7/Auto-File-Renamer) to see how web-scraping works
+- Convert scraped data to desirable format so as to import it as a dataframe in Pandas
 
 ## Reading data from PDF files (pyPDF2)
+See [PyPDF2 Github](https://github.com/mstamy2/PyPDF2) and [Docs](https://pythonhosted.org/PyPDF2/)
