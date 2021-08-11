@@ -41,3 +41,6 @@ WHERE PARTITION_TIME >= "2021-04-23"
 AND
 is_vtx_enabled IS NOT NULL;
 ```
+
+# Steps to query a table in BigQuery
+See [this document](https://docs.google.com/document/d/1kMgmqrj3PCBARVde6NkTUy_4TGbLemj9UIBPxC3kheE/edit#heading=h.c6o1ltpg7zdi)
