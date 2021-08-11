@@ -167,6 +167,314 @@ Note: Special case of Negative Binomial Distribution, where 'r' i.e. number of s
 P(x) = (1 − p)<sup>x-1</sup>p
 
 ---
+
+## Cumulative Probability
+F(x) = P(X<=x)
+E.g F(1) = P(X<=1) = P(X=0) + P(X=1)
+Last value of cumulative probability should always be 1
+
+---
+
+Summary: Discrete Probability Distributions
+- We started with learning how to find probability without experiment, using basic concepts such as the addition and the multiplication rule of probability.
+
+# Takeaways
+- Binomial Distributions have the following conditions
+    1. total number of trials is fixed
+    1. each trial is binary (2 outcomes - success/failure)
+    1. probability of success is same in all trials
+    1. Formula: <sup>n</sup>C<sub>r</sub>\(p\)<sup>r</sup>(1-p)<sup>n-r</sup>
+- There are other distributions such as Poisson, negative binomial and geometric, each with their own set of conditions, use cases and formulas. Negative binomial distribution is different from the regular one such that we count the number of failures before success.
+- Cumulative probability is defined as F(x) = P(X<=x) i.e. sum of all probabilities up to & including P(x).
+
+---
+
+#### Question: Suppose you take 10 random pasta packets from the market and get it tested for the amount of lead. It just so happens that you have picked out packets from a very defective batch, and there is a 5% probability that any pasta packet you select is going to be defective.
+
+#### Answer: 
+It is given that 5% of all packets are defective. We can assume that choosing a packet is a bernoulli trial.
+Using binomial distribution,
+p = 0.05
+1-p = 0.95
+10C2 = 45
+
+P(X=2) = (10C2 * p^2 * (1-p)*(10-2))*100 = 7.46%
+
+#### What is the probability that, after testing these 10 packets, not more than 2 packets would turn out to be defective?
+
+P(X<=2) = (P(X=0) + P(X=1) + P(X=2))
+
+```py heading="binomial distribution"
+from scipy.stats import binom
+# setting the values
+# of n and p
+n = 10
+p = 0.05
+# defining the list of r values
+r_values = list(range(n + 1))
+dist = [binom.pmf(r, n, p) for r in r_values ]
+
+print("r\tp(r)")
+for i in range(n + 1):
+    print(str(r_values[i]) + "\t" + str(dist[i]*100))
+
+print('sum:', sum(dist[0:3]))
+```
+
+#### WHat is the Expected Value of X?
+
+```py heading="Expected Value"
+from scipy.stats import binom
+# setting the values
+# of n and p
+n = 10
+p = 0.05
+# defining the list of r values
+r_values = list(range(n + 1))
+dist = [binom.pmf(r, n, p) for r in r_values ]
+ev_list = []
+
+print("r\tp(r)")
+for i in range(n + 1):
+    print(str(r_values[i]) + "\t" + str(dist[i]*100) + "\t" + str(dist[i]*r_values[i]))
+    ev = dist[i]*r_values[i]
+    ev_list.append(ev)
+
+print('sum:', sum(dist[0:3]))
+print('sum ev:', sum(ev_list))
+```
+
+---
+
+#### Question: 
+Suppose a new cancer treatment has been discovered, claiming to increase the one year survival rate for pancreatic cancer to 40%. In other words, the probability that a patient suffering from pancreatic cancer would survive for at least one year after receiving this treatment is 40%.
+
+Suppose a  hospital is planning to use this treatment for its pancreatic cancer patients.
+
+The hospital has a total of 10 patients suffering from pancreatic cancer. What is the probability that exactly 4 of these patients would survive the first year after receiving this treatment?
+
+
+Answer:
+There are a total of 10 patients and the probability of surviving the first year is 40%, or 0.4 for each of them. Hence, the probability of 4 patients surviving is given by 
+$P (X=4) = \binom{10}{4}*(0.4)*4(0.6)*6 = 0.251$ or $25.1 \%$
+```py heading='exact 4 patients'
+from scipy.stats import binom
+# setting the values
+# of n and p
+n = 10
+p = 0.4
+# defining the list of r values
+r_values = list(range(n + 1))
+dist = [binom.pmf(r, n, p) for r in r_values ]
+ev_list = []
+
+print("r\tp(r)")
+for i in range(n + 1):
+    print(str(r_values[i]) + "\t" + str(dist[i]*100) + "\t" + str(dist[i]*r_values[i]))
+    ev = dist[i]*r_values[i]
+    ev_list.append(ev)
+
+print('sum:', sum(dist[0:3]))
+print('sum ev:', sum(ev_list))
+```
+
+#### What is the probability that the number of patients that survive the first year after receiving the treatment would not be more than 2?
+Let’s define X as the number of patients that will survive the first year after treatment. Now, according to the question, you have to find the probability of that number being less than or equal to 2, i.e. $P(X<=2). You know that P(X<=2) = P(X=0) + P(X=1) + P(X=2) = 
+\binom{10}{0}( 0.4) 0 ( 0.6) 10 + \binom{10}{1} ( 0.4) 1 ( 0.6) 9 + \binom{10}{2}( 0.4) 2 ( 0.6) 8 = 0.167$ or $16.7\%$
+
+---
+
+# Continous Probability Distributions
+
+What happens when we talk about the probability of continuous random variables, such as time, weight etc.? 
+
+Since these two functions talk about probabilities in terms of intervals rather than exact values, it is advisable to use them CDF & PDF when talking about continuous random variables, and not the bar chart distribution that we used for discrete variables.
+
+- A CDF, or a cumulative distribution function, is a distribution which plots the cumulative probability of X against X.
+    - It is monotonically non decreasing in nature
+- A PDF, or Probability Density Function, however, is a function in which the area under the curve, gives you the cumulative probability.
+
+
+For discrete variables, the cumulative probability does not change very frequently. In the discrete example, we only care about what the probability is for 0, 1, 2, 3 and 4. This is because the cumulative probability will not change between, say, 3 and 3.999999. For all values between these two, the cumulative probability is equal to 0.8704.
+
+However, for the continuous variable, i.e. the daily commute time, you have a different cumulative probability value for every value of X. For example, the value of cumulative probability at 21 will be different from its value at 21.1, which will again be different from the one at 21.2 and so on. Hence, you would show its cumulative probability as a continuous curve, not a bar chart.
+
+A commonly observed type of distribution among continuous variables is the `uniform distribution`. For a continuous random variable following a uniform distribution, the value of probability density is equal for all possible values. 
+
+
+Hence, generally, PDFs are used more commonly than CDFs.
+- it is much easier to see patterns in PDFs as compared to CDFs. 
+- The PDF clearly shows uniformity, as the probability density’s value remains constant for all possible values. However, the CDF does not show any trends that help you identify quickly that the variable is uniformly distributed.
+-  it is clear that the symmetrical nature of the variable is much more apparent in the PDF than in the CDF.
+
+
+### Question
+**Cumulative Probability of Continuous Variables**
+
+Suppose you work at a sports analysis company and you want to analyse the effect a bowler’s height has on his/her performance. So, you create a list of all 5 wicket hauls in the last decade. Based on this data, they created a cumulative probability distribution for X, where X = height of the bowler who took the 5 wicket haul.
+
+Now, based on the data, you conclude that the cumulative probability, F(175.3 cm) = 0.3. In this case, which of the following statements is correct?
+
+1. P(X<175.3 cm) = 0.3
+
+2. P(X=175.3 cm) = 0
+
+
+Answer: Both 1 & 2 are correct
+You can say that P(X ≤ 175.3 cm) = P(X < 175.3 cm) + P(X = 175.3 cm). Now, since X is a continuous variable, you know that the probability of getting an exact value is zero. Hence, P(X=175.3 cm) = 0, which means that P(X ≤ 175.3 cm = P(X < 175.3 cm) + 0.
+
+---
+
+# Normal Distribution
+- PDF is symmetrical around mean, median & mode
+    (1, 2, 3 rule)
+- µ - sig to µ + σ = 68%
+- µ - 2 σ to µ + 2 σ = 95.4%
+- µ - 3 σ to µ + 3 σ = 99.7%
+
+Example:
+This is actually like saying that, if you buy a loaf of bread everyday and measure it, then - (mean weight = 100 g, standard deviation = 1 g)
+
+For 5 days every week, the weight of the loaf you bought that day will be within 99 g (100-1) and 101 g (100+1).
+
+For 20 days every 3 weeks, the weight of the loaf you bought that day will be within 98 g (100-2) and 102 g (100+2).
+
+For 364 days every year, the weight of the loaf you bought that day will be within 97 g (100-3) and 103 g (100+3).
+
+A lot of naturally occurring variables are normally distributed. For example, the heights of a group of adult men would be normally distributed. To try this out, we asked 50 male employees at the UpGrad office for their height and then plotted the probability density function using that data.
+
+| PMF                                                                    | Mean | Variance          |
+|------------------------------------------------------------------------|------|-------------------|
+| 1/root(2σ^2*pi)e<sup>-(x-µ)<sup>2</sup>/2σ<sup>2</sup></sup> | µ  | σ^2           |
+
+
+# Uniform Distribution
+
+| PMF                     | Mean    | Variance          |
+|-------------------------|---------|-------------------|
+| 1/(b-a) for x in [a, b] | (a+b)/2 | (b-a)<sup>2</sup> |
+| 0 otherwise             |         |                   |
+
+
+---
+
+**Question: Probability of Normal Random Variables**
+
+Q: Let's say that you need to find the cumulative probability for a random variable X which is normally distributed. You do not know what the value of X is or, for that matter, what the value of µ and σ is. You only know that X = µ + σ. Can you find the cumulative probability, i.e. the probability of the variable being less than µ + σ?
+
+- Yes, probability that variable is less µ + σ is 84% by 1, 2, 3 rule
+
+`Z Score` - Standard Normal Distribution
+- (X=µ)/σ
+- X => random variable
+
+
+P(-2 < Z < 2) = P (µ - 2σ < X < µ + 2σ) = 95%
+P(-2 < Z < 3) = P (µ - 2σ < X < µ + 3σ) = 97.35%
+P(Z < 1) = P (µ + σ) = 84%
+
+Z Table
+- P(Z<=2) = .7517 (from Z table)
+
+**Question: Employee Commute time**
+
+What is the probability that an employee has a daily commute time between 25.2 and 44.8? The employee time is normally distributed, with mean (μ) = 35 and standard deviation (σ) = 5.
+```py
+def z(x, µ, σ):
+    return (x-µ)/σ
+
+mean = 35
+standard_deviation = 5
+
+a = z(25.2, mean, standard_deviation)
+b = z(44.8, mean, standard_deviation)
+
+print(a, b)
+
+res = 0.975 - 0.025
+print(res)
+
+```
+
+
+#### Question
+What is the probability of a normally distributed random variable lying within 1.65 standard deviations of the mean?
+
+#### Answer
+You have to find the probability of the variable lying between μ-1.65σ and μ+1.65σ. i.e. P(μ-1.65σ < X < μ+1.65σ). In terms of Z, this becomes P(-1.65 < Z < +1.65). This would be equal to P(1.65) - P(-1.65) = 0.95 - 0.05 = 0.90.
+
+---
+
+As you can see, the value of σ is an indicator of how wide the graph is. This will be true for any graph, not just the normal distribution. A low value of σ means that the graph is narrow, while a high value implies that the graph is wider. This will happen because the wider graph will clearly have more values away from the mean, resulting in a high standard deviation.
+
+---
+
+# Summary: Continuous Probability Distributions
+- for a continuous random variable, the probability of getting an exact value is very low, almost zero. Hence, when talking about the probability of continuous random variables, you can only talk in terms of intervals. 
+    - For example, for a particular company, the probability of an employee’s commute time being exactly equal to 35 minutes was zero, but the probability of an employee having a commute time between 35 and 40 minutes was 0.2.
+
+- Hence, for continuous random variables, probability density functions (PDFs) and cumulative distribution functions (CDFs) are used, instead of the bar chart type of distribution used for the probability of discrete random variables. These functions are preferred because they talk about probability in terms of intervals.
+
+ 
+- The major difference between a PDF and a CDF is that in a CDF, you can find the cumulative probability directly by checking the value at x. However, for a PDF, you need to find the area under the curve between the lowest value and x to find the cumulative probability.
+    - PDFs are still more commonly used, mainly because it is very easy to see patterns in them. For example, for a uniformly distributed variable
+
+- The normal distribution: it is symmetric and its mean, median and mode lie at the centre.
+    - 1-2-3 rule, which states that there is a -
+        - 68% probability of the variable lying within 1 standard deviation of the mean
+        - 95% probability of the variable lying within 2 standard deviations of the mean
+        - 99.7% probability of the variable lying within 3 standard deviations of the mean
+
+- `Z Score`: To find the probability, you do not need to know the value of the mean or the standard deviation — it is enough to know the number of standard deviations away from the mean your random variable is. That is given by:
+    $Z = \frac{X-\mu}{\sigma}$ This is called the Z score, or the standard normal variable.
+    - Calcuating Z value without table: F(Z) = 1/√2π ∫(−∞ to Z)e<sup>−t<sup>2</sup>/2</sup>dt
+
+# Takeaways
+- Continuous variables are different from discrete variables. They can take a range of values. This implies that for any discrete value in a Continuous distribution, the probability of it's occurrence is very close to 0. Hence, we always talk in terms of range of values.
+- Probability Density Function (PDF) are more descriptive visually than CDFs. 
+- Normal distributions are a common case of continuous random variables. They occur in nature very frequently. The mean, median & mode all lie at the center. 
+- Converting normally distributed X to Z distribution is useful for finding probabilities with respect to σ values.
+
+
+### Practice Question
+
+**Q1:
+The regulatory authority selects a random tablet from Batch Z2. Based on previous knowledge, you know that Batch Z2 has a mean paracetamol level of 510 mg, and its standard deviation is 20 mg. What is the probability that the tablet that has been selected by the authority has a paracetamol level below 550 mg?**
+
+- Let's define X as the amount of paracetamol in the selected tablet. 
+- Now, X is a normally distributed random variable, 
+    - with mean μ = 510 mg and 
+    - standard deviation σ = 20 mg. 
+- Now, to find the probability of X being less than 550, i.e. P(X<550). 
+    - Converting this to Z, you get P(X<550) = P(Z<{550-510}/20) = P(Z<2) = 0.977, or 97.7%.
+
+---
+
+**Q2:
+Now, the company’s QC (Quality Control) department comes and selects a tablet at random from Batch Z2. It is interested in finding if the paracetamol level is above 450 mg or not.
+What is the probability that the tablet selected by QC has a paracetamol level above 450 mg?**
+
+- Let’s define X as the amount of paracetamol in the selected tablet. 
+- Now, X is a normally distributed random variable, 
+    - with mean μ = 510 mg and 
+    - standard deviation σ = 20 mg. 
+- Now, to find the probability of X being more than 450, i.e. P(X>450). 
+    - Converting this to Z, we get P(X>450) = P(Z>{450-510}/20) = P(Z>-3) = 1 - P(Z<-3) = 0.9987, or 99.87%.
+
+---
+
+**Q3:
+Now, let’s say that QC decides to sample one more tablet. This time, it selects a tablet from Batch Y4. Based on previous knowledge, we know that Batch Y4 has a mean paracetamol level of 505 mg, and its standard deviation is 25 mg. This time, QC wants to check both the upper limit and the lower limit for the paracetamol level. What is the probability that the tablet selected by QC has a paracetamol level between 450 mg and 550 mg?**
+
+
+- Let’s define X as the amount of paracetamol in the selected tablet. 
+- Now, X is a normally distributed random variable, 
+    - with mean μ = 505 mg and 
+    - standard deviation σ = 25 mg. 
+- Now, to find the probability of X being more than 450 and less than 550, i.e. P(450 < X < 550). 
+    - Converting this to Z, we get P(450 < X < 550) = P({450-505}/25 < Z < {550-505}/25) = P(-2.2 < Z < 1.8) = P(Z < 1.8) - P(Z < -2.2) = 0.9641 - 0.0139 = 0.9502, or 95%.
+
+
 ---
 
 
@@ -179,3 +487,11 @@ P(x) = (1 − p)<sup>x-1</sup>p
 - https://www.statisticshowto.com/probability-density-function/
 - https://stattrek.com/probability-distributions/negative-binomial.aspx
 - https://www.statisticshowto.com/negative-binomial-experiment/
+- https://www.khanacademy.org/math/ap-statistics/random-variables-ap/binomial-random-variable/e/identifying-binomial-variables
+- https://www.math.arizona.edu/~rsims/ma464/standardnormaltable.pdf
+- https://online.stat.psu.edu/stat414/lesson/15/15.1 - exponential
+- https://online.stat.psu.edu/stat414/lesson/15/15.4 - gamma
+- https://online.stat.psu.edu/stat414/lesson/15/15.8 - chi-squared
+
+# Additional Reading
+- https://www.youtube.com/watch?v=G7zT9MljJ3Y
