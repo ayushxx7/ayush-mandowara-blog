@@ -7,6 +7,23 @@ author: "Ayush"
 tags: ["data-analysis", "statistics"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Sampling Terminology](#sampling-terminology)
+  * [Why taking large number of samples is good?](#why-taking-large-number-of-samples-is-good)
+* [Central Limit Theorem](#central-limit-theorem)
+* [Confidence Level](#confidence-level)
+* [Margin of Error](#margin-of-error)
+* [Confidence Interval](#confidence-interval)
+* [Takeaways](#takeaways)
+* [Additional Information](#additional-information)
+  * [4 types of sampling](#4-types-of-sampling)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
+
 # Sampling Terminology
 1. Sample Mean ($\bar X$)
 2. Population Mean ($\mu$)
@@ -55,3 +72,16 @@ We can use the central limit theorem to calculate population mean from sample me
 - Using Central Limit Theorem, we can assume that sample mean in normally distributed (given that sample size is greater than 30)
 - We can therefore apply properties of normal distribution to answer questions such as what is the probability that the population mean will be within certain limits w.r.t to sample mean. This probability is called the confidence level.
 - The interval value is called the condifence interval. It is given by the formula: [$\bar X - \frac{Z^{*}S}{\sqrt n}$] to [$\bar X + \frac{Z^{*}S}{\sqrt n}$] where Z* corresponds to the Z table, S is the standard deviation of the sample.
+
+
+# Additional Information
+
+## 4 types of sampling
+- random
+- opportunity
+- volunteer - whoever is available
+- stratified - selection from subgroups
+
+# References
+- https://canview.com/2020/03/define-booster-sample-marketing-research-when-to-use/
+- https://www.optimizely.com/optimization-glossary/ab-testing/
