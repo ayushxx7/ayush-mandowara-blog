@@ -48,3 +48,6 @@ I have hands on experience with data science libraries such as pandas & numpy.
 I have acquired a beginner certification in Pandas.  
 I am pursuing a Master's degree in Machine Learning and Artificial Intelligence.  
 I try to push at least one commit every day to Github: github.com/ayushxx7.
+
+# Statement
+I automate to help free up business teams from working on mundane, repetitive tasks, allowing them to learn new technical skills and accelerating their contribution to their organization's growth and success by engaging in high-value activities & innovation
