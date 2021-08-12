@@ -256,7 +256,7 @@ The hospital has a total of 10 patients suffering from pancreatic cancer. What i
 
 Answer:
 There are a total of 10 patients and the probability of surviving the first year is 40%, or 0.4 for each of them. Hence, the probability of 4 patients surviving is given by 
-$P (X=4) = \binom{10}{4}*(0.4)*4(0.6)*6 = 0.251$ or $25.1 \%$
+$P (X=4) = \binom{10}{4}*(0.4)^4(0.6)^6 = 0.251$ or $25.1 \%$
 ```py heading='exact 4 patients'
 from scipy.stats import binom
 # setting the values
@@ -280,7 +280,7 @@ print('sum ev:', sum(ev_list))
 
 #### What is the probability that the number of patients that survive the first year after receiving the treatment would not be more than 2?
 Let’s define X as the number of patients that will survive the first year after treatment. Now, according to the question, you have to find the probability of that number being less than or equal to 2, i.e. $P(X<=2). You know that P(X<=2) = P(X=0) + P(X=1) + P(X=2) = 
-\binom{10}{0}( 0.4) 0 ( 0.6) 10 + \binom{10}{1} ( 0.4) 1 ( 0.6) 9 + \binom{10}{2}( 0.4) 2 ( 0.6) 8 = 0.167$ or $16.7\%$
+\binom{10}{0}( 0.4)^0 ( 0.6)^{10} + \binom{10}{1} ( 0.4)^1 ( 0.6)^9 + \binom{10}{2}( 0.4)^2 ( 0.6)^8 = 0.167$ or $16.7\%$
 
 ---
 
@@ -288,7 +288,7 @@ Let’s define X as the number of patients that will survive the first year afte
 
 What happens when we talk about the probability of continuous random variables, such as time, weight etc.? 
 
-Since these two functions talk about probabilities in terms of intervals rather than exact values, it is advisable to use them CDF & PDF when talking about continuous random variables, and not the bar chart distribution that we used for discrete variables.
+It is advisable to use CDF & PDF when talking about continuous random variables, and not the bar chart distribution that we use for discrete variables.
 
 - A CDF, or a cumulative distribution function, is a distribution which plots the cumulative probability of X against X.
     - It is monotonically non decreasing in nature
@@ -328,9 +328,13 @@ You can say that P(X ≤ 175.3 cm) = P(X < 175.3 cm) + P(X = 175.3 cm). Now, sin
 # Normal Distribution
 - PDF is symmetrical around mean, median & mode
     (1, 2, 3 rule)
-- µ - sig to µ + σ = 68%
-- µ - 2 σ to µ + 2 σ = 95.4%
-- µ - 3 σ to µ + 3 σ = 99.7%
+- $µ - \sigma$ to µ + σ = 68%
+- $µ - 2 σ$ to µ + 2 σ = 95.4%
+- $µ - 3 σ$ to µ + 3 σ = 99.7%
+
+| PMF                                                                    | Mean | Variance          |
+|------------------------------------------------------------------------|------|-------------------|
+| $\frac{1}{\sqrt {2\sigma^{2} \pi e^{-\frac{(x-\mu)^2}{2\sigma^2}}}} = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}$ | µ  | $σ^2$           |
 
 Example:
 This is actually like saying that, if you buy a loaf of bread everyday and measure it, then - (mean weight = 100 g, standard deviation = 1 g)
@@ -341,18 +345,14 @@ For 20 days every 3 weeks, the weight of the loaf you bought that day will be wi
 
 For 364 days every year, the weight of the loaf you bought that day will be within 97 g (100-3) and 103 g (100+3).
 
-A lot of naturally occurring variables are normally distributed. For example, the heights of a group of adult men would be normally distributed. To try this out, we asked 50 male employees at the UpGrad office for their height and then plotted the probability density function using that data.
-
-| PMF                                                                    | Mean | Variance          |
-|------------------------------------------------------------------------|------|-------------------|
-| 1/root(2σ^2*pi)e<sup>-(x-µ)<sup>2</sup>/2σ<sup>2</sup></sup> | µ  | σ^2           |
+A lot of naturally occurring variables are normally distributed. For example, the heights of a group of adult men would be normally distributed. 
 
 
 # Uniform Distribution
 
 | PMF                     | Mean    | Variance          |
 |-------------------------|---------|-------------------|
-| 1/(b-a) for x in [a, b] | (a+b)/2 | (b-a)<sup>2</sup> |
+| $\frac{1}{(b-a)}$ for x in [a, b] | $\frac{(a+b)}{2}$ | $(b-a)^2$ |
 | 0 otherwise             |         |                   |
 
 
