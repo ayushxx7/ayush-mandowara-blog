@@ -424,6 +424,7 @@ As you can see, the value of σ is an indicator of how wide the graph is. This w
         - 68% probability of the variable lying within 1 standard deviation of the mean
         - 95% probability of the variable lying within 2 standard deviations of the mean
         - 99.7% probability of the variable lying within 3 standard deviations of the mean
+    ![OneTwoThreeRule](./one_two_three_rule.jpg)
 
 - `Z Score`: To find the probability, you do not need to know the value of the mean or the standard deviation — it is enough to know the number of standard deviations away from the mean your random variable is. That is given by:
     $Z = \frac{X-\mu}{\sigma}$ This is called the Z score, or the standard normal variable.
