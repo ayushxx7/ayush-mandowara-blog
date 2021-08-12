@@ -337,3 +337,4 @@ See [this question on StackOverflow](https://stackoverflow.com/questions/1630601
 - [Intentional Git commit message](https://stevetarver.github.io/2016/02/19/intentional-git-comments.html)
 - [Telling stories with your Git history](https://www.futurelearn.com/info/blog/telling-stories-with-your-git-history)
 - [How To Write a Good Commit Message](http://api.coala.io/en/latest/Developers/Writing_Good_Commits.html)
+- https://www.designcise.com/web/tutorial/how-to-apply-git-stash-to-a-different-branch#apply-stashed-changes-to-a-new-branch
