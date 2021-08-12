@@ -289,7 +289,7 @@ In the t-table,
     - significance level for two tailed and one tailed test are mentioned
     - [t-table](https://cdn.upgrad.com/UpGrad/temp/539fd5d0-aaf0-4502-8336-6050098ad8ce/t-table.pdf)
 
-![T-Table](.\use-t-distribution.png)
+![T-Table](./use-t-distribution.png)
 
 # t-test
 Question:   
