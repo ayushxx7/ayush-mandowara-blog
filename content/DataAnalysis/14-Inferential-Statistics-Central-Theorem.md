@@ -49,6 +49,7 @@ We can use the central limit theorem to calculate population mean from sample me
 # Confidence Level
 - Probability associated with the claim is called confidence level
 - Z* values for commonly used confidence levels
+
     | Confidence Level | Z*     |
     |------------------|--------|
     | 90%              | +-1.65 |
