@@ -495,3 +495,4 @@ Now, let’s say that QC decides to sample one more tablet. This time, it select
 
 # Additional Reading
 - https://www.youtube.com/watch?v=G7zT9MljJ3Y
+- https://www.sciencedirect.com/topics/earth-and-planetary-sciences/normal-density-functions
