@@ -69,11 +69,11 @@ We can use the central limit theorem to calculate population mean from sample me
 # Takeaways
 - When the population size is large, it is not feasible to collect values from each of the data points
 - We can use sampling, where we take a subset of data and use it for estimating values for the whole population
-- We should take large number of samples as it removes sample bias by accomodating the diversity that is inherent in the population
+- We should take large number of samples as it removes sample bias by accommodating the diversity that is inherent in the population
 - Central limit theorem can be used to find population mean by sample means.
 - Using Central Limit Theorem, we can assume that sample mean in normally distributed (given that sample size is greater than 30)
 - We can therefore apply properties of normal distribution to answer questions such as what is the probability that the population mean will be within certain limits w.r.t to sample mean. This probability is called the confidence level.
-- The interval value is called the condifence interval. It is given by the formula: [$\bar X - \frac{Z^{*}S}{\sqrt n}$] to [$\bar X + \frac{Z^{*}S}{\sqrt n}$] where Z* corresponds to the Z table, S is the standard deviation of the sample.
+- The interval value is called the confidence interval. It is given by the formula: [$\bar X - \frac{Z^{*}S}{\sqrt n}$] to [$\bar X + \frac{Z^{*}S}{\sqrt n}$] where Z* corresponds to the Z table, S is the standard deviation of the sample.
 
 
 # Additional Information
