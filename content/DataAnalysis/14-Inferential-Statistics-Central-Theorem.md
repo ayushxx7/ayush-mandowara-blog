@@ -32,6 +32,8 @@ tags: ["data-analysis", "statistics"]
 5. Population Standard Deviation ($\sigma$)
 6. Sample Standard Deviation ($S$)
 
+![NotationsForSampling](.\notations_for_sampling.png)
+
 ## Why taking large number of samples is good?
 - removes sample bias by accomodating the diversity that is inherent in the population
 
