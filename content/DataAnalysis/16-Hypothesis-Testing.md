@@ -281,12 +281,15 @@ The most important use of the t-distribution is that you can approximate the val
 The calculations of t-distribution and normal distribution are similar. The methodology remains the same. The only difference is that instead of the Z-Table we use the the T-Table and Zc in this case is called t-statistic or t-critical.
 
 In the t-table,
-one the y-axis we have the degree of freedom
+- one the y-axis we have the degree of freedom
     - df = sample size - 1
-on the x-axis we have the significance level
+
+- on the x-axis we have the significance level
     - alpha = percentage / 100
     - significance level for two tailed and one tailed test are mentioned
     - [t-table](https://cdn.upgrad.com/UpGrad/temp/539fd5d0-aaf0-4502-8336-6050098ad8ce/t-table.pdf)
+
+![T-Table](.\use-t-distribution.png)
 
 # t-test
 Question:   
