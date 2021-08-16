@@ -69,12 +69,13 @@ Since, $P(A \cap B) = P(A|B).P(B) = P(B|A).P(B)$
 ## Note
 - Sample Space for Joint Probability remains same while it changes for Conditional probability
 
-
 # Takeaways
 - Conditional Probability: It is the probability of an event occurring given some other event has already occurred
 - Joint Probability: It is the probability that event A and event B both have occurred
 - Bayes Theorem: P(A|B) = P(A)*P(B|A)/P(B) can be derived using a two-way contingency matrix
 - Sample Space for Joint Probability remains same while it changes for Conditional probability
+
+---
 
 # Principles from Bayes Thinking
 1. Remember your priors
@@ -104,7 +105,7 @@ $P(C_i|X = \frac{P(X|C_i)P(C_i)}{P(X)}$
 - tells us the likelihood of a data point occurring in a particular class
 
 ## Denominator
-- The effect of the denominator P(x) is not incorporated while calculating probabilities as it is the same for both the classes and hence, can be ignored without affecting the final outcome.# Reference
+- The effect of the denominator P(x) is not incorporated while calculating probabilities as it is the same for both the classes and hence, can be ignored without affecting the final outcome.
 
 ## Posterior Probability
 - $P(C_i|X)$
@@ -114,6 +115,47 @@ $P(C_i|X = \frac{P(X|C_i)P(C_i)}{P(X)}$
 - For classification, we don't need to compute the denominator, we can just compare the numerators for both cases (as the denominator will anyways cancel out) and choose which class the test point belongs to.
 - We assume that variables are conditionally independent when implementing Naive Bayes classification
 - Prior probability can have large impact on New (Posterior) probability while likelihood function helps in classifying where the test points lies (i.e. in which class)
+
+---
+
+# Document Classification
+
+## Bag of Words
+The sentences are broken down into words and the ordering doesn't matter anymore as if it were put in a bag and shuffled.
+
+## Stop Words
+These are generic words such as and, the, of, which don't hold any intrinsic values when it comes to classifying documents.
+
+## Multinomial Naive Bayes
+- If a word from dictionary occurs multiple times in the document, we raise the power of it's probability by that number. 
+- Suppose that P(great) = 0.1 and P(world) = 0.3 and the document is "great great world", then it's likelihood will be expressed as ${(0.1)}^2*{(0.3)}$.
+
+## Laplace Smoothing
+- Document cannot be classified because probability of one of terms is 0.
+- Apply Laplace Smoothing, which adds `1` to all frequencies, hence no term has zero probability
+- Prob After Smoothing = $\frac{curr\;frequency + 1}{curr\;total + |v|}$
+
+| word   | freq | prob | freq after smoothing | prob after smoothing |
+|--------|------|------|----------------------|----------------------|
+| power  | 1    | 1/3  | 2                    | 2/6                  |
+| food   | 0    | 0    | 1                    | 1/6                  |
+| hunger | 2    | 2/3  | 3                    | 3/6                  |
+
+## Note
+If there are words occurring in a test sentence which are not a part of the dictionary, then they will not be considered as part of the feature vector since it only considers the words that are part of the dictionary. These new words will be completely ignore.
+
+## Bernoulli Naive Bayes
+- doesn't care about the frequency of occurrence of a word in the dictionary. 
+- Bernoulli Naive Bayes is concerned only with whether the word is present or not in a document, whereas Multinomial Naive Bayes counts the no. of occurrences of the words as well.
+- Likelihood and Laplace Smoothing are different from Naive Bayes Classifier.
+- `Likelihood Function`: 
+    - $\displaystyle P(w_1,w_2,\ldots,w_n|C) = P(d|C) = \prod_{n=1}^{|v|}[d_iP(w_i|C)+(1-d_i)(1-P(w_i|C))]$
+    - d is the feature vector of document
+
+- `Laplace Smoothing`: 
+    - $P(w_t|C) = \frac{n_c(w_t)+1}{N_c+2}$
+    - $n_c(w_t)$ is the number of documents in class C in which word $w_t$ is present
+    - $N_c$ is the total no of documents in class C
 
 # References
 
