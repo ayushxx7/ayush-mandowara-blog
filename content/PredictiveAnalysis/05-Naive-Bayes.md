@@ -130,6 +130,10 @@ These are generic words such as and, the, of, which don't hold any intrinsic val
 - If a word from dictionary occurs multiple times in the document, we raise the power of it's probability by that number. 
 - Suppose that P(great) = 0.1 and P(world) = 0.3 and the document is "great great world", then it's likelihood will be expressed as ${(0.1)}^2*{(0.3)}$.
 
+## Zero Probability Problem
+While trying to calculate the likelihood of a test document for a given class, it is possible that there exist certain words which although are a part of the dictionary but don't appear in the training documents of that class like the word pepsi does not appear in documents of hot class but it does in cold class.  Then, the probability of that word for that class becomes zero ( P(pepsi|hot) =0 )  and it makes the complete likelihood term zero. This is called the zero-probability problem.  
+To counter this problem, a ‘1’ is added to the total of every word count of all the words of the dictionary for that class. This increases the total word count for that class by the length of the dictionary. This technique is called Laplace Smoothing. 
+
 ## Laplace Smoothing
 - Document cannot be classified because probability of one of terms is 0.
 - Apply Laplace Smoothing, which adds `1` to all frequencies, hence no term has zero probability
@@ -148,6 +152,7 @@ If there are words occurring in a test sentence which are not a part of the dict
 - doesn't care about the frequency of occurrence of a word in the dictionary. 
 - Bernoulli Naive Bayes is concerned only with whether the word is present or not in a document, whereas Multinomial Naive Bayes counts the no. of occurrences of the words as well.
 - Likelihood and Laplace Smoothing are different from Naive Bayes Classifier.
+
 - `Likelihood Function`: 
     - $\displaystyle P(w_1,w_2,\ldots,w_n|C) = P(d|C) = \prod_{n=1}^{|v|}[d_iP(w_i|C)+(1-d_i)(1-P(w_i|C))]$
     - d is the feature vector of document
@@ -157,6 +162,17 @@ If there are words occurring in a test sentence which are not a part of the dict
     - $n_c(w_t)$ is the number of documents in class C in which word $w_t$ is present
     - $N_c$ is the total no of documents in class C
 
+- `Binarization of a feature vector`
+    - Converting all non-zero word count of a feature vector to 1 and leaving zero counts as it is
+
+# Determine if two variables are independent
+$P(A \cap B) = P(A|B).P(B) = P(A)*P(B)$ must hold true
+
+# Takeaways
+1. Naive Bayes Classifier is generally very good for Document classification. Here the documents are converted to bag of words and stop words are removed. 
+2. Multinomial Naive Bayes considers frequency of occurence of a word, while Bernoulli Naive Bayes only considers whether a word has appeared in the document or not
+3. Laplace Smoothing is applied to counter Zero Probability Problem (likelihood function becomes 0 because one of the probabilities is zero)
+
 # References
 
 - http://www.malinc.se/math/latex/basiccodeen.php
@@ -165,3 +181,4 @@ If there are words occurring in a test sentence which are not a part of the dict
 - https://cdn.upgrad.com/UpGrad/temp/e3ff7cbe-4892-467f-8869-5eb56b889fda/Worldly%20Wisdom%20in%20an%20Equation.pdf
 - https://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification
 - https://math.stackexchange.com/questions/23093/could-someone-explain-conditional-independence
+- https://stats.stackexchange.com/questions/105501/understanding-roc-curve
