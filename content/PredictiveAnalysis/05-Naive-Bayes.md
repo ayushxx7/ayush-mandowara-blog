@@ -168,6 +168,50 @@ If there are words occurring in a test sentence which are not a part of the dict
 # Determine if two variables are independent
 $P(A \cap B) = P(A|B).P(B) = P(A)*P(B)$ must hold true
 
+# Model Building Process for Naive Bayes Classifier
+1. Load Data
+2. Identify target (class) column and `map` it to numeric values
+3. Convert dataset to array using `.values()`
+4. Convert text values to bag of words notation using `CountVectorize`
+    - use `stop_words` to remove common words such as 'and', 'the' which don't add value for classification
+    - use `min_df` & `max_df` to limit what frequency of words will be picked
+        - Suppose we don't want to consider those (rare) words which have appeared only in 3% of the documents, or say those (extremely common ones) which have appeared in 80% of the documents.
+        - CountVectorizer(stop_words='english', min_df=.03, max_df=.8)
+5. Fit using `vec.fit(X_train)` on training set
+6. Transform using `vec.transform(X_train)` on Training as well as Test Set 
+    - This converts the data to Compressed Spare Row format
+    - Note: Do not ever fit on test set, only use transform on test set
+7. Build a model on training set
+
+```py heading='Bernoulli Naive Bayes Model'
+from sklearn.naive_bayes import BernoulliNB
+
+# instantiating bernoulli NB class
+bnb=BernoulliNB()
+
+# fitting the model
+bnb.fit(X_transformed, y_train)
+
+# predicting probability of test data
+prob_bnb = bnb.predict_proba(X_test)
+prob_bnb
+
+# predicting class
+prob_bnb = bnb.predict(X_test)
+prob_bnb
+```
+
+8. Analyze model using metrics from sklearn
+    - accuracy_score
+    - roc_curve, auc
+    - confusion matrix
+    - precision
+    - recall
+    - specificity
+    - sensitivity
+
+9. Choose model based on business requirement. Some business problems will prefer specificity over sensitivity, others will want the opposite.
+
 # Takeaways
 1. Naive Bayes Classifier is generally very good for Document classification. Here the documents are converted to bag of words and stop words are removed. 
 2. Multinomial Naive Bayes considers frequency of occurence of a word, while Bernoulli Naive Bayes only considers whether a word has appeared in the document or not
