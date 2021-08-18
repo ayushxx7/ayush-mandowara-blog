@@ -7,6 +7,39 @@ author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [Choice of Model Selection](#choice-of-model-selection)
+    * [Practical Issues](#practical-issues)
+    * [Domain Knowledge](#domain-knowledge)
+    * [Class of Models](#class-of-models)
+* [Occams Razor](#occams-razor)
+* [Which model should be picked](#which-model-should-be-picked)
+    * [Example](#example)
+    * [Question](#question)
+* [System](#system)
+    * [Example](#example-1)
+* [Model](#model)
+    * [Example](#example-2)
+    * [Relation between learning algorithm and model](#relation-between-learning-algorithm-and-model)
+* [Hypothesis Class](#hypothesis-class)
+    * [Example](#example-3)
+* [Model complexity](#model-complexity)
+* [Advantages of Simplicity](#advantages-of-simplicity)
+    * [Ways of measuring simplicity](#ways-of-measuring-simplicity)
+* [Overfitting](#overfitting)
+    * [Example](#example-4)
+* [Bias vs Variance Tradeoff](#bias-vs-variance-tradeoff)
+    * [Variance](#variance)
+    * [Bias](#bias)
+    * [Example](#example-5)
+* [Regularization](#regularization)
+* [Takeaways](#takeaways)
+
+<!-- vim-markdown-toc -->
+
 # Purpose
 The central issue in all of machine learning is how do we extrapolate learnings from a finite amount of available data to all possible inputs ‘of the same kind’? Training data is always finite, and yet, the model is supposed to learn all about the task at hand from it and perform well on unseen data. 
 
@@ -36,7 +69,7 @@ Different Models can have properties to deal with the following different kinds 
 4. Large amount data
 5. Missing data
 
-# Occam’s Razor 
+# Occams Razor 
 - Making your model is as simple as possible but no simpler than that or, in other words, a model should be as simple as possible but robust.
 - When in doubt, choose a simpler model
 - Occam’s razor does not suggest that a model should be unjustly simplified until no further simplification is possible. It suggests that when faced with a trade-off between a complex and a simple model, with all other things being roughly equal, you are better off choosing the simpler one.
