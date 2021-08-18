@@ -1,7 +1,7 @@
 ---
 title: Naive Bayes Classification
 description: Fundamentals of Naive Base Model
-date: "2021-08-15"
+date: "2021-08-17"
 image: "naive_bayes.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
