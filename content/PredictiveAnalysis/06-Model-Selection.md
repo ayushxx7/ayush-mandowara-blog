@@ -263,10 +263,10 @@ In each iteration, you keep one fold as the test set and the remaining you use f
 from sklearn.model_selection import cross_val_score
 scores = cross_val_score(lm, X_train, y_train, scoring='neg_mean_squared_error', cv=5)
 ```
-![kfoldcv](.\cv.png)
+![kfoldcv](cv.png)
 
 ## Grid Search Cross-Validation
-![gridsearch](.\grid_search_image.png)
+![gridsearch](./grid_search_image.png)
 
 The following three key steps are to be taken while tuning the hyperparameters in Python:  
 
