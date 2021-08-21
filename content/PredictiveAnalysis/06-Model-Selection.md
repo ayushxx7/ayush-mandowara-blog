@@ -315,8 +315,12 @@ model_cv.fit(X_train, y_train)
 **Why should we have disjoint training and test data sets? (This means that a model should not be tested with data on which it is trained.)**
 - Any model needs to be tested on how well it would work in the proverbial ‘real’ world because once a model has seen the data, it can attempt to ‘memorise’ it, and once that is done, testing it on the same data set will not help in determining its performance on unseen data. In an ideal scenario wherein we have plenty of data, we should divide the data into three sets. The first one would be the training data on which we shall train the model. The second one would be the validation data on which we shall test the model and tune the hyperparameters. The third one would be the test data that we will use for assessing our model.
 
+---
+
 **Among Weak Learners and Strong Learners, which are more likely to have a low variance?**
 - Weak Learners: Weak learners create simpler models that have a lower variance. They are not able to model complex relationships and, hence, create a more generic model.
+
+---
 
 **Suppose two linear regression models are provided on the same data set with 100 attributes. Model A has 10 attributes, whereas model B has 90 attributes. What can you say about the two models?**
 - Model B has tried to memorise the data, and when the training data changes slightly, the expected results will change.
@@ -326,22 +330,32 @@ model_cv.fit(X_train, y_train)
 - Model A will have a higher bias.
     - Model A has made numerous assumptions about the data to keep the model simple, leading to a high bias.
 
+---
+
 **Suppose data is generated via a polynomial equation of degree 4 (i.e., the said polynomial equation will perfectly fit the given data). Which of the following statements is true in this case?**
 - Linear regression will have a high bias and a low variance.
     - Linear regression would create a degree-1 polynomial that would be less complex than the degree-4 polynomial and, hence, would have a higher bias. Since the model is less complex and will not overfit, it would have a low variance.
 - A polynomial equation of degree 4 will have a low bias and a low variance.
     - Since the equation fits the data perfectly, both bias and variance will be low.
 
+---
+
 **How do you measure the variance of a model?**
 - By measuring how much does the estimates of the model change on the test data on changing the training data
     - Variance measures the extent of change in a model with respect to the training data.
 
+---
+
 **Is it always possible, in principle, to reduce the training error to zero?**
 - Yes, you could always make the model memorise the entire training data set.
+
+---
 
 **What is regularization?**
 - It is a technique that is used to strike a balance between model complexity and model accuracy on training data.
     - Regularization does not improve accuracy; it improves the balance between accuracy and complexity.
+
+---
 
 **Which of the following statements is correct with respect to k-fold cross validation?**
 
@@ -351,6 +365,8 @@ model_cv.fit(X_train, y_train)
 | As k increases, the training time for k-fold cross validation increases.             | T   | 
 - Training happens for k times, and a higher k would imply a higher run time for training with k-fold cross validation. 
 - Also, a higher k implies that the training set is bigger and is a better representation of the actual data each time.
+
+---
 
 **Which of the following about k-fold cross validation is not true?**
 
@@ -363,3 +379,5 @@ model_cv.fit(X_train, y_train)
 
 - With k-fold cross validation, training happens k times while each sample is used as validation data at least once.
 - Overfitting is possible with cross validation. Cross-validation does not prevent overfitting by itself, but it may help in identifying a case of overfitting.
+
+---
