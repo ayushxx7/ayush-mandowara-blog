@@ -24,6 +24,7 @@ tags: ["python", "data-analysis", "pandas"]
     * [Selecting values of a particular quantile in Pandas DataFrame](#selecting-values-of-a-particular-quantile-in-pandas-dataframe)
     * [Create Day column from Date Time column in Pandas](#create-day-column-from-date-time-column-in-pandas)
     * [Percentage Wise column distribution](#percentage-wise-column-distribution)
+* [Frequency Table using pd.crosstab](#frequency-table-using-pd.crosstab)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -192,5 +193,11 @@ df = pd.read_csv('https://query.data.world/s/vbdcsohcytuslkklvq851k2b8jockf')
 print(round(df.X.value_counts(normalize=True)*100,2))
 ```
 
+# Frequency Table using pd.crosstab
+```py heading='Frequency using pd.crosstab'
+import pandas as pd
+df = pd.DataFrame({'Role': ['HR', 'HR', 'SDE'], 'Gender': ['Male', 'Female', 'Female']})
+pd.crosstab(df.Role, df.Gender)
+```
 # References
 - [Selecting Subsets using loc & iloc](https://medium.com/dunder-data/selecting-subsets-of-data-in-pandas-6fcd0170be9c)
