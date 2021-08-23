@@ -46,12 +46,18 @@ tags: ["data-analysis", "statistics"]
     * [1-sample t-test: testing the value of a population mean](#1-sample-t-test-testing-the-value-of-a-population-mean)
     * [2-sample t-test: testing for difference across populations](#2-sample-t-test-testing-for-difference-across-populations)
     * [Paired tests: repeated measurements on the same individuals](#paired-tests-repeated-measurements-on-the-same-individuals)
+    * [Formula for two-sample t-test](#formula-for-two-sample-t-test)
 * [Summary](#summary-1)
     * [T-distribution:](#t-distribution-1)
     * [Two-sample mean test - paired:](#two-sample-mean-test---paired)
     * [Two-sample mean test - unpaired:](#two-sample-mean-test---unpaired)
     * [Two-sample proportion test:](#two-sample-proportion-test-1)
-    * [A/B Testing:](#ab-testing)
+    * [A/B Testing](#ab-testing)
+* [F-Test](#f-test)
+* [ANOVA - Analysis of Variance](#anova---analysis-of-variance)
+    * [Variance](#variance)
+    * [Key Terms](#key-terms)
+    * [Degrees of Freedom](#degrees-of-freedom)
 * [References:](#references)
 
 <!-- vim-markdown-toc -->
@@ -378,6 +384,11 @@ stats.ttest_rel()
 stats.ttest_rel(column_1,column_2)  
 ```
 
+## Formula for two-sample t-test
+$\displaystyle t_{df} = \frac{\bar x_1 − \bar x_2 − μ_1 − μ_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$  
+where $df$ is smalerr of $n_1 - 1$ or $n_2-1$
+
+
 # Summary
 ## T-distribution:
 - A T-distribution is used whenever the standard deviation of the population is unknown
@@ -399,10 +410,63 @@ stats.ttest_rel(column_1,column_2)
 - It could be True/False, 1/0, Yes/No, Male/Female, Success/Failure, etc. 
  
 
-## A/B Testing:
+## A/B Testing
 - A/B testing is a direct industry application of the two-sample proportion test
 - It is a widely used process in digital companies in the ecommerce, manufacturing and advertising domains
 - It provides a way to test two different versions of the same element and see which one performs better
+
+# F-Test
+It is used when there are more than 2 groups as the t-test in such cases becomes tedious. The reason is that we have to perofrm the tests for each combination of the groups. Moreover, the type 1 error increases in this process.
+
+F-tests are named after the test statistic F, which was named in honor of Sir Ronald Fisher. The **F-statistic** is simply **a ratio of two variances.**
+
+To use the F-test to determine whether group means are equal, all you need to do is include the correct variances in the ratio. In one-way ANOVA, the F-statistic is given by this ratio:
+
+$F = \displaystyle \frac{\text{Variation between the sample means}}{\text{Variation within the samples}} = \frac{MSB}{MSW}$
+
+# ANOVA - Analysis of Variance
+ANOVA can determine whether the means of three or more groups are different. It uses F-Tests to statistically test the equality of means.
+
+## Variance
+Variance is the average squared deviation of a data point from the distribution mean. The distance between the sample mean and each data point is measured and squared. Then, you add it together and take the average. 
+
+$\displaystyle s^2 = \frac{\sum(x-\bar x)^2}{n-1}$  
+Here, 
+- s2 represents the variance, 
+- x represents the sample data points, 
+- x-bar represents the sample mean, 
+- and n represents the number of sample points.
+
+
+## Key Terms
+Total Sum of Squares = Sum of Squares between + Sum of squares within the group i.e. TSS = SSB + SSW
+
+- $\displaystyle SS_{total} = \sum_{j=1}^p\sum_{i=1}^{n_j}(x_{ij} - \bar x)^2$
+- $\displaystyle SS_{between} = \sum_{j=1}^pn_j(\bar x_{j} - \bar x)^2$
+- $\displaystyle SS_{within} = \sum_{j=1}^p\sum_{i=1}^{n_j}(x_{ij} - x_j)^2$
+
+Here, 
+- ‘i’ represents the observations in a group or a treatment level, and 
+- ‘j’ refers to a particular group or a treatment level.
+
+- $n_j$: It represents the number of observations in a group. In your case, it will be the number of times feedback is received for, say, Snapdeal.
+- $x_{ij}$:It represents all the observations that have been recorded in the dataset.
+- $\bar x_j$: It represents the mean of a particular group or treatment.
+- $\bar x$: It represents the grand mean of all the observations.
+
+## Degrees of Freedom
+
+| Type            | degree of freedom (df)                          |
+|-----------------|-------------------------------------------------|
+| between groups  | number of groups - 1                            |
+| within a group | total number of observations - number of groups |
+| complete data   | total number of observations - 1                |
+
+Mean Square $\displaystyle = \frac{\text{sum of squares}}{df}$
+
+- If caculated F &lt; critical F, you will fail to reject the null hypothesis.
+- If caculated F &gt; critical F, you will reject the null hypothesis.
+
 
 ---
 
