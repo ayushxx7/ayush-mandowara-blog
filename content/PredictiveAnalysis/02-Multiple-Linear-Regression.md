@@ -28,8 +28,9 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Dealing with Categorical Variables](#dealing-with-categorical-variables)
 * [Feature Scaling](#feature-scaling)
     * [Effect of scaling](#effect-of-scaling)
-    * [MinMaxScaling](#minmaxscaling)
+    * [MinMaxScaling or Normalization](#minmaxscaling-or-normalization)
     * [Standardization](#standardization)
+* [Note](#note)
     * [Scaling Categorical Variables](#scaling-categorical-variables)
 * [Model Assessment and Comparison - Selecting the best model](#model-assessment-and-comparison---selecting-the-best-model)
     * [$Adjusted\;R^2$](#adjustedr2)
@@ -163,16 +164,20 @@ Multicollinearity refers to the phenomenon of having related predictor variables
 
 - If target variable is scaled then in final prediction, it should be rescaled for interpretation
 
-## MinMaxScaling
-- also called Normalization
+## MinMaxScaling or Normalization
+- Normalization is generally used when you know that the distribution of your data does not follow a Gaussian distribution. This can be useful in algorithms that do not assume any distribution of the data like K-Nearest Neighbors and Neural Networks. It rescales the values into a range of [0,1]
 - get the values between 0 and 1
 - $X_{changed} = \frac{X-X_{min}}{X_{max}-X_{min}}$
-- Generally Min-Max Scaling is preferred when there are outliers in the data
 
 ## Standardization
+- Standardization, on the other hand, can be helpful in cases where the data follows a Gaussian distribution. However, this does not have to be necessarily true. Also, unlike normalization, standardization does not have a bounding range. So, even if you have outliers in your data, they will not be affected by standardization. It rescales data to have a mean of 0 and a standard deviation of 1
 - also called Z-score Normalization
 - subtracting the mean and dividing by standard deviation such that the variable is centered at zero and the standard deviation is 1
 - Formula: $X_{changed} = \frac{X-\mu}{\sigma}$
+- Generally Standard Scaling is preferred when there are outliers in the data
+
+# Note
+Although normalization via min-max scaling is a commonly used technique that is useful when we need values in a bounded interval, standardization can be more practical for many machine learning algorithms. The reason is that many linear models, such as the logistic regression and SVM, [...] initialize the weights to 0 or small random values close to 0. Using standardization, we center the feature columns at mean 0 with standard deviation 1 so that the feature columns take the form of a normal distribution, which makes it easier to learn the weights. Furthermore, standardization maintains useful information about outliers and makes the algorithm less sensitive to them in contrast to min-max scaling, which scales the data to a limited range of values.
 
 ## Scaling Categorical Variables 
 For categorical variables, in general, it is better to not perform any scaling especially if we want to interpret the data since the values are already between 0 and 1.
