@@ -43,6 +43,18 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Summary](#summary)
 * [Takeways](#takeways)
 * [Questions](#questions)
+* [Steps to perform Multiple Linear Regression](#steps-to-perform-multiple-linear-regression)
+    * [Loss Function](#loss-function)
+* [Gradient Descent](#gradient-descent)
+    * [Formula](#formula)
+    * [Learning Rate](#learning-rate)
+    * [Issues with low learning rate](#issues-with-low-learning-rate)
+    * [Issues with high learning rate](#issues-with-high-learning-rate)
+    * [Process](#process)
+* [Implementing Gradient Descent in Python](#implementing-gradient-descent-in-python)
+    * [Cost Function for Gradient Descent](#cost-function-for-gradient-descent)
+    * [Batch Gradient Descent](#batch-gradient-descent)
+* [Takeways](#takeways-1)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -392,6 +404,86 @@ Q: Which option between Standard Scaling and MinMax Scaling is better when deali
 Q: Consider you are performing multiple linear regression where X1 and X2 are independent variables and Y is the dependent variable. What can you say about the coefficient of X1 and value of y in the regression equation?   
 $y = \beta_{0} + \beta_{1}*X_{1} + \beta_{2}*X_{2}$
 - The predicted value of Y increases by $β_{1}$ for a unit increase in X1, given X2 does not change.
+
+# Steps to perform Multiple Linear Regression
+1. Create Function Approximator
+2. Decide Loss Function
+3. Use Optimization Algorithm to minimize
+
+## Loss Function
+1. Regression - RSS, ESS, TSS, RMSE, MSE
+2. Classification - Cross Entropy Loss
+- Loss is $y_{actual} - y_{pred}$ and we want to reduce this value because we want the output to be very close to real output
+
+# Gradient Descent 
+- Gradient Descent algorithm is used to find the optimal coefficients for the linear regression model. 
+- We try to minimize the cost function by reducing values proportional to the learning rate and check the cost obtained. 
+- Once the cost is stabilized we can say that the optimal coefficients have been obtained. 
+- Cost function is given as 1/2*num_training_examples * sum from first to last training sample over ypred - ytrue squared
+
+- Gradient descent is an algorithm that minimises functions. If given a function that is defined by a set of parameters, gradient descent starts with an initial set of parameter values and iteratively moves toward a set of parameter values that minimise the function. 
+
+## Formula
+$\beta^{new} = \beta^{current} - \text{Learning Rate}*(\text {derivate of loss function w.r.t } \beta_{current})$  
+- Note: In MLR, we perform this operations for all betas parallely
+
+## Learning Rate 
+- At which rate are we approaching minima
+
+## Issues with low learning rate
+- long time / too many iterations
+- maybe stuck in local minima
+
+## Issues with high learning rate
+- oscillation 
+
+## Process
+In loop, For every iteration,
+1. calculate loss
+2. calculate new coefficients
+3. update the equation
+
+# Implementing Gradient Descent in Python
+## Cost Function for Gradient Descent
+$\displaystyle J(\theta_0, \theta_1) = \frac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^i)-y^i)^2$
+
+In the equation above, 
+- $x^i$ is the column vector of all the feature inputs of the $i_{th}$ training example, 
+- $m$ is the number of training examples, 
+- $h_{θ}$ is the prediction from our regression model, and 
+- $y_i$ is the column vector of the dependent variable.
+
+The dataset is a collection of data points of ($x_i$, $y_i$). Once you have a model $h_θ$ , the least squares error of $h_θ$ on a single data point is $(h_{\theta}(x^i)-y^i)^2$ . Now, if you simply sum up the errors and multiply by half (1/2), we get the total error of $\frac{1}{2}\sum_{i=1}^m(h_{\theta}(x^i)-y^i)^2$, but if you divide it by the number of summands, you would get the average error per data point of $\frac{1}{2m}\sum_{i=1}^m(h_{\theta}(x^i)-y^i)^2$. 
+- The reason for dividing the error by half (1/2) is to get a nice interpretation for minimising (half) the average error per data point.
+
+## Batch Gradient Descent
+- In batch gradient descent, the gvalues are updated in each iteration
+    - $\displaystyle \theta_0 = \theta_0 - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x_i)-y_i).x_0^i$
+    - $\displaystyle \theta_1 = \theta_1 - \alpha\frac{1}{m}\sum_{i=1}^{m}(h_{\theta}(x_i)-y_i).x_1^i$
+
+```py heading='Gradient Descent in Python'
+import numpy as np
+import pandas as pd
+
+def compute_cost(X, y, theta):
+    return np.sum(np.square(np.matmul(X, theta) - y)) / (2 * len(y))
+
+def gradient_descent_multi(X, y, theta, alpha, iterations):
+    theta = np.zeros(X.shape[1])
+    m = len(X)
+    gdm_df = pd.DataFrame(columns = ['Bets','cost'])
+    for i in range(iterations):
+        gradient = (1/m) * np.matmul(X.T, np.matmul(X, theta) - y)
+        theta = theta - alpha * gradient
+        cost = compute_cost(X, y, theta)
+        gdm_df.loc[i] = [theta,cost]
+    return gdm_df
+```
+
+# Takeways
+1. it is easy to implement mathematical models and equations in python over data with help of pandas
+2. to find optimal betas for the best fit line we need to minimize the cost function
+3. gradient descent is an iterative algorithm which helps us in minimizing the cost function
 
 # References
 - https://elitedatascience.com/overfitting-in-machine-learning
