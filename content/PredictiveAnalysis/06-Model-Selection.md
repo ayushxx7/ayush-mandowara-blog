@@ -162,6 +162,7 @@ Class of models that a learning algorithm with produce.
 - $R^2$ value will be $0.8$ on training but $0.3$ on test set.
 
 # Bias vs Variance Tradeoff
+- Bias and Variance are properties of model
 ![BiasVsVariance](./bias_vs_variance.png)
 
 ## Variance
@@ -176,6 +177,7 @@ Class of models that a learning algorithm with produce.
 - Low Complexity => High Bias (or Simple Model => High Bias)
 - Correctness of Model
 - Bias measures how accurately a model can describe the actual task at hand.
+- High Bias means $y_{pred} - y_{actual}$ will be high
 
 A balance is required between Bias and Variance
 - Model should be simple enough to be generalizable
@@ -379,5 +381,11 @@ model_cv.fit(X_train, y_train)
 
 - With k-fold cross validation, training happens k times while each sample is used as validation data at least once.
 - Overfitting is possible with cross validation. Cross-validation does not prevent overfitting by itself, but it may help in identifying a case of overfitting.
+
+---
+
+**Choosing between Regression and Classification**
+- Target is continuous then use regression
+- Target is 0/1 then use classification
 
 ---
