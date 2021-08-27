@@ -15,11 +15,12 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Iterative Method](#iterative-method)
 * [Random Variables](#random-variables)
 * [Maximum Likelihood Cost Function](#maximum-likelihood-cost-function)
-    * [What is MLE](#what-is-mle)
+  * [What is MLE](#what-is-mle)
 * [Finding Parameters of Gaussian Distribution through MLE](#finding-parameters-of-gaussian-distribution-through-mle)
-    * [Note](#note)
+  * [Note](#note)
 * [Maximum Likelihood Estimate for Discrete Distributions](#maximum-likelihood-estimate-for-discrete-distributions)
-    * [Bernoulli Distribution](#bernoulli-distribution)
+  * [Bernoulli Distribution](#bernoulli-distribution)
+  * [Logistic Regression](#logistic-regression)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -127,7 +128,47 @@ The Bernoulli distribution models events with two possible outcomes: either succ
     - 1-p, if x = 0
     - 0, if x does not belong in $R_x$ (Support)
 
+The likelihood for p based on X is defined as the joint probability distribution of X1, X2, . . . , Xn. Since X1, X2, . . . , Xn are i.i.d random variables, the joint distribution is
 
+$\displaystyle L(p;x) \approx f(x;p) = \prod_{i=1}^{n}f(x_i;p) = \prod_{i=1}^{n}p^x(1-p)^{1-x}$
+
+Taking log,
+
+$\displaystyle \ln f = \sum xi \ln p + (n - \sum x_i)\ln(1-p)$
+
+Differentiating the log of L(p; x) with respect to p and setting the derivative to zero shows that this function achieves a maximum at
+
+$\displaystyle \hat p = \sum_{i=1}^{N}\frac{x_i}{n}$
+
+## Logistic Regression
+1. Starting with log form of MLE
+- $\displaystyle p(y;p) = \prod_{i=1}^{N}(y_i;\underline p)$
+- $l(p) = \sum[y_i \ln \underline p + (1-y_i)\ln (1-\underline p)]$
+
+\
+2. Sigmoid Function
+- $\displaystyle P(y_{i}|x_{i}) = \sigma(\beta_0 + \beta_1x_{i,1})$
+- Here $x_{i,j}: i \implies i^{th}\text{ sample and } j^{th} \text{feature}$
+-  $\displaystyle \sigma(\beta_0+\beta_1x_{i,1})$ can be written as $\sigma \beta^{T}x_{i}$
+
+- $\displaystyle \sigma(\beta^{T}x_{i}) = \frac{1}{1+e^{-\beta^{T}x_{i}}} = \frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}$
+- $\displaystyle P(1-y_{i}|x_{i}) = 1-\frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}} = \frac{1}{1+e^{\beta^{T}x_{i}}}$
+
+- Note that we found out: 
+
+  - $\displaystyle \boxed {P(y_{i}|x_{i}) = \frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}}$
+
+  - $\displaystyle \boxed {P(1-y_{i}|x_{i}) = \frac{1}{1+e^{\beta^{T}x_{i}}}}$
+
+3. Substituting the values in $\log$ expression 
+    - $\displaystyle l(\beta) = - \sum_{i=1}^{N}\ln(1+\beta^{T}x_{i}) + \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i})$
+
+
+4. We can take partial derivate w.r.t $\beta_0 \;\& \beta_1$ and solve the equations using gradient descent
+    - After simplification, it will turn into simple matrix multiplication, where we will take transpose of the $\beta$ matrix and multiply it with the error matrix.
+    - The matrix multiplication can be carried by `np.matmul` in python
+    - Shape of X will be $N \times (d+1)$ where d is the number of features
+    - Shape of $X^{T}$ (X-Transpose) will be $(d+1) \times N$ where d is the number of features
 
 # References
 - [Why choose Iterative Method over Closed Form method](https://stats.stackexchange.com/questions/23128/solving-for-regression-parameters-in-closed-form-vs-gradient-descent)
@@ -137,3 +178,6 @@ The Bernoulli distribution models events with two possible outcomes: either succ
 - [Maximum Likelihood Estimate in Layman Terms](https://stats.stackexchange.com/questions/112451/maximum-likelihood-estimation-mle-in-layman-terms)
 - [Maximum Likelihood estimation of normal distribution](https://daijiang.name/en/2014/10/08/mle-normal-distribution/)
 - [Bernoulli Distribution](https://www.statlect.com/probability-distributions/Bernoulli-distribution)
+- [MLE](https://faculty.washington.edu/ezivot/econ583/mleLectures.pdf)
+- [MLE of Logistic Regression](https://czep.net/stat/mlelr.pdf)
+- [Gradient Descent for Logistic Regression - Simplified](http://ucanalytics.com/blogs/gradient-descent-logistic-regression-simplified-step-step-visual-guide/)
