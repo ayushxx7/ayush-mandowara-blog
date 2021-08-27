@@ -1,7 +1,7 @@
 ---
 title: Pandas Basics
 description: Series and DataFrames
-date: "2021-06-16"
+date: "2021-08-22"
 image: "data-analysis.png"
 author: "Ayush"
 tags: ["python", "data-analysis", "pandas"]

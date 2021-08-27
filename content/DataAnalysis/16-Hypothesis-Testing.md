@@ -1,7 +1,7 @@
 ---
 title: Hypothesis Testing
 description: using hypothesis testing to validate conclusions gained from sample data
-date: "2021-07-10"
+date: "2021-08-23"
 image: "statistics.jpg"
 author: "Ayush"
 tags: ["data-analysis", "statistics"]
