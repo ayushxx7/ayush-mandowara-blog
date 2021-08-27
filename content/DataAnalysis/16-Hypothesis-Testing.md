@@ -260,6 +260,10 @@ Conceptually, Increasing the sample size
     - Type II error occurs when the null hypothesis is not rejected when it is in fact incorrect
 - denoted by beta
 
+![ErrorsTable](errors_in_hypothesis.png)
+
+![ErrorsGraph](errors_in_hypothesis_visual.png)
+
 ## Power of Hypothesis Test
 - (1 - beta) is called the power of Hypothesis Test
 - [See this article](https://stattrek.com/hypothesis-test/power-of-test.aspx)
