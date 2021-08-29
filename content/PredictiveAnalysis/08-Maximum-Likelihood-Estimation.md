@@ -1,7 +1,7 @@
 ---
 title: Maximum Likelihood Estimation
 description: Maximum Likelihood Estimation or MLE 
-date: "2021-08-25"
+date: "2021-08-29"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -21,6 +21,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Maximum Likelihood Estimate for Discrete Distributions](#maximum-likelihood-estimate-for-discrete-distributions)
   * [Bernoulli Distribution](#bernoulli-distribution)
   * [Logistic Regression](#logistic-regression)
+* [\end{bmatrix}](#endbmatrix)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -141,14 +142,15 @@ Differentiating the log of L(p; x) with respect to p and setting the derivative 
 $\displaystyle \hat p = \sum_{i=1}^{N}\frac{x_i}{n}$
 
 ## Logistic Regression
-1. Starting with log form of MLE
+
+**1. Starting with log form of MLE**
 - $\displaystyle p(y;p) = \prod_{i=1}^{N}(y_i;\underline p)$
 - $l(p) = \sum[y_i \ln \underline p + (1-y_i)\ln (1-\underline p)]$
 
-\
-2. Sigmoid Function
+
+**2. Sigmoid Function**
 - $\displaystyle P(y_{i}|x_{i}) = \sigma(\beta_0 + \beta_1x_{i,1})$
-- Here $x_{i,j}: i \implies i^{th}\text{ sample and } j^{th} \text{feature}$
+  - Here $x_{i,j}: i \implies i^{th}\text{ sample and } j^{th} \text{feature}$
 -  $\displaystyle \sigma(\beta_0+\beta_1x_{i,1})$ can be written as $\sigma \beta^{T}x_{i}$
 
 - $\displaystyle \sigma(\beta^{T}x_{i}) = \frac{1}{1+e^{-\beta^{T}x_{i}}} = \frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}$
@@ -156,19 +158,49 @@ $\displaystyle \hat p = \sum_{i=1}^{N}\frac{x_i}{n}$
 
 - Note that we found out: 
 
-  - $\displaystyle \boxed {P(y_{i}|x_{i}) = \frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}}$
+  - $\displaystyle \Large \boxed {P(y_{i}|x_{i}) = \frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}}$
 
-  - $\displaystyle \boxed {P(1-y_{i}|x_{i}) = \frac{1}{1+e^{\beta^{T}x_{i}}}}$
+  - $\displaystyle \Large \boxed {P(1-y_{i}|x_{i}) = \frac{1}{1+e^{\beta^{T}x_{i}}}}$
 
-3. Substituting the values in $\log$ expression 
-    - $\displaystyle l(\beta) = - \sum_{i=1}^{N}\ln(1+\beta^{T}x_{i}) + \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i})$
+**3. Substituting the values in $\log$ expression**
+- $\displaystyle l(\beta) = - \sum_{i=1}^{N}\ln(1+e^{\beta^{T}x_{i}}) + \sum_{i=1}^{N}(y_{i}\beta^{T}x_{i})$
 
 
-4. We can take partial derivate w.r.t $\beta_0 \;\& \beta_1$ and solve the equations using gradient descent
-    - After simplification, it will turn into simple matrix multiplication, where we will take transpose of the $\beta$ matrix and multiply it with the error matrix.
-    - The matrix multiplication can be carried by `np.matmul` in python
-    - Shape of X will be $N \times (d+1)$ where d is the number of features
-    - Shape of $X^{T}$ (X-Transpose) will be $(d+1) \times N$ where d is the number of features
+**4. We can take partial derivate w.r.t $\beta_0 \;\& \beta_1$ and solve the equations using gradient descent**
+
+- $\displaystyle \frac{\partial l(\beta)}{\partial \beta_1} = -\sum_{i=1}^{N}\frac{e^{\beta^{T}x_{i}}}{1+e^{\beta^{T}x_{i}}}x_{i,1} + \sum_{i=1}^{N}y_{i}x_{i,1}$
+
+- $\large \displaystyle \frac{\partial l(\beta)}{\partial \beta_j} = \sum_{i=1}^{N}(y_{i} - p(y_{i}|x_{i}))x_{i,1}$
+  - $y_{i}$ - actual value
+  - $p(y_{i}|x_{i})$ - predicted value
+  - $y_{i} - p(y_{i}|x_{i})$ - error term
+- After simplification, it will turn into simple matrix multiplication, where we will take transpose of the $\beta$ matrix and multiply it with the error matrix.
+- $\begin{bmatrix}e_1, e_2,\ldots,e_n\end{bmatrix}
+    \begin{bmatrix}x_1\\x_2\\\ldots\\xn\end{bmatrix}
+ $
+- $\begin{bmatrix}x_1,x_2,\ldots,xn\end{bmatrix}\begin {bmatrix}e_1\\ e_2\\\ldots\\e_n\end{bmatrix}
+$
+- $\large \triangledown_{\beta}l(\beta) = 
+\begin{bmatrix}\frac{\partial l(\beta)}{\partial \beta_0}
+\\
+\\
+\frac{\partial l(\beta)}{\partial \beta_1}
+\end{bmatrix}
+=
+\begin{bmatrix}x_{1,0}, x_{2,0},\ldots,x_{n,0}
+\\
+x_{1,1}, x_{2,1},\ldots,x_{n,1}
+\end{bmatrix}
+\begin{bmatrix}e_1\\e_2\\\ldots\\e_n\end{bmatrix}
+=X^{T}e
+ $
+- The matrix multiplication can be carried by `np.matmul` in python
+- Shape of X will be $N \times (d+1)$ where 
+  - d is the number of features
+  - N is the number of observations
+- Shape of $X^{T}$ (X-Transpose) will be $(d+1) \times N$ where d is the number of features
+  - d is the number of features
+  - N is the number of observations
 
 # References
 - [Why choose Iterative Method over Closed Form method](https://stats.stackexchange.com/questions/23128/solving-for-regression-parameters-in-closed-form-vs-gradient-descent)
@@ -181,3 +213,4 @@ $\displaystyle \hat p = \sum_{i=1}^{N}\frac{x_i}{n}$
 - [MLE](https://faculty.washington.edu/ezivot/econ583/mleLectures.pdf)
 - [MLE of Logistic Regression](https://czep.net/stat/mlelr.pdf)
 - [Gradient Descent for Logistic Regression - Simplified](http://ucanalytics.com/blogs/gradient-descent-logistic-regression-simplified-step-step-visual-guide/)
+- https://katex.org/docs/supported.html
