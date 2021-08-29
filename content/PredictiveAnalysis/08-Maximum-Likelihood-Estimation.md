@@ -21,7 +21,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Maximum Likelihood Estimate for Discrete Distributions](#maximum-likelihood-estimate-for-discrete-distributions)
   * [Bernoulli Distribution](#bernoulli-distribution)
   * [Logistic Regression](#logistic-regression)
-* [\end{bmatrix}](#endbmatrix)
+* [Obtaining Parameters using Newton Raphson Method](#obtaining-parameters-using-newton-raphson-method)
+  * [Elements of Hessian Matrix](#elements-of-hessian-matrix)
+* [Application of MLE: Naive Bayes Classifier](#application-of-mle-naive-bayes-classifier)
+  * [Assumptions](#assumptions)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -114,7 +117,7 @@ Now we have a cost function, we can use iterative or closed form method to solve
 
 - $\displaystyle \sum_{i=1}^{N}x_i = \sum_{i=1}^{N}\hat \mu \implies \boxed{\hat \mu = \frac{\sum x_i}{N}}$
 
-Similarly, we can find out the value for standard deviation ($\sigma$)  
+Similarly, we can find out the value for standard deviation ($\sigma$)
 - $\boxed{\displaystyle \hat \sigma = \sqrt{\frac{\sum_{i=1}^{N}(x_i-\hat \mu)^2}{N}}}$
 
 ## Note
@@ -185,8 +188,7 @@ $
 \\
 \\
 \frac{\partial l(\beta)}{\partial \beta_1}
-\end{bmatrix}
-=
+\end{bmatrix} =
 \begin{bmatrix}x_{1,0}, x_{2,0},\ldots,x_{n,0}
 \\
 x_{1,1}, x_{2,1},\ldots,x_{n,1}
@@ -202,6 +204,47 @@ x_{1,1}, x_{2,1},\ldots,x_{n,1}
   - d is the number of features
   - N is the number of observations
 
+# Obtaining Parameters using Newton Raphson Method
+- It is a second order method
+- Gradient Descent: $\displaystyle \beta_j^{new} = \beta_j^{old} - \eta \frac{\partial l(\beta)}{\partial \beta_j}$
+- Newton Raphson: $\displaystyle \beta_j^{new} = \beta_j^{old} - H^{-1} \frac{\partial l(\beta)}{\partial \beta_j}$
+
+## Elements of Hessian Matrix
+
+- $\displaystyle \large \frac{\partial l(\beta)}{\partial \beta_k \partial \beta_j}$
+- $\large \displaystyle \frac{\partial l(\beta)}{\partial \beta_j} = \sum_{i=1}^{N}(y_{i} - p(y_{i}|x_{i}))x_{i,1}$
+- $\displaystyle \large \frac{\partial l(\beta)}{\partial \beta_k \partial \beta_j} = \sum_{i=1}^{N}\frac{(1+e^{\beta^{T}x_{i}})e^{\beta^{T}x_{i}} x_{i,k} - e^{\beta^{T}x_{i}}e^{\beta^{T}x_{i}}x_{i,k}}{(1+e^{\beta^{T}x_{i}})^2}x_{i,j}$
+- $\displaystyle \sum_{i=1}^{N}P(y_{i}|x_{i}) + (P(y_{i}|x_{i}))^2x_{i,k}.x_{i,j}$
+- $\displaystyle -\sum_{i=1}^{N}(P(y_{i}|x_{i})(1-P(y_{i}|x_{i})))$
+
+# Application of MLE: Naive Bayes Classifier
+Two class classifier:
+- $\displaystyle P(C=C_1|x)$
+- $\displaystyle P(C=C_2|x)$
+- $\displaystyle P(C=C_1|x) + P(C=C_2|x) = 1$
+
+---
+
+$\displaystyle \text{posterior probability} = \frac{\text{conditional probability.prior probability}}{evidence}$
+- The posterior probability, in the context of a classification problem, can be interpreted, “given the feature vector $x_i$ what is the probability of sample "$i$" belonging to class "$c_j$”?
+
+- $\displaystyle P(\text{Female}|x) = \frac{P(x|\text{Female}).P(\text{Female})}{P(x)}$
+
+- $\displaystyle P(\text{Male}|x) = \frac{P(x|\text{Male}).P(\text{Male})}{P(x)}$
+- If $P(\text{Female}|x) > P(\text{Male}|x)$, we say that the person is female
+- We don't need to care about P(x) when doing comparison
+
+- Learning: from the data, we can find out $\mu_m, \mu_f, \sigma_m, \sigma_f$ by fitting Gaussian distributions over each class
+
+## Assumptions
+- Distribution is Gaussian
+  - if the distribution is not Gaussian, then the predictions will be bad
+- Naive Assumption 
+  - features are conditionally independent
+  - $\displaystyle  P(X|Y,Z) = P(X|Z)$
+  - lets us break down features into products
+  - $\displaystyle P(x_1,x_2|c) = P(x_1|c).P(x_2|c)$ 
+
 # References
 - [Why choose Iterative Method over Closed Form method](https://stats.stackexchange.com/questions/23128/solving-for-regression-parameters-in-closed-form-vs-gradient-descent)
 - [Closed form expressions Wiki](https://en.wikipedia.org/wiki/Closed-form_expression)
@@ -210,7 +253,12 @@ x_{1,1}, x_{2,1},\ldots,x_{n,1}
 - [Maximum Likelihood Estimate in Layman Terms](https://stats.stackexchange.com/questions/112451/maximum-likelihood-estimation-mle-in-layman-terms)
 - [Maximum Likelihood estimation of normal distribution](https://daijiang.name/en/2014/10/08/mle-normal-distribution/)
 - [Bernoulli Distribution](https://www.statlect.com/probability-distributions/Bernoulli-distribution)
-- [MLE](https://faculty.washington.edu/ezivot/econ583/mleLectures.pdf)
 - [MLE of Logistic Regression](https://czep.net/stat/mlelr.pdf)
 - [Gradient Descent for Logistic Regression - Simplified](http://ucanalytics.com/blogs/gradient-descent-logistic-regression-simplified-step-step-visual-guide/)
 - https://katex.org/docs/supported.html
+- [Logistic Regression and Newton Raphson](https://statacumen.com/teach/SC1/SC1_11_LogisticRegression.pdf)
+- [Hessian of a Logistic function](https://stats.stackexchange.com/questions/68391/hessian-of-logistic-function)
+- [Logistic classification model - Maximum Likelihood Estimate](https://www.statlect.com/fundamentals-of-statistics/logistic-model-maximum-likelihood)
+- [Maximum Likelihood Estimation](https://faculty.washington.edu/ezivot/econ583/mleLectures.pdf)
+- [MLE, Bayesian Classifier](http://www.cs.cmu.edu/~tom/10601_sp08/slides/NBayes-1-28-2008-plus.pdf)
+- [Naive Bayes and Gaussian Bayes Classifier](https://www.cs.toronto.edu/~urtasun/courses/CSC411/tutorial4.pdf)
