@@ -1,7 +1,7 @@
----
+e--
 title: Hypothesis Testing
 description: using hypothesis testing to validate conclusions gained from sample data
-date: "2021-08-23"
+date: "2021-08-30"
 image: "statistics.jpg"
 author: "Ayush"
 tags: ["data-analysis", "statistics"]
@@ -25,7 +25,8 @@ tags: ["data-analysis", "statistics"]
     * [Question](#question)
 * [Summary](#summary)
 * [The p-value method](#the-p-value-method)
-            * [Revising Z-Score](#revising-z-score)
+    * [Example](#example)
+* [Z-Score](#z-score)
     * [How to find p-value](#how-to-find-p-value)
     * [Question](#question-1)
         * [Answer](#answer)
@@ -60,9 +61,10 @@ tags: ["data-analysis", "statistics"]
     * [Variance](#variance)
     * [Key Terms](#key-terms)
     * [Degrees of Freedom](#degrees-of-freedom)
+    * [Example](#example-1)
 * [Chi-Square Test](#chi-square-test)
     * [Chi-square test of independence](#chi-square-test-of-independence)
-    * [Example](#example)
+    * [Example](#example-2)
     * [Chi-square goodness of fit](#chi-square-goodness-of-fit)
 * [Questions](#questions-1)
 * [References:](#references)
@@ -212,7 +214,12 @@ The hypothesis is always made about the population parameters. The sample parame
 ---
 
 # The p-value method
+- It states the probability of observing a similar or more extreme observation given the null hypothesis is true.
 - used more frequently in the industry
+- The concept of p-value is very important in the field of statistics because of one solid advantage it has over the critical value method. 
+    - You don’t have to state the significance level before conducting the hypothesis test. 
+    - It is easier to understand intuitively as to whether you are going to reject the null hypothesis or not. 
+![p-value](Interpretation+of+p-value.png)
 - p-value is the probability that null hypothesis will not be rejected
 - Smaller p-values 
     - indicate more evidence in support of The alternate hypothesis
@@ -221,14 +228,37 @@ The hypothesis is always made about the population parameters. The sample parame
 - p-value greater than alpha implies that we fail to reject null-hypothesis
 - p-value less than alpha implies that we reject the null-hypothesis
 
-#### Revising Z-Score
+## Example
+**Let us consider you toss a coin whose nature (whether it is biased or unbiased) you are not aware of. After tossing for 10 times, you observed 8 heads and 2 tails. Now you are asked to test the hypothesis of whether the coin is biased or unbiased. You are also asked to measure the p-value at 0.05 significance level and make a decision.**
+
+- H0 : P(H) = 0.5
+- H1 : P(H) ≠ 0.5
+- we are given that we have observed 8 heads in this case.
+- p-value definition states - it is the probability of observing a similar or more extreme observation given the null hypothesis is true.
+
+**Solution Methodology**
+1. Assume the null hypothesis to be true, i.e. P(H)=0.5
+2. Here a similar or more extreme observation would be denoted by (Heads>=8) and its probability would be given by P(Heads>=8)
+3. Calculate the probability of P(Heads>=8) given that P(H)= 0.5.
+    -  it is equivalent to calculating the probability of observing 8 or more heads in a coin toss experiment where the unbiased coin is flipped 10 time
+    -  $\displaystyle P(Heads>=8)=P(X>=r)=P(X>=8)= P(X=8)+P(X=9)+P(X=10) \\= \binom{10}{8}0.5^{8}0.5^2 + \binom{10}{9}0.5^90.5^1+\binom{10}{10}0.5^{10}0.5^{0} = 0.055$
+4. Observe that the hypothesis-test is two-tailed. Hence multiply the previous probability by 2. This would be the p-value of this test.
+    -  from the null hypothesis we can infer that the extreme observations can occur on both endsA
+    - binomial distribution is symmetric, hence we can multiply the value by 2
+    - p-value as $2*P(Heads>=8)= 2* 0.055=0.11$
+
+- Given the significance level of 0.05 and the calculated p-value, we can safely say that we **fail to reject the null hypothesis**.
+
+---
+
+# Z-Score
 - $\Large \displaystyle Z = \frac{(\bar X - \bar \mu)}{\sigma_{\bar x}}$
 - Z-table gives cumulative probability
 - If sample mean lies on the left side of hypothesised mean, z-score will be negative and vice-versa
 
 | Critical Value Method               | p-value Method                    |
 |-------------------------------------|-----------------------------------|
-| Zc is calculated for Critical Point | Z score is calculated for meuXbar |
+| Zc is calculated for Critical Point | Z score is calculated for $\large \mu_{\bar x}$ |
 
 
 ## How to find p-value
@@ -472,6 +502,7 @@ Here,
 
 ## Key Terms
 Total Sum of Squares = Sum of Squares between + Sum of squares within the group i.e. TSS = SSB + SSW
+Total Sum of Squares = Sum of Squares column + Sum of squares error i.e. TSS = SSB + SSW
 
 - $\displaystyle SS_{total} = \sum_{j=1}^p\sum_{i=1}^{n_j}(x_{ij} - \bar x)^2$
 - $\displaystyle SS_{between} = \sum_{j=1}^pn_j(\bar x_{j} - \bar x)^2$
@@ -488,16 +519,48 @@ Here,
 
 ## Degrees of Freedom
 
-| Type            | degree of freedom (df)                          |
-|-----------------|-------------------------------------------------|
-| between groups  | number of groups - 1                            |
-| within a group | total number of observations - number of groups |
-| complete data   | total number of observations - 1                |
+| Type                                   | degree of freedom (df)                          |
+|----------------------------------------|-------------------------------------------------|
+| between groups (sum of squares column) | number of groups - 1                            |
+| within a group (sum of squares error)  | total number of observations - number of groups |
+| complete data                          | total number of observations - 1                |
 
 Mean Square $\displaystyle = \frac{\text{sum of squares}}{df}$
 
 - If caculated F &lt; critical F, you will fail to reject the null hypothesis.
 - If caculated F &gt; critical F, you will reject the null hypothesis.
+
+## Example
+**In an Analysis of Variance (ANOVA) problem, the total sum of squares is 150 and the sum of squares error is 50. What value will there be in the sum of squares column?**
+- 100
+- Total sum of square = Sum of square column + Sum of square error
+
+**In an Analysis of Variance problem, there are four groups with 10 observations in each group. If the total sum of squares is 278.4 and the sum of square error is 56.2, what value will there be in the mean square column?**
+- TSS = 278.4
+- SSE (SSW) = 56.2
+- Number of Groups (Number of columns) = 4
+- SSC (SSB) = TSS - SSE = 222.2
+- degree of freedom column = num columns - 1 = 4 - 1 = 3
+- **Mean Square Column (MSB) = 222.2 / 3 = 74.06**
+
+| Source of Variation  | Sum of Squares       | Degree of Freedom | Mean Square     | F-Ratio |
+|----------------------|----------------------|-------------------|-----------------|---------|
+| between (SSB or SSC) | 278.4 - 56.2 = 222.2 | 4 - 1 = 3         | 222.2/3 = 74.06 |         |
+| within (SSW or SSE)  | 56.2                 |                   |                 |         |
+| Total (TSS)          | 278.4                |                   |                 |
+
+---
+
+**From a dataset, we have extracted some information: The total sum of squares (TSS) = 2784; The sum of squares error (SSE) = 970; The total number of observations = 30, and H0: μ1 = μ2 = μ3 = μ4. What is the total mean square value and F-Ratio?**
+
+| Source of Variation  | Sum of Squares | Degree of Freedom | Mean Square     | F-Ratio        |
+|----------------------|----------------|-------------------|-----------------|----------------|
+| between (SSB or SSC) | 2784-970=1814  | 4-1=3             | 1814/3 = 604.67 | MSB/MSW        |
+| within (SSW or SSE)  | 970            | 30-4=26           | 970/26 = 37.30  | = 604.67/37.30 |
+| Total (TSS)          | 2784           | 30-1=29           | 2784/29 = 96    | = 16.21        |
+
+- F-Ratio = 16.21
+- Total Mean Square = 2784/(30-1) = 96
 
 ---
 
