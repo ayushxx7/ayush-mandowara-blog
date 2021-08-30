@@ -11,6 +11,7 @@ tags: ["data-analysis", "statistics"]
 
 * [Purpose](#purpose)
 * [Difference between Inferential Statistics & Hypothesis Testing](#difference-between-inferential-statistics--hypothesis-testing)
+* [Hypothesis Testing](#hypothesis-testing)
 * [Critical Region](#critical-region)
 * [Acceptance Region](#acceptance-region)
 * [Types of Test](#types-of-test)
@@ -34,6 +35,7 @@ tags: ["data-analysis", "statistics"]
     * [Power of Hypothesis Test](#power-of-hypothesis-test)
     * [Relation of Type 1 Error (alpha) & Type 2 Error (beta)](#relation-of-type-1-error-alpha--type-2-error-beta)
 * [z-test](#z-test)
+    * [Steps for Hypothesis Testing](#steps-for-hypothesis-testing)
 * [T-Distribution](#t-distribution)
 * [t-test](#t-test)
 * [Two-Sample Mean Test](#two-sample-mean-test)
@@ -58,6 +60,11 @@ tags: ["data-analysis", "statistics"]
     * [Variance](#variance)
     * [Key Terms](#key-terms)
     * [Degrees of Freedom](#degrees-of-freedom)
+* [Chi-Square Test](#chi-square-test)
+    * [Chi-square test of independence](#chi-square-test-of-independence)
+    * [Example](#example)
+    * [Chi-square goodness of fit](#chi-square-goodness-of-fit)
+* [Questions](#questions-1)
 * [References:](#references)
 
 <!-- vim-markdown-toc -->
@@ -72,16 +79,21 @@ Notes about Hypothesis Testing
 | To find some population parameter (mostly population mean) when you have no initial number to start with                                           | To confirm your conclusion (or hypothesis) about the population parameter (which you know from EDA or your intuition)      |
 | start with the sampling activity and find out the sample mean. can estimate the population mean from the sample mean using the confidence interval | can determine whether there is enough evidence to conclude if the hypothesis about the population parameter is true or not
 
+# Hypothesis Testing
+- It is a method or procedure that tests the statistical validity of a claim
+
 Hypothesis Testing starts with the formulation of these two hypotheses:
 - `Null hypothesis (H₀)`: The status quo
+    - A null hypothesis is the prevailing belief about a population; it states that there is no change or no difference in the situation and assumes that the status quo is true. 
+    - We can either reject the null hypothesis or `fail to` reject the null hypothesis (we can never accept null hypothesis)
+    - Failure to rejct null hypothesis != Accept null hypothesis
+    - The null hypothesis always has the following signs:  =  OR   ≤   OR    ≥
 - `Alternate hypothesis (H₁)`: The challenge to the status quo
-- We can either reject the null hypothesis or `fail to` reject the null hypothesis (we can never accept null hypothesis)
-- We cannot reject the alternate hypothesis, we can accept it, or fail to accept it
-- Failure to rejct null hypothesis != Accept null hypothesis
-- Null & Alternate Hypothesis are 2 non-overlapping sets
+    - An alternative hypothesis is a claim that opposes the null hypothesis. It challenges the status quo and may or may not be proved.
+    - We cannot reject the alternate hypothesis, we can accept it, or fail to accept it
+    The alternate hypothesis always has the following signs:  ≠   OR  >   OR    <
+- Null & Alternate Hypothesis are 2 non-overlapping (or disjoint) sets
 
-The null hypothesis always has the following signs:  =  OR   ≤   OR    ≥
-The alternate hypothesis always has the following signs:  ≠   OR  >   OR    <
 
 # Critical Region
 - Upper Critical Value (ucv)
@@ -203,14 +215,14 @@ The hypothesis is always made about the population parameters. The sample parame
 - used more frequently in the industry
 - p-value is the probability that null hypothesis will not be rejected
 - Smaller p-values 
-        - indicate more evidence in support of The alternate hypothesis
-        - indicates sample mean is father away from population mean
-        - indicates sample mean lies in the critical region
+    - indicate more evidence in support of The alternate hypothesis
+    - indicates sample mean is father away from population mean
+    - indicates sample mean lies in the critical region
 - p-value greater than alpha implies that we fail to reject null-hypothesis
 - p-value less than alpha implies that we reject the null-hypothesis
 
 #### Revising Z-Score
-- Z = (Xbar - meuXbar)/sigmaxbar
+- $\Large \displaystyle Z = \frac{(\bar X - \bar \mu)}{\sigma_{\bar x}}$
 - Z-table gives cumulative probability
 - If sample mean lies on the left side of hypothesised mean, z-score will be negative and vice-versa
 
@@ -281,6 +293,16 @@ Conceptually, Increasing the sample size
 1. Critical Value Method
 2. p-value Method
 
+## Steps for Hypothesis Testing
+1. Formulate null and alternate hypothesis
+2. If you know the population standard deviation and the sample size is greater than 30, use the z-test else use the t-test
+3. Determine Test Statistic (Z-score)
+    - $\Large \displaystyle Z = \frac{(\bar X - \bar \mu)}{\sigma_{\bar x}}$
+    - $\large \sigma_{\bar x}$ is calculated as $\displaystyle  \large \frac{{}\sigma_{population}}{\sqrt \text{sample size (n)}}$
+4. Based on the confidence level (like 95%, 99%), we determine the critical Z-Score. 
+5. If the Z-score lies outside the region of the crtical Z-Score limits, we reject the null hypothesis, else we fail to reject the null hypothesis
+
+
 # T-Distribution
 A t-distribution is also referred to as Student’s T distribution. A t-distribution is similar to the normal distribution in many cases; for example, it is symmetrical about its central tendency. However, it is shorter than the normal distribution and has a flatter tail, which would eventually mean that it has a larger standard deviation.
 
@@ -302,9 +324,13 @@ In the t-table,
 ![T-Table](./use-t-distribution.png)
 
 # t-test
-Question:   
+t = (x – μ) / (s/√(n))
+
+**Question**  
+
 You are given the standard deviation of a sample of size 25 for a two-tailed hypothesis test of a significance level of 5%.
-Answer:    
+
+**Answer**  
 For sample size = 25, your degrees of freedom would become 25 - 1 = 24. So, if you look for the value in the t-table corresponding to d.f. = 24 and α = 0.05 for a two-tailed test, you would get the t-value as 2.064.
 
 ---
@@ -419,6 +445,8 @@ where $df$ is smalerr of $n_1 - 1$ or $n_2-1$
 - It is a widely used process in digital companies in the ecommerce, manufacturing and advertising domains
 - It provides a way to test two different versions of the same element and see which one performs better
 
+---
+
 # F-Test
 It is used when there are more than 2 groups as the t-test in such cases becomes tedious. The reason is that we have to perofrm the tests for each combination of the groups. Moreover, the type 1 error increases in this process.
 
@@ -471,6 +499,77 @@ Mean Square $\displaystyle = \frac{\text{sum of squares}}{df}$
 - If caculated F &lt; critical F, you will fail to reject the null hypothesis.
 - If caculated F &gt; critical F, you will reject the null hypothesis.
 
+---
+
+# Chi-Square Test
+## Chi-square test of independence
+- This is used to determine if there is a significant relationship between two nominal (categorical) variables.  
+
+## Example
+A researcher wants to examine the relationship between gender (male vs female) and the chances of getting Alzheimer's disease. The chi-square test of independence can be used to examine this relationship. 
+- The null hypothesis (Ho) for this test is that there is no relationship between gender and life expectancy, and 
+- the alternative hypothesis is that there is a relationship between gender and life expectancy.
+
+Here, there are two categorical variables (nominal variables) — male and female.
+
+Let’s draw a table for both these categorical values:
+
+| Value    | Male | Female |
+|----------|------|--------|
+| Expected |      |        |
+| Sample   |      |        |
+
+The expected value is calculated by assuming that the null hypothesis is correct. So, if you select a sample of, say, 100 Alzheimer’s patients, 50 should be men and 50 should be women.
+
+| Value    | Male | Female |
+|----------|------|--------|
+| Expected | 50   |   50   |
+| Sample   |      |        |
+
+Let's say the sample value comes up to be a bit different, and in a sample of 100 Alzheimer's patients, 60 are men and 40 are women.
+Putting the expected values in the table above, you get —  
+
+| Value    | Male | Female |
+|----------|------|--------|
+| Expected | 50   | 50     |
+| Sample   | 60   | 40     |
+
+The **test statistic for the chi-squre test** is equal to 
+- $\displaystyle \chi^2 = \frac{\sum(O-E)^2}{E}$, where
+- O is the observed sample value 
+- E is the \expected value
+
+So, our test statistic will be equal to 
+
+$\displaystyle \chi^2 = \frac{10^2}{50}+\frac{-10^2}{50} = 4$
+
+Let’s select the level of significance as 5%, or 0.05.
+- Degrees of freedom = (r-1) x (c-1), where 
+- r is the number of rows and 
+- c is the number of columns.
+
+So, the degree of freedom, in this case, is 1.
+
+Now, you will use the [chi-square distribution table](https://people.smp.uq.edu.au/YoniNazarathy/stat_models_B_course_spring_07/distributions/chisqtab.pdf) to calculate the critical value. 
+
+Select the value corresponding to the required Degrees of freedom and the significance level. 
+
+- So, the critical value is 3.84, and the test statistic value is 4.
+- In this case, the test statistic value (4), which is greater than the critical value, lies in the rejection region.
+- Therefore, you reject the null hypothesis.
+
+
+## Chi-square goodness of fit 
+- This is used to test whether a sample data correctly represents a population data
+
+---
+
+# Questions
+
+**A doctor states to a researcher, “A malaria patient takes either 10 or lesser number of days to recover on average.”
+What will be the null and alternative hypotheses in this case if the average number of days is represented by μ?**
+
+- H₀: μ ≤ 10 days and H₁: μ > 10 days
 
 ---
 
