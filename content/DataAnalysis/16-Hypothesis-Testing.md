@@ -573,6 +573,65 @@ What will be the null and alternative hypotheses in this case if the average num
 
 ---
 
+**The average growth of a certain variety of bamboo trees is less than or equal to 10.1 inches with a standard deviation of 2.1 inches in three years. A biologist claims that due to climate change, the average growth of bamboo is more than 10.1 inches for a period of three years. To prove this point, the biologist planted 35 bamboo trees and recorded that they had an average three-year growth of 10.8 inches. 
+Use this information to solve the following questions:**
+
+**A: Select the appropriate null and alternative hypotheses to test the biologist’s claim:**
+- H0: μ ≤ 10.1 against H1: μ>10.1
+- The null hypothesis is a premise that has been existing traditionally, so here, traditionally, the average growth of the bamboo trees is less than or equal to 10.1 inches. Thus, the null hypothesis is H0: μ ≤ 10.1, and the alternative hypothesis is that the growth was caused due to a trigger factor. Thus, based on the biologist’s claim, the alternative hypothesis is H1: μ > 10.1.
+
+**B: Identify the distribution associated with the example above and the test statistic to be used for the hypothesis testing.**
+- Normal distribution; Z-statistic
+- As the sample size is more than 30 and the population standard deviation is known, we identify the distribution as normal and the statistic as z-statistic
+
+**C: What is the Z statistic for the case?**
+- The formula for z-statistic is $\displaystyle Z = \frac{(\bar X - \bar \mu)}{\frac{\sigma_{p}}{\sqrt n}}$
+So, here, z= (10.8 - 10.1) / (2.1 / √35) = 1.97  
+
+**D: Test the hypothesis above at 5% significance level and state the final result.**
+- Reject the null hypothesis
+- Look up Zc in z-table.
+- Since Zc is 1.97, the value is 0.97558
+- Since Zc is positive, we subtract the value obtained by 1
+- so p-value is 0.02442 or 2.4%
+- $p-value < Z_c \implies \text{reject the null hypothesis}$
+
+---
+
+**The ideal water used in concrete mixing should not have more than 200 mg/litre of solid organic content on an average. So, before a construction begins, the engineers test samples of water from different water sources to select an appropriate water source, or they use filtration of water. So, the hypotheses for this test are \
+\
+$H_0$: average organic  content ≤ 200 (water is fit for concrete) \
+$H_1$: average organic content > 200 (water is unfit for concrete) \
+\
+Solve the following questions based on the above information.**
+
+**A: Which of the following would be a Type-1 error?**
+- The hypothesis test declares the water unfit for construction, when in fact it was fit.
+- In type-1 error, the Ho is correct, but it is rejected. Hence if we declare the water unfit, we are rejecting the null hypothesis. But since the water is actually fit, then the rejection of the null hypothesis leads to a Type-1 error.
+
+**B: What would be a type 2 error?**
+- The hypothesis test declares the water fit for construction, when in fact it wasn't fit.
+- In a type-2 error, the H0 is incorrect. Thus if we fail to reject the null hypothesis, we are declaring the water fit for construction. But the water was actually unfit for construction and hence this leads to a Type-2 error.
+
+---
+
+**According to a study, the daily average time spent by a user on social media website is 50 minutes. To test the claim of this study, Ramesh, a researcher, takes a sample of 25 website users and finds out that the mean time spent by the sample users is 60 minutes, and the sample standard deviation is 30 minutes.
+Based on the information above, the null hypothesis and the alternate hypothesis will be \
+\
+Ho = The average time spent by the users is 50 minutes \
+H1 = The average time spent by the users is not 50 minutes \
+\
+Use 5% significance level to test his hypothesis. Use the t-table from the [link here](http://www.sjsu.edu/faculty/gerstman/StatPrimer/t-table.pdf).**
+
+- Fail to reject the null hypothesis
+- Here, the population standard deviation is not known, and the sample size is less than 30; so, we can use the t-test.
+- Therefore, the t-test statistic (t) = (x – μ) / (s/√(n)) = (60 - 50) / ( 30 / √25) = 1.66
+- The sample size is 25. So, the degree of freedom = 25 - 1 = 24.
+- This is a two-tailed t-test with a significance level of 5%; so, the critical t-value = t 0.05, 24 = 2.064 (using the t-table).
+- Since the observed t-value is smaller than the critical value, Ramesh fails to reject the null hypothesis.
+
+---
+
 # References:
 - https://statisticsbyjim.com/hypothesis-testing/failing-reject-null-hypothesis/
 - https://stattrek.com/hypothesis-test/power-of-test.aspx
