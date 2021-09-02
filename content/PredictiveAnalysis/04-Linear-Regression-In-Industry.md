@@ -85,7 +85,53 @@ A non-random error pattern, on the other hand, would mean that the errors are ca
 3. R^2 value of 60% is good when it comes to the industry, but we should investigate all data that we have. 
 4. We can get inference from multiple models and not just one. 
 
+# Questions
+
+**Create feature based called BMI_group which groups people based on their BMI. The groups should be as follows:**
+- **Underweight: BMI is less than 18.5.**
+- **Normal: BMI is 18.5 to 24.9.**
+- **Overweight: BMI is 25 to 29.9.**
+- **Obese: BMI is 30 or more.**
+
+```py heading="Create new binned column"
+import pandas as pd 
+df=pd.read_csv("https://media-doselect.s3.amazonaws.com/generic/OzvzVqK4pgg4x7qEadoZMRyVR/insurance.csv")
+
+df['BMI_group'] = pd.cut(df['bmi'], [0, 18.5, 24.9, 29.9, 1000], labels=['Underweight', 'Normal', 'Overweight', 'Obese'])
+
+print(df.head())
+```
+
+**Encode Categorical Variables**
+```py heading="Encode Categorical Varibles using LabelEncoder"
+import pandas as pd 
+from sklearn.preprocessing import LabelEncoder
+pd.set_option('display.max_columns', 500)
+df=pd.read_csv("https://media-doselect.s3.amazonaws.com/generic/831JKKEkW7kqd5M4evNva9LyB/insurance_grouped.csv")
+le = LabelEncoder()
+
+df['BMI_group'] = pd.cut(df['bmi'],[0, 18.5, 24.9, 29.9, 1000], labels=['Underweight', 'Normal', 'Overweight', 'Obese'])
+
+df['sex'] = le.fit_transform(df['sex'])
+df['BMI_group'] = le.fit_transform(df['BMI_group'])
+df['smoker'] = le.fit_transform(df['smoker'])
+df['region'] = le.fit_transform(df['region'])
+
+print(df.head())
+```
+
+**Find Correlation between Values**
+```py heading='Correlation among variables using df.corr()'
+import pandas as pd 
+df=pd.read_csv("https://media-doselect.s3.amazonaws.com/generic/B5yO4wkEbQk4dVGn8140yV1bx/insurance_encoded.csv")
+print("{:0.4f}".format(round(df['smoker'].corr(df['bmi']), 4)))
+print("{:0.4f}".format(round(df['smoker'].corr(df['age']), 4)))
+print("{:0.4f}".format(round(df['smoker'].corr(df['charges']), 4)))
+```
+
 # References
 - https://stats.stackexchange.com/questions/268638/confusion-about-parametric-and-non-parametric-model
-- http://machinelearningmastery.com/parametric-and-nonparametric-machine-learning-algorithms/
-- http://rstudio-pubs-static.s3.amazonaws.com/24365_2803ab8299934e888a60e7b16113f619.html
+- https://machinelearningmastery.com/parametric-and-nonparametric-machine-learning-algorithms/
+- https://rstudio-pubs-static.s3.amazonaws.com/24365_2803ab8299934e888a60e7b16113f619.html
+- https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html
+- https://towardsdatascience.com/categorical-encoding-using-label-encoding-and-one-hot-encoder-911ef77fb5bd
