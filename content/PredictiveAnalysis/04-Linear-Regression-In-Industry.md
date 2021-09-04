@@ -1,7 +1,7 @@
 ---
 title: Linear Regression in the Industry
 description: Real life examples of using Linear Regression in the Industry
-date: "2021-08-13"
+date: "2021-09-03"
 image: "linear_vs_logistic_regression.jpg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
