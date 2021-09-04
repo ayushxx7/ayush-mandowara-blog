@@ -1,4 +1,4 @@
-e--
+---
 title: Hypothesis Testing
 description: using hypothesis testing to validate conclusions gained from sample data
 date: "2021-08-30"
