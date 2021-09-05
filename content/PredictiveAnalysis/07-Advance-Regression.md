@@ -19,6 +19,10 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Gradient Descent](#gradient-descent)
     * [1D Gradient Descent](#1d-gradient-descent)
     * [2D Gradient Descent](#2d-gradient-descent)
+* [Metrics](#metrics)
+    * [RSS](#rss)
+    * [Mean Square Error](#mean-square-error)
+    * [Root Mean Square Error](#root-mean-square-error)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -160,6 +164,23 @@ $
 $\displaystyle \frac{\partial J}{\partial m} = 2\sum_{i=1}^{n}(y_i-(mx_i+c))(-x_i)$
 
 $\displaystyle \frac{\partial J}{\partial c} = 2\sum_{i=1}^{n}(y_i-(mx_i+c))(-1)$
+
+# Metrics
+- Overall sense of error of the model
+- Smaller the RSS, closer is the model fit
+
+## RSS
+$\displaystyle y_i = \beta_0 + \beta_1x_{i} + \epsilon_i$
+
+$\displaystyle \hat y_i = \beta_0 + \beta_1x_{i}$
+
+$RSS = \displaystyle \sum_{i=1}^{N}\epsilon_i^2 = \sum_{i=1}^{N}(y_i - \hat y_i)^2 = \sum_{i=1}^{N}(y_i - bo - b_1x_i)^2$
+
+## Mean Square Error
+$\displaystyle MSE = \frac{RSS}{n}$
+
+## Root Mean Square Error
+$\displaystyle RMSE = \sqrt{MSE}$
 
 # References
 [Plot best fit line - Libre Office](https://www.youtube.com/watch?v=f4_GwWdUNqI)
