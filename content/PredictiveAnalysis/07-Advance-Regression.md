@@ -1,7 +1,7 @@
 ---
 title: Advance Regression - Ridge, Lasso, Gradient Descent
 description: constrained and unconstrained minimisation
-date: "2021-08-27"
+date: "2021-09-09"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
