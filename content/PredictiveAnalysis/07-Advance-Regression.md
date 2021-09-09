@@ -23,7 +23,12 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
     * [RSS](#rss)
     * [Mean Square Error](#mean-square-error)
     * [Root Mean Square Error](#root-mean-square-error)
+* [SLR](#slr)
+* [Benefits of Using Matrices](#benefits-of-using-matrices)
+    * [SLR Equation in Matrix Form](#slr-equation-in-matrix-form)
+* [MLR](#mlr)
 * [References](#references)
+    * [- https://online.stat.psu.edu/stat462/node/132/](#--httpsonlinestatpsuedustat462node132)
 
 <!-- vim-markdown-toc -->
 
@@ -75,8 +80,8 @@ $\displaystyle \theta_{new} = \theta_{old} - \eta\frac{\partial J}{\partial \the
 $\displaystyle \theta_{new} = \theta_{old} - \eta(2.4){(\theta_{old}-2)}$
 
 Let's assume the following starting conditions:
-- \theta = 1
-- \eta = 0.1
+- $\theta = 1$
+- $\eta = 0.1$
 
 Substituting,
 
@@ -176,12 +181,93 @@ $\displaystyle \hat y_i = \beta_0 + \beta_1x_{i}$
 
 $RSS = \displaystyle \sum_{i=1}^{N}\epsilon_i^2 = \sum_{i=1}^{N}(y_i - \hat y_i)^2 = \sum_{i=1}^{N}(y_i - bo - b_1x_i)^2$
 
+$\displaystyle \frac{\partial (RSS)}{\partial \beta_0} \implies \beta_0 = \bar y - \beta_1 \bar x$
+
+$\displaystyle \frac{\partial (RSS)}{\partial \beta_1} \implies \beta_1 = \frac{\sum_{i=1}^{N}(x-\bar x)(y - \bar y)}{\sum_{i=1}^{N}(x-\bar x)^2}$
+
 ## Mean Square Error
 $\displaystyle MSE = \frac{RSS}{n}$
 
 ## Root Mean Square Error
 $\displaystyle RMSE = \sqrt{MSE}$
 
+# SLR
+for i = i to n,
+$\displaystyle y_{i} = \beta_0 + \beta_1x_{i} + \epsilon_i$ 
+
+for n observations, equations can be written as:
+- $y_{1} = \beta_0 + \beta_1x_{1}$
+- $y_{2} = \beta_0 + \beta_1x_{2}$
+- $\ldots$
+- $y_{n} = \beta_0 + \beta_1x_{n}$
+
+This can be written more efficient in matrix notation:
+
+$\displaystyle \begin{bmatrix}y_1\\y_2\\\ldots\\y_{n}\end{bmatrix} = 
+\begin{bmatrix}1&x_1\\1&x_2\\\ldots&\ldots\\1&x_{n}\end{bmatrix}
+\begin{bmatrix}\beta_0\\\beta_1\end{bmatrix} +
+\begin{bmatrix}\epsilon_1\\\epsilon_2\\\ldots\\\epsilon_n\end{bmatrix}
+$
+
+In more concise form:
+
+$\displaystyle Y = X\beta + \epsilon$
+
+here,
+- Y: Response Vector
+- X: Design matrix
+- $\beta$: Coeffient Vector
+- $\epsilon$: Error Vector
+
+# Benefits of Using Matrices
+- Formulae become simpler, and more compact and readable.
+- Code using matrices runs much faster than explicit ‘for’ loops. 
+- Python libraries, such as NumPy, help us build n-dimensional arrays, which occupy less memory than Python lists and computation is also faster.
+
+## SLR Equation in Matrix Form
+$\displaystyle \widehat{\beta}=(X^{T}.X)^{-1}.X^{T}.Y$
+
+```py heading="Implementing equation in Python"
+beta_hat = np.linalg.inv(X_mat.T.dot(X_mat)).dot(X_mat.T).dot(Y)
+```
+
+# MLR
+for i = i to n,
+- $\displaystyle y_{i} = \beta_0 + \beta_1x_{i,1} + \beta_2x_{i,2} + \ldots + \beta_kx_{i,k} + \epsilon_i$,  
+- where k is the number of variables in the model
+
+Matrix Notation:
+
+$\displaystyle \begin{bmatrix}y_1\\y_2\\\ldots\\y_{n}\end{bmatrix} = 
+\begin{bmatrix}1&x_{1,1} & x_{1, 2}\ldots&x_{1,k}\\1
+&x_{2,1} & x_{2, 2}\ldots&x_{2,k}\\ 
+\ldots&\ldots\\1&
+x_{n,1} & x_{n, 2}\ldots&x_{n,k}\\ 
+\end{bmatrix}
+\begin{bmatrix}\beta_0\\\beta_1\\\beta_2\\\ldots\\\beta_k\end{bmatrix} +
+\begin{bmatrix}\epsilon_1\\\epsilon_2\\\ldots\\\epsilon_n\end{bmatrix}
+$
+
+Dimension: $\displaystyle Y(n,1) = X(n, k+1).\beta(k+1) + \epsilon(n,1)$
+
+It can still be written as:
+
+$\displaystyle Y = X\beta + \epsilon$
+
+here,
+- Y: Response Vector
+- X: Design matrix
+- $\beta$: Coeffient Vector
+- $\epsilon$: Error Vector
+
+Residual: $\displaystyle \Large \epsilon = \normalsize Y - X\beta$
+
+
+---
+
 # References
-[Plot best fit line - Libre Office](https://www.youtube.com/watch?v=f4_GwWdUNqI)
+- [Plot best fit line - Libre Office](https://www.youtube.com/watch?v=f4_GwWdUNqI)
 - https://mat.gsia.cmu.edu/classes/QUANT/NOTES/chap4.pdf
+- https://towardsdatascience.com/understanding-the-ols-method-for-simple-linear-regression-e0a4e8f692cc
+- https://online.stat.psu.edu/stat462/node/132/
+-
