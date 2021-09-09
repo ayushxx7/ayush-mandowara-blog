@@ -30,7 +30,7 @@ print(arr_1)
 print(arr_2)
 print(arr_3)
 hstack = np.hstack([arr_1, arr_2])
-vstack = np.hstack([arr_2, arr_3])
+vstack = np.vstack([arr_2, arr_3])
 print(hstack)
 print(vstack)
 ```
@@ -100,4 +100,14 @@ print(a)
 border_array = np.ones((n, n), dtype = int)
 border_array[1:-1, 1:-1] = 0
 print(border_array)
+```
+
+## Transpose of Matrix
+
+If we have a set of data points $x_1, x_2, x_3$ upto $x_n$, stored in array, we can create a design matrix using vstack and transpose.
+```py heading="Transpose Matrix for Simple Linear Regression"
+import numpy as np
+
+X = [5, 6, 7]
+print(np.vstack((np.ones(len(X)), X)).T)
 ```
