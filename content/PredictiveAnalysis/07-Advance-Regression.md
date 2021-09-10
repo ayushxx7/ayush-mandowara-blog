@@ -27,6 +27,7 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Benefits of Using Matrices](#benefits-of-using-matrices)
     * [SLR Equation in Matrix Form](#slr-equation-in-matrix-form)
 * [MLR](#mlr)
+* [Question](#question)
 * [References](#references)
     * [- https://online.stat.psu.edu/stat462/node/132/](#--httpsonlinestatpsuedustat462node132)
 
@@ -181,6 +182,12 @@ $\displaystyle \hat y_i = \beta_0 + \beta_1x_{i}$
 
 $RSS = \displaystyle \sum_{i=1}^{N}\epsilon_i^2 = \sum_{i=1}^{N}(y_i - \hat y_i)^2 = \sum_{i=1}^{N}(y_i - bo - b_1x_i)^2$
 
+```py heading="RSS in Python"
+import numpy as np
+rss = np.sum(np.square(y-y_pred))
+print(rss)
+```
+
 $\displaystyle \frac{\partial (RSS)}{\partial \beta_0} \implies \beta_0 = \bar y - \beta_1 \bar x$
 
 $\displaystyle \frac{\partial (RSS)}{\partial \beta_1} \implies \beta_1 = \frac{\sum_{i=1}^{N}(x-\bar x)(y - \bar y)}{\sum_{i=1}^{N}(x-\bar x)^2}$
@@ -262,6 +269,16 @@ here,
 
 Residual: $\displaystyle \Large \epsilon = \normalsize Y - X\beta$
 
+
+# Question
+**How will you identify the presence of heteroscedasticity in the residuals?**
+- Plot residuals vs the predicted values and see of there is a consistent change in the residuals as we move from left of the x axis to the right.
+
+---
+
+**How would you check for the assumptions of Linear Regression?**
+- Scatter Plot of residuals vs y_pred
+- Histogram Plot of residuals
 
 ---
 
