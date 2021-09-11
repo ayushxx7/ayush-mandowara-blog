@@ -195,8 +195,18 @@ $\displaystyle \frac{\partial (RSS)}{\partial \beta_1} \implies \beta_1 = \frac{
 ## Mean Square Error
 $\displaystyle MSE = \frac{RSS}{n}$
 
+```py heading="MSE in Python"
+from sklearn.metrics import mean_squared_error as mse
+
+print(mse(y_actual, y_true))
+```
+
 ## Root Mean Square Error
 $\displaystyle RMSE = \sqrt{MSE}$
+
+```py heading="RMSE in Python"
+print(mse**0.5)
+```
 
 # SLR
 for i = i to n,
@@ -269,8 +279,7 @@ here,
 
 Residual: $\displaystyle \Large \epsilon = \normalsize Y - X\beta$
 
-
-# Question
+# Questions
 **How will you identify the presence of heteroscedasticity in the residuals?**
 - Plot residuals vs the predicted values and see of there is a consistent change in the residuals as we move from left of the x axis to the right.
 
