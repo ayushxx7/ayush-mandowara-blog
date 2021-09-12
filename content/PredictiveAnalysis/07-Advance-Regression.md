@@ -1,7 +1,7 @@
 ---
 title: Advance Regression - Ridge, Lasso, Gradient Descent
 description: constrained and unconstrained minimisation
-date: "2021-09-09"
+date: "2021-09-13"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
@@ -27,9 +27,15 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Benefits of Using Matrices](#benefits-of-using-matrices)
     * [SLR Equation in Matrix Form](#slr-equation-in-matrix-form)
 * [MLR](#mlr)
-* [Question](#question)
+* [Questions](#questions)
+* [Identifying Non-Linearity in Data](#identifying-non-linearity-in-data)
+* [Handling Non-Linear Data](#handling-non-linear-data)
+* [Polynomial Regression](#polynomial-regression)
+* [Questions](#questions-1)
+* [Data Transformation](#data-transformation)
+    * [When to do transformation](#when-to-do-transformation)
+* [Questions](#questions-2)
 * [References](#references)
-    * [- https://online.stat.psu.edu/stat462/node/132/](#--httpsonlinestatpsuedustat462node132)
 
 <!-- vim-markdown-toc -->
 
@@ -233,7 +239,7 @@ $\displaystyle Y = X\beta + \epsilon$
 here,
 - Y: Response Vector
 - X: Design matrix
-- $\beta$: Coeffient Vector
+- $\beta$: Coefficient Vector
 - $\epsilon$: Error Vector
 
 # Benefits of Using Matrices
@@ -274,7 +280,7 @@ $\displaystyle Y = X\beta + \epsilon$
 here,
 - Y: Response Vector
 - X: Design matrix
-- $\beta$: Coeffient Vector
+- $\beta$: Coefficient Vector
 - $\epsilon$: Error Vector
 
 Residual: $\displaystyle \Large \epsilon = \normalsize Y - X\beta$
@@ -291,9 +297,81 @@ Residual: $\displaystyle \Large \epsilon = \normalsize Y - X\beta$
 
 ---
 
+# Identifying Non-Linearity in Data
+- For SLR
+    - scatter plot and check non-linear patterns
+
+- For MLR
+    - check residuals vs predictions plot for non-linearity
+        - residuals are scattered randomly around 0
+        - spread of residuals should be constant
+        - no outliers in the data
+    - If non-linearity is present, then we may need to plot each predictor against the residuals to identify which predictor is nonlinear.
+
+# Handling Non-Linear Data
+- Polynomial regression
+- Data Transformation
+- Non-Linear Regression
+- Polynomial regression and data transformation allow to use the linear regression framework to estimate model coefficients
+
+# Polynomial Regression
+
+$\displaystyle \hat y = \beta_0 + \beta_1x_i + \beta_2x_{i}^{2}$
+
+Substitute the variable $x_{i}$ as $x_1$ and $x_{i}^{2}$ as $x_2$
+
+$\displaystyle \hat y = \beta_0 + \beta_1x_1 + \beta_2x_{2}$
+
+This way, we can express non-linear data in linear regression model
+
+---
+
+The kth-order polynomial model in one variable is given by:
+
+$y = β_0 + β_1x + β_2x^{2} + β_3x^3 + \ldots + β_kx^k + \epsilon$
+ 
+If $x_j = x^j$ and j = 1, 2, ..., k, then the model is a multiple linear regression model with k predictor variables, $x_1, x_2, \ldots, x_k$. Thus, polynomial regression can be considered an extension of multiple linear regression and, hence, we can use the same technique used in multiple linear regression to estimate the model coefficients for polynomial regression. 
+
+# Questions
+**On inspection of the relationship between one predictor variable (a) and the response variable (y), you identify that the two have a cubic relationship. In the final model, which predictors will you include?**
+
+- $x, x^{2}, x^{3}$
+- Since this is a cubic fit, we need to include third degree of the predictor. In polynomial regression, we need to include the lower degree polynomials in the model as well. Hence, we include all three predictors as mentioned in the answer.
+- Model Equation: $y_{i} = \beta_0 + \beta_1x_{i} + \beta_2x^{2} + \beta_3x^{3} + \epsilon$
+
+# Data Transformation
+- both response and predictors can be transformed
+- One can take a log transform over data if there is sharp upward trend which then normalizes
+```py heading="Log Transform in Python"
+import numpy as np
+x = [1, 5, 9, 100, 200, 300, 400]
+l = np.log(x)
+print(l)
+```
+- $\displaystyle \hat y_{i} = \beta_0 + \beta_1x_{i}$
+- After $\log$ transform: $\displaystyle \hat y_{i} = \beta_0 + \beta_1\log(x_{i})$
+
+- There are other transformations one can perform. Refer [this article](https://www.mathsisfun.com/sets/functions-common.html) for more information.
+
+![Common-Equations-Dance-Moves](math-dance-moves.gif)
+
+## When to do transformation
+- If there is a non-linear trend in the data, the first thing to do is transform the predictor values.
+- When the problem is the non-normality of error terms and/or unequal variances are the problems, then consider transforming the response variable; this can also help with non-linearity.
+- When the regression function is not linear and the error terms are not normal and have unequal variances, then transform both the response and the predictor. 
+- In short, generally:
+    - Transforming the y values helps in handling issues with the error terms and may help with the non-linearity
+    - Transforming the x values primarily corrects the non-linearity
+
+# Questions
+
+**What is the equation for exponential transformation?**
+- $\displaystyle \hat y = \beta_0 + \beta_1e^{x_{i}} + \epsilon_i$
+
 # References
 - [Plot best fit line - Libre Office](https://www.youtube.com/watch?v=f4_GwWdUNqI)
 - https://mat.gsia.cmu.edu/classes/QUANT/NOTES/chap4.pdf
 - https://towardsdatascience.com/understanding-the-ols-method-for-simple-linear-regression-e0a4e8f692cc
 - https://online.stat.psu.edu/stat462/node/132/
--
+- https://www.mathsisfun.com/sets/functions-common.html
+- https://online.stat.psu.edu/stat462/node/155/
