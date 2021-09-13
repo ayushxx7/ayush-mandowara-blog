@@ -368,10 +368,15 @@ print(l)
 **What is the equation for exponential transformation?**
 - $\displaystyle \hat y = \beta_0 + \beta_1e^{x_{i}} + \epsilon_i$
 
+**Give Examples where Linear Regression (even with tranformation) cannot be applied**
+- $\displaystyle y = \beta_1x_1 + \beta_2e^{x_2+x_3}+\beta_3sin(\beta_4x_4)$
+- $\displaystyle y_{i} = \frac{\beta_1}{1+e^{\beta_2+bet_3x_{i}}} + \epsilon_i$
+
 # References
 - [Plot best fit line - Libre Office](https://www.youtube.com/watch?v=f4_GwWdUNqI)
-- https://mat.gsia.cmu.edu/classes/QUANT/NOTES/chap4.pdf
-- https://towardsdatascience.com/understanding-the-ols-method-for-simple-linear-regression-e0a4e8f692cc
-- https://online.stat.psu.edu/stat462/node/132/
-- https://www.mathsisfun.com/sets/functions-common.html
-- https://online.stat.psu.edu/stat462/node/155/
+- [Constrained Optimisation](https://mat.gsia.cmu.edu/classes/QUANT/NOTES/chap4.pdf)
+- [OLS for SLR](https://towardsdatascience.com/understanding-the-ols-method-for-simple-linear-regression-e0a4e8f692cc)
+- [Matrix form of MLR](https://online.stat.psu.edu/stat462/node/132/)
+- [Common Math Functions](https://www.mathsisfun.com/sets/functions-common.html)
+- [Data Tranformations](https://online.stat.psu.edu/stat462/node/155/)
+- [Nonlinear Regression](https://online.stat.psu.edu/stat462/node/204/)
