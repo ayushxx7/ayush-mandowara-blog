@@ -1,7 +1,7 @@
 ---
 title: Advance Regression - Ridge, Lasso, Gradient Descent
 description: constrained and unconstrained minimisation
-date: "2021-09-13"
+date: "2021-09-14"
 image: "regression.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
@@ -41,6 +41,14 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
     * [Multicollinearity](#multicollinearity)
     * [Overfitting](#overfitting)
     * [Extrapolation](#extrapolation)
+* [Overfitting](#overfitting-1)
+* [Regularization](#regularization)
+* [Ridge Regression](#ridge-regression)
+    * [Role of Lambda](#role-of-lambda)
+    * [Summary - Ridge Regression](#summary---ridge-regression)
+* [Lasso Regression](#lasso-regression)
+    * [Summary - Lasso Regression](#summary---lasso-regression)
+* [Takeaways](#takeaways)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -367,6 +375,13 @@ $y = β_0 + β_1x + β_2x^{2} + β_3x^3 + \ldots + β_kx^k + \epsilon$
 
 If $x_j = x^j$ and j = 1, 2, ..., k, then the model is a multiple linear regression model with k predictor variables, $x_1, x_2, \ldots, x_k$. Thus, polynomial regression can be considered an extension of multiple linear regression and, hence, we can use the same technique used in multiple linear regression to estimate the model coefficients for polynomial regression.
 
+```py heading="Polynomial Features in Python"
+from sklearn.linear_model import PolynomialRegression
+
+poly = PolynomialRegression(3)
+Y = poly.fit_transform(X) # 1, x^1, x^2, x^3
+print(Y)
+```
 # Questions
 
 **On inspection of the relationship between one predictor variable (a) and the response variable (y), you identify that the two have a cubic relationship. In the final model, which predictors will you include?**
@@ -451,6 +466,111 @@ When a model is too complex, it may lead to overfitting. It means the model may 
 ## Extrapolation
 
 Extrapolation occurs when we use a linear regression model to make predictions for predictor values that are not present in the range of data used to build the model. For instance, suppose we have built a model to predict the weight of a child given its height, which ranges from 3 to 5 feet. If we now make predictions for a child with height greater than 5 feet or less than 3 feet, then we may get incorrect predictions. The predictions are valid only within the range of values that are used for building the model. Hence, we should not extrapolate beyond the scope of the model.
+
+---
+
+# Overfitting
+When a model performs really well on the data that is used to train it, but does not perform well with unseen data, we know we have a problem: overfitting. Such a model will perform very well with training data and, hence, will have very low bias; but since it does not perform well with unseen data, it will show high variance.
+
+- When Model is too complex, the bias is low, while the variance is high. It has essentially memorized the whole dataset instead of creating a general pattern from it.
+- When Model is too simple, the bias is high, while the variance is low. It means that the model has not learned anything at all. This is called Underfitting. Here both the training and testing error is going to be high.
+- [Refer this for more details](./06-Model-Selection.md#BiasVsVariance)
+
+# Regularization
+Regularization helps with managing model complexity by essentially shrinking the model coefficient estimates towards 0. This discourages the model from becoming too complex, thus avoiding the risk of overfitting.
+
+For Linear Regression, Model Complexity depends on 
+- Magnitude of the coefficients
+- Number of coefficients
+
+In OLS, 
+- minimizing the cost function leads to low bias, or in other words Overfitting.
+- The coefficients obtained can be highly unstable.
+    - only few predictors are significantly related to target
+    - multicollinearity
+
+To solve this, 
+- Add a penalty to cost term i.e Cost function = RSS + Penalty
+
+When we regularize, we sacrifice a little bias in favor of a significant reduction in variance.
+
+One sign of overfitting is extreme values of model coefficients. Hence, regularization helps as it shrinks the coefficients towards 0.
+
+# Ridge Regression
+In OLS, we get the best coefficients by minimising the residual sum of squares (RSS). Similarly, with Ridge regression also, we estimate the model coefficients, but by minimising a different cost function. This cost function adds a penalty term to the RSS.
+
+$\displaystyle \text{OLS Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2$
+
+$\displaystyle \text{Ridge Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2 + \lambda\sum_{j=1}^{P}\beta_j^2$
+- Here, $\lambda\sum_{j=1}^{P}\beta_j^2$ is the penalty term
+- It has the effect of shrinking $\beta$s towards zero to minimize cost
+
+One point to keep in mind is that we need to standardise the data whenever working with Ridge regression. We have seen that regularization puts a constraint on the magnitude of the model coefficients. Then the penalty term depends upon the magnitude of each coefficient. This makes it necessary to centre or standardise the variables. 
+
+## Role of Lambda
+If lambda is 0, then the cost function would not contain the penalty term and there will be no shrinkage of the model coefficients. They would be the same as those from OLS. However, since lambda moves towards higher values, the shrinkage penalty increases, pushing the coefficients further towards 0, which may lead to model underfitting. Choosing an appropriate lambda becomes crucial: If it is too small, then we would not be able to solve the problem of overfitting, and with too large a lambda, we may actually end up underfitting.
+
+Another point to note is that in OLS, we will get only one set of model coefficients when the RSS is minimised. However, in Ridge regression, for each value of lambda, we will get a different set of model coefficients.
+
+Higher $\lambda \implies$ more regularization
+- if $\lambda$ is too high, it will lead to underfitting
+- if $\lambda$ is too low, it will not handle overfitting
+
+## Summary - Ridge Regression
+- Ridge regression has a particular advantage over OLS when the OLS estimates have high variance, i.e., when they overfit. Regularization can significantly reduce model variance while not increasing bias much. 
+
+- The tuning parameter lambda helps us determine how much we wish to regularize the model. The higher the value of lambda, the lower the value of the model coefficients, and more is the regularization. 
+
+- Choosing the right lambda is crucial so as to reduce only the variance in the model, without compromising much on identifying the underlying patterns, i.e., the bias.
+
+- It is important to standardise the data when working with Ridge regression.
+
+- The model coefficients of ridge regression can shrink very close to 0 but do not become 0 and hence there is no feature selection with ridge regression. This can cause problems with interpretability of the model if the number of predictors is very large.
+
+```py heading="Ridge Regression in Python"
+from sklearn.linear_model import Ridge
+
+r = Ridge(alpha = 0.1) # alpha is the hyperparameter lambda
+r.fit(X, y)
+r.predict(X_test)
+```
+
+# Lasso Regression
+
+$\displaystyle \text{Ridge Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2 + \lambda\sum_{j=1}^{P}|\beta_j|$
+
+- Here, $\lambda\sum_{j=1}^{P}|\beta_j|$ is the penalty term
+- If $\lambda$ is large enough, the coefficient for some of the variables will become zero. Hence it performs variable selection.
+- Models generated from Lasso are generally easier to interpret than those produced by Ridge Regression
+- $\lambda \uparrow \implies variance \downarrow \; bias \uparrow$
+- Standardising the variable is necessary for lasso as well
+
+```py heading="Lasso Regression in Python"
+from sklearn.linear_model import Lasso
+
+r = Lasso(alpha = 0.1) # alpha is the hyperparameter lambda
+r.fit(X, y)
+r.predict(X_test)
+```
+
+- Choosing correct $\lambda$ is important. If it is too large, all coefficients will become zero.
+
+## Summary - Lasso Regression
+- The behaviour of Lasso regression is similar to that of Ridge regression.
+- With an increase in the value of lambda, variance reduces with a slight compromise in terms of bias.
+- Lasso also pushes the model coefficients towards 0 in order to handle high variance, just like Ridge regression. But, in addition to this, Lasso also pushes some coefficients to be exactly 0 and thus performs variable selection.
+- This variable selection results in models that are easier to interpret.
+
+Generally, Lasso should perform better in situations where only a few among all the predictors that are used to build our model have a significant influence on the response variable. So, feature selection, which removes the unrelated variables, should help. But Ridge should do better when all the variables have almost the same influence on the response variable. 
+
+It is not the case that one of the techniques always performs better than the other – the choice would depend upon the data that is used for modelling.
+
+---
+
+# Takeaways
+- If hyperparameter lambda is high, it will lead to underfitting, while if it is low, it will not handle overfitting.
+- Ridge regression does not make the coefficient zero, while lasso regression does.
+- Both ridge and lasso have the same idea of adding a penalty to the cost function based on the weight of the coefficients. in ridge, the penalty is on the sum of squares of the coefficients, while in lasso it is on the sum of the absolute value of the coefficients.
 
 # References
 
