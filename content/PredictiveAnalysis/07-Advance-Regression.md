@@ -49,6 +49,7 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Lasso Regression](#lasso-regression)
     * [Summary - Lasso Regression](#summary---lasso-regression)
 * [Questions](#questions-3)
+* [Ridge vs Lasso](#ridge-vs-lasso)
 * [Takeaways](#takeaways)
 * [References](#references)
 
@@ -577,6 +578,14 @@ It is not the case that one of the techniques always performs better than the ot
 - Lasso will cause some of the coefficients to be 0.
 
 ---
+
+# Ridge vs Lasso
+![RvL](RidgeVsLasso.jfif)
+Observing the plots above, we see that we can get the model coefficients to become 0 only if the ellipses touch the constraint region on either the x or the y axis. Since the Ridge regression constraint is circular, without any sharp points, the ellipse will generally not touch the circular constraint region at the axis.
+
+Hence, the coefficients can become very small but would not become 0. In the case of Lasso regression, since the diamond constraint has a corner at each axis, the ellipse would touch the constraint at any of its corners often, resulting in that coefficient becoming 0. In higher dimensions, since there will be a higher number of corners, a higher number of coefficients can become 0 at the same time.
+
+This is the reason Lasso regression can perform feature selection.
 
 # Takeaways
 - If hyperparameter lambda is high, it will lead to underfitting, while if it is low, it will not handle overfitting.
