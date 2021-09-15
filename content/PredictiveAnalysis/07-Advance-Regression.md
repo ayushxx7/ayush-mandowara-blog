@@ -48,6 +48,7 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
     * [Summary - Ridge Regression](#summary---ridge-regression)
 * [Lasso Regression](#lasso-regression)
     * [Summary - Lasso Regression](#summary---lasso-regression)
+* [Questions](#questions-3)
 * [Takeaways](#takeaways)
 * [References](#references)
 
@@ -542,7 +543,7 @@ $\displaystyle \text{Ridge Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2
 - Here, $\lambda\sum_{j=1}^{P}|\beta_j|$ is the penalty term
 - If $\lambda$ is large enough, the coefficient for some of the variables will become zero. Hence it performs variable selection.
 - Models generated from Lasso are generally easier to interpret than those produced by Ridge Regression
-- $\lambda \uparrow \implies variance \downarrow \; bias \uparrow$
+- $\lambda \uparrow \implies variance \downarrow \; bias \uparrow \; rss \uparrow$
 - Standardising the variable is necessary for lasso as well
 
 ```py heading="Lasso Regression in Python"
@@ -564,6 +565,16 @@ r.predict(X_test)
 Generally, Lasso should perform better in situations where only a few among all the predictors that are used to build our model have a significant influence on the response variable. So, feature selection, which removes the unrelated variables, should help. But Ridge should do better when all the variables have almost the same influence on the response variable. 
 
 It is not the case that one of the techniques always performs better than the other – the choice would depend upon the data that is used for modelling.
+
+# Questions
+
+**As λ increases from 0 to infinity, what is the impact on Variance, RSS, Test Error, Ridge Coefficients, Lasso Coefficients and Bias of the model?**
+- Variance decreases: When λ=0, the alphas have their least square estimate values. The actual estimates heavily depend on the training data and hence variance is high. As we increase λ, alphas start decreasing and model becomes simpler. In the limiting case of λ approaching infinity, all betas reduce to zero and model predicts a constant and has no variance.
+- RSS increases: Differentiating the cost function with lambda=0 gives the value of the coefficients which minimizes the RSS. Again, putting λ = infinity gives us a constant model with maximum RSS. Thus, the RSS steadily increases with the variation of lambda
+- Bias increase: When λ=0, alphas have their least-square estimate values and hence have the least bias. As λ increases, alphas start reducing towards zero, the model fits less accurately to training data and hence bias increases. In the limiting case of λ approaching infinity, the model predicts a constant and hence bias is maximum.
+- Test error will be high: Even though the variance will be very low, test error will be high as the model would not have captured the behaviour of the data correctly.
+- Ridge will lead to some of the coefficients to be very close to 0.
+- Lasso will cause some of the coefficients to be 0.
 
 ---
 
