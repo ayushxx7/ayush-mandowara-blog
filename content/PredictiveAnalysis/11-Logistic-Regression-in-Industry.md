@@ -28,6 +28,17 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [Mathematical Transformation](#mathematical-transformation)
     * [Principal Component Transformation](#principal-component-transformation)
 * [Takeaways](#takeaways)
+* [Challenges in Logistic Regression](#challenges-in-logistic-regression)
+    * [Low Event Rate](#low-event-rate)
+        * [Solved by](#solved-by)
+    * [Missing Values](#missing-values)
+        * [Solved by](#solved-by-1)
+    * [Truncated Data](#truncated-data)
+        * [Solved by](#solved-by-2)
+    * [Examples](#examples)
+* [Model Evaluation](#model-evaluation)
+* [Model Validation](#model-validation)
+    * [Cross Validation](#cross-validation)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -174,5 +185,72 @@ $\displaystyle RSS = y_{actual} - y_{predicted}$
 2. Sample selection is important when it comes to logistic regression. For instance, class imbalance can cause problems while building model. So we have to do stratified sampling to resolve that problem. 
 3. WOE (Weight of Evidence) is a good technique for grouped variables as it maintains the logical reasoning. It is important that WOE be monotic. If it is not, the groups are not created correctly.
 
+---
+
+# Challenges in Logistic Regression
+
+## Low Event Rate
+- One class has very less frequency of data
+
+### Solved by
+- Bias Sampling
+- gather data over long range of time
+- change definition of 1 a little bit
+
+## Missing Values
+- Missing at random
+- Missing not at random (have some pattern)
+
+### Solved by
+- imputation using woe, mean, median, predictive pattern
+- Markov Chain Monte Carlo
+- Expectation Maximisation
+
+## Truncated Data
+- machine is producing laptops, and there is a chance that the laptop is defective. Some laptops will be discarded right away due to some obvious physical damage from the outside, so these laptops won't be part of the data. Yet, the model which will be prepared using this data will run on everything.
+- Example: Reject Inference in risk (providing Loan)
+
+### Solved by
+- Hickman's correction method
+
+## Examples
+
+1. Utilisation is missing: As mentioned earlier, if this variable is missing for a particular customer, that could very well be because the bank did not find that customer worthy enough for a credit card. Hence, these missing values are not missing at random, and it would be unfair to just replace them with the mean or the median. As mentioned earlier, it would be wiser to perform a WOE analysis and then replace these values.
+
+2. Age is missing: Consider why the variable age is missing for some customers. Here, it may actually make more sense to just replace the missing value with the mean or the median, instead of wasting time on WOE analysis. This is because it is very likely that the variable age is just missing because of a system error or a manual error, and there is no clear pattern behind the missing values.
+
+# Model Evaluation
+1. Discriminatory power: how good the model is able to separate the two types of classes
+- KS Statistic
+- Gini: $\displaystyle Gini = 2 * \text{Area Under ROC Curve} - 1$
+- Rank Ordering
+- Sensititivy
+- Specificity
+
+2. Accuracy: using log odds we can calcuate how close real and predicted data is
+- Sensitivity
+- Specificity
+- Compare actual versus predicted $\log$ odds
+
+3. Stability
+- Performance Stability: see if values obtained in training set is holding in test set
+- Variable stability: The sample used for model building hasn't changed too much and has the same general characteristics
+     - Variable distribution stability
+     - Population stability index (PSI) - upto 0.1 is good. more than 0.25 is bad.
+# Model Validation
+- In-sample validation: keep a portion of data out of the total sample data to check peformance once the model is built.
+- Out of time validation: build model using data from 2015 and test on 2013 or 2017.
+- K-cross validataion: when we have small amount data (can cause overfitting). take various small portions and see if score is good on each fold.
+
+## Cross Validation
+![CrossValidation](.\3-fold-CV.png)
+Basically, there are 3 iterations in which evaluation is done. In the first iteration, 2/3rd of the data is selected as training data and the remaining 1/3rd of it is selected as testing data. In the next iteration, a different 2/3rd of the data is selected as the training data set and then the model is built and evaluated. Similarly, the third iteration is completed.
+
+Such an approach is necessary if the data you have for model building is very small, i.e. has very few data points.
+
 # References
 - https://www.analyticsvidhya.com/blog/2016/02/guide-build-predictive-models-segmentation/
+- https://support.sas.com/resources/papers/proceedings13/436-2013.pdf
+- http://www.stats.ox.ac.uk/~steffen/teaching/fsmHT07/fsm407c.pdf 
+- [KS Statistic](https://learn.upgrad.com/course/1611/segment/9864/70778/208785/1105518)
+- [Rank ORdering](https://www.listendata.com/2015/01/model-validation-in-logistic-regression.html)
