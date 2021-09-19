@@ -21,3 +21,25 @@ Notes on Tree based models
 - The intermediate nodes between the root and the leaf nodes are called the internal nodes.
 - it is easy to interpret a decision tree, and you can almost always identify the various factors that lead to a particular decision. In fact, trees are often underestimated in their ability to relate the predictor variables to their predictions. As a rule of thumb, if interpretability by layman is what you are looking for in a model, then decision trees should be at the top of your list.
 - In a decision tree, you start from the top (root node) and traverse left/right according to the result of the condition. Each new condition adds to the previous condition with a logical ‘and’, and you may continue to traverse further until you reach the final condition’s leaf node. A decision is the value (class/quantity) that is assigned to the leaf node.
+
+# Building Decision Trees
+1. Recursive binary splitting/partitioning the data into smaller subsets
+1. Select the best variable for the split
+1. Apply the split
+1. Repeat the process for the subsets obtained
+1. Continue process until stopping criterion is reached
+1. Assigning the majority class/average value as the prediction
+
+### Top Down
+- starting from top with larger data and keep splitting
+
+### Greedy
+- tries to maximize the immediate effect at a node while splitting
+- A small variation in the data can result in a significant change in the decision tree leading to different decisions and results altogether.
+- due to this decision tree is called a high variance model i.e. smaller changes in data can significantly change what the tree looks like
+- The reason we call the process greedy is because it does not take into account what will happen in the next two or three steps. The entire structure of the tree changes with small variations in the input data. This, in turn, changes the way you split and the final decisions altogether. This means that the process is not holistic in nature, as it only aims to gain an immediate result that is derived after splitting the data at a particular node based on a certain rule of the attribute.
+
+# Question
+
+**The order of attributes in each side of a decision tree is exactly the same.**
+- No. The order of attributes in each side of the decision tree does not matter in the process of decision making.
