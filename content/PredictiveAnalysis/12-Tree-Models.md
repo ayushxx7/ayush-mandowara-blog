@@ -30,6 +30,38 @@ Notes on Tree based models
 1. Continue process until stopping criterion is reached
 1. Assigning the majority class/average value as the prediction
 
+```py heading="Creating a Decision Tree in Python"
+from sklearn.tree import DecisionTeeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score
+from IPython.display import Image
+from six import StringIO
+from sklearn.tree import export_graphviz
+import pydotplus, graphviz
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.7, random_state=42)
+
+dt = DecisionTreeClassifier(max_depth=3)
+dt.fit(X_train, y_train)
+
+dot_data = StringIO()
+export_graphviz(dt, out_file=dot_data, filled=True, rounded=True,
+                feature_names=X.columns, 
+                class_names=['No Disease', "Disease"])
+
+graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
+Image(graph.create_png())
+
+y_train_pred = dt.predict(X_train)
+y_test_pred = dt.predict(X_test)
+
+print(accuracy_score(y_train, y_train_pred))
+confusion_matrix(y_train, y_train_pred)
+
+print(accuracy_score(y_test, y_test_pred))
+confusion_matrix(y_test, y_test_pred)
+```
+
 ### Top Down
 - starting from top with larger data and keep splitting
 
