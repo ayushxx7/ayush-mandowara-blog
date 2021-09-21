@@ -13,7 +13,7 @@ Notes on Tree based models
 # About Decision Trees
 - With high interpretability and an intuitive algorithm, decision trees mimic the human decision-making process and are efficient in dealing with categorical data. Unlike other algorithms, such as logistic regression and support vector machines (SVMs), decision trees do not help in finding a linear relationship between the independent variable and the target variable. However, they can be used to model highly non-linear data.
 - A decision tree, as the term suggests, uses a tree-like model to make predictions. It resembles an upside-down tree and uses a similar process that you do to make decisions in real life, i.e., by asking a series of questions to arrive at a decision.
-- A decision tree splits data into multiple sets of data. Each of these sets is then further split into subsets to arrive at a decision. Let’s hear from Prof. Raghavan as he explains this process in detail.
+- A decision tree splits data into multiple sets of data. Each of these sets is then further split into subsets to arrive at a decision.
 - It forms the base for Random Forest Classification Algorithm.
 - A decision tree uses a natural decision-making process, i.e., it asks a series of questions in a nested if-then-else structure. On each node, you ask a question to further split the data that is held by the node. If the test passes, you move to the left; otherwise, you move to the right.
 - The first and top node of a decision tree is called the root node. The arrows in a decision tree always point away from this node.
@@ -75,3 +75,47 @@ confusion_matrix(y_test, y_test_pred)
 
 **The order of attributes in each side of a decision tree is exactly the same.**
 - No. The order of attributes in each side of the decision tree does not matter in the process of decision making.
+
+# Hyperparmaeters
+- Hyperparameter tuning can improve the performance of decision trees to a great extent.
+- Hyperparameters are simply the parameters that we pass on to the learning algorithm to control the training of the model i.e. these are the parameters that the user provides and not something that the algorithm learns on its own during the training process. 
+- Hyperparameters are choices that the algorithm designer makes to ‘tune’ the behaviour of the learning algorithm. 
+- The choice of hyperparameters, therefore, has a lot of bearing on the final model produced by the learning algorithm.
+- The values of hyper-parameters are pre-set. The values of hyper-parameters are independent of the dataset. These values do not change during training.
+- Hyper-parameter is not a part of the trained or the final model. The values of model parameters estimated during training are saved with the trained model.
+- The hyper-parameter values are used during training to estimate the value of model parameters.
+
+## Hyperparameter Tuning
+Since hyperparameters can take many values, it is essential for us to determine the optimal values where the model will perform the best. This process of optimising hyperparameters is called hyperparameter tuning. 
+
+## Difference between Parameter and Hyperparameter
+
+| Parameter                                                | Hyperparameter                                                     |
+|----------------------------------------------------------|--------------------------------------------------------------------|
+| Estimated during the training with historical data       | Values are set before hand                                         |
+| It is a part of the model                                | External to the model                                              |
+| The estimated value is saved with the trained model      | Not a part of the trained model and hence the values are not saved |
+| Dependent on the dataset that the system is trained with | Independent of the dataset                                         |
+
+# Advantages of Decision Trees
+- Interpretable
+  - Trees can be visualised.
+  - Uses a white box model. If a given situation is observable in a model, the explanation for the condition is easily explained by boolean logic. By constrast, in a black box model (e.g., in an artificial neural network), results may be more difficult to interpret.
+- Versatile
+  - can handle classification as well regression
+  - It does not assume anything specific about the nature of the attributes in a data set. 
+  - It can seamlessly handle all kinds of data such as numeric, categorical, strings, Boolean, etc.
+  - Requires little data preparation. 
+- Fast
+  - conditionally partitioning data
+  - The cost of using the tree (i.e., predicting data) is logarithmic in the number of data points used to train the tree.
+- Handle Multicollinearity better: doesn't have distribution assumptions
+- Scale Invariant
+    -  It does not require normalisation, as it only has to compare the values within an attribute.
+- Identifying complex relationships
+    - subsets can be created which have different predictions
+    - work well in certain cases where you cannot fit a single linear relationship between the target and feature variables. 
+- give us an idea of the relative importance of the explanatory attributes that are used for prediction
+- Possible to validate a model using statistical tests. That makes it possible to account for the reliability of the model.
+- Performs well even if its assumptions are somewhat violated by the true model from which the data were generated.
+
