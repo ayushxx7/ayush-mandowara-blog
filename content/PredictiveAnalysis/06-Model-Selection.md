@@ -1,7 +1,7 @@
 ---
 title: Model Selection
 description: which model to use for which scenario 
-date: "2021-08-19"
+date: "2021-09-05"
 image: "model_selection.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -171,13 +171,19 @@ Class of models that a learning algorithm with produce.
 - Consistency of Mode
 - Variance refers to changes in the model as a whole when trained on a different data set rather than the variance in the predicted values of a single model
 - Variance measures how flexible the model is with respect to changes in the training data.
+- High Variance -> Model will fail on test data
+- High Variance -> Overfitting
 
 ## Bias 
 - How much error the model is likely to make on (future) test data
 - Low Complexity => High Bias (or Simple Model => High Bias)
+- High Complexity => Low Bias
 - Correctness of Model
 - Bias measures how accurately a model can describe the actual task at hand.
 - High Bias means $y_{pred} - y_{actual}$ will be high
+- When complexity is high, the bias is the least and the variance is high. Hence the model must have identified all the patterns present in the data including the noise.
+- High Bias -> Model will fail on training data
+- High Bias -> Underfitting
 
 A balance is required between Bias and Variance
 - Model should be simple enough to be generalizable
