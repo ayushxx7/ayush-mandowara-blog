@@ -539,7 +539,7 @@ r.predict(X_test)
 
 # Lasso Regression
 
-$\displaystyle \text{Ridge Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2 + \lambda\sum_{j=1}^{P}|\beta_j|$
+$\displaystyle \text{Lasso Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2 + \lambda\sum_{j=1}^{P}|\beta_j|$
 
 - Here, $\lambda\sum_{j=1}^{P}|\beta_j|$ is the penalty term
 - If $\lambda$ is large enough, the coefficient for some of the variables will become zero. Hence it performs variable selection.
