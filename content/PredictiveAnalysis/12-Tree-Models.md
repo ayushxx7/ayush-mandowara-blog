@@ -7,6 +7,27 @@ author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [About Decision Trees](#about-decision-trees)
+* [Building Decision Trees](#building-decision-trees)
+    * [Top Down](#top-down)
+    * [Greedy](#greedy)
+* [Question](#question)
+* [Hyperparmaeters](#hyperparmaeters)
+  * [Hyperparameter Tuning](#hyperparameter-tuning)
+  * [Difference between Parameter and Hyperparameter](#difference-between-parameter-and-hyperparameter)
+* [Advantages of Decision Trees](#advantages-of-decision-trees)
+* [Disadvantages of Decision Trees](#disadvantages-of-decision-trees)
+  * [Regression using Decision Trees](#regression-using-decision-trees)
+* [Questions](#questions)
+* [Summary](#summary)
+* [Takeaways](#takeaways)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Purpose
 Notes on Tree based models
 
@@ -119,3 +140,49 @@ Since hyperparameters can take many values, it is essential for us to determine 
 - Possible to validate a model using statistical tests. That makes it possible to account for the reliability of the model.
 - Performs well even if its assumptions are somewhat violated by the true model from which the data were generated.
 
+# Disadvantages of Decision Trees
+- Overfitting
+  - Decision-tree learners can create over-complex trees that do not generalise the data well. This is called overfitting. 
+  - Mechanisms such as pruning, setting the minimum number of samples required at a leaf node or setting the maximum depth of the tree are necessary to avoid this problem.
+- High Variance
+  - Decision trees can be unstable because small variations in the data might result in a completely different tree being generated. 
+  - This problem is mitigated by using decision trees within an ensemble.
+- NP Complete
+  - The problem of learning an optimal decision tree is known to be NP-complete under several aspects of optimality and even for simple concepts. 
+  - Consequently, practical decision-tree learning algorithms are based on heuristic algorithms such as the greedy algorithm where locally optimal decisions are made at each node. 
+  - Such algorithms cannot guarantee to return the globally optimal decision tree. 
+  - This can be mitigated by training multiple trees in an ensemble learner, where the features and samples are randomly sampled with replacement.
+- Biased Analysis
+  - Decision tree learners create biased trees if some classes dominate
+  - It is therefore recommended to balance the dataset prior to fitting with the decision tree.
+- There are concepts that are hard to learn because decision trees do not express them easily, such as XOR, parity or multiplexer problems.
+
+## Regression using Decision Trees
+- In regression problems, a decision tree splits the data into multiple subsets. 
+- The difference between decision tree classification and decision tree regression is that in regression, each leaf represents the average of all the values as the prediction as opposed to a class label in classification trees.
+- For classification problems, the prediction is assigned to a leaf node using majority voting but for regression, it is done by taking the average value. This average is calculated using the following formula:
+    - $\hat{y_t} = \frac{1}{N_t}\sum_{i\epsilon D_t}y^{(i)}$ where $\displaystyle y_{i}$ represent the observations in a node
+- For example, suppose you are predicting the sales your company will have based on various factors such as marketing, no. of products, etc. Now, if you use a decision tree to solve this problem, and if one of the leaf nodes has, say, 5 data points, 1 Cr, 1.3 Cr, 0.97 Cr, 1.22 Cr, 0.79 Cr. Now, you will just take the average of these five values which comes out to be 1.05 Cr, and that becomes your final prediction.
+
+# Questions
+**What do leaves in regression and classification decision trees contain**
+- Leaves in classification contain labels.
+  - In classification, the target variable is discrete. Hence, each data point in a leaf has an associated class label.
+- Leaves in regression contain the average predicted value.
+
+# Summary
+- Decision trees are easy to interpret, as you can always traverse backwards and identify the various factors that lead to a particular decision. 
+- A decision tree requires you to perform certain tests on attributes in order to split the data into multiple partitions.
+- In classification, each data point in a leaf has a class label associated with it.A
+- You cannot use the linear regression model to make predictions when you need to divide the data set into multiple subsets, as each subset has an independent trend corresponding to it. In such cases, you can use the decision tree model to make predictions because it can split the data into multiple subsets and assign average values as the prediction to each set independently.
+
+# Takeaways
+- decision trees are intuitive to understand just by visualizing the model as they mimic human decision-making process
+- they are fast (logarithmic time complexity) because they split data into subsets on each condition
+- decision trees are greedy i.e. they only care about what will be the most optimal solution for the current node. They don't care about the global solution optimization
+- decision trees can overfit and are know to be susceptible to changes in the data set (i.e they have high variance) as well as class imbalance
+
+
+# References
+- https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/
+- http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/tree.html
