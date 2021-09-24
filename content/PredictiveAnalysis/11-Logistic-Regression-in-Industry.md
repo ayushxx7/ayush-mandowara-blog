@@ -1,7 +1,7 @@
 ---
 title: Logistic Regression in the Industry
 description: Real life examples of using Logistic Regression in the Industry
-date: "2021-09-04"
+date: "2021-09-22"
 image: "linear_vs_logistic_regression.jpg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -39,6 +39,8 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Model Evaluation](#model-evaluation)
 * [Model Validation](#model-validation)
     * [Cross Validation](#cross-validation)
+* [Model Tracking](#model-tracking)
+* [Model Recalibration](#model-recalibration)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -237,6 +239,7 @@ $\displaystyle RSS = y_{actual} - y_{predicted}$
 - Variable stability: The sample used for model building hasn't changed too much and has the same general characteristics
      - Variable distribution stability
      - Population stability index (PSI) - upto 0.1 is good. more than 0.25 is bad.
+
 # Model Validation
 - In-sample validation: keep a portion of data out of the total sample data to check peformance once the model is built.
 - Out of time validation: build model using data from 2015 and test on 2013 or 2017.
@@ -247,6 +250,19 @@ $\displaystyle RSS = y_{actual} - y_{predicted}$
 Basically, there are 3 iterations in which evaluation is done. In the first iteration, 2/3rd of the data is selected as training data and the remaining 1/3rd of it is selected as testing data. In the next iteration, a different 2/3rd of the data is selected as the training data set and then the model is built and evaluated. Similarly, the third iteration is completed.
 
 Such an approach is necessary if the data you have for model building is very small, i.e. has very few data points.
+
+# Model Tracking 
+- also called Model Governance
+- Ensure that the model is good over time as it is being used
+- variables should be stable (comparable from when the model was originally built)
+- ex: machine is breaking down: instant performance check
+- ex: fraud detection: early warnings / early indicators
+- look for the same parameters as when confirming model
+
+# Model Recalibration
+- small overlay over the same weights
+- change coefficients of model
+- rebuild the model
 
 # References
 - https://www.analyticsvidhya.com/blog/2016/02/guide-build-predictive-models-segmentation/
