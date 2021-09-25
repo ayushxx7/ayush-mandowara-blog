@@ -28,6 +28,11 @@ tags: ["python", "machine-learning", "predictive-analysis"]
   * [CART Algorithm](#cart-algorithm)
   * [Discretization](#discretization)
 * [Question](#question-1)
+* [Impurity Measures](#impurity-measures)
+  * [Classification Error](#classification-error)
+  * [Gini Impurity](#gini-impurity)
+  * [Entropy](#entropy)
+    * [Note](#note)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -210,6 +215,35 @@ Calculating percentiles and midpoints of the sorted values for handling continuo
 **Given a dataset with two attributes, age and gender, you want to predict whether a person will purchase a product (yes/no). You know that among all those who have purchased the product in the past, 98% are females. Also, the age distribution of the customers is almost uniform. The homogeneity of the resultant nodes will be maximised if you split on Age or Gender?**
 
 - Gender as it will split the data such that one node will contain 98% of total observations that belong to 'product purchased' class and the other node will contain 2% of total observations belonging to 'product purchased' class. So, nodes will have high homogeneity here.
+
+# Impurity Measures
+## Classification Error 
+- $\displaystyle E = 1 - max(p_i)$
+- minority becomes the classifcation error if everything is assigned to majority class
+- Max ambiguity value is 0.5
+
+## Gini Impurity
+$\displaystyle G = \sum_{i=1}^{K}p_i(1-p_i) = \sum_{i=1}^{K}(p_{i}-p_{i}^{2}) = \sum_{i=1}^{K}p_{i}-\sum_{i=1}^{k}p_{i}^2=1-\sum_{i=1}^{K}p_{i}^2$
+
+where $p_{i}$, is the probability of finding a point with the label and $k$ is the number of classes 
+
+Note that $\sum_{i=1}^{K}p_{i} = 1$ because sum of all probabilities is equal to 1
+
+- Min ambiguity (all elements belong to single class) is 0
+- Max ambiguity value is 0.5
+- most popular impurity index along with being the default in sklearn library
+- $\displaystyle \text{homogeneity} \uparrow \implies \text{Gini Index} \downarrow$
+
+## Entropy
+$\displaystyle D = -\sum_{i=1}^{K}p_i\log_2p_i$
+- Min ambiguity value is 0
+- Max ambiguity value is 1
+- Here $\log0$ is assumed to be 0
+- Entropy quantifies the degree of disorder in the given data, its value varies from 0 to 1.
+- $\displaystyle \text{homogeneity} \uparrow \implies \text{Entropy} \downarrow$
+
+### Note
+The measures don't distinguish between classes.
 
 # References
 - https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/
