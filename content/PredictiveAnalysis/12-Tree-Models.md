@@ -1,7 +1,7 @@
 ---
 title: Decision Trees
 description: Introduction to tree based models
-date: "2021-09-24"
+date: "2021-09-25"
 image: "decision_trees.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -32,7 +32,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
   * [Classification Error](#classification-error)
   * [Gini Impurity](#gini-impurity)
   * [Entropy](#entropy)
-    * [Note](#note)
+* [Algorithms for Decision Tree](#algorithms-for-decision-tree)
+* [Questions](#questions-1)
+* [Steps for Selecting Best Split Feature](#steps-for-selecting-best-split-feature)
+* [Summary](#summary-1)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -148,6 +151,9 @@ Since hyperparameters can take many values, it is essential for us to determine 
 - give us an idea of the relative importance of the explanatory attributes that are used for prediction
 - Possible to validate a model using statistical tests. That makes it possible to account for the reliability of the model.
 - Performs well even if its assumptions are somewhat violated by the true model from which the data were generated.
+- Gives Feature Importance
+  - higher the node, better the feature
+  - gini number is visible in the nodes
 
 # Disadvantages of Decision Trees
 - Overfitting
@@ -217,6 +223,9 @@ Calculating percentiles and midpoints of the sorted values for handling continuo
 - Gender as it will split the data such that one node will contain 98% of total observations that belong to 'product purchased' class and the other node will contain 2% of total observations belonging to 'product purchased' class. So, nodes will have high homogeneity here.
 
 # Impurity Measures
+- Measures of misclassification of data
+- The measures don't distinguish between classes.
+
 ## Classification Error 
 - $\displaystyle E = 1 - max(p_i)$
 - minority becomes the classifcation error if everything is assigned to majority class
@@ -242,9 +251,41 @@ $\displaystyle D = -\sum_{i=1}^{K}p_i\log_2p_i$
 - Entropy quantifies the degree of disorder in the given data, its value varies from 0 to 1.
 - $\displaystyle \text{homogeneity} \uparrow \implies \text{Entropy} \downarrow$
 
-### Note
-The measures don't distinguish between classes.
+![ImpurityPlots](ImpurityIndicesPlot.png)
+
+# Algorithms for Decision Tree
+- $\Delta \text{impurity}$ = Impurity (post split) &lt; Impurity (pre-split)
+- Split that does this best is chosen
+- The post-split impurity is calculated by finding the weighted average of two child nodes. The split that results in maximum gain is chosen as the best split.
+- Information Gain = $D - D_A$ where $D$ is the entropy of the parent set (data before splitting), $D_A$ is the entropy of the partitions obtained after splitting on attribute $A$.
+- $\displaystyle \text{entropy} \downarrow \implies \text{information} \uparrow$ (reduction in entropy implies information gain)
+- In case of a classification problem, you always try to maximise purity gain or reduce the impurity at a node after every split and this process is repeated till you reach the leaf node for the final prediction. 
+
+# Questions
+**Considering all the data points in a data set have the same label, what will be the Gini index?**
+- 0. The probability of exactly one class will be 1, and the probability of all the other classes will be 0. So, the Gini index, which is given by $\displaystyle 1-\sum_{i=1}^{K}p_{i}^2$, will be 0.
+
+**In a given data set, 50% of the data points belong to label 1, and the other 50% belong to label 2. Calculate the Gini index.**
+- 0.5. Using formula for Gini Index: $\displaystyle 1-\sum_{i=1}^{K}p_{i}^2 = 1-[(\frac{1}{2})^2+(\frac{1}{2})^2]$
+
+# Steps for Selecting Best Split Feature
+1. Calculate the Gini impurity before any split on the whole dataset.
+1. Consider any one of the available attributes.
+1. Calculate the Gini impurity after splitting on this attribute for each of the levels of the attribute.
+1. Combine the Gini impurities of all the levels to get the Gini impurity of the overall attribute.
+1. Repeat steps 2-5 with another attribute till you have exhausted all of them.
+1. Compare the decrease in Gini impurity across all attributes and select the one which offers maximum reduction.
+
+# Summary
+- A decision tree first decides on an attribute to split on.
+- To select this attribute, it measures the homogeneity of the nodes before and after the split.
+- You can measure homogeneity in various ways with metrics like Gini index and entropy.
+- The attribute that results in the increase of homogeneity the most is then selected for splitting.
+- Then, this whole cycle is repeated until you obtain a sufficiently homogeneous data set.
 
 # References
-- https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/
-- http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/tree.html
+- [hyperparameter vs parameter](https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/)
+- [sklearn decision trees](http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/tree.html)
+- [CHAID Algorithm](https://www.listendata.com/2015/03/difference-between-chaid-and-cart.html)
+- [Impurity Measures](https://www.bogotobogo.com/python/scikit-learn/scikt_machine_learning_Decision_Tree_Learning_Informatioin_Gain_IG_Impurity_Entropy_Gini_Classification_Error.php#:~:text=There%20are%20three%20commonly%20used,Gini%20index%2C%20and%20Classification%20Error.&text=where%20pj%20is%20the,have%20a%20uniform%20class%20distribution.)
+- [What happen when we use a base other than 2 for log in entropy](https://stats.stackexchange.com/questions/87182/what-is-the-role-of-the-logarithm-in-shannons-entropy)
