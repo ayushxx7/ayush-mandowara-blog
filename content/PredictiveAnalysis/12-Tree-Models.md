@@ -24,6 +24,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Questions](#questions)
 * [Summary](#summary)
 * [Takeaways](#takeaways)
+* [Splitting and Homogeneity](#splitting-and-homogeneity)
+  * [CART Algorithm](#cart-algorithm)
+  * [Discretization](#discretization)
+* [Question](#question-1)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -182,6 +186,30 @@ Since hyperparameters can take many values, it is essential for us to determine 
 - decision trees are greedy i.e. they only care about what will be the most optimal solution for the current node. They don't care about the global solution optimization
 - decision trees can overfit and are know to be susceptible to changes in the data set (i.e they have high variance) as well as class imbalance
 
+---
+
+# Splitting and Homogeneity
+- We split the data to get groups which are homogeneous or pure or largely belong to one class.
+- We keep splitting till homogeneity exceeds a threshold value after which that node becomes a leaf node.
+- homogeneity refers to response (target) variable's homogeneity.
+- For classification purposes, a data set is completely homogeneous if it contains only a single class label. 
+- For regression purposes, a data set is completely homogeneous if its variance is as small as possible
+- The goal of decision tree splitting is to increase homogeneity. More homogeneity will mean that most of the data points in the set belong to the same class label. Hence, classifying all the data points of that set, to get them to belong to that class, will result in fewer errors.
+
+## CART Algorithm
+A tree can be split based on different rules of an attribute and these attributes can be categorical or continuous in nature. If an attribute is nominal categorical, then there are $2^{k − 1} − 1$
+ possible splits for this attribute, where k is the number of classes. In this case, each possible subset of categories is examined to determine the best split.
+
+If an attribute is ordinal categorical or continuous in nature with n different values, there are $n - 1$ different possible splits for it. Each value of the attribute is sorted from the smallest to the largest and candidate splits based on the individual values is examined to determine the best split point which maximizes the homogeneity at a node.
+
+## Discretization
+Calculating percentiles and midpoints of the sorted values for handling continuous features is known as discretization
+- Refer [this article](https://sci2s.ugr.es/keel/pdf/algorithm/articulo/liu1-2.pdf) for more information.
+
+# Question
+**Given a dataset with two attributes, age and gender, you want to predict whether a person will purchase a product (yes/no). You know that among all those who have purchased the product in the past, 98% are females. Also, the age distribution of the customers is almost uniform. The homogeneity of the resultant nodes will be maximised if you split on Age or Gender?**
+
+- Gender as it will split the data such that one node will contain 98% of total observations that belong to 'product purchased' class and the other node will contain 2% of total observations belonging to 'product purchased' class. So, nodes will have high homogeneity here.
 
 # References
 - https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/
