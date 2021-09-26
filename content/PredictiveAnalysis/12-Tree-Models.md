@@ -41,6 +41,12 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [Hyperparameters in DecisionTeeClassifier](#hyperparameters-in-decisionteeclassifier)
       * [How to find best parameters](#how-to-find-best-parameters)
 * [Questions](#questions-2)
+* [Decision Tree Regression](#decision-tree-regression)
+  * [Prediction](#prediction)
+  * [Impurity Measure](#impurity-measure)
+  * [Process](#process)
+  * [Key Insights](#key-insights)
+* [Takeaways](#takeaways-1)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -301,8 +307,8 @@ $\displaystyle D = -\sum_{i=1}^{K}p_i\log_2p_i$
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Stop the tree while it is still growing so that it may not end up with leaves containing very few data points. Note that truncation is also known as pre-pruning. | Let the tree grow to any complexity. Then, cut the branches of the tree in a bottom-up fashion, starting from the leaves. It is more common to use pruning strategies to avoid overfitting in practical implementations |
 | top down                                                                                                                                                          | bottom up                                                                                                                                                                                                               |
-| don't grow further than speicified depth or if some criteria is met                                                                                               | delete leaves based on criteria                                                                                                                                                                                         |
-| Ex: Homogenity > Threshold                                                                                                                                        |                                                                                                                                                                                                                         |
+| don't grow further than specified depth or if some criteria is met                                                                                               | delete leaves based on criteria                                                                                                                                                                                         |
+| Ex: Homogeneity > Threshold                                                                                                                                        |                                                                                                                                                                                                                         |
 
 ## Methods of Truncation
 1. Limit the minimum size of a partition after a split
@@ -366,6 +372,47 @@ grid_search.best_estimator_
 - The depth will decrease.
   - Since the node should now contain at least 10 data points before splitting, as opposed to 5, all the branches — where the nodes had less than 10 data points — will be chopped off, leading to a decrease in the tree depth.
 
+---
+
+# Decision Tree Regression
+- In decision tree regression, each leaf represents the average of all the values as the prediction as opposed to taking an majority vote in classification trees.
+
+## Prediction
+- Average value of the target available in the node
+- $\displaystyle \hat{y_t} = \frac{1}{N_t}\sum_{i\epsilon D_t}y^{i}$
+- This is nothing but the sum of all data points divided by the total number of data points.
+
+## Impurity Measure
+- Weighted Mean Square Error (WMSE) a.ka. variance:
+- $\displaystyle \text{WMSE(t)} = \frac{1}{N_t}\sum_{i\epsilon D_t}(y^{i}-\hat y_t)^2$
+- This is nothing but the variance of all data points.
+- A higher value of MSE means that the data values are dispersed widely around mean, and a lower value of MSE means that the data values are dispersed closely around mean and this is usually the preferred case while building a regression tree.
+
+## Process
+The regression tree building process can be summarised as follows:
+
+1. Calculate the MSE of the target variable.
+1. Split the data set based on different rules obtained from the attributes and calculate the MSE for each of these nodes.
+1. The resulting MSE is subtracted from the MSE before the split. This result is called the MSE reduction.
+1. The attribute with the largest MSE reduction is chosen for the decision node.
+1. The dataset is divided based on the values of the selected attribute. This process is run recursively on the non-leaf branches, until you get significantly low MSE and the node becomes as homogeneous as possible.
+1. Finally, when no further splitting is required, assign this as the leaf node and calculate the average as the final prediction when the number of instances is more than one at a leaf node.
+
+So, you need to split the data such that the weighted MSE of the partitions obtained after splitting is lower than that obtained with the original or parent data set. In other words, the fit of the model should be as ‘good’ as possible after splitting. As you can see, the process is surprisingly similar to what you did for classification using trees.
+
+## Key Insights
+- Leaves in decision tree regression contain average values as the prediction.
+  - Each leaf in regression contains an average value that is used for prediction.
+- The MSE gives a sense of how good or bad the linear regression fit is.
+  - The MSE is a measure of the average squared differences between the estimated values and the actual value.
+- Decision tree regression and classification are similar in the sense that both try to pick an attribute (for splitting) that maximises the homogeneity of a data set.
+  - A decision tree splits a data set on the attribute that results in the maximum increase in homogeneity.
+
+# Takeaways
+- decision trees are prone to overfitting and have a high variance
+- hyperparamerter tuning is required to reduce overfitting. Parameters such as min_samples_split and min_samples_leaf help in stopping the decision tree to grow in a way that it does not end up memorizing the whole dataset
+- decison tree regression and decision tree classification have similar algorithms, where we try to find the best node to split on along with the condition on which to split. The best node is decided by max MSE/Gini reduction compared to parent. Once criteria is met, we stop growth of tree.
+
 # References
 - [hyperparameter vs parameter](https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/)
 - [sklearn decision trees](http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/tree.html)
@@ -374,3 +421,5 @@ grid_search.best_estimator_
 - [What happen when we use a base other than 2 for log in entropy](https://stats.stackexchange.com/questions/87182/what-is-the-role-of-the-logarithm-in-shannons-entropy)
 - [Overfitting and Underfitting with ML Algorithms](https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/)
 - [Bias vs Variance Tradeoff](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
+- [Decision Tree Regressor in Depth](https://gdcoder.com/decision-tree-regressor-explained-in-depth/)
+- [A step by step regression decision tree](https://sefiks.com/2018/08/28/a-step-by-step-regression-decision-tree-example/)
