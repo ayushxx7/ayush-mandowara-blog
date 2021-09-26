@@ -36,6 +36,11 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Questions](#questions-1)
 * [Steps for Selecting Best Split Feature](#steps-for-selecting-best-split-feature)
 * [Summary](#summary-1)
+* [Hyperparameter Tuning in Decision Trees](#hyperparameter-tuning-in-decision-trees)
+  * [Methods of Truncation](#methods-of-truncation)
+    * [Hyperparameters in DecisionTeeClassifier](#hyperparameters-in-decisionteeclassifier)
+      * [How to find best parameters](#how-to-find-best-parameters)
+* [Questions](#questions-2)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -158,9 +163,12 @@ Since hyperparameters can take many values, it is essential for us to determine 
 # Disadvantages of Decision Trees
 - Overfitting
   - Decision-tree learners can create over-complex trees that do not generalise the data well. This is called overfitting. 
+  - can memorize the entire dataset.
+  - If allowed to grow with no check on its complexity, a decision tree will keep splitting until it has correctly classified (or rather, mugged up) all the data points in the training set.
   - Mechanisms such as pruning, setting the minimum number of samples required at a leaf node or setting the maximum depth of the tree are necessary to avoid this problem.
 - High Variance
   - Decision trees can be unstable because small variations in the data might result in a completely different tree being generated. 
+  - Bias is too low, hence the variance will be too high.
   - This problem is mitigated by using decision trees within an ensemble.
 - NP Complete
   - The problem of learning an optimal decision tree is known to be NP-complete under several aspects of optimality and even for simple concepts. 
@@ -283,9 +291,86 @@ $\displaystyle D = -\sum_{i=1}^{K}p_i\log_2p_i$
 - The attribute that results in the increase of homogeneity the most is then selected for splitting.
 - Then, this whole cycle is repeated until you obtain a sufficiently homogeneous data set.
 
+---
+
+# Hyperparameter Tuning in Decision Trees
+- Decision trees have a tendency to overfit the data. A large tree will have a leafy only to cater to a single data point
+- There are two broad ways to control overfitting: truncation and pruning
+
+| Truncation                                                                                                                                                        | Pruning                                                                                                                                                                                                                 |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Stop the tree while it is still growing so that it may not end up with leaves containing very few data points. Note that truncation is also known as pre-pruning. | Let the tree grow to any complexity. Then, cut the branches of the tree in a bottom-up fashion, starting from the leaves. It is more common to use pruning strategies to avoid overfitting in practical implementations |
+| top down                                                                                                                                                          | bottom up                                                                                                                                                                                                               |
+| don't grow further than speicified depth or if some criteria is met                                                                                               | delete leaves based on criteria                                                                                                                                                                                         |
+| Ex: Homogenity > Threshold                                                                                                                                        |                                                                                                                                                                                                                         |
+
+## Methods of Truncation
+1. Limit the minimum size of a partition after a split
+2. Minimize change in the measure of homogenity
+3. Limit the depth of the tree
+4. Set a minimum threshold on the number of samples that appear in a leaf
+5. Set a limit on the maximum number of leavest present in tree
+
+No objective way coming up with the number for the various parameters. It is essentially based on domain knowledge and trial and error.
+
+### Hyperparameters in DecisionTeeClassifier
+- max_features: It defines the no. of features to consider when looking for the best split. 
+  - We can input integer, float, string & None value.
+  - If an integer is inputted then it considers that value as max features at each split.
+  - If float value is taken then it shows the percentage of features at each split.
+  - If “auto” or “sqrt” is taken then max_features=sqrt(n_features).
+  - If “log2” is taken then max_features= log2(n_features).
+  - If None, then max_features=n_features. 
+  - By default, it takes “None” value.
+- max_depth: The max_depth parameter denotes the maximum depth of the tree. 
+  - It can take any integer value or None. 
+  - If None, then nodes are expanded until all leaves contain just one data point (leading to overfitting) or until all leaves contain less than "min_samples_split" samples. 
+  - By default, it takes “None” value.
+- min_samples_split: This tells about the minimum no. of samples required to split an internal node. 
+  - If an integer value is taken then consider min_samples_split as the minimum no. 
+  - If float, then min_samples_split is a fraction and ceil(min_samples_split * n_samples) are the minimum number of samples for each split. 
+  - By default, it takes the value "2".
+- min_samples_leaf: The minimum number of samples required to be at a leaf node. 
+  - If an integer value is taken then consider min_samples_leaf as the minimum no. 
+  - If float, then it shows the percentage. By default, it takes the value "1".
+
+#### How to find best parameters
+- we can use K-Fold Cross Validation technique
+- It is implemented in sklearn 
+```
+from sklearn.model_selection import GridSearchCV
+params = {
+    'max_depth': [2, 3, 5, 10, 20],
+    'min_samples_leaf': [5, 10, 20, 50, 100],
+    'criterion': ["gini", "entropy"]
+}
+grid_search = GridSearchCV(estimator=dt, 
+              param_grid=params, 
+              cv=4, n_jobs=-1, verbose=1, scoring = "accuracy")
+grid_search.fit(X_train, y_train)
+grid_search.best_estimator_
+```
+
+# Questions
+**As you increase the value of the hyperparameter min_samples_leaf, the resulting tree will become more complex or less?**
+- It will become less complex, and the depth will tend to reduce.
+- min_samples_leaf is the minimum number of samples required in a (resulting) leaf for the split to happen. Thus, if you specify a high value of min_samples_leaf, the tree will be forced to stop splitting quite early.
+
+**Suppose you decide to tweak the hyperparameters so as to decrease the overfitting. Which steps can one follow?**
+- Increasing min_samples_split
+  - A low value of the min_samples_split will lead to a small number of data points in the nodes. This means that it is very likely that each leaf (obtained after splitting) is going to represent very few (or only one, in some cases) data points. So, you increase the min_samples_split.
+- Decreasing max_depth
+  - Decreasing max_depth will stop the tree to grow deeper, in that way your tree will not overfit the data and you will have a decent accuracy in both test and train.
+
+**What will the (likely) impact of increasing the value of min_sample_splits from 5 to 10?**
+- The depth will decrease.
+  - Since the node should now contain at least 10 data points before splitting, as opposed to 5, all the branches — where the nodes had less than 10 data points — will be chopped off, leading to a decrease in the tree depth.
+
 # References
 - [hyperparameter vs parameter](https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/)
 - [sklearn decision trees](http://ogrisel.github.io/scikit-learn.org/sklearn-tutorial/modules/tree.html)
 - [CHAID Algorithm](https://www.listendata.com/2015/03/difference-between-chaid-and-cart.html)
 - [Impurity Measures](https://www.bogotobogo.com/python/scikit-learn/scikt_machine_learning_Decision_Tree_Learning_Informatioin_Gain_IG_Impurity_Entropy_Gini_Classification_Error.php#:~:text=There%20are%20three%20commonly%20used,Gini%20index%2C%20and%20Classification%20Error.&text=where%20pj%20is%20the,have%20a%20uniform%20class%20distribution.)
 - [What happen when we use a base other than 2 for log in entropy](https://stats.stackexchange.com/questions/87182/what-is-the-role-of-the-logarithm-in-shannons-entropy)
+- [Overfitting and Underfitting with ML Algorithms](https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/)
+- [Bias vs Variance Tradeoff](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
