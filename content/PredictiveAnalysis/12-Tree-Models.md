@@ -1,7 +1,7 @@
 ---
 title: Decision Trees
 description: Introduction to tree based models
-date: "2021-09-25"
+date: "2021-09-26"
 image: "decision_trees.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
