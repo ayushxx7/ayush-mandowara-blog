@@ -132,6 +132,112 @@ y
 - When random subsets of the dataset are drawn as random subsets of the features, then the method is known as Random Subspaces
 - Finally, when base estimators are built on subsets of both samples and features, then the method is known as Random Patches
 
+---
+
+# Random Forests
+
+- In the bagging type of ensembles, random forests are by far the most successful. 
+- They are essentially ensembles of a number of decision trees. You can create a large number of models (say, 100 decision trees), each one on a different bootstrap sample from the training set. 
+- To get the result, you can aggregate the decisions taken by all the trees in the ensemble. 
+- Bagging chooses random samples of observations from a data set. Each of these samples is then used to train each tree in the forest. 
+
+## Decision Trees
+### Assumptions
+- Data is in a tabular format
+- Each row represents a data point
+- Each column represents an attribute
+### Building a Decision Tree
+- Node represents a test on an attribute
+- Leaves contain the predictions for the target column
+- For every split at a node, training data homogeneity should increase
+- We split on attributes which causes maximum homogeneity
+
+# Building a Random Forest
+- Decision Trees are created where we take a random sample and on each split we also take random sample of the features for choosing the best split.
+- Random selection of features for splitting
+- Not selection all the features
+- We may not consider most prominent features for all nodes
+
+- Bootstrapping refers to creating bootstrap samples from a given data set. A bootstrap sample is created by sampling the given data set uniformly and with replacement. A bootstrap sample typically contains about 40–70% data from the data set. Aggregation implies combining the results of different models present in the ensemble.
+
+- Random forest selects a random sample of data points (bootstrap sample) to build each tree and a random sample of features while splitting a node. Randomly selecting features ensures that each tree is diverse and that some prominent features are dominating in all the trees making them somewhat similar.
+
+##### Example
+Suppose you want to build a random forest of 10 decision trees.
+- First, you will create 10 bootstrap samples from the data, and then, you will train each tree on a different bootstrap sample
+- In a decision tree every data point passes from the root node to the bottom until it is classified in a leaf node
+- A similar process takes place in random forests as well while making predictions
+- Each data point passes through different trees in the ensemble which are built on different training and feature subsets
+- The final outcome of these trees are then combined either by taking the most frequent class prediction in case of a classification problem or average in case of a regression problem
+
+# Question
+**Consider the heart disease data set where a few attributes such as Thal, blood pressure, etc., are prominent predictors for the target variable. If you were to build multiple decision trees on this as a part of an ensemble, considering all the attributes for all the individual trees, which of these violations would occur and be significant?**
+- The models will not be diverse enough
+    - If a few variables are prominent, a large number of trees will have them as important nodes, and they will look similar. Similar trees violate the condition of diversity.
+
+**What is the process of subsetting observations and features for each decision tree in a random forest?**
+- A random subset of observations is chosen every time a new tree is built in a forest.
+    - A different random subset of observations is chosen, which is called the bootstrap sample, for each tree that is to be built in the forest. This is called bootstrapping.
+- A random subset of features is chosen every time a node is being split inside a tree.
+    - After the bootstrap sample is selected, tree building starts, and a random subset of features is selected at each node in order to split it. This is what makes random forests better than a simple bagging algorithm.
+
+# Advantages of Random Forest
+1. It is diverse
+    - More diversity = better results
+    - Increase number of trees to make random forest stable
+    - More the number of trees, more generalizable the model becomes
+    - Diversity arises because each tree is created with a subset of the attributes/features/variables, i.e., not all the attributes are considered while making each tree; the choice of the attributes is random. This ensures that the trees are independent of each other.
+2. Immune to the curse of dimensionality
+    - Randomly picks a sample of features
+    - Since each tree does not consider all the features, the feature space (the number of features that a model has to consider) reduces. This makes an algorithm immune to the curse of dimensionality. Also, a large feature space causes computational and complexity issues.
+3. It is parallelizable
+    - Independent trees can be built on different machines
+    - You need a number of trees to make a forest. 
+    - Since two trees are independently built on different data and attributes, they can be built separately. 
+    - This implies that you can make full use of your multi-core CPU to build random forests. Suppose there are 4 cores and 100 trees to be built; each core can build 25 trees to make a forest.
+4. No distinction between training and testing data is required
+    - Every tree has been built from some part of the dataset
+5. Stability
+    - Stability arises because the answers given by a large number of trees average out. 
+    - A random forest has a lower model variance than an ordinary individual tree.
+
+  
+## Out of Bag Error
+- When I compute the test performance of the ensemble.
+- I take every point in the entire dataset
+- Look at all the trees which were built with datasets that did not include some point  
+- You should always avoid violating the fundamental tenet of learning: 'Not testing a model on what it has been trained on’. 
+- While building individual trees, you can choose a random subset of the observations to train them. 
+- If you have 10,000 observations, each tree may only be built from 7,000 (70%) randomly chosen observations. 
+- OOB is the mean prediction error on each training sample $x_{i},$ using only the trees that do not have $x_{i}$ in their bootstrap sample used for building the model. 
+- This is very similar to a cross-validation (CV) error. In a CV error, you can measure the performance on the subset of data that the model has not seen before.
+- In fact, it has been proven that using an OOB estimate is as accurate as using a test data set of a size equal to the training set.
+- Thus, the OOB error omits the need for set-aside test data (though you can still work with test data like you have been doing, at the cost of eating into the training data).
+
+##### Example
+Suppose there are 
+N = 100 observations with M = 15 features, and the outcome variable is a categorical variable Y. Also, you build a random forest with 50 trees. The OOB is calculated as follows:
+
+For each observation $N_{i}, N_{i}$ is passed to all the trees that did not have it in their training. These trees then predict the class of $N_{i}$. The final prediction for $N_{i}$ is decided by a majority vote.
+
+Now let’s apply this to $N_1$. Suppose 10 trees did not have $N_1$ in their training. So these 10 trees make their prediction for $N_1$. Let’s say four trees predicted 0, and the other six predicted 1 as the output. The final prediction for $N_1$ will be 1.
+
+Next, we move on to $N_2$. Suppose 15 trees did not have $N_2$ in their training. So these 15 trees make their prediction for $N_2$. Let’s say 12 predicted 0, and the remaining three trees predicted 1 as the output. The final prediction for $N_2$ will be 0.
+
+This is done for each observation in the training set. Once all the predictions for each observation are calculated, the OOB error is calculated as the number of observations predicted wrongly as a proportion of the total number of observations.
+
+# Questions
+
+**The core idea behind bagging is considering a majority score rather than committing to a set of assumptions made by a single model. Which of the following reasons is why the core idea is particularly successful in random forests?**
+- Trees are typically unstable.
+    - If you have only one tree, you have to rely on the decision that it makes. 
+    - The decision made by a single tree (on unseen data) majorly depends upon the training data, as trees are unstable. 
+    - On the other hand, in a forest, even if a few trees are unstable, averaging out their decisions ensures that you do not make mistakes because of the unstable behaviour of a few trees.
+
+**In terms of accuracy, is a random forest always better than a decision tree?**
+- No. While it is well known that random forests are better than a single decision tree in terms of accuracy, it cannot be said that they are better than every possible decision tree; the only issue is that it is more difficult to build a decision tree that is better than a random forest. In fact, there may be several trees that provide better predictions on unseen data. 
+
+
 # References
 - [Ensemble Methods](https://scikit-learn.org/stable/modules/ensemble.html)
 - [Ensemble for Regression](https://www.mlsurveys.com/papers/80.pdf)
