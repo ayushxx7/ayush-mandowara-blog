@@ -52,13 +52,7 @@ Notes on Random Forest and Ensembles
 - Multiple Models inside an ensemble help in derisking and we hope that the collection will do better.
 
 #### Example
-- Consider an ensemble with 100 models consisting of decision trees, logistic regression models, etc. Given a new data point, each model will predict an output 
-y
- for this data point. If this is a binary classification, then you simply take the majority score. If more than 50% models say 
-y
-=
-0
-, you go with 0, and vice versa.
+- Consider an ensemble with 100 models consisting of decision trees, logistic regression models, etc. Given a new data point, each model will predict an output y for this data point. If this is a binary classification, then you simply take the majority score. If more than 50% models say y = 0, you go with 0, and vice versa.
 
 - Firstly, if each individual model is acceptable, i.e., if it is wrong with a probability of less than 50%, you can show that the probability of the ensemble being wrong (i.e., the majority vote going wrong) will be much less than that of any individual model. In this way your chance of getting the prediction correct will be higher as compared to the individual models in the ensemble as they pool the opinion of each weak learner. This is done by exploiting and leveraging the predictive power of these models to predict the final outcome.
 
@@ -88,6 +82,31 @@ y
 - Add another layer in the model, which decides what should be the final output
 - Another approach to carry out manual ensembling is to pass the outputs of the individual models to a level-2 classifier/regressor as derived meta features, which will decide what weights should be given to each of the model outputs in the final prediction. In this way, the outputs of the individual models are combined with different weightages in the final prediction. This is the high-level approach behind stacking and blending.
 ![Stacking](stacking.png)
+
+```py heading='Stacking in Python'
+from sklearn.ensemble import StackingRegressor
+
+estimators = [
+    ('lr', LinearRegression()),
+    ("knn",KNeighborsRegressor(5)),
+    ('dt',DecisionTreeRegressor(random_state=42, max_depth=4))
+]
+
+stack_reg = StackingRegressor(estimators=estimators,
+                              final_estimator=LinearRegression())
+
+stack_reg.fit(X_train, y_train)
+
+y_train_pred = stack_reg.predict(X_train)
+y_test_pred = stack_reg.predict(X_test)
+
+r2_score(y_train, y_train_pred)
+r2_score(y_test, y_test_pred)
+
+level2_model = stack_reg.final_estimator_
+
+level2_model.coef_/sum(level2_model.coef_)
+```
 
 # Boosting
 - Can be used with any technique
