@@ -256,6 +256,57 @@ This is done for each observation in the training set. Once all the predictions 
 **In terms of accuracy, is a random forest always better than a decision tree?**
 - No. While it is well known that random forests are better than a single decision tree in terms of accuracy, it cannot be said that they are better than every possible decision tree; the only issue is that it is more difficult to build a decision tree that is better than a random forest. In fact, there may be several trees that provide better predictions on unseen data. 
 
+# Feature Importance
+- decision trees: variable is more important if it reduces the most impurity, however, it has high variance.
+- random forest: notion of importance from random forest is more reliable.
+- average out importance from different trees in the forest
+- The importance of features in random forests, sometimes called ‘Gini importance’ or ‘mean decrease impurity’, is defined as the total decrease in node impurity (it is weighted by the probability of reaching that node (which is approximated by the proportion of samples reaching that node)) averaged over all the trees of the ensemble.
+- For each variable, the sum of the Gini decreases across every tree of the forest and is accumulated every time that variable is chosen to split a node. The sum is divided by the number of trees in the forest to give an average.
+
+```py heading="Random Forest in Python"
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(random_state=42, n_estimators=10, max_depth=3)
+rf.fit(X_train, y_train)
+rf.estimators_[0]
+
+classifier_rf = RandomForestClassifier(random_state=42, n_jobs=-1)
+
+# Create the parameter grid based on the results of random search 
+params = {
+    'max_depth': [1, 2, 5, 10, 20],
+    'min_samples_leaf': [5, 10, 20, 50, 100],
+    'max_features': [2,3,4],
+    'n_estimators': [10, 30, 50, 100, 200]
+}
+
+# Instantiate the grid search model
+grid_search = GridSearchCV(estimator=classifier_rf, param_grid=params, 
+                          cv=4, n_jobs=-1, verbose=1, scoring = "accuracy")
+
+%%time
+grid_search.fit(X,y)
+
+rf_best = grid_search.best_estimator_
+```
+```py heading='Feature Importance'
+classifier_rf = RandomForestClassifier(random_state=42, n_jobs=-1, max_depth=5, n_estimators=100, oob_score=True)
+classifier_rf.fit(X_train, y_train)
+classifier_rf.feature_importances_
+imp_df = pd.DataFrame({
+    "Varname": X_train.columns,
+    "Imp": classifier_rf.feature_importances_
+})
+imp_df.sort_values(by="Imp", ascending=False)
+```
+
+# Hyperparameters
+- Many of the parameters are same as decision trees
+
+## The effect of max_features
+There is an optimal value of max_features, i.e, at very low values, the component trees are too simple to learn about anything useful, while at extremely high values, the component trees become similar to each other (and violate the 'diversity' criterion).
+
+## The effect of n_estimators
+When you observe the plot of n_estimators and training and test accuracies, you will see that as you increase the value of n_estimators, the accuracies of both the training and test sets gradually increase. More importantly, the model does not overfit even when its complexity is increasing. This is an important benefit of random forests: You can increase the number of trees as much as you like without worrying about overfitting (only if your computational resources allow). 
 
 # References
 - [Ensemble Methods](https://scikit-learn.org/stable/modules/ensemble.html)
