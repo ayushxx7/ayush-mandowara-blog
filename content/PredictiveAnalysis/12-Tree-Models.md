@@ -47,6 +47,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
   * [Process](#process)
   * [Key Insights](#key-insights)
 * [Takeaways](#takeaways-1)
+* [Questions](#questions-3)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -412,6 +413,19 @@ So, you need to split the data such that the weighted MSE of the partitions obta
 - decision trees are prone to overfitting and have a high variance
 - hyperparamerter tuning is required to reduce overfitting. Parameters such as min_samples_split and min_samples_leaf help in stopping the decision tree to grow in a way that it does not end up memorizing the whole dataset
 - decison tree regression and decision tree classification have similar algorithms, where we try to find the best node to split on along with the condition on which to split. The best node is decided by max MSE/Gini reduction compared to parent. Once criteria is met, we stop growth of tree.
+
+# Questions
+**Difference between Random Forest and Decision Tree?**
+- Decision Tree uses all the features for training while random forest selects a subset of features
+
+**Consider decision tree A learned with min_samples_leaf = 500. Now consider decision tree B trained on the same dataset and parameters, except that the min_samples_leaf=50. What can you say about depth, number of samples and training error of the two models?**
+- The depth of B >= the depth of A
+  - min_samples_leaf guarantees a minimum number of samples in a leaf. Higher no of this parameter means you are stopping early. A lower value allows you to grow further.
+- The number of nodes in B >= the number of nodes in A
+  - min_samples_leaf guarantees a minimum number of samples in a leaf. Higher no of this parameter means you are stopping early. A lower value allows you to grow further. As the tree grows no of nodes increases.
+- The training error of B &lt;= the training error of A
+  - min_samples_leaf guarantees a minimum number of samples in a leaf. Higher no of this parameter means you are stopping early. A lower value allows you to grow further. As the tree grows no of nodes increases. With more nodes and deeper tree , it tends to memorize training data and variance of the model increases.
+
 
 # References
 - [hyperparameter vs parameter](https://www.hitechnectar.com/blogs/hyperparameter-vs-parameter/)
