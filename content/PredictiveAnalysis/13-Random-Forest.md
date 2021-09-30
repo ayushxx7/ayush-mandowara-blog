@@ -1,11 +1,51 @@
 ---
 title: Ensembles and Random Forest
 description: intro to ensembles, along with the random forest machine learning algorithm
-date: "2021-09-27"
-image: "random-forest-diagram.svg"
+date: "2021-09-29"
+image: "Random-Forest-Algorithm.jpg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [Ensembles](#ensembles)
+    * [Idea](#idea)
+    * [Diversity](#diversity)
+        * [Ways to achieve diversity](#ways-to-achieve-diversity)
+    * [Acceptability](#acceptability)
+        * [Why ensembles work](#why-ensembles-work)
+            * [Example](#example)
+                * [Coin Toss Explanation](#coin-toss-explanation)
+* [Voting](#voting)
+* [Stacking and Blending](#stacking-and-blending)
+* [Boosting](#boosting)
+    * [Aproaches](#aproaches)
+    * [Adaptive Boosting](#adaptive-boosting)
+* [Bagging - Boostrapped Aggregation](#bagging---boostrapped-aggregation)
+    * [Benefits](#benefits)
+    * [Limitations of Bagging](#limitations-of-bagging)
+    * [Methods](#methods)
+* [Random Forests](#random-forests)
+    * [Decision Trees](#decision-trees)
+        * [Assumptions](#assumptions)
+        * [Building a Decision Tree](#building-a-decision-tree)
+* [Building a Random Forest](#building-a-random-forest)
+                * [Example](#example-1)
+* [Question](#question)
+* [Advantages of Random Forest](#advantages-of-random-forest)
+    * [Out of Bag Error](#out-of-bag-error)
+                * [Example](#example-2)
+* [Questions](#questions)
+* [Feature Importance](#feature-importance)
+* [Hyperparameters](#hyperparameters)
+    * [The effect of max_features](#the-effect-of-max_features)
+    * [The effect of n_estimators](#the-effect-of-n_estimators)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # Purpose
 Notes on Random Forest and Ensembles
