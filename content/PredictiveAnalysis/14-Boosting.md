@@ -1,11 +1,38 @@
 ---
 title: Boosting
 description: boosting ensemble technique
-date: "2021-10-01"
+date: "2021-10-02"
 image: "boosting.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [Bagging vs Boosting](#bagging-vs-boosting)
+    * [Bagging](#bagging)
+    * [Boosting](#boosting)
+* [Question](#question)
+* [Weak Learners](#weak-learners)
+* [Question](#question-1)
+* [AdaBoost](#adaboost)
+    * [Steps](#steps)
+        * [Question](#question-2)
+    * [Amount of Say](#amount-of-say)
+    * [Change of Weight](#change-of-weight)
+    * [Normalized Weights](#normalized-weights)
+        * [Question](#question-3)
+    * [Resampling Data](#resampling-data)
+    * [Prediction](#prediction)
+        * [Question](#question-4)
+    * [Algorithm](#algorithm)
+* [Question](#question-5)
+    * [Tip](#tip)
+* [Summary](#summary)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # Purpose
 Notes on Boosting
@@ -189,5 +216,23 @@ Before you apply the AdaBoost algorithm, you should remove the Outliers. Since A
 - Cook's distance
 - Z-score.
 
+```py heading="Adaboost in Python"
+# scikit-learn has an implementation of adaboost ml model
+from sklearn.ensemble import AdaBoostClassifier
+adaboost =  AdaBoostClassifier(n_estimators=200, random_state=1)
+adaboost.fit(X_train, y_train)
+y_pred = adaboost.predict(X_test)
+```
+
+# Summary
+- AdaBoost starts with a uniform distribution of weights over training examples.
+- These weights give the importance of the datapoint being considered.
+- You will first start with a weak learner h1(x) to create the initial prediction.
+- Patterns which are not captured by previous models become the goal for the next model by giving more weightage.
+- The next model (weak learner) trains on this resampled data to create the next prediction.
+- This process will be repeated till a pre-specified number of trees/models are built.
+- In the end, we take a weighted sum of all the weak classifiers to make a strong classifier.
+
 # References
 - [A short introduction to boosting](https://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)
+- [Adaboost Regressor Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html)
