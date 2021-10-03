@@ -11,25 +11,31 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 
 * [Purpose](#purpose)
 * [Bagging vs Boosting](#bagging-vs-boosting)
-    * [Bagging](#bagging)
-    * [Boosting](#boosting)
+  * [Bagging](#bagging)
+  * [Boosting](#boosting)
 * [Question](#question)
 * [Weak Learners](#weak-learners)
 * [Question](#question-1)
 * [AdaBoost](#adaboost)
-    * [Steps](#steps)
-        * [Question](#question-2)
-    * [Amount of Say](#amount-of-say)
-    * [Change of Weight](#change-of-weight)
-    * [Normalized Weights](#normalized-weights)
-        * [Question](#question-3)
-    * [Resampling Data](#resampling-data)
-    * [Prediction](#prediction)
-        * [Question](#question-4)
-    * [Algorithm](#algorithm)
+  * [Steps](#steps)
+    * [Question](#question-2)
+  * [Amount of Say](#amount-of-say)
+  * [Change of Weight](#change-of-weight)
+  * [Normalized Weights](#normalized-weights)
+    * [Question](#question-3)
+  * [Resampling Data](#resampling-data)
+  * [Prediction](#prediction)
+    * [Question](#question-4)
+  * [Algorithm](#algorithm)
 * [Question](#question-5)
-    * [Tip](#tip)
+  * [Tip](#tip)
 * [Summary](#summary)
+* [Gradient Boosting](#gradient-boosting)
+  * [GBM Regression](#gbm-regression)
+    * [Steps](#steps-1)
+    * [Question](#question-6)
+  * [GBM Classificantion](#gbm-classificantion)
+    * [Question](#question-7)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -233,6 +239,64 @@ y_pred = adaboost.predict(X_test)
 - This process will be repeated till a pre-specified number of trees/models are built.
 - In the end, we take a weighted sum of all the weak classifiers to make a strong classifier.
 
+---
+
+# Gradient Boosting
+## GBM Regression
+Gradient Boosting, like AdaBoost, trains many models in a gradual, additive and sequential manner. However, the major difference between the two is how they identify and handle the shortcomings of weak learners. In AdaBoost, more weight is given to the datapoints which are misclassified/wrongly predicted earlier. Gradient Boosting performs the same by using gradients in the loss function.
+
+- The first prediction in Gradient Boosting for all samples is the average of all the target values.
+- Then calculate residulas (average / first prediction - original target value)
+- Construct the model (decision tree) on top residulas in which every leaf will contain a prediction of the residual.
+- Compute predictions
+- Compute new residuals
+- Repeat the process with new added trees
+- Use all the sequential trees created in the ensemble to make a final prediction
+
+$F_{t+1} = Ft + \lambdah_{t+1}$
+
+### Steps
+- Build the first weak learner using a sample from the training data; you can consider a decision tree as the weak learner or the base model. It may not necessarily be a stump, can grow a bigger tree but will still be weak, i.e., still not be fully grown.
+- Then, predictions are made on the training data using the decision tree which was just built.
+- The negative gradient, in our case the residuals, are computed and these residuals are the new response or target values for the next weak learner.
+- A new weak learner is built with the residuals as the target values and a sample of observations from the original training data.
+- Add the predictions obtained from the current weak learner to the predictions obtained from all the previous weak learners. The predictions obtained at each step are multiplied by the learning rate so that no single model makes a huge contribution to the ensemble thereby avoiding overfitting. Essentially, with the addition of each weak learner, the model takes a very small step in the right direction. 
+- The next weak learner fits on the residuals obtained till now and these steps are repeated, either for a pre-specified number of weak learners or if the model starts overfitting, i.e., it starts to capture the niche patterns of the training data.
+- GBM makes the final prediction by simply adding up the predictions from all the weak learners (multiplied by the learning rate).
+
+To summarize,
+- Find the residual and fit a new model on the residual
+- Add the new model to the older model and continue the next iteration
+
+### Question
+**What is the reason for introducing the learning rate in GBM?**
+- To handle overfitting
+- The final model is a weighted aggregation of all the individual models we have built in GBM.
+- With each additional model, our prediction is getting better and close to the real/target value.
+- We do not want any single weak learner to make a big contribution to the overall model which may result in overfitting.
+- Learning rate helps us in controlling the contribution of each of the weak learners.
+- Without it, the model may suffer from overfitting.
+
+## GBM Classificantion
+1. Build the first weak learner using a sample from the training data. Calculate the initial predicition for every individual -> $\ln(odds)$
+    - $\displaystyle \ln(odds)\frac{\text{positive class}}{\text{negative class}}$
+    - $\displaystyle \text{logistic function (sigmoid)} = \frac{e^{\ln(odds)}}{1+e^{\ln(odds)}}$
+2. Calculate the residuals for every sample in the dataset, which will be the new response or target for the next weak learner
+3. A new weak learner is built with the residuals as the target values and a sample of observations from the original training data. Constuct the model on top of residuals
+    - Output of leaf = $\displaystyle \frac{\sum(Residual)}{\sum[(\text{previous probability}(y_{i})*(1-\text{previous probability}(y_{i})))]}$
+4. Compute the predictions
+    - New log(odds) = initial log(odds) + LR(output value by D.T)
+    - apply logistic function to get probability
+5. Repeat process till required number of trees have been built
+6. Use all of the trees in the ensemble to make a final prediction
+7. The final prediction is adding the current predictions to the predictions obtained from all the previous weak learners. The predictions obtained at each step are multiplied by the learning rate so that no single model makes a huge contribution to the ensemble thereby avoiding overfitting. Essentially, with the addition of each weak learner, the model takes a very small step in the right direction. 
+
+### Question
+**Consider that there are total of 6 samples in our dataset for predicting the chances of surviving the ship Titanic. The target value has a binary distribution with 4:2 (surviving:non-surviving) ratio. As part of the first step in the GBM algorithm, we will be starting off with an initial prediction which will be common for all samples. What will be the value of that initial prediction for surviving done by the base model? Round off the values to one decimal.**
+- 0.7 by using formula: $\frac{e^{\ln(odds)}}{1+e^{\ln(odds)}}$
+
+
 # References
 - [A short introduction to boosting](https://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)
 - [Adaboost Regressor Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html)
+- [Gradient Boosting - StatQuest](https://www.youtube.com/watch?v=3CC4N4z3GJc&t=1s)
