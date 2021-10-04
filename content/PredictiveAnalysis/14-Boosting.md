@@ -11,31 +11,38 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 
 * [Purpose](#purpose)
 * [Bagging vs Boosting](#bagging-vs-boosting)
-  * [Bagging](#bagging)
-  * [Boosting](#boosting)
+    * [Bagging](#bagging)
+    * [Boosting](#boosting)
 * [Question](#question)
 * [Weak Learners](#weak-learners)
 * [Question](#question-1)
 * [AdaBoost](#adaboost)
-  * [Steps](#steps)
-    * [Question](#question-2)
-  * [Amount of Say](#amount-of-say)
-  * [Change of Weight](#change-of-weight)
-  * [Normalized Weights](#normalized-weights)
-    * [Question](#question-3)
-  * [Resampling Data](#resampling-data)
-  * [Prediction](#prediction)
-    * [Question](#question-4)
-  * [Algorithm](#algorithm)
+    * [Steps](#steps)
+        * [Question](#question-2)
+    * [Amount of Say](#amount-of-say)
+    * [Change of Weight](#change-of-weight)
+    * [Normalized Weights](#normalized-weights)
+        * [Question](#question-3)
+    * [Resampling Data](#resampling-data)
+    * [Prediction](#prediction)
+        * [Question](#question-4)
+    * [Algorithm](#algorithm)
 * [Question](#question-5)
-  * [Tip](#tip)
+    * [Tip](#tip)
 * [Summary](#summary)
 * [Gradient Boosting](#gradient-boosting)
-  * [GBM Regression](#gbm-regression)
-    * [Steps](#steps-1)
-    * [Question](#question-6)
-  * [GBM Classificantion](#gbm-classificantion)
-    * [Question](#question-7)
+    * [GBM Regression](#gbm-regression)
+        * [Steps](#steps-1)
+        * [Question](#question-6)
+    * [GBM Classificantion](#gbm-classificantion)
+        * [Question](#question-7)
+* [XGBoost - Extreme Gradient Descent](#xgboost---extreme-gradient-descent)
+    * [Steps](#steps-2)
+        * [Question](#question-8)
+    * [Hyperparameters - Learning Rate, Number of Trees and Subsampling](#hyperparameters---learning-rate-number-of-trees-and-subsampling)
+        * [$λ_t$ - the learning rate](#_t---the-learning-rate)
+        * [Subsampling](#subsampling)
+        * [$\gamma$ - Gamma](#gamma---gamma)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -253,7 +260,7 @@ Gradient Boosting, like AdaBoost, trains many models in a gradual, additive and 
 - Repeat the process with new added trees
 - Use all the sequential trees created in the ensemble to make a final prediction
 
-$F_{t+1} = Ft + \lambdah_{t+1}$
+$F_{t+1} = Ft + \lambda h_{t+1}$
 
 ### Steps
 - Build the first weak learner using a sample from the training data; you can consider a decision tree as the weak learner or the base model. It may not necessarily be a stump, can grow a bigger tree but will still be weak, i.e., still not be fully grown.
@@ -295,8 +302,82 @@ To summarize,
 **Consider that there are total of 6 samples in our dataset for predicting the chances of surviving the ship Titanic. The target value has a binary distribution with 4:2 (surviving:non-surviving) ratio. As part of the first step in the GBM algorithm, we will be starting off with an initial prediction which will be common for all samples. What will be the value of that initial prediction for surviving done by the base model? Round off the values to one decimal.**
 - 0.7 by using formula: $\frac{e^{\ln(odds)}}{1+e^{\ln(odds)}}$
 
+---
+
+# XGBoost - Extreme Gradient Descent
+- similar to gradient boosting framework but more efficient and advanced implementation of the Gradient Boosting algorithm.
+- First developed by Tainqi Chen and became popular in solving the Higgs Boson problem. Due to its robust accuracy, it has been widely used in machine learning competitions as well.
+- supports Regularization 
+- higher (second) order derivative to optimize loss function
+- parallel computing
+- missing value handling
+- tree pruning using depth first approach
+
+## Steps
+1. Perform initial prediction and calculate residuals
+2. Create a XGBoost Regression Tree
+    - Split such as similar residuals should go to same leaf node
+    - Create a weak leaner (DT) with a root node consisting of all the residual values and calculate it's similarity score
+    - Calculate the similarity score for each node from its first tree split
+        - Similarity Score = $\frac{\text{Square of sum of residuals}}{\text{number of residuals} + \lambda}$
+        - When values of the residual are very different, the values will cancel out and the similarity score will be low (ex: $\frac{+7.5-7.5}{2} = 0$)
+        - Similarity score will be high when # of residual = 1
+    - Calculate the gain
+    - Gain = Similarity score(Left leaf) + Similarity score(right leaf) - Similarity score (root node)
+3. Select the best gain
+4. Split the tree further and select the best gain
+    - Stop when there is only one residual or some user defined criterion is met
+5. Regularisation
+    - Tree pruning prevents overfitting with the help of threshold parameter $\gamma$
+    - A branch containing the terminal node i pruned when gain &lt; $\gamma$ (or gain-$\gamma$ = negative)
+    - If gain-$\gamma$ &gt; 0 => split further else prune
+    - In Similarity Score = $\frac{\text{Square of sum of residuals}}{\text{number of residuals} + \lambda}$, increasing the $\lambda$ value will reduce similarity score and hence regularization will take place
+6. Calculate Output Value
+- Output Value = $\frac{\text{Sum of Residuals}}{\text{Number of Residuals} + \lambda}$
+7. Calculate the final prediction
+    - Final prediction = Initial Prediction + L.R(Output Value)
+8. Continue the steps till we reach a very small residual value or max no of iterations
+
+### Question
+**Suppose we are building a decision tree using XGBoost with a gamma(
+γ) of 80. For a depth of 2, we have 3 options for splitting the nodes based on a different threshold. Option 1 will lead to a gain of 108.5, option 2 will lead to a gain of 58 while the last option will lead to a gain of 78. Among the three options which will be chosen for the next split in our decision tree.**
+- Option 1. A node is further split only if gain-γ &gt; 0
+
+**Effect of $\gamma$ and $\lambda$ on XGBoost**
+- $\lambda \uparrow \implies \text{Regularisation}\uparrow \text{Output Value}\downarrow$
+- $\gamma \uparrow \implies \text{Regularisation}\uparrow \text{Number of Leaves}\downarrow$
+
+## Hyperparameters - Learning Rate, Number of Trees and Subsampling
+
+### $λ_t$ - the learning rate
+- is also known as shrinkage. 
+- It can be used to regularize the gradient tree boosting algorithm. 
+- $λ_t$ typically varies from 0 to 1. 
+- Smaller values of $λ_t$ lead to a larger number of trees T (called n_estimators in the Python package XGBoost). 
+- This is because, with a slower learning rate, you need a larger number of trees to reach the minima.
+- This, in turn, leads to longer training time. 
+- On the other hand, if $λ_t$ is large, we may reach the same point with a lesser number of trees (n_estimators), but there is the risk of actually missing the minima altogether (i.e., cross over it) because of the long stride taken at each iteration.
+- Some other ways of regularisation are explicitly specifying the number of trees T and doing subsampling. 
+- Note that you should not tune both $λ_t$ and number of trees T together since a high $λ_t$ implies a low value of T and vice-versa.
+
+### Subsampling 
+- is training the model in each iteration on a fraction of data (similar to how random forests build each tree).
+- A typical value of subsampling is 0.5 while it ranges from 0 to 1. 
+- In random forests, subsampling is critical to ensure diversity among the trees, since otherwise, all the trees will start with the same training data and therefore look similar. 
+- This is not a big problem in boosting since each tree is any way built on the residual and gets a significantly different objective function than the previous one. 
+
+### $\gamma$ - Gamma
+- It is a parameter used to control the pruning of the tree. 
+- A node is split only when the resulting split gives a positive reduction in the loss function. 
+- Gamma specifies the minimum loss reduction required to make a split and makes the algorithm conservative. 
+- The values can vary depending on the loss function and should be tuned.
 
 # References
 - [A short introduction to boosting](https://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)
 - [Adaboost Regressor Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html)
 - [Gradient Boosting - StatQuest](https://www.youtube.com/watch?v=3CC4N4z3GJc&t=1s)
+- [Gradient Boosting - Classification (sklearn)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)
+- [Gradient Boosting - Regressor (sklearn)](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)
+- [XGBoost is not black magic](https://towardsdatascience.com/xgboost-is-not-black-magic-56ca013144b4)
+- [XGBoost - Paper](https://arxiv.org/pdf/1603.02754.pdf)
+- [XGBoost - StatQuest](https://youtu.be/OtD8wVaFm6E)
