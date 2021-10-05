@@ -1,7 +1,7 @@
 ---
 title: Boosting
 description: boosting ensemble technique
-date: "2021-10-02"
+date: "2021-10-05"
 image: "boosting.jpeg"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
@@ -34,7 +34,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [GBM Regression](#gbm-regression)
         * [Steps](#steps-1)
         * [Question](#question-6)
-    * [GBM Classificantion](#gbm-classificantion)
+    * [GBM Classification](#gbm-classification)
         * [Question](#question-7)
 * [XGBoost - Extreme Gradient Descent](#xgboost---extreme-gradient-descent)
     * [Steps](#steps-2)
@@ -43,6 +43,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
         * [$λ_t$ - the learning rate](#_t---the-learning-rate)
         * [Subsampling](#subsampling)
         * [$\gamma$ - Gamma](#gamma---gamma)
+* [Questions](#questions)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -284,7 +285,7 @@ To summarize,
 - Learning rate helps us in controlling the contribution of each of the weak learners.
 - Without it, the model may suffer from overfitting.
 
-## GBM Classificantion
+## GBM Classification
 1. Build the first weak learner using a sample from the training data. Calculate the initial predicition for every individual -> $\ln(odds)$
     - $\displaystyle \ln(odds)\frac{\text{positive class}}{\text{negative class}}$
     - $\displaystyle \text{logistic function (sigmoid)} = \frac{e^{\ln(odds)}}{1+e^{\ln(odds)}}$
@@ -371,6 +372,68 @@ To summarize,
 - A node is split only when the resulting split gives a positive reduction in the loss function. 
 - Gamma specifies the minimum loss reduction required to make a split and makes the algorithm conservative. 
 - The values can vary depending on the loss function and should be tuned.
+
+```py heading="Python Implementation - Gradient Boosting"
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import accuracy_score
+
+xgb_cfl = xgb.XGBClassifier(n_jobs = -1,objective = 'binary:logistic')
+xgb_cfl.get_params()
+
+xgb_cfl.fit(train, target_train)  # default 
+xgb_predictions = xgb_cfl.predict(test)
+
+accuracy_score(target_test, xgb_predictions)
+```
+
+```py heading="Hyperparameter Tuning using RandomizedSearch"
+from sklearn.model_selection import RandomizedSearchCV
+
+# A parameter grid for XGBoost
+params = {
+        'n_estimators' : [100, 200, 500, 750], # no of trees 
+        'learning_rate' : [0.01, 0.02, 0.05, 0.1, 0.25],  # eta
+        'min_child_weight': [1, 5, 7, 10],
+        'gamma': [0.1, 0.5, 1, 1.5, 5],
+        'subsample': [0.6, 0.8, 1.0],
+        'colsample_bytree': [0.6, 0.8, 1.0],
+        'max_depth': [3, 4, 5, 10, 12]
+        }
+
+folds = 5
+
+param_comb = 800
+
+random_search = RandomizedSearchCV(xgb_cfl, param_distributions=params, n_iter=param_comb, scoring='accuracy', n_jobs=-1, cv=5, verbose=3, random_state=42)
+
+random_search.fit(train, target_train)
+
+print('\n Best estimator:')
+print(random_search.best_estimator_)
+print('\n Best accuracy for %d-fold search with %d parameter combinations:' % (folds, param_comb))
+print(random_search.best_score_ )
+print('\n Best hyperparameters:')
+print(random_search.best_params_)
+
+xgb_predictions_hpt = random_search.predict(test)
+accuracy_score(target_test, xgb_predictions_hpt)
+```
+
+# Questions
+
+| Statement                                                                                                                                                  | T/F                                               |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| In GBM, At each iteration, we add an incremental model, which is fitted on the positive gradients of the loss function evaluated at current target values. | False (Calculation is done on Negative Gradients) |
+| In XGBoost, We multiply $λ_t$ (learning rate) with the incremental model h t + 1 so that the new model does not overfit.                                   | True                                              |
+| In Adaboost, The classifier weight grows exponentially as the error approaches 0. Better classifiers are given exponentially more weight.                  | True                                              |
+| In Adaboost, The classifier weight grows exponentially as the error approaches 0. Better classifiers are given exponentially more weight.                  | False (at 50% $\alpha = 0$)                       |
+| In Adaboost, The classifier weight grows exponentially negative as the error approaches 1. These types of classifiers are given a negative weight.         | True                                              |
+
+**For a gradient boosting algorithm, let's say $F_0$ is the crude model with which we start off. For a model Ft which is fitted on the training data, the prediction we get for xi is Ft(xi). What is the general expression of the residuals generated once the Ft model is trained? Assume y is the initial target variable.**
+- $y - [Fo(xi)+F1(xi) + F2 (xi)+.........+ Ft−2(xi) + Ft−1(xi) + Ft(xi)]$
+- The residuals created by F1 is y−F0(xi)−F1(xi), for F2 it is  y−F0(xi)−F1(xi) - F2(xi) and so on. In general, Ft trains on the residuals generated by the model Ft−1.  So the residuals created by Ft is y - [Fo(xi)+F1(xi) + F2 (xi)+.........+ Ft−2(xi) + Ft−1(xi) + Ft(xi)].
+
+
 
 # References
 - [A short introduction to boosting](https://www.site.uottawa.ca/~stan/csi5387/boost-tut-ppr.pdf)
