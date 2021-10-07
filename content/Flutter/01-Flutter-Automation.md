@@ -57,3 +57,6 @@ Note: This is an exhaustive list. The flutter driver only supports these 4 ways,
 # References
 - [Flutter Automation Playlist](https://www.youtube.com/watch?v=9wNa48EiksM&list=PL6tu16kXT9PrzZbUTUscEYOHHTVEKPLha&index=1)
 - [Introduction to Integration Testing in Flutter](https://flutter.dev/docs/cookbook/testing/integration/introduction)
+- [Flutter Gherkin](https://pub.dev/packages/flutter_gherkin)
+- [Dart Language - Learn by Example](https://dart.dev/samples)
+- [Dart - Language Tour](https://dart.dev/guides/language/language-tour)
