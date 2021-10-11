@@ -71,6 +71,41 @@ D. High Earning Individual from Hyderabad
 **You are an analyst at a global laptop manufacturer and are given the task of deciding whether the company should enter the Indian Market. You try to estimate the market size by first breaking the market by different types of people who use a laptop such as students, working professionals and their paying capacity to get an estimate of the total market size and the characteristics of each segment. In essence, you are doing?**
 - Demographic Segmentation: Since you are looking at the income and the profession of people. Notice how this is much simpler than finding data about actual laptop purchasing history of customers and then trying to estimate the market size based on that.
 
+# K-Means Clustering
+
+## Euclidean Distance Measure
+The algorithm needs to find data points whose values are similar to each other and therefore these points would then belong to the same cluster. The method in which any clustering algorithm goes about doing that is through the method of finding something called a “distance measure”. The distance measure that is used in K-means clustering is called the Euclidean Distance measure.
+
+- $X = (X_1, X_2, \ldots, X_n)$
+- $Y = (Y_1, Y_2, \ldots, Y_n)$
+
+- It is the length of the straight line joining 2 points
+- Formula: $D = \sqrt{(X_1-Y_1)^2 + (X_2-Y_2)^2 + \ldots + (X_n - Y_n)^2}$
+
+- The idea of distance measure is quite intuitive. Essentially, the observations which are closer or more similar to each other would have a low Euclidean distance and the observations which are farther or less similar to each other would have a higher Euclidean distance. 
+
+```py heading="Euclidean Distance in Python"
+from math import sqrt
+
+x = (7, 50)
+y = (23, 34)
+c = (12, 12)
+
+squared_sum = 0
+for i, j in zip(x, c):
+    squared_sum += (i-j)**2
+
+print(sqrt(squared_sum)) # x - c distance
+
+
+squared_sum = 0
+for i, j in zip(y, c):
+    squared_sum += (i-j)**2
+
+print(sqrt(squared_sum)) # y - c distance
+
+# the point (among x, y) which has lower distance is closer to c
+```
 
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
