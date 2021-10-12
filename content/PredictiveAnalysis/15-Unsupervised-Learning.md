@@ -128,6 +128,7 @@ print(centroid)
 - Maximizes the distance between the clusters
 - Each time the clusters are made, the centroid is updated. The updated centroid is the centre of all the points which fall in the cluster associated with the centroid. This process continues till the centroid no longer changes, i.e. the solution converges.
 - K-means algorithm is a clustering algorithm that takes N data points and groups them into K clusters. 
+
 ### Steps
 1. Start by choosing k initial centroids
 2. Assign based on euclidean distance
@@ -135,8 +136,34 @@ print(centroid)
 4. Assign based on new distance
 5. Repeat steps 3 and 4 until centroid no longer changes
 
+#### Inner Loop
+- Assign each observation $X_{i}$ to the closest cluster centroid $μ_k$
+- Update each centroid to the mean of the points assigned to it.
+
+#### Cost Function
+
+$\displaystyle J = \sum_{i=1}^{N}||x_{i}-\mu_{k(i)}||^2 = \sum_{k=1}^{K}\sum_{i\in c_k}||x_{i}-\mu_{k}||^2$
+
+#### Assigning clusters
+$\displaystyle Z_{i} \leftarrow \text{argmin}||x_{i}-\mu_k||^2$
+- compute distance from each cluster and assign the cluster which is the closest
+
+#### Optimisation
+$\boxed{ \displaystyle \mu_k = \frac{1}{n_k}\sum_{i:z_i=k}X_{i}}$
+
+### K-Means++ algorithm
+- K-means++ is just an initialisation procedure for K-means. 
+- In K-means++ you pick the initial centroids using an algorithm that tries to initialise centroids that are far apart from each other.
+
+#### Steps
+- We choose one center as one of the data points at random.
+- For each data point $X_{i}$, We compute the distance between $X_i$ and the nearest center that had already been chosen.
+- Now, we choose the next cluster center using the weighted probability distribution where a point X is chosen with probability proportional to $d(X)^2$.
+- Repeat Steps 2 and 3 until K centers have been chosen.
+
 
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
 - [Euclidean Distance - Sentdex](https://www.youtube.com/watch?v=hl3bQySs8sM)
 - [Centroid - Wikipedia](https://en.wikipedia.org/wiki/Centroid)
+- [Clustering - Visualization](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/)
