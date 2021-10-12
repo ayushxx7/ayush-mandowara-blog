@@ -107,5 +107,36 @@ print(sqrt(squared_sum)) # y - c distance
 # the point (among x, y) which has lower distance is closer to c
 ```
 
+## Centroid
+- If you remember your high school geometry, centroids are essentially the centre points of triangles. Similarly, in the case of clustering, centroids are the centre points of the clusters that are being formed.
+- The cluster centers for a particular cluster that we compute in K-means Algorithm is given by the Centroid Value for those cluster points
+
+```py heading='Centroid in Python'
+x = [12, 31, 17, 19, 13]
+y = [23, 31, 15, 27, 11]
+z = [45, 31, 25, 45, 27]
+
+centroid = (sum(x)/len(x),
+            sum(y)/len(y),
+            sum(z)/len(z))
+
+print(centroid)
+```
+
+## Algorithm
+- Maximizes the tightness/closeness of cluster
+- Maximizes the distance between the clusters
+- Each time the clusters are made, the centroid is updated. The updated centroid is the centre of all the points which fall in the cluster associated with the centroid. This process continues till the centroid no longer changes, i.e. the solution converges.
+- K-means algorithm is a clustering algorithm that takes N data points and groups them into K clusters. 
+### Steps
+1. Start by choosing k initial centroids
+2. Assign based on euclidean distance
+3. Optimize centroid based on the grouping in step 2
+4. Assign based on new distance
+5. Repeat steps 3 and 4 until centroid no longer changes
+
+
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
+- [Euclidean Distance - Sentdex](https://www.youtube.com/watch?v=hl3bQySs8sM)
+- [Centroid - Wikipedia](https://en.wikipedia.org/wiki/Centroid)
