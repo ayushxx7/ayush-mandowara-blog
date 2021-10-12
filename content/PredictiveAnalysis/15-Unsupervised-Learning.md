@@ -1,11 +1,43 @@
 ---
 title: Unsupervised Learning
 description: Clustering and intro to Unsupervised Learning
-date: "2021-10-05"
+date: "2021-10-12"
 image: "unsupervised_learning.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Types of Learning](#types-of-learning)
+* [Unsupervised Learning](#unsupervised-learning)
+    * [Practical applications of Clustering](#practical-applications-of-clustering)
+* [Clustering vs Segmentation](#clustering-vs-segmentation)
+* [Segmentation Stability](#segmentation-stability)
+    * [Inter and Intra cluster homogeneity](#inter-and-intra-cluster-homogeneity)
+    * [Behavioral Segmenatation](#behavioral-segmenatation)
+    * [Attitudinal Segmentation](#attitudinal-segmentation)
+    * [Demographic Segmenetation](#demographic-segmenetation)
+* [Questions](#questions)
+* [K-Means Clustering](#k-means-clustering)
+    * [Euclidean Distance Measure](#euclidean-distance-measure)
+    * [Centroid](#centroid)
+    * [Algorithm](#algorithm)
+        * [Steps](#steps)
+            * [Inner Loop](#inner-loop)
+            * [Cost Function](#cost-function)
+            * [Assigning clusters](#assigning-clusters)
+            * [Optimisation](#optimisation)
+        * [K-Means++ algorithm](#k-means-algorithm)
+            * [Steps](#steps-1)
+    * [Practical Considerations](#practical-considerations)
+        * [Silhoutte Coefficient](#silhoutte-coefficient)
+    * [Cluster Tendency](#cluster-tendency)
+* [Summary](#summary)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # Types of Learning
 
@@ -161,9 +193,48 @@ $\boxed{ \displaystyle \mu_k = \frac{1}{n_k}\sum_{i:z_i=k}X_{i}}$
 - Now, we choose the next cluster center using the weighted probability distribution where a point X is chosen with probability proportional to $d(X)^2$.
 - Repeat Steps 2 and 3 until K centers have been chosen.
 
+## Practical Considerations
+- The number of clusters that you want to divide your data points into, i.e. the value of K has to be pre-determined.
+    - try different choices and then see which makes business sense
+- The choice of the initial cluster centres can have an impact on the final cluster formation.
+    - can be solved by iterating multiple times
+    - Since each run of K-means is independent, multiple runs can find different local optima, and this can help in choosing the global optimum value.
+- The clustering process is very sensitive to the presence of outliers in the data.
+    - treat outliers to resolve issues
+- Since the distance metric used in the clustering process is the Euclidean distance. 
+    - You need to bring all your attributes on the same scale. This can be achieved through standardisation.
+    - business problem decides type of scaling
+- The K-Means algorithm does not work with categorical data.
+    - can be resolved via k-mode clustering
+- The process may not converge in the given number of iterations. 
+    - You should always check for convergence.
+
+### Silhoutte Coefficient
+- Silhouette coefficient is a measure of how similar a data point is to its own cluster (cohesion) compared to other clusters (separation). 
+- to compute silhouette metric, we need to compute two measures i.e. 
+$a(i)$ and $b(i)$ where,
+- $a(i)$ is the average distance from own cluster(Cohesion).
+- $b(i)$ is the average distance from the nearest neighbour cluster(Separation). 
+- $\displaystyle S(i) = \frac{b(i) - a(i)}{\max(b(i), a(i))}$
+- $a(i) \ll b(i)$
+- For every k, Average Silhouette Measure can be calculated as mean of S(i)
+
+## Cluster Tendency
+- Before we apply any clustering algorithm to the given data, it's important to check whether the given data has some meaningful clusters or not? which in general means the given data is not random. 
+- The process to evaluate the data to check if the data is feasible for clustering or not is know as the clustering tendency.
+- To check cluster tendency, we use Hopkins test. Hopkins test examines whether data points differ significantly from uniformly distributed data in the multidimensional space.
+
+# Summary
+- K-means is a popular algorithm for clustering which uses euclidean distance to group data points together. it finds out cluster centers, assigns data points and finds clusters again on new grouping until centroids converge
+- We should first check whether the data is cluster-able and then consider the practical points such as whether the data is categorical, if there are any outliers, if the data requires any scaling
+- Initial points can be found out using k-mean++ algorithm which uses a measure proportional to distance squared for finding out cluster centers
 
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
 - [Euclidean Distance - Sentdex](https://www.youtube.com/watch?v=hl3bQySs8sM)
 - [Centroid - Wikipedia](https://en.wikipedia.org/wiki/Centroid)
 - [Clustering - Visualization](https://www.naftaliharris.com/blog/visualizing-k-means-clustering/)
+- [K-Mode Clustering](https://shapeofdata.wordpress.com/2014/03/04/k-modes/)
+- [Local Minima - Wikipedia](https://en.wikipedia.org/wiki/Local_optimum)
+- [Hopkins Test](https://stats.stackexchange.com/questions/332651/validating-cluster-tendency-using-hopkins-statistic)
+- [Methods for assessing clustering tendency](http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/#methods-for-assessing-clustering-tendency)
