@@ -16,9 +16,9 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
 * [Clustering vs Segmentation](#clustering-vs-segmentation)
 * [Segmentation Stability](#segmentation-stability)
     * [Inter and Intra cluster homogeneity](#inter-and-intra-cluster-homogeneity)
-    * [Behavioral Segmenatation](#behavioral-segmenatation)
+    * [Behavioral Segmentation](#behavioral-segmentation)
     * [Attitudinal Segmentation](#attitudinal-segmentation)
-    * [Demographic Segmenetation](#demographic-segmenetation)
+    * [Demographic Segmentation](#demographic-segmentation)
 * [Questions](#questions)
 * [K-Means Clustering](#k-means-clustering)
     * [Euclidean Distance Measure](#euclidean-distance-measure)
@@ -32,9 +32,16 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
         * [K-Means++ algorithm](#k-means-algorithm)
             * [Steps](#steps-1)
     * [Practical Considerations](#practical-considerations)
-        * [Silhoutte Coefficient](#silhoutte-coefficient)
+        * [Silhouette Coefficient](#silhouette-coefficient)
     * [Cluster Tendency](#cluster-tendency)
 * [Summary](#summary)
+* [Questions](#questions-1)
+* [Hierarchical Clustering Algorithm](#hierarchical-clustering-algorithm)
+    * [Linkage](#linkage)
+        * [Types](#types)
+    * [Steps](#steps-2)
+    * [Dendrogram](#dendrogram)
+* [Question](#question)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -71,17 +78,17 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
 - Inter segment - there should be lot of difference between individuals
 - Intra Segment - there should be almost no difference between individuals
 
-## Behavioral Segmenatation
+## Behavioral Segmentation
 - what the person, market exhibited through action
 - data comes from internal CRM system
-- ex: youtube recommendatations
+- ex: YouTube recommendations
 
 ## Attitudinal Segmentation
 - what you want to behave like
 - intent to purchase not actual purchase
 - in survey person says they purchase branded clothes (attitudinal), while they actually end up purchasing discounted clothes (behavioural)
 
-## Demographic Segmenetation
+## Demographic Segmentation
 - Gender
 - Age
 - Location
@@ -102,6 +109,8 @@ D. High Earning Individual from Hyderabad
 
 **You are an analyst at a global laptop manufacturer and are given the task of deciding whether the company should enter the Indian Market. You try to estimate the market size by first breaking the market by different types of people who use a laptop such as students, working professionals and their paying capacity to get an estimate of the total market size and the characteristics of each segment. In essence, you are doing?**
 - Demographic Segmentation: Since you are looking at the income and the profession of people. Notice how this is much simpler than finding data about actual laptop purchasing history of customers and then trying to estimate the market size based on that.
+
+---
 
 # K-Means Clustering
 
@@ -209,7 +218,7 @@ $\boxed{ \displaystyle \mu_k = \frac{1}{n_k}\sum_{i:z_i=k}X_{i}}$
 - The process may not converge in the given number of iterations. 
     - You should always check for convergence.
 
-### Silhoutte Coefficient
+### Silhouette Coefficient
 - Silhouette coefficient is a measure of how similar a data point is to its own cluster (cohesion) compared to other clusters (separation). 
 - to compute silhouette metric, we need to compute two measures i.e. 
 $a(i)$ and $b(i)$ where,
@@ -218,6 +227,22 @@ $a(i)$ and $b(i)$ where,
 - $\displaystyle S(i) = \frac{b(i) - a(i)}{\max(b(i), a(i))}$
 - $a(i) \ll b(i)$
 - For every k, Average Silhouette Measure can be calculated as mean of S(i)
+- Range of score is -1 to 1 where 1 is the best cluster while -1 is the worst cluster
+
+```py heading='Silhoutte Score in Python'
+from sklearn.metrics import silhouette_score
+from sklearn.cluster import KMeans
+
+range_n_clusters = [2, 3, 4, 5, 6, 7]
+for num_clusters in range_n_clusters:
+    kmeans = KMeans(n_clusters=num_clusters, max_iter=50)
+    kmeans.fit(rfm_df_scaled)
+    
+    cluster_labels = kmeans.labels_
+    
+    silhoutte_avg = silhouette_score(rfm_df_scaled, cluster_labels)
+    print(f'num_cluster {num_clusters} | silhoutte {silhoutte_avg}')
+```
 
 ## Cluster Tendency
 - Before we apply any clustering algorithm to the given data, it's important to check whether the given data has some meaningful clusters or not? which in general means the given data is not random. 
@@ -263,6 +288,80 @@ print(hopkins(df))
 - We should first check whether the data is cluster-able and then consider the practical points such as whether the data is categorical, if there are any outliers, if the data requires any scaling
 - Initial points can be found out using k-mean++ algorithm which uses a measure proportional to distance squared for finding out cluster centers
 
+# Questions
+
+
+| Statement                                                                                           | T/F |
+|-----------------------------------------------------------------------------------------------------|-----|
+| The clusters formed by k-means algorithm do not depend on the initial selection of cluster centers. | F   |
+| The results of k-means algorithm get impacted by outliers and range of the attributes.              | T   |
+| KMeans algorithm can be applied to both categorical and numerical variables.                        | F   |
+| KMeans clustering automatically selects the most optimum value of k                                 | F   |
+
+
+---
+
+# Hierarchical Clustering Algorithm
+- One of the major considerations in using the K-means algorithm is deciding the value of K beforehand. The hierarchical clustering algorithm does not have this restriction.
+- The output of the hierarchical clustering algorithm is quite different from the K-mean algorithm as well. It results in an inverted tree-shaped structure, called the dendrogram. An example of a dendrogram is shown below.
+![dendrogram](dendrogram.png)
+
+| K-Means                                                                             | Hierarchical                                                                                                                                                                 |
+|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| divide the data in the first step itself.                                           | The data is not partitioned into a particular cluster in a single step.                                                                                                      |
+| In the subsequent steps, you refined our clusters to get the most optimal grouping. | Instead, a series of partitions/merges take place, which may run from a single cluster containing all objects to n clusters that each contain a single object or vice-versa. |
+| have to specify number of clusters before hand                                      | don’t have to specify the number of clusters beforehand.                                                                                                                     |
+| good large data points                                                              | good for small data points                                                                                                                                                   |
+
+
+## Linkage
+- Measure of dissimilarity between clusters having multiple observations
+
+### Types
+- Single Linkage: Here, the distance between 2 clusters is defined as the shortest distance between points in the two clusters
+    - will produce dendrograms which are not structured properly
+- Complete Linkage: Here, the distance between 2 clusters is defined as the maximum distance between any 2 points in the clusters
+    - will produce clusters which have a proper tree-like structure
+- Average Linkage: Here, the distance between 2 clusters is defined as the average distance between every point of one cluster to every other point of the other cluster.
+    - will produce clusters which have a proper tree-like structure
+
+## Steps
+Given a set of N items to be clustered, the steps in hierarchical clustering are:
+1. Calculate the NxN distance (similarity) matrix, which calculates the distance of each data point from the other
+2. Each item is first assigned to its own cluster, i.e. N clusters are formed
+3. The clusters which are closest to each other are merged to form a single cluster
+4. The same step of computing the distance and merging the closest clusters is repeated till all the points become part of a single cluster
+
+## Dendrogram
+- Height of the dendrogram represents the dissimilarity measure between different clusters
+- Clusters that fuse together at the top are more dissimilar to each other than those at the bottom
+- At each step of algorithm, we are reducing the number of clusters and building up a tree. This is why it's called Hierarchical Clustering Algorithm.
+
+![DendrogramUpDown](dendrogram_up_down.png)
+| Agglomerative Clustering                                                                                 | Divisive Clustering                                                                                                         |
+|----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Bottom Up                                                                                                | Top Down                                                                                                                    |
+| start with n distinct clusters and iteratively reach to a point where you have only 1 cluster in the end | start with 1 big cluster and subsequently keep on partitioning this cluster to reach n clusters, each containing 1 elementA |
+
+```py heading='Hierarchical Clustering in Python'
+from scipy.cluster.hierarchy import linkage
+from scipy.cluster.hierarchy import dendrogram
+from scipy.cluster.hierarchy import cut_tree
+
+mergings = linkage(df, method='complete', metric='euclidean')
+dendrogram(mergings)
+plt.show()
+
+cluster_labels = cut_tree(mergings, n_clusters=3).reshape(-1, )
+```
+
+# Question
+**Can you use the dendrogram to make meaningful clusters? (By looking at which elements leave and join at what height)**
+- Yes. It is a great tool. You can look at what stage an element is joining a cluster and hence see how similar or dissimilar it is to the rest of the cluster. If it joins at the higher height, it is quite different from the rest of the group. You can also see which elements are joining which cluster at what stage and can thus use business understanding to cut the dendrogram more accurately.
+
+---
+
+
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
 - [Euclidean Distance - Sentdex](https://www.youtube.com/watch?v=hl3bQySs8sM)
@@ -272,3 +371,10 @@ print(hopkins(df))
 - [Local Minima - Wikipedia](https://en.wikipedia.org/wiki/Local_optimum)
 - [Hopkins Test](https://stats.stackexchange.com/questions/332651/validating-cluster-tendency-using-hopkins-statistic)
 - [Methods for assessing clustering tendency](http://www.sthda.com/english/articles/29-cluster-validation-essentials/95-assessing-clustering-tendency-essentials/#methods-for-assessing-clustering-tendency)
+- [Divisive Clustering - Stanford](https://nlp.stanford.edu/IR-book/html/htmledition/divisive-clustering-1.html)
+- [Divisive Clustering - Notes](http://luthuli.cs.uiuc.edu/~daf/courses/probcourse/notesclustering.pdf)
+- [Hierarchical Clustering - Linkage](http://www.saedsayad.com/clustering_hierarchical.htm)
+- [Choosing the right Linkage - StackExchange](https://stats.stackexchange.com/questions/195446/choosing-the-right-linkage-method-for-hierarchical-clustering)
+- [Hierarchical Clustering - Notes](http://www.stat.cmu.edu/~ryantibs/datamining/lectures/05-clus2.pdf)
+- [Dendrogram](https://www.displayr.com/what-is-dendrogram/)
+- [Visualize CLusters using Scatterplot](https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489)
