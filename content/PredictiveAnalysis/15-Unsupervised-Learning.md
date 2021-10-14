@@ -1,7 +1,7 @@
 ---
 title: Unsupervised Learning
 description: Clustering and intro to Unsupervised Learning
-date: "2021-10-13"
+date: "2021-10-15"
 image: "unsupervised_learning.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning"]
@@ -42,6 +42,8 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
     * [Steps](#steps-2)
     * [Dendrogram](#dendrogram)
 * [Question](#question)
+* [K-Mode Clustering](#k-mode-clustering)
+* [K-Prototype](#k-prototype)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -361,6 +363,62 @@ cluster_labels = cut_tree(mergings, n_clusters=3).reshape(-1, )
 
 ---
 
+# K-Mode Clustering
+| Step                       | K-Mean                                                                   | K-Mode                                                                    |
+|----------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| Initialize cluster centers | K-Mean++                                                                 | Huang method, and Cao method are used                                     |
+| Assignment step            | $z_{i} \leftarrow \text{arg min}(x_{i}, \mu_k)$ using euclidean distance | matching dissimilarity (how many attributes between X and Y are different)
+| Optimization Step          | compute mean of set of points assigned to cluster K                      | compute mode of set of points assinged to cluster K                       |
+| Usage                      | Used for numeric values                                                  | Used for categorical data                                                 |
+
+```py heading='K-Modes in Python'
+from kmodes.kmodes import KModes
+from sklearn import preprocessing
+
+le = preprocessing.LabelEncoder()
+bank_cust = bank_cust.apply(le.fit_transform)
+
+# cao initialization
+km_cao = KModes(n_clusters=2, init = "Cao", n_init = 1, verbose=1)
+fitClusters_cao = km_cao.fit_predict(bank_cust)
+
+clusterCentroidsDf = pd.DataFrame(km_cao.cluster_centroids_)
+clusterCentroidsDf.columns = bank_cust.columns
+
+clusterCentroidsDf
+
+# huang initilization
+km_huang = KModes(n_clusters=2, init = "Huang", n_init = 1, verbose=1)
+fitClusters_huang = km_huang.fit_predict(bank_cust)
+
+# choosing K by comparing cost
+cost = []
+for num_clusters in list(range(1,5)):
+    kmode = KModes(n_clusters=num_clusters, init = "Cao", n_init = 1, verbose=1)
+    kmode.fit_predict(bank_cust)
+    cost.append(kmode.cost_)
+
+y = np.array([i for i in range(1,5,1)])
+plt.plot(y,cost)
+```
+
+
+# K-Prototype
+- Simple combination of K-Means and K-Modes in clustering mixed attributes.
+- We combine K-means and K-Mode to handle both continuous and categorical data. For K-Prototype the distance function is as follows,
+- $\displaystyle d(x, y) = \sum_{j=1}^{p}(X_j - Y_j)^2 + \gamma\sum_{j=p+1}^{M}\delta(X_j-Y_j)^2$
+- Where $\gamma$ is the weighting factor that determines the relative importance of numerical categorical attributes.
+
+```py heading='K-Prototype in Python'
+from kmodes.kprototypes import KPrototypes
+
+kproto = KPrototypes(n_clusters=5, init='Cao')
+clusters = kproto.fit_predict(blood_matrix, categorical=[4])
+
+kproto.cluster_centroids_
+```
+
+---
 
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
@@ -377,4 +435,7 @@ cluster_labels = cut_tree(mergings, n_clusters=3).reshape(-1, )
 - [Choosing the right Linkage - StackExchange](https://stats.stackexchange.com/questions/195446/choosing-the-right-linkage-method-for-hierarchical-clustering)
 - [Hierarchical Clustering - Notes](http://www.stat.cmu.edu/~ryantibs/datamining/lectures/05-clus2.pdf)
 - [Dendrogram](https://www.displayr.com/what-is-dendrogram/)
-- [Visualize CLusters using Scatterplot](https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489)
+- [Visualize Clusters using Scatterplot](https://towardsdatascience.com/visualizing-clusters-with-pythons-matplolib-35ae03d87489)
+- [Huang Initialization](https://pdfs.semanticscholar.org/d42b/b5ad2d03be6d8fefa63d25d02c0711d19728.pdf)
+- [Cao Initialization](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.474.8181&rep=rep1&type=pdf)
+- [K-Prototype](https://cse.hkust.edu.hk/~qyang/Teaching/537/Papers/huang98extensions.pdf)
