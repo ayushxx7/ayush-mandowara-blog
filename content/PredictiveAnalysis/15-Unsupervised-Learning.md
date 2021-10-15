@@ -344,10 +344,13 @@ Given a set of N items to be clustered, the steps in hierarchical clustering are
 - At each step of algorithm, we are reducing the number of clusters and building up a tree. This is why it's called Hierarchical Clustering Algorithm.
 
 ![DendrogramUpDown](dendrogram_up_down.png)
+
+
 | Agglomerative Clustering                                                                                 | Divisive Clustering                                                                                                         |
 |----------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | Bottom Up                                                                                                | Top Down                                                                                                                    |
 | start with n distinct clusters and iteratively reach to a point where you have only 1 cluster in the end | start with 1 big cluster and subsequently keep on partitioning this cluster to reach n clusters, each containing 1 elementA |
+
 
 ```py heading='Hierarchical Clustering in Python'
 from scipy.cluster.hierarchy import linkage
