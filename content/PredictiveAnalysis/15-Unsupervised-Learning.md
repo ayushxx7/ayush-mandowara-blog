@@ -47,6 +47,7 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
 * [DB Scan Clustering](#db-scan-clustering)
     * [EPS](#eps)
     * [Min Samples](#min-samples)
+* [Questions](#questions-2)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -367,12 +368,12 @@ cluster_labels = cut_tree(mergings, n_clusters=3).reshape(-1, )
 ---
 
 # K-Mode Clustering
-| Step                       | K-Mean                                                                   | K-Mode                                                                    |
-|----------------------------|--------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Initialize cluster centers | K-Mean++                                                                 | Huang method, and Cao method are used                                     |
+| Step                       | K-Mean                                                                   | K-Mode                                                                     |
+|----------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| Initialize cluster centers | K-Mean++                                                                 | Huang method, and Cao method are used                                      |
 | Assignment step            | $z_{i} \leftarrow \text{arg min}(x_{i}, \mu_k)$ using euclidean distance | matching dissimilarity (how many attributes between X and Y are different)
-| Optimization Step          | compute mean of set of points assigned to cluster K                      | compute mode of set of points assinged to cluster K                       |
-| Usage                      | Used for numeric values                                                  | Used for categorical data                                                 |
+| Optimization Step          | compute mean of set of points assigned to cluster K                      | compute mode of set of points assinged to cluster K                        |
+| Usage                      | Used for numeric values                                                  | Used for categorical data                                                  |
 
 ```py heading='K-Modes in Python'
 from kmodes.kmodes import KModes
@@ -453,6 +454,86 @@ DBSCAN algorithm requires 2 parameters:
 |-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
 | every data point is assigned to one of the clusters | assignment of data point to a cluster is based on the probability or likelihood of that data point to exist in that cluster |
 | ex: K-Means                                         | ex: Gaussian Mixture Models                                                                                                 |
+
+---
+
+# Questions
+**Which method should be preferred in the case of K-mode or K-means clustering when both categorical and numerical variables are present in the dataset?**
+
+| Method      | Can be used |
+|-------------|-------------|
+| K-Means     | No          |
+| K-Mode      | No          |
+| K-Prototype | Yes         |
+
+**What is the advantage of hierarchical clustering over K-means clustering?**
+- You don't have to assign the number of clusters from the beginning in the case of hierarchical clustering.
+
+**In the silhouette score method, which point would be the most appropriate number of clusters for the K-means clustering algorithm?**
+- Global maximum
+
+**Which of the following approaches can be used in Hierarchical Clustering?**
+
+| Method                   | Can be used |
+|--------------------------|-------------|
+| Agglomerative Clustering | T           |
+| Divisive Clustering      | T           |
+
+**What are the different proximity functions or distance metrics used for the K-means algorithm?**
+- Euclidean: is the squared distance from a data point to the centroid. 
+- Manhattan: is the absolute distance from a data point to the centroid.- Cosine: is the cosine distance from a data point to the cluster centroid. 
+- Bregman divergence: is a class of distance metrics that includes Euclidean, Mahalanobis, and Cosine. Basically, Bregman divergence includes all those distance metrics for which the mean is a centroid.
+
+**Explain the types of segmentation that can be considered while solving a business problem using Clustering.**
+- behavioral segmentation: actual behavior of customer
+- demographic segmentation: based on location
+- attitudnal segmentation: what customer pretends to be like
+- RFM analysis: recency frequency and monetary
+- Psychographic segmentation: study of consumers based on their activities, interests, and opinions (AIOs). It goes beyond classifying people based on general demographic data, such as age, gender, or race. Psychographics seeks to understand the cognitive factors that drive consumer behaviors.
+
+
+**What are the issues with random initialization of centroids in K-means algorithm and how to overcome it?**
+- Initiation of the centroids in a cluster is one of the most important steps of the K-means algorithm.
+- Many times, random selection of initial centroid does not lead to an optimal solution. 
+- In order to overcome this problem, the algorithm is run multiple times with different random initialisations. 
+- The sum of squared errors (SSE) are calculated for different initial centroids. The set of centroids with the minimum SSE is selected. Even though this is a very simple method, it is not foolproof. The results of multiple random cluster initialisations will depend on the dataset and the number of clusters selected, however, that still will not give an optimum output every time.
+- The other method involves first selecting the centroid of all the data points. Then, for each successive initial centroid, select the point which is the farthest from the already selected centroid. This procedure will ensure that the selection is random, and the centroids are far apart. The disadvantage of this method is that calculating the farthest point will be expensive. In order to avoid this problem, initialisation is carried out on a subset of the dataset.
+
+**How are outliers handled by the K-means algorithm?**
+- Handling of outliers differs from case to case. 
+- In some cases, it will provide very useful information, and in some cases, it will severely affect the results of the analysis. 
+- Having said that, let’s learn about some of the issues that arise due to outliers in the K-means algorithm below.
+- The centroids will not be a true representation of a cluster in the presence of outliers. 
+- The sum of squared errors (SSE) will also be very high in the case of outliers. 
+- Small clusters will bond with outliers, which may not be the true representation of the natural patterns of clusters in data. 
+- Due to these reasons, outliers need to be removed before proceeding with clustering on the data.
+
+**What is the objective function for measuring the quality of clustering in case of the K-means algorithm with Euclidean distance?**
+- Sum of squared errors (SSE) is used as the objective function for K-means clustering with Euclidean distance. 
+- The Euclidean distance is calculated from each data point to its nearest centroid. 
+- These distances are squared and summed to obtain the SSE. 
+- The aim of the algorithm is to minimize the SSE. Note that SSE considers all the clusters formed using the K-means algorithm.
+
+
+**Is K-means clustering suitable for all shapes and sizes of clusters?**
+- K-means is not suitable for all shapes, sizes, and densities of clusters. 
+- If the natural clusters of a dataset are vastly different from a spherical shape, then K-means will face great difficulties in detecting it. 
+- K-means will also fail if the sizes and densities of the clusters are different by a large margin. 
+- This is mostly due to using SSE as the objective function, which is more suited for spherical shapes. 
+- SSE is not suited for clusters with non-spherical shapes, varied cluster sizes, and densities.
+
+**What are the disadvantages of agglomerative hierarchical clustering?**
+- Objective function: SSE is the objective function for K-means. Likewise, there exists no global objective function for hierarchical clustering. It considers proximity locally before merging two clusters.
+- Time and space complexity: The time and space complexity of agglomerative clustering is more than K-means clustering, and in some cases, it is prohibitive.
+- Final merging decisions: The merging decisions, once given by the algorithm, cannot be undone at a later point in time. Due to this, a local optimisation criteria cannot become global criteria. Note that there are some advanced approaches available to overcome this problem.
+
+**Is validation required for clustering? If yes, then why is it required?**
+- Clustering algorithms have a tendency to cluster even when the data is random. 
+- It is essential to validate if a non-random structure is present in the data. 
+- It is also required to validate whether the number of clusters formed is appropriate or not. 
+- Evaluation of clusters is done with or without external reference to check the fitness of the data. 
+- Evaluation is also done to compare clusters and decide the better among them.
+
 
 ---
 
