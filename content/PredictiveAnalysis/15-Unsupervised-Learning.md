@@ -44,6 +44,9 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
 * [Question](#question)
 * [K-Mode Clustering](#k-mode-clustering)
 * [K-Prototype](#k-prototype)
+* [DB Scan Clustering](#db-scan-clustering)
+    * [EPS](#eps)
+    * [Min Samples](#min-samples)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -420,6 +423,39 @@ kproto.cluster_centroids_
 
 ---
 
+# DB Scan Clustering
+- DBSCAN is a density-based clustering algorithm that divides a data set into subgroups of high-density regions. 
+- DBSCAN groups together point that are close to each other based on a distance measurement (usually Euclidean distance) and a minimum number of points. 
+- It also marks as outliers the points that are in low-density regions.
+- The DBSCAN algorithm is used to find associations and structures in the data that are usually hard to find manually.
+
+DBSCAN algorithm requires 2 parameters:
+- Epsom or EPS
+- MinPoints or MinSamples.
+
+## EPS
+- EPS is a distance parameter that defines the radius to search for nearby neighbours. 
+- We can imagine each data point having a circle with radius EPS drawn around it. 
+- The value of EPS taken to cluster the data has a significant impact on the results. 
+- If the value of EPS is considered too small, decidedly fewer data points will be considered in one cluster, and a large part of the data will not be clustered. 
+- The un-clustered data points will be considered as outliers because they don't satisfy the number of points to create a dense region.
+- If the EPS value is chosen to be very high, no real clusters will be formed as all of them will merge in the same cluster. 
+- The eps should be chosen based on the distance of the dataset (we can use a k-distance graph to find it), but in general small eps values are preferable.
+
+## Min Samples
+- Min Samples or Min Points are the number of minimum points to form a dense region or cluster. 
+- For example, if we set the min_samples as 5, we need at least 5 points to form a dense cluster. 
+- Minimum points can be selected from some dimensions (D) in the data set, as a general rule min points >=D+1. 
+
+---
+
+| Hard Clustering                                     | Soft Clustering                                                                                                             |
+|-----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| every data point is assigned to one of the clusters | assignment of data point to a cluster is based on the probability or likelihood of that data point to exist in that cluster |
+| ex: K-Means                                         | ex: Gaussian Mixture Models                                                                                                 |
+
+---
+
 # References
 - [10 interesting uses of k-means clustering](https://dzone.com/articles/10-interesting-use-cases-for-the-k-means-algorithm)
 - [Euclidean Distance - Sentdex](https://www.youtube.com/watch?v=hl3bQySs8sM)
@@ -439,3 +475,7 @@ kproto.cluster_centroids_
 - [Huang Initialization](https://pdfs.semanticscholar.org/d42b/b5ad2d03be6d8fefa63d25d02c0711d19728.pdf)
 - [Cao Initialization](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.474.8181&rep=rep1&type=pdf)
 - [K-Prototype](https://cse.hkust.edu.hk/~qyang/Teaching/537/Papers/huang98extensions.pdf)
+- [DBSCAN Visualization](https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/)
+- [Application of DBSCAN at Netflix](https://medium.com/netflix-techblog/tracking-down-the-villains-outlier-detection-at-netflix-40360b31732)
+- [Application of DBSCAN in Geolocated data](https://www.oreilly.com/ideas/clustering-geolocated-data-using-spark-and-dbscan)
+- [Original Paper on DBSCAN posted on KDD by Martin Ester](https://www.aaai.org/Papers/KDD/1996/KDD96-037.pdf)
