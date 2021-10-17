@@ -37,3 +37,46 @@ PCA is a statistical procedure to convert observations of possibly correlated va
 - They are uncorrelated with each other.
 - They are linear combinations of the original variables.
 - They help in capturing maximum information in the data set.
+
+# PCA - Change of Basis
+- We change the basis such that it is easy to identify key features
+- Simply put you have the flexibility of choosing a different set of basis vectors apart from the standard basis vectors that are provided to you to represent your information. The information won't change, just the numbers representing the information would change.
+- Mainly when we're moving between multiple basis vectors, it's important to know that the point's position in space doesn't change. The point's representation might be different in different basis vectors but it would be representing the same point.
+- PCA finds new basis vectors for us. These new basis vectors are also known as Principal Components.
+- We represent the data using these new Principal Components by performing the change of basis calculations.
+- After doing the change of basis, we can perform dimensionality reduction. In fact, PCA finds new basis vectors in such a way that it becomes easier for us to discard a few of the features.
+
+### Standard Basis
+- It is the identify matrix for a particular dimension
+
+$\begin{bmatrix}
+1 && 0 \\
+0 && 1
+\end{bmatrix}$
+
+### Non-Standard Basis
+- Anything other than standard basis (filled with 1s and 0s) is not standard basis vector
+
+$\begin{bmatrix}
+3 & 0.5 \\
+2 & 1
+\end{bmatrix}$
+
+# Variance
+- $\displaystyle \sigma^2 = \frac{\sum(x-\mu)^2}{N}$
+- High Variance $\implies$ More Information and vice-versa
+
+![PCA_Height-Weigth](.\pca-height-weight.jfif)
+
+- The red line on the Height and Weight axes show the spread of the projections of the vectors on those axes. 
+- As you can see here, the spread of the line is quite good on the Weight axis as compared to the Height axis. 
+- Hence you can say that Weight has more variance than Height. 
+- This idea of the spread of the data being equivalent to the variance is quite an elegant way to distinguish the important directions from the non-important ones.
+
+# PCA Steps
+- First, it finds the basis vector which is along the best- fit line that maximises the variance. This is our first principal component or PC1.
+- The second principal component is perpendicular to the first principal component and contains the next highest amount of variance in the dataset.
+- This process continues iteratively, i.e. each new principal component is perpendicular to all the previous principal components and should explain the next highest amount of variance.
+- If the dataset contains n independent features, then PCA will create n Principal components.
+- Once the Principal Components are found out, PCA assigns a %age variance to each PC. Essentially it's the fraction of the total variance of the dataset explained by a particular PC. This helps in understanding which Principal Component is more important than the other and by how much. 
+
