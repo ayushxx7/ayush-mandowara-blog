@@ -88,7 +88,7 @@ $\begin{bmatrix}
 - $\displaystyle \sigma^2 = \frac{\sum(x-\mu)^2}{N}$
 - High Variance $\implies$ More Information and vice-versa
 
-![PCA_Height-Weigth](.\pca-height-weight.jfif)
+![PCA_Height-Weigth](pca-height-weight.jfif)
 
 - The red line on the Height and Weight axes show the spread of the projections of the vectors on those axes. 
 - As you can see here, the spread of the line is quite good on the Weight axis as compared to the Height axis. 
