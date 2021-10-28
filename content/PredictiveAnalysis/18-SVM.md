@@ -1,11 +1,22 @@
 ---
 title: Support Vector Machines
 description: SVM
-date: "2021-10-20"
+date: "2021-10-30"
 image: "svm.png"
 author: "Ayush"
 tags: ["python", "machine-learning", "predictive-analysis"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Support Vector Machines](#support-vector-machines)
+* [Maximal Marginal Classifier](#maximal-marginal-classifier)
+* [Soft Margin Classifier](#soft-margin-classifier)
+* [Summary](#summary)
+* [Questions](#questions)
+
+<!-- vim-markdown-toc -->
 
 # Support Vector Machines
 - These are models that help in separating points into different classes by creating hyperplanes.
@@ -42,3 +53,20 @@ If you impose the condition $\displaystyle l_{i}X(W.Y_{i})\ge M$ on the model, t
 Thus, you modify the formulation to $\displaystyle l_{i}X(W.Y_{i})\ge M(1-\epsilon_i)$, where the slack variable ($\epsilon_i$) takes a value between 0 to infinity.
 
 Depending on the value of $\epsilon_i$, the ith data point can now take any position - it can fall on the correct side of the margin (and a safe distance away), or inside the margin (but still correctly classified), or even stray on the wrong side of the hyperplane itself.
+
+# Summary
+- Maximal Margin Classifier has certain limitations. It will not find a separator if the classes are not linearly separable (as shown below).
+![misclassify](misclassify.png)
+- The Soft Margin Classifier overcomes the drawbacks of the Maximal Margin Classifier by allowing certain points to be misclassified. 
+- You control the amount of misclassifications using the cost of misclassification 'C', where C is the maximum value of the summation of the slack variable epsilon(ϵ), i.e. $\sum \epsilon_i \le C$.
+- If C is high, a higher number of points are allowed to be misclassified or violate the margin. In this case, the model is flexible, more generalisable, and less likely to overfit. In other words, it has a high bias. 
+- On the other hand, if C is low, a lesser numer of points are allowed to be misclassified or violate the margin. In this case, the model is less flexible, less generalisable, and more likely to overfit. In other words, it has a high variance.
+- So, C represents the 'liberty of misclassification' that you provide to the model.
+- Note that the C defined above and the parameter C used in the SVC() function in python are the inverse of each other. In SVC(), C represents the 'penalty for misclassification'. 
+
+# Questions
+**The data points on the edge of the ‘band’, around the separator that makes all the data points outside the band redundant, are called**
+- Support vectors: Support vectors are the data points that lie close to the Support Vector Classifier; they are the only data points used for constructing the classifier.
+
+**For two classes, i.e. class A and class B, If the number of data points that are misclassified is more for class A than that for class B, then for a cost-sensitive SVM model, decreasing the value of C should**
+- Shift the separator towards class B: According to SVM formulation, if C has a high value, it will allow misclassifications. However, a low value of C will not allow any points to be misclassified. So with the cost being high for class A, the separator would be shifted towards B.
