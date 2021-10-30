@@ -1,28 +1,49 @@
 ---
 title: Art and Science of Problem Solving
 description: how to solve problems.
-date: "2021-08-29"
+date: "2021-10-29"
 image: "problem-questions.png"
 author: "Ayush"
 tags: ["general", "soft-skills"]
 ---
 
-### Identify the problem first
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+   * [Identify the problem first](#identify-the-problem-first)
+   * [Questions are more important than answers](#questions-are-more-important-than-answers)
+   * [How to identify the problem](#how-to-identify-the-problem)
+      * [First Principle Thinking](#first-principle-thinking)
+   * [How to break down a problem](#how-to-break-down-a-problem)
+   * [Frameworks to identify the problems](#frameworks-to-identify-the-problems)
+   * [Post Identifying the sub parts - Answers](#post-identifying-the-sub-parts---answers)
+   * [The SCQ Matrix](#the-scq-matrix)
+      * [Current State](#current-state)
+      * [Complications](#complications)
+      * [Desired Outcome](#desired-outcome)
+
+<!-- vim-markdown-toc -->
+
+# Purpose
+- Notes from a webinar on the art of problem solving
+
+## Identify the problem first
 Ex: My sale is going by 30% - this is not the problem. this is the situation.
 - If I were given one hour to save the world, I would spend 59 minutes defining the problem and one minute solving it. - Albert Einstein
 
-### Questions are more important than answers
+## Questions are more important than answers
 - Judge a person by their questions, rather than their answers - Voltaire
 
-### How to identify the problem
-##### First Principle Thinking
+## How to identify the problem
+### First Principle Thinking
 - Breaking down a given problem or a situation into sub parts to understand where does the actual problem lie. It involves deconstructing the problem down to its core elements and building up from there
 - In simple words getting into the depth of a problem by asking series of questions to figure out where is the root of the problem and then solve for that part of the problem with best possible solution
 - Most importantly being curious in a genuine way and not to be in hurry to provide a solution without knowing the exact nature of the problem in depth
 Ex: Elon Musk - journey to mars, building rockets
 Ex: India's Mangalyaan Mission costed just 11% of Nasa's Maven Mars Mission
 
-### How to break down a problem
+## How to break down a problem
 - By asking right set of questions to divide it into sub parts! As simple as that!
 ...then keep asking questions till we get all the answers or know what all questions you need to solve to arrive at an overall solution. 
 Ex: Doctor asking questions for diagnosis
@@ -64,4 +85,4 @@ Ex: Investigators are asking why a particular crime occurred, who will benefit, 
 - How should the final outcome look like?
 - Put things into perspective
 
-![EarthInSun](.\earth-in-sun.jpg)
+![EarthInSun](earth-in-sun.jpg)
