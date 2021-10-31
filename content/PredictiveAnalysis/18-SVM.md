@@ -15,6 +15,14 @@ tags: ["python", "machine-learning", "predictive-analysis"]
 * [Soft Margin Classifier](#soft-margin-classifier)
 * [Summary](#summary)
 * [Questions](#questions)
+* [Kernels](#kernels)
+* [Boundary Transformation](#boundary-transformation)
+    * [Feature Transformation](#feature-transformation)
+* [How Kernls Work](#how-kernls-work)
+    * [The Kernel Trick](#the-kernel-trick)
+    * [Practical Considerations](#practical-considerations)
+        * [Hyperparameters in Non Linear Kernels](#hyperparameters-in-non-linear-kernels)
+* [Questions](#questions-1)
 
 <!-- vim-markdown-toc -->
 
@@ -70,3 +78,79 @@ Depending on the value of $\epsilon_i$, the ith data point can now take any posi
 
 **For two classes, i.e. class A and class B, If the number of data points that are misclassified is more for class A than that for class B, then for a cost-sensitive SVM model, decreasing the value of C should**
 - Shift the separator towards class B: According to SVM formulation, if C has a high value, it will allow misclassifications. However, a low value of C will not allow any points to be misclassified. So with the cost being high for class A, the separator would be shifted towards B.
+
+---
+
+# Kernels
+- Kernels are one of the most interesting inventions in machine learning, partly because they were born through the creative imagination of mathematicians, and partly because of their utility in dealing with non-linear datasets. 
+- Many real-world data sets are not separable by linear boundaries. For instance, what if the distribution of data points looks like the figure given below?
+
+![NonLinear](boundary.png)
+
+- You’ll agree that it is not possible to imagine a linear hyperplane (a line in 2D) that separates the red and blue points reasonably well. Thus, you need to tweak the linear SVM model and enable it to incorporate nonlinearity in some way.
+- Kernels serve this purpose — they enable the linear SVM model to separate nonlinearly separable data points. 
+- It is important to remember that SVMs are linear models, and kernels do not change this at all. Kernels are ‘toppings’ over the linear SVM model, which somehow enable the model to separate nonlinear data.
+
+# Boundary Transformation
+You can transform nonlinear boundaries to linear boundaries by applying certain functions to the original attributes. The original space (X, Y) is called the original attribute space, and the transformed space (X’, Y’) is called the feature space.
+
+Ex: Equation of an Ellipse
+- $\frac{x^{2}}{a}+\frac{y^{2}}{b} = c$
+
+## Feature Transformation
+- There is an exponential increase in the number of dimensions when you transform the attribute space to a feature space. This makes the modelling (i.e. the learning process) computationally expensive.
+
+Ex: Quadratic
+- x, y $\rightarrow$ x, y, xy, x^2, y^2, c
+
+# How Kernls Work
+
+- Kernels are like black boxes where the original attributes are passed and it spits out the transformed attributes in a higher dimensional feature space. The SVM algorithm is shown only the transformed, linear feature space, where it builds the linear classifier as usual
+
+![kernel](kernel.png)
+
+- However, what makes kernels special is that they don't do this transformation explicitly (which is a computationally difficult task), but they use a mathematical hack to do this implicitly.
+
+## The Kernel Trick
+- The key fact that makes the kernel trick possible is that to find a best fit model, the learning algorithm only needs the inner products of the observations ($X^T_i.Xj$). It never uses the individual data points X1, X2 etc. in silo.
+- Kernel functions use this fact to bypass the explicit transformation process from the attribute space to the feature space, and rather do it implicitly. The benefit of implicit transformation is that now you do not need to:
+    -  Manually find the mathematical transformation needed to convert a nonlinear to a linear feature space
+    - Perform computationally heavy transformations 
+
+## Practical Considerations
+In practice, you only need to know that kernels are functions which help you transform non-linear datasets. Given a dataset, you can try various kernels, and choose the one that produces the best model. The three most popular types of kernel functions are: 
+
+1. The `linear` kernel: This is the same as the support vector classifier, or the hyperplane, without any transformation at all
+
+![LinearKernel](linear_kernel.png)
+
+2. The `polynomial` kernel: It is capable of creating nonlinear, polynomial decision boundaries 
+
+![PolynomialKernel](polynomial-kernel.png)
+
+3. The `radial basis function (RBF)` kernel: This is the most complex one, which is capable of transforming highly nonlinear feature spaces to linear ones. It is even capable of creating elliptical (i.e. enclosed) decision boundaries
+
+![RadialKernel](RBF_kernel.png)
+
+### Hyperparameters in Non Linear Kernels
+- In a non-linear kernel, such as the RBF kernel, you'll need to choose two tuning parameters: gamma and 'C'. The hyperparameter gamma controls  the amount of non-linearity in the model - as gamma increases, the model becomes more non-linear, and thus model complexity increases.
+- As per SVC implementation of scikit-learn in Python, high value of C as well as gamma will lead to overfitting
+    - $\uparrow \gamma \implies \uparrow \text{overfitting}$
+    - $\uparrow C \implies \uparrow \text{overfitting} $
+- Choosing the appropriate kernel is important for building a model of optimum complexity. If the kernel is highly nonlinear, the model is likely to overfit. On the other hand, if the kernel is too simple, then it may not fit the training data well. 
+- Usually, it is difficult to choose the appropriate kernel by visualising the data or using exploratory analysis. Thus, cross-validation (or hit-and-trial, if you are only choosing from 2-3 types of kernels) is often a good strategy.
+
+# Questions
+**Suppose you build an SVM model using a polynomial kernel with default hyperparameters. It gives an accuracy of 87% on training data but performs poorly on test data with an accuracy of 67%.**
+**Considering default setting of hyperparameters, what kernel should you choose next to improve the performance of your model on test data?**
+- A more simple model such as linear kernel i.e. a vanilla hyperplane
+- The order of complexity increases from linear kernel to RBF kernel. If the kernel is more complex, the model tries to overfit the training data. Thus, it performs poor on test data. Hence we would choose a less complex kernel ie a linear kernel
+
+
+| Statement                                                                                          | T/F |
+|----------------------------------------------------------------------------------------------------|-----|
+| The hyperparameter ‘gamma’ directly controls the amount of non-linearity in the decision boundary. | T   |
+| The hyperparameter ‘c’ directly controls the amount of non-linearity in the decision boundary.     | F   |
+| The hyperparameter ‘gamma’ directly controls the number of misclassifications.                     | F   | 
+
+
