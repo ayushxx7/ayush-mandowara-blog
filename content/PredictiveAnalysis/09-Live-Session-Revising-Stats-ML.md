@@ -124,3 +124,5 @@ $Adj R^2 = 1 - \frac{(1-R^2)(N-1)}{(N-P-1)}$
 - odds: $\displaystyle y = \frac{1}{1+e^{-\beta_0+\beta_1x_1}}$
 - sigmoid
 - recall, precision, specificity, sensitivity, confusion matrix
+- precision: out of all the 0s you "PREDICTED" (TP+FP), how many are actually zero (TP)
+- recall: out of all the 0s there actually are (TP+FN), how many you predicted correctly (TP)
