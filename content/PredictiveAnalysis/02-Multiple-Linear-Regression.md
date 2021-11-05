@@ -33,9 +33,10 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Note](#note)
     * [Scaling Categorical Variables](#scaling-categorical-variables)
 * [Model Assessment and Comparison - Selecting the best model](#model-assessment-and-comparison---selecting-the-best-model)
-    * [$Adjusted\;R^2$](#adjustedr2)
-    * [$Akaike\;Information\;Criterion $](#akaikeinformationcriterion-)
-    * [Others](#others)
+    * [Adjusted $R^2$](#adjusted-r2)
+    * [Akaike Information Criterion](#akaike-information-criterion)
+    * [Bayesian Information Criterion](#bayesian-information-criterion)
+    * [Mallows CP](#mallows-cp)
     * [Adjusted $R^2$ vs $R^2$](#adjusted-r2-vs-r2)
 * [Feature Selection](#feature-selection)
     * [Recursive Feature Elimination](#recursive-feature-elimination)
@@ -198,15 +199,39 @@ For categorical variables, in general, it is better to not perform any scaling e
 - Trade off between explaining highest variable and keeping it simple [<a href="#bias-vs-variance---infographic">Bias vs Variance Tradeoff</a>]
 - Penalize models for using higher number of predictors
 
-## $Adjusted\;R^2$
+## Adjusted $R^2$
 - $Adj\;R^2= 1 - \frac{(1-R^2)(N-1)}{N-p-1}$; where n = sample size, p = number of predictors
 
-## $Akaike\;Information\;Criterion $
-- $AIC = n*\log(\frac{RSS}{n})+2p$; where n = sample size, RSS = Residual Sum of Squares
+- $\displaystyle Adj\;R^2=1 - \frac{\frac{RSS}{(n-d-1)}}{{\frac{TSS}{n-1}}}$
 
-## Others
-- $BIC = Bayesian\;Information\;Criterion$
-- $Mallow's\;Cp$
+## Akaike Information Criterion
+- based on Information Theory
+- $AIC = n*\log(\frac{RSS}{n})+2p$; where n = sample size, RSS = Residual Sum of Squares
+- $\displaystyle AIC = \frac{1}{n\sigma^2}(RSS + 2d\sigma^2))$ where 
+    - n: number of training examples
+    - d: the number of predictors
+    - $\sigma^2$: an estimate of the variance of the training error
+    - RSS: Residual Sum of Squares
+- $AIC = -\ln(p(Dataset|Model)) + features$ 
+    - $ln(p(Dataset|Model))$ is called the Model likelihood and it is equal to RSS because the spread of the data around the model can be explained using a Gaussian i.e. $\displaystyle \large{e^{-\frac{(y_{i}-\hat y_{i})^2}{2\sigma^2}}}$
+- We calculate the likelihood of the data given the model
+
+## Bayesian Information Criterion
+- based on Bayesian Analysis
+- we can debate over the model, but not the data 
+- In constrast with AIC where we calculate the likelihood of the data given the model, here we calculate the likelihood of the model given the data 
+- Posterior: $\displaystyle p(M|D) \propto p(D|M).p(M)$ where p(M) is prior probability
+- Formula: $\displaystyle \frac{1}{n}(RSS + \ln(n)d\sigma^2)$ where
+    - n: number of training examples
+    - d: the number of predictors
+    - $\sigma^2$: an estimate of the variance of the training error
+    - RSS: Residual Sum of Squares
+- $\ln(n)d\sigma^2$ is the measure of instability
+- works well when dataset is large
+- good estimate since it uses posterior
+
+## Mallows CP
+- [Mallow's CP - Wikipedia](https://en.wikipedia.org/wiki/Mallows%27s_Cp)
 
 ## Adjusted $R^2$ vs $R^2$
 The major difference between R-squared and Adjusted R-squared is that R-squared doesn't penalise the model for having more number of variables. Thus, if you keep on adding variables to the model, the R-squared will always increase (or remain the same in the case when the value of correlation between that variable and the dependent variable is zero). Thus, R-squared assumes that any variable added to the model will increase the predictive power.
