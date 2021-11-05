@@ -11,21 +11,21 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 
 * [Constrained Minimization](#constrained-minimization)
 * [Ridge and Lasso Regression](#ridge-and-lasso-regression)
-    * [Signature of overfitting in Polynomial Regression](#signature-of-overfitting-in-polynomial-regression)
-    * [Ridge](#ridge)
-    * [Lasso](#lasso)
+  * [Signature of overfitting in Polynomial Regression](#signature-of-overfitting-in-polynomial-regression)
+  * [Ridge](#ridge)
+  * [Lasso](#lasso)
 * [Unconstrained Minimization](#unconstrained-minimization)
 * [Closed form](#closed-form)
 * [Gradient Descent](#gradient-descent)
-    * [1D Gradient Descent](#1d-gradient-descent)
-    * [2D Gradient Descent](#2d-gradient-descent)
+  * [1D Gradient Descent](#1d-gradient-descent)
+  * [2D Gradient Descent](#2d-gradient-descent)
 * [Metrics](#metrics)
-    * [RSS](#rss)
-    * [Mean Square Error](#mean-square-error)
-    * [Root Mean Square Error](#root-mean-square-error)
+  * [RSS](#rss)
+  * [Mean Square Error](#mean-square-error)
+  * [Root Mean Square Error](#root-mean-square-error)
 * [SLR](#slr)
 * [Benefits of Using Matrices](#benefits-of-using-matrices)
-    * [SLR Equation in Matrix Form](#slr-equation-in-matrix-form)
+  * [SLR Equation in Matrix Form](#slr-equation-in-matrix-form)
 * [MLR](#mlr)
 * [Questions](#questions)
 * [Identifying Non-Linearity in Data](#identifying-non-linearity-in-data)
@@ -33,23 +33,27 @@ tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
 * [Polynomial Regression](#polynomial-regression)
 * [Questions](#questions-1)
 * [Data Transformation](#data-transformation)
-    * [When to do transformation](#when-to-do-transformation)
+  * [When to do transformation](#when-to-do-transformation)
 * [Questions](#questions-2)
 * [Pit Falls of Linear Regression](#pit-falls-of-linear-regression)
-    * [Non-constant variance](#non-constant-variance)
-    * [Autocorrelation](#autocorrelation)
-    * [Multicollinearity](#multicollinearity)
-    * [Overfitting](#overfitting)
-    * [Extrapolation](#extrapolation)
+  * [Non-constant variance](#non-constant-variance)
+  * [Autocorrelation](#autocorrelation)
+  * [Multicollinearity](#multicollinearity)
+  * [Overfitting](#overfitting)
+  * [Extrapolation](#extrapolation)
 * [Overfitting](#overfitting-1)
 * [Regularization](#regularization)
+    * [Tradeoff between Error and Regularization](#tradeoff-between-error-and-regularization)
 * [Ridge Regression](#ridge-regression)
-    * [Role of Lambda](#role-of-lambda)
-    * [Summary - Ridge Regression](#summary---ridge-regression)
+  * [Role of Lambda](#role-of-lambda)
+  * [Summary - Ridge Regression](#summary---ridge-regression)
 * [Lasso Regression](#lasso-regression)
-    * [Summary - Lasso Regression](#summary---lasso-regression)
+  * [Summary - Lasso Regression](#summary---lasso-regression)
 * [Questions](#questions-3)
 * [Ridge vs Lasso](#ridge-vs-lasso)
+    * [Visualizing a function](#visualizing-a-function)
+    * [Visualizing Function using Contours](#visualizing-function-using-contours)
+    * [Visualizing Difference between Ridge and Lasso](#visualizing-difference-between-ridge-and-lasso)
 * [Takeaways](#takeaways)
 * [References](#references)
 
@@ -493,10 +497,24 @@ In OLS,
 
 To solve this, 
 - Add a penalty to cost term i.e Cost function = RSS + Penalty
+- Error Function: $\displaystyle \sum_{i=1}^{N}(w^Tx_{i}-y_{i})^2+\lambda R(w)$
+- There are two common techniques which employ this method.<br><br>
+    - Ridge: $R(w) = \sum_{i=1}^{N}w_{i}^2$<br><br>
+    - Lasso: $R(w) = \sum_{i=1}^{N}|w_{i}|$
 
 When we regularize, we sacrifice a little bias in favor of a significant reduction in variance.
 
 One sign of overfitting is extreme values of model coefficients. Hence, regularization helps as it shrinks the coefficients towards 0.
+
+### Tradeoff between Error and Regularization
+- Suppose $\lambda_1 > \lambda_2$ and with $\lambda_1$ the most optimal $\theta$ is $\theta_1$ while with $\lambda_2$ the most optimal $\theta$ is $\theta_2$
+- It follows that $E(\theta_1) + \lambda_1R(\theta_1) \le E(\theta_2) + \lambda_1R(\theta_2)$ (1)
+- and $E(\theta_2) + \lambda_2R(\theta_2) \le E(\theta_2) + \lambda_2R(\theta_2)$ (2)
+- If we combine and shuffle (1) and (2)
+- $\lambda_2(R(\theta_2)-R(\theta_1)) \le E(\theta_1) - E(\theta_2) \le \lambda_1(R(\theta_2)-R(\theta_1))$
+- Since $\lambda_1 > \lambda_2$, and $\lambda_1\delta R\ge \lambda_2\delta R$, we can say that $\delta R \ge 0$
+- Hence, $E(\theta_1)\ge E(\theta_2) \;\&\; R(\theta_1)\le R(\theta_2)$
+- When we increase the value of λ, the error term will increase and regularisation term will decrease and the opposite will happen when we decrease the value of λ.
 
 # Ridge Regression
 In OLS, we get the best coefficients by minimising the residual sum of squares (RSS). Similarly, with Ridge regression also, we estimate the model coefficients, but by minimising a different cost function. This cost function adds a penalty term to the RSS.
@@ -546,6 +564,11 @@ $\displaystyle \text{Lasso Cost Function} = \sum_{i=1}^{N}(y_{i} - \hat y_{i})^2
 - Models generated from Lasso are generally easier to interpret than those produced by Ridge Regression
 - $\lambda \uparrow \implies variance \downarrow \; bias \uparrow \; rss \uparrow$
 - Standardising the variable is necessary for lasso as well
+- No closed form solution is possible as compared to ridge
+- Gives a sparse solution i.e many of the model coefficients auomtically become exactly zero, $w_{i}=0$
+- If $\theta^*$ is the best model that we end up getting, which is given as:
+  - $\theta^* = argmin[E(\theta)+\lambda R(\theta)]$, then 
+  - $\lambda\uparrow \implies Sparsity(\theta^*) \uparrow$ where $Sparsity(\theta^*)$ of a model is defined by the number of parameters in $\theta^*$ that are exactly equal to zero.
 
 ```py heading="Lasso Regression in Python"
 from sklearn.linear_model import Lasso
@@ -567,6 +590,8 @@ Generally, Lasso should perform better in situations where only a few among all 
 
 It is not the case that one of the techniques always performs better than the other – the choice would depend upon the data that is used for modelling.
 
+We often have a large number of features in real-world problems, but we want the model to be able to pick up only the most useful ones (since we do not want unnecessarily complex models). Since lasso regularisation produces sparse solutions, it automatically performs feature selection.
+
 # Questions
 
 **As λ increases from 0 to infinity, what is the impact on Variance, RSS, Test Error, Ridge Coefficients, Lasso Coefficients and Bias of the model?**
@@ -580,6 +605,17 @@ It is not the case that one of the techniques always performs better than the ot
 ---
 
 # Ridge vs Lasso
+
+### Visualizing a function
+![VisualizingFunction](visualizing-function.jpg)
+- For a function given as $f(x, y)$, a third axis, say Z is used to plot the output values of the function, and once we connect all the values, we get a surface.
+
+### Visualizing Function using Contours
+![Contours](contours.jpg)
+- For contours, we join all the points where the function value is the same and we end up getting a contour for the function, which is the visual representation of the function.
+- No two contours can intersect, which means a function can't have two different values for a combination of x and y but two contours can meet tangentially.
+
+### Visualizing Difference between Ridge and Lasso
 ![RvL](RidgeVsLasso.jfif)
 Observing the plots above, we see that we can get the model coefficients to become 0 only if the ellipses touch the constraint region on either the x or the y axis. Since the Ridge regression constraint is circular, without any sharp points, the ellipse will generally not touch the circular constraint region at the axis.
 
