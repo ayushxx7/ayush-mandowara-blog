@@ -107,6 +107,88 @@ print(accuracy_score(y_test, y_test_pred))
 confusion_matrix(y_test, y_test_pred)
 ```
 
+```py heading='Decision Tree + GridSearchCV'
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import os
+from sklearn import metrics, preprocessing
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import KFold
+from sklearn.model_selection import GridSearchCV
+
+# please alter the file reading/writing ops as per your own codebase
+# read training data
+bank_train = pd.read_csv("/data/training/bank_train.csv")
+
+# read test data
+bank_test = pd.read_csv("/data/test/bank_test.csv")
+
+print(bank_train.head())
+print(bank_test.head())
+
+# Build the model 
+print(bank_train.columns)
+
+# split into x_train and y_train
+x_train = bank_train.drop(['purchased', 'id'], axis=1)
+y_train = bank_train[['purchased']]
+
+# Hyperparameter tuning: maxdepth
+# specify number of folds for k-fold CV
+n_folds = 5
+
+# parameters to build the model on: specify a range of max_depth
+parameters = {'max_depth': range(3, 6)}
+
+# instantiate the model
+dtree = DecisionTreeClassifier()
+
+# fit tree on training data
+tree = GridSearchCV(dtree, parameters, 
+                    cv=n_folds, 
+                  scoring="accuracy",
+                  return_train_score=True)
+tree.fit(x_train, y_train)
+
+# scores of GridSearch CV
+scores = tree.cv_results_
+print(pd.DataFrame(scores).head())
+
+# plotting accuracies with max_depth (code already written)
+plt.figure()
+plt.plot(scores["param_max_depth"], 
+         scores["mean_train_score"], 
+         label="training accuracy")
+plt.plot(scores["param_max_depth"], 
+         scores["mean_test_score"], 
+         label="test accuracy")
+plt.xlabel("max_depth")
+plt.ylabel("Accuracy")
+plt.legend()
+plt.show()
+plt.savefig('/code/output/hyperparam.png') 
+
+# observe the optimal value of max_depth from the plot and store 
+# in max_depth_optimal
+max_depth_optimal = tree.best_params_['max_depth']
+
+# Build a tree with optimal max_depth
+best_tree = DecisionTreeClassifier(max_depth=max_depth_optimal)
+best_tree.fit(x_train, y_train)
+
+# make predictions on test data
+predictions = best_tree.predict(bank_test.drop(['id'], axis=1))
+print(predictions[:5])
+
+
+# Write columns id, predictions into the output file
+d = pd.DataFrame({'id': bank_test['id'], 'bank_predicted': predictions})
+
+# Write the output to file
+d.to_csv('/code/output/bank_predictions.csv', sep=",")
+```
+
 ### Top Down
 - starting from top with larger data and keep splitting
 
