@@ -25,6 +25,18 @@ tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learni
     * [Problems Solved via PCA](#problems-solved-via-pca)
     * [Practical Considerations](#practical-considerations)
     * [Shortcomings of PCA](#shortcomings-of-pca)
+* [Covariance Matrix](#covariance-matrix)
+    * [Diagonalisation](#diagonalisation)
+        * [Usage](#usage)
+            * [PCA](#pca)
+* [Algorithm of PCA](#algorithm-of-pca)
+    * [Eigendecomposition](#eigendecomposition)
+        * [Eigendecomposition of Covariance Matrix](#eigendecomposition-of-covariance-matrix)
+        * [Transformation Matrix](#transformation-matrix)
+    * [Eigenvectors](#eigenvectors)
+        * [Properties](#properties)
+        * [Diagonalisation - Mathematical Equations](#diagonalisation---mathematical-equations)
+* [Questions](#questions)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -84,6 +96,12 @@ $\begin{bmatrix}
 2 & 1
 \end{bmatrix}$
 
+- To convert a vector ($v_1$) from standard basis $B_1$ to non-standard basis $B_2$
+    - Formula: $v_2 = B_2^{-1}.v_1$
+- To convert a vector ($v_1$) from non-standard basis $B_1$ to standard basis $B_2$
+    - Formula: $v_2 = B_1.v_1$
+- To derive above forumulas, use the following equation: $B_1*v_1 = B_2*v_2$
+
 # Variance
 - $\displaystyle \sigma^2 = \frac{\sum(x-\mu)^2}{N}$
 - High Variance $\implies$ More Information and vice-versa
@@ -96,7 +114,7 @@ $\begin{bmatrix}
 - This idea of the spread of the data being equivalent to the variance is quite an elegant way to distinguish the important directions from the non-important ones.
 
 # PCA Steps
-- First, it finds the basis vector which is along the best- fit line that maximises the variance. This is our first principal component or PC1.
+- First, it finds the basis vector which is along the best-fit line that maximises the variance. This is our first principal component or PC1.
 - The second principal component is perpendicular to the first principal component and contains the next highest amount of variance in the dataset.
 - This process continues iteratively, i.e. each new principal component is perpendicular to all the previous principal components and should explain the next highest amount of variance.
 - If the dataset contains n independent features, then PCA will create n Principal components.
@@ -151,9 +169,153 @@ newdata.shape
 - It should not be used forcefully to reduce dimensionality (when the features are not correlated).
 
 ## Shortcomings of PCA
-- PCA is limited to linearity, though we can use non-linear techniques such as t-SNE as well. 
-- PCA needs the components to be perpendicular, though in some cases, that may not be the best solution. The alternative technique is to use Independent Components Analysis. 
+- PCA is limited to linearity, though we can use non-linear techniques such as t-SNE as well.
+- PCA needs the components to be perpendicular, though in some cases, that may not be the best solution. The alternative technique is to use Independent Components Analysis.
 - PCA assumes that columns with low variance are not useful, which might not be true in prediction setups (especially classification problem with a high class imbalance).
+- It can only be useful if the data is skewed in some direction
+- Interpretability is somewhat lost after doing PCA because we change the basis of the data
+
+---
+
+# Covariance Matrix
+- used to capture the covariance or the correlations between the columns
+- For a matrix having N columns, the covariance matrix is an $N\times N$ matrix.
+- $C = \begin{bmatrix}cov(x,x) & cov(x,y) & cov(x,z) \\ cov(y,x) & cov(y, y) & cov(y,z) \\ cov(z,x) & cov(z,y) & cov(z, z)\end{bmatrix}$
+- cov(x,y) = cov(y,x): It is a symmetric matrix i.e. flipping values around diagonals will give the same matrix
+- $cov(X,Y) = \frac{\sum(X_{i}-\bar X)(Y_{i}-\bar Y)}{N}$
+
+
+```py heading='Covariance Matrix in Python'
+import numpy as np
+import pandas as pd
+
+a = [[2,2], [3,4], [4,5], [5,7], [9,11]]
+b = ['X', 'Y']
+data = pd.DataFrame(a, columns = b)
+print(data)
+
+np.cov(data.T)
+```
+
+## Diagonalisation
+- The process of converting the covariance matrix with only non-zero diagonal elements and 0 values everywhere else is also known as diagonalisation.
+- It can be acheived by changing the basis vectors and representing the original information in the new basis.
+
+### Usage
+- Your new basis vectors are all uncorrelated and independent of each other.
+- Since variance is now explained only by the new basis vectors themselves, you can find the directions of maximum variance by checking which value is higher than the rest numerically. There is no correlation to take into account this time. All the information in the dataset is explained by the columns themselves.
+- So now, your new basis vectors are uncorrelated, hence linearly independent, and explain the directions of maximum variance. 
+
+#### PCA
+- These basis vectors are the Principal Components of the original matrix.
+- The algorithm of PCA seeks to find those new basis vectors that diagonalise the covariance when the same data is represented on this new basis. 
+- Then these vectors would have all the above properties that we require and therefore would help us in the process of dimensionality reduction.
+
+# Algorithm of PCA
+1. Construct Covariance Matrix
+2. Perform Eigendecomposition of the Covariance Matrix
+![pca-algo](pca-algo.png)
+
+## Eigendecomposition
+Basically, for any square matrix $\bold A$, its eigenvectors are all the vectors $\bold v$ which satisfy the following equation:
+- $A\bold v = \lambda \bold v$; where $\lambda$ is a constant also known as eigenvalue for that vector 
+
+Ex: For the following matrix, $\begin{bmatrix}2&0\\0&5\end{bmatrix}$, its eignenvectors and corresponding eigenvalues are given as:
+- $\begin{bmatrix}2&0\\0&5\end{bmatrix}\begin{bmatrix}1\\0\end{bmatrix} = 2\begin{bmatrix}1\\0\end{bmatrix}$
+- $\begin{bmatrix}2&0\\0&5\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix} = 5\begin{bmatrix}0\\1\end{bmatrix}$
+
+Here $A$ has 2 sets of eignvectors/eignevalues:
+- $v_{1} = \begin{bmatrix}1\\0\end{bmatrix}, \lambda_1=2$ and 
+- $v_2 = \begin{bmatrix}0\\1\end{bmatrix}, \lambda_2=5$
+
+The process of finding the eigenvalues and eignenvectors is known as eigendecomposition
+
+### Eigendecomposition of Covariance Matrix
+- We wanted to find a new set of basis vectors where the covariance matrix gets diagonalised.
+- It turns out that these new set of basis vectors are in fact the eigenvectors of the Covariance Matrix. And therefore these eigenvectors are the Principal Components of our original dataset. 
+- In other words, these eigenvectors are the directions that capture maximum variance.
+- The eigenvalues are indicators of the variance explained by that particular direction or eigenvector. 
+- So higher is the eigenvalue, higher is the variance explained by that eigenvector and hence that direction is more important for us.
+ 
+### Transformation Matrix
+- Matrix multiplication results into the rotation of the vector
+- Suppose you have a vector: $x=\begin{bmatrix}1\\1\end{bmatrix}$
+- Suppose the transformation matrix is $A=\begin{bmatrix}1&1\\-1&1\end{bmatrix}$
+![Transformation](transformation.png)
+    - blue vector is x
+    - red vector is Ax
+- The new tranformed vector on the same plane will be: $Ax = \begin{bmatrix}2\\0\end{bmatrix}$
+- If the matrix is not a diagonal matrix, then it performs both rotation as well as scaling. 
+- If the matrix is a diagonal matrix, it will peform only scaling
+
+## Eigenvectors
+- Eigenvectors of any matrix are those vectors that do not shift from their span / rotate when that matrix is used as a transformation matrix
+- Ex: for $A = \begin{bmatrix}3&1\\0&2\end{bmatrix}, x=\begin{bmatrix}-1\\1\end{bmatrix}$ is an eigenvector
+- An eigenvector of a linear transformation (or a square matrix) is a non-zero vector that changes at most by a scalar factor when that linear transformation is applied to it. The corresponding eigenvalue is the factor by which the eigenvector is scaled.
+
+### Properties
+- Eigenvalues and eigenvectors of a given matrix always occur in pairs
+- Eigenvalues and eigenvectors are defined only for square matrices, and it is not necessary that they will always exist. This means there could be cases where there are no eigenvectors and eigenvalues for a given matrix, or, in other words, there exist imaginary eigenvectors and eigenvalues.
+
+### Diagonalisation - Mathematical Equations
+- Suppose there is a matrix ‘A’, which has ‘v1’ and ‘v2’ eigenvectors, and ‘λ1’ and ‘λ2’ eigenvalues, as shown below:
+    - $A = \begin{bmatrix}3&1\\0&2\end{bmatrix}$
+    - Eigenvectors: $v_1 = \begin{bmatrix}1\\0\end{bmatrix}$ and $v_2 = \begin{bmatrix}-1\\1\end{bmatrix}$
+    - Eigenvalues: $\lambda_1=3, \lambda_2=2$
+- Let's define the eigenvector and eigenvalue matrix, '$V$' and '$\Lambda$', respectively, as shown below:
+    - $V = \begin{bmatrix}1&-1\\0&1\end{bmatrix}$
+    - $\Lambda = \begin{bmatrix}3&0\\0&2\end{bmatrix}$
+- When you multiply matrix ‘A’ with matrix ‘V’, you get the same results as when you multiply matrix ‘V’ with matrix ‘Λ’:
+    - $AV = VΛ$
+- When you right multiply both sides of the equation above with inv(V), you will get the following result:
+    - $A = VΛV^{-1}$
+- Or when you left multiply both sides of that same equation, you get the following result.
+    - $V^{-1}AV = Λ$
+
+Now, if you see this equation, matrix ‘Λ’ is nothing but a diagonal matrix whose non-diagonal entries are simply 0.
+
+So, based on the analysis above, you can state that:
+
+Both A and $\Lambda$ represent the same linear transformation but in different basis vectors (i.e., original basis and eigenvector basis, respectively). 
+
+# Questions
+
+| Statement                                                                                                                                                                | True / False |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| The PCA algorithm needs the data to be highly correlated to work properly.                                                                                               | F            |
+| The PCA algorithm does not need the data to be highly correlated to work properly, although PCA is necessary and becomes useful only when the data is highly correlated. | T            |
+
+**You are given a data set that has 540 unique variables (n). Based on this information, which of the following options shows the correct number of principal components (k) that are chosen for the final model?**
+
+| Option | Y/N |
+|--------|-----|
+| 539    | Y   |
+| 345    | Y   |
+| 565    | N   |
+
+- Number of principal components (k) &lt;= Number of variables (n)
+
+**Arrange the steps of PCA**
+
+**a. Find the eigenvectors of the covariance matrix**
+
+**b. Find the covariance matrix of the data set**
+
+**c. Find the inverse of the eigenvector matrix**
+
+**d. Normalize and standardise the data points**
+
+**e. Arrange the eigenvectors in a matrix (eigenvector matrix) in decreasing order of the corresponding eigenvalues**
+
+**f. Multiply each original data point with the inverse of the eigenvector matri.**
+
+The correct order will be, 
+- (d) Normalize and standardise the data points
+- (b) Find the covariance matrix of the data set
+- (a) Find the eigenvectors of the covariance matrix
+- (e) Arrange the eigenvectors in a matrix (eigenvector matrix) in decreasing order of the corresponding eigenvalues
+- \(c\) Find the inverse of the eigenvector matrix
+- (f) Multiply each original data point with the inverse of the eigenvector matri.
 
 ---
 
@@ -163,3 +325,8 @@ newdata.shape
 - [Visualising data using t-SNE: Journal of Machine Learning Research](http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf)
 - [How to use t-SNE effectively](https://distill.pub/2016/misread-tsne/)
 - [Independent Components Analysis](https://sgfin.github.io/files/notes/CS229_Lecture_Notes.pdf)
+- [Covariance](https://corporatefinanceinstitute.com/resources/knowledge/finance/covariance/)
+- [Eigenvectors - 3Blue1Brown](https://www.youtube.com/watch?v=PFDu9oVAE-g)
+- [Singular Value Decomposition](https://medium.com/data-science-group-iitr/singular-value-decomposition-elucidated-e97005fb82fa)
+- [Eigenvectors - Upgrad Chapter Link](https://learn.upgrad.com/course/1611/segment/9862/79382/237008/1245187)
+- [Eigenvalue](https://www.mathsisfun.com/algebra/eigenvalue.html)
