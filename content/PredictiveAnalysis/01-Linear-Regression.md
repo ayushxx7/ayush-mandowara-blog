@@ -4,7 +4,7 @@ description: Fundamentals of Linear Regression
 date: "2021-08-02"
 image: "regression.jpeg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
+tags: ["python", "machine-learning", "predictive-analysis", "linear-regression", "supervised-learning", "regression"]
 ---
 
 # Table of Contents

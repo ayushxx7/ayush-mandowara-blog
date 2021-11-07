@@ -4,7 +4,7 @@ description: boosting ensemble technique
 date: "2021-10-05"
 image: "boosting.jpeg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "supervised-learning"]
+tags: ["python", "machine-learning", "predictive-analysis", "supervised-learning", "classification", "regression", "decision-tree", "adaboost", "boosting", "ensemble", "gradient-boosting", "xgboost", "model-selection"]
 ---
 
 <!-- vim-markdown-toc GFM -->

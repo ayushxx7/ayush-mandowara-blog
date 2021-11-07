@@ -4,7 +4,7 @@ description: intro to ensembles, along with the random forest machine learning a
 date: "2021-09-29"
 image: "Random-Forest-Algorithm.jpg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis"]
+tags: ["python", "machine-learning", "predictive-analysis", "supervised-learning", "classification", "regression", "decision-tree", "random-forest", "bagging", "ensemble"]
 ---
 
 

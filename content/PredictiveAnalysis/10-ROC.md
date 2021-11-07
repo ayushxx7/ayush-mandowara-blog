@@ -4,7 +4,7 @@ description: ROC Curve
 date: "2021-08-30"
 image: "roc.jpg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis"]
+tags: ["python", "machine-learning", "predictive-analysis", "classification", "supervised-learning"]
 ---
 
 # Purpose

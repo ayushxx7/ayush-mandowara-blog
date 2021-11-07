@@ -4,7 +4,7 @@ description: constrained and unconstrained minimisation
 date: "2021-09-14"
 image: "regression.jpeg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "linear-regression"]
+tags: ["python", "machine-learning", "predictive-analysis", "linear-regression", "regression", "supervised-learning", "ridge-regression", "lasso-regression"]
 ---
 
 <!-- vim-markdown-toc GFM -->
