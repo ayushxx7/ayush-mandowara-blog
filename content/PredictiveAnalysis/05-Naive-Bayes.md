@@ -4,7 +4,7 @@ description: Fundamentals of Naive Base Model
 date: "2021-08-17"
 image: "naive_bayes.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "classification", "naive-bayes", "supervised-learning"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 # Purpose

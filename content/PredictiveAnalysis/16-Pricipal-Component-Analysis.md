@@ -4,7 +4,7 @@ description: dimensionality reduction using PCA
 date: "2021-10-18"
 image: "principal_component_analysis.jpeg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning", "pca", "principal-component-analysis"]
+tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning"]
 ---
 
 <!-- vim-markdown-toc GFM -->

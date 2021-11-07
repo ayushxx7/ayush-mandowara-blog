@@ -1,10 +1,10 @@
 ---
 title: Model Selection - Practical Considerations
-description: which model to apply and when. CART, CHAID.
+description: which model to apply and when
 date: "2021-10-18"
 image: "model-selection.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "model-selection", "supervised-learning", "unsupervised-learning", "tree-models", "decision-trees", "random-forests", "logistic-regression", "svm"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 <!-- vim-markdown-toc GFM -->

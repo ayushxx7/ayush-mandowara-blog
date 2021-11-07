@@ -1,10 +1,10 @@
 ---
 title: Model Selection
-description: which model to use for which scenario. bias vs variance trade-off
+description: which model to use for which scenario 
 date: "2021-09-05"
 image: "model_selection.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "model-selection", "supervised-learning", "unsupervised-learning", "linear-regression", "logistic-regression", "svm"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 

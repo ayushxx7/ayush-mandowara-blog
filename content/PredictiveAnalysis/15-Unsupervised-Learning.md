@@ -1,10 +1,10 @@
 ---
-title: Clustering
+title: Unsupervised Learning
 description: Clustering and intro to Unsupervised Learning
 date: "2021-10-15"
 image: "unsupervised_learning.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning", "clustering", "k-means", "k-mode", "dbscan"]
+tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning"]
 ---
 
 

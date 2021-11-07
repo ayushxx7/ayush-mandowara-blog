@@ -4,7 +4,7 @@ description: Fundamentals of Logistic Regression
 date: "2021-07-31"
 image: "linear_vs_logistic_regression.jpg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "logistic-regression", "supervised-learning", "classification"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 
@@ -56,7 +56,7 @@ tags: ["python", "machine-learning", "predictive-analysis", "logistic-regression
 * [Summary - Steps of Building a Classification Model](#summary-steps-of-building-a-classification-model)
 * [Takeaways](#takeaways)
 * [Measures of Discriminative Power](#measures-of-discriminative-power)
-  * [Gain](#gain)
+  * [Gain Chart](#gain-chart)
   * [Lift](#lift)
   * [KS Statistic](#ks-statistic)
 * [References](#references)

@@ -4,7 +4,7 @@ description: Maximum Likelihood Estimation or MLE
 date: "2021-08-29"
 image: "regression.jpeg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "maximum-likelihood-estimate", "classification", "regression"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 <!-- vim-markdown-toc GFM -->

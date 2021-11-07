@@ -4,7 +4,7 @@ description: GMM. probabilistic clustering technique
 date: "2021-11-06"
 image: "gaussian_mixture.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning", "clustering", "k-means", "gmm", "gaussian-mixture-models", "model-selection"]
+tags: ["python", "machine-learning", "predictive-analysis", "unsupervised-learning"]
 ---
 
 

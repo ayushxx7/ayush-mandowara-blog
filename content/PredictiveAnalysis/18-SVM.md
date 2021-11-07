@@ -4,7 +4,7 @@ description: SVM
 date: "2021-10-30"
 image: "svm.png"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "classification", "supervised-learning", "svm", "support-vector-machine"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 

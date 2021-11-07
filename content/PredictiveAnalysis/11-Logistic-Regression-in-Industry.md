@@ -4,7 +4,7 @@ description: Real life examples of using Logistic Regression in the Industry
 date: "2021-09-22"
 image: "linear_vs_logistic_regression.jpg"
 author: "Ayush"
-tags: ["python", "machine-learning", "predictive-analysis", "logistic-regression", "classification"]
+tags: ["python", "machine-learning", "predictive-analysis"]
 ---
 
 <!-- vim-markdown-toc GFM -->
