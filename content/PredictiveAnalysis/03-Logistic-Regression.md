@@ -55,6 +55,10 @@ tags: ["python", "machine-learning", "predictive-analysis"]
   * [Questions](#questions-2)
 * [Summary - Steps of Building a Classification Model](#summary-steps-of-building-a-classification-model)
 * [Takeaways](#takeaways)
+* [Measures of Discriminative Power](#measures-of-discriminative-power)
+  * [Gain Chart](#gain-chart)
+  * [Lift](#lift)
+  * [KS Statistic](#ks-statistic)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -331,6 +335,9 @@ Hence, it is very crucial that you consider the overall business problem you are
 
 ## Confusion Matrix
 
+![ConfusionMatrix](confusion_matrix.jpg)
+
+
 | Actual | Predicted-No    | Predicted-Yes   |
 |--------|-----------------|-----------------|
 | No     | True Negatives  | False Positives |
@@ -498,6 +505,33 @@ Note: Increase Precision => Decrease Recall and vice-versa
 - When building a Logistic Regression model, we will perform the steps of data cleaning, EDA, Feature Selection, train-test split, scaling. These are steps that are to be performed for any model.
 - In Classification Models, we should look at statistics such as Specificity, Sensitivity, Precision and Recall. As per business understanding, we may have to prefer one metric over the other. Generally, the optimal cut off will be the one where the values for specificity, and sensitivity are similar.
 - Precision-Recall and Specificity-Sensitivity are two views of the same problem and the choice depends on the business.
+
+# Measures of Discriminative Power
+
+[Sheet Demonstrating Gain, Lift and KS Statistic](https://docs.google.com/spreadsheets/d/1d0SR_HJcgFAg31tpiqXQXEiD4Z-fJUkC/edit?usp=sharing&ouid=115309787505328466965&rtpof=true&sd=true)
+- Note: Download this file as an excel to view the charts properly
+
+## Gain
+- Create a model
+- Sort by probability of churn
+- Create buckets
+- Findd cumulative probability
+- Generate Gain Chart
+![Gain](gain_chart.png)
+
+## Lift
+- Create a Random Model
+- Compare random model vs our model
+- Lift tells you the factor by which your model is outperforming a random model, i.e. a model-less situation
+- Formula: $\displaystyle \frac{\text{Gain for Current Model}}{\text{Gain for Random Model}}$
+
+## KS Statistic
+- The KS statistic is an indicator of how well your model discriminates between the two classes.
+- The KS statistic gives you an indicator of where you lie between the random and perfect model
+- A good model will be such that: 
+    - \ge 40% KS Statistic
+    - lies in the top deciles, i.e. 1st, 2nd, 3rd or 4th
+- It is caclualated as {% cumulative churn - % cumulative non-churn} for every decile
 
 # References
 - https://www.mathplanet.com/education/algebra-1/exponents-and-exponential-functions/properties-of-exponents
