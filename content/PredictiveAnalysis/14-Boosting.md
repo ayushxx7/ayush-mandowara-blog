@@ -85,7 +85,7 @@ These individual models are connected in such a way that the subsequent models a
 Boosting is an approach where the individual models are connected in such a way that they correct the mistakes made by the previous models. Here, these individual models are called weak learners.
 
 - refers to a simple model which performs at least better than a random guesser
-- the error rate should be lesser than 0.5)
+- the error rate should be lesser than 0.5
 - primarily identifies only the prominent pattern(s) present in the data
 - not capable of overfitting
 

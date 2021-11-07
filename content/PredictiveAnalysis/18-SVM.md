@@ -23,6 +23,7 @@ tags: ["python", "machine-learning", "predictive-analysis"]
     * [Practical Considerations](#practical-considerations)
         * [Hyperparameters in Non Linear Kernels](#hyperparameters-in-non-linear-kernels)
 * [Questions](#questions-1)
+* [Applications of SVMs](#applications-of-svms)
 
 <!-- vim-markdown-toc -->
 
@@ -153,4 +154,9 @@ In practice, you only need to know that kernels are functions which help you tra
 | The hyperparameter ‘c’ directly controls the amount of non-linearity in the decision boundary.     | F   |
 | The hyperparameter ‘gamma’ directly controls the number of misclassifications.                     | F   | 
 
-
+# Applications of SVMs
+- Image Segmentation and Categorization
+- Geographic Image Processing
+- Handwriting recognition
+- Healthcare: Analyzing a group of over million people for myocardial infarction within a period of 10 years is an application area of SVMs
+- Prediction whether a person is depressed or not based on bag of words from the corpus seems to be conveniently solvable using SVM
