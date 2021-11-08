@@ -1,14 +1,64 @@
 ---
 title: Introduction to Neural Networks
-description: NN, Neural, Nuerons, perceptron
+description: NN, Neural, Neurons, perceptron
 date: "2021-09-07"
 image: "NN.png"
 author: "Ayush"
 tags: ["python", "deep-learning", "neural-networks", "machine-learning"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [Artificial Neural Networks (ANNs)](#artificial-neural-networks-anns)
+* [Bottlenecks with Neural Networks](#bottlenecks-with-neural-networks)
+* [Deep Learning Applications](#deep-learning-applications)
+* [Human Brain](#human-brain)
+  * [Simplified Human Brain Analogy for Neural Networks](#simplified-human-brain-analogy-for-neural-networks)
+* [What are ANNs](#what-are-anns)
+* [Perceptron](#perceptron)
+  * [How Perceptrons work](#how-perceptrons-work)
+    * [Simplified Example](#simplified-example)
+  * [Theory](#theory)
+* [Question](#question)
+* [Perceptron as a Classifier](#perceptron-as-a-classifier)
+    * [Perceptron Problem Statement](#perceptron-problem-statement)
+* [Question](#question-1)
+* [Homogeneous Coordinates](#homogeneous-coordinates)
+* [Question](#question-2)
+* [Perceptron Algorithm](#perceptron-algorithm)
+  * [Example](#example)
+* [Perceptron - Multiclass Classification](#perceptron---multiclass-classification)
+* [Artificial Neural Network - Single Neuron](#artificial-neural-network---single-neuron)
+* [Neural Network](#neural-network)
+  * [Specifying a Neural Network](#specifying-a-neural-network)
+  * [Inputs to Neural Networks](#inputs-to-neural-networks)
+    * [Questions](#questions)
+  * [Output of a Neural Network](#output-of-a-neural-network)
+    * [Softmax Output](#softmax-output)
+    * [Sigmoid function as a special case of softmax in binary classification](#sigmoid-function-as-a-special-case-of-softmax-in-binary-classification)
+    * [Question](#question-3)
+  * [Assumptions made to Simplify Neural Networks](#assumptions-made-to-simplify-neural-networks)
+  * [Parameters and Hyperparameters of Neural Networks](#parameters-and-hyperparameters-of-neural-networks)
+* [Notations](#notations)
+  * [Question](#question-4)
+* [Activation Functions](#activation-functions)
+  * [Most Popular Activation Functions](#most-popular-activation-functions)
+    * [Logistic function](#logistic-function)
+    * [Hyperbolic Tangent Function](#hyperbolic-tangent-function)
+    * [Rectilinear Unit](#rectilinear-unit)
+    * [Leaky ReLU](#leaky-relu)
+    * [Questions](#questions-1)
+* [Summary](#summary)
+* [Takeaways](#takeaways)
+    * [Questions](#questions-2)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Purpose
-Notes on Artificial Neural Networkds
+Notes on Artificial Neural Networks
 
 # Artificial Neural Networks (ANNs)
 - The most sophisticated and cutting-edge models in machine learning
@@ -69,8 +119,8 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 - The perceptron takes a weighted sum of multiple inputs (along with a bias) as the cumulative input and applies a step function on the cumulative input, i.e. it returns 1 if the input is positive, else -1. 
 - In other words, the perceptron “fires” (returns 1) if the cumulative input is positive and "stays dormant" (returns 0) if the input is negative.
 - Note that there are different ways to define the step function. One can also use the -1, 1 or 0, 1 definition.
-  - $y = 1 if x > 0$
-  - $y = 0 if x \le 0$
+  - $y = 1, \text{if}\; x > 0$
+  - $y = 0, \text{if}\; x \le 0$
 
 - The input to a perceptron is the sum of weights multiplied with their respective inputs and the bias:
   - Cumulative Input = $w_1x_1+w_2x_2+\ldots+w_kx_k + b$
@@ -121,7 +171,7 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 | $w = \begin{bmatrix}-1\\2\end{bmatrix}, b=2$  | Y     |
 - Use formula: $y(w^T.x + b) > 0$
 
-# Homogenous Coordinates
+# Homogeneous Coordinates
 - w and x will be represented as follows
   - $w = \begin{bmatrix}w_1\\w_2\\\ldots\\w_k\\b\end{bmatrix}$<br><br>
   - $x = \begin{bmatrix}x_1\\x_2\\\ldots\\x_k\\1\end{bmatrix}$
@@ -131,10 +181,10 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 **Consider an input vector x which has dimensions (5,1). What is the dimension of w without transforming to homogenous coordinates?**
 - (5,1) - dimension of w has to be same as x
 
-**After converting to homogeneous coordinates, what should be the new dimension of x and w ?
+**After converting to homogeneous coordinates, what should be the new dimension of x and w ?**
 - (6,1) - There 1 additional input hence the dimension increases by 1. Hence (6,1).
 
-**Supporse that x is $\begin{bmatrix}1\\2\\3\end{bmatrix}$ and w is $\begin{bmatrix}4\\5\\6\end{bmatrix}$ and b = 3. After homogenous transformation, what are new x & w?
+**Suppose that x is $\begin{bmatrix}1\\2\\3\end{bmatrix}$ and w is $\begin{bmatrix}4\\5\\6\end{bmatrix}$ and b = 3. After homogenous transformation, what are new x & w?**
 - $x_{new} = \begin{bmatrix}1\\2\\3\\1\end{bmatrix}$<br><br>
 - $w_{new} = \begin{bmatrix}4\\5\\6\\3\end{bmatrix}$
 - 1 is added in x and 3 that is bias is added in the w vector
@@ -153,14 +203,14 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 
 ## Example
 
-| Data Points | x_1 | x_2 | True Label (y) | Homogenous Coordinates |
-|-------------|-----|-----|----------------|------------------------|
-| 0           | 1   | 0   | 1              | (1, 0, 1)              |
-| 1           | 3   | 1   | 1              | (3, 1, 1)              |
-| 2           | 4   | 2   | 1              | (4, 2, 1)              |
-| 3           | 0   | 1   | -1             | (0, 1, 1)              |
-| 4           | 1   | 6   | -1             | (1, 6, 1)              |
-| 5           | 2   | 4   | -1             | (2, 4, 1)              |
+| Data Points | x_1 | x_2 | True Label (y) | Homogeneous Coordinates |
+|-------------|-----|-----|----------------|-------------------------|
+| 0           | 1   | 0   | 1              | (1, 0, 1)               |
+| 1           | 3   | 1   | 1              | (3, 1, 1)               |
+| 2           | 4   | 2   | 1              | (4, 2, 1)               |
+| 3           | 0   | 1   | -1             | (0, 1, 1)               |
+| 4           | 1   | 6   | -1             | (1, 6, 1)               |
+| 5           | 2   | 4   | -1             | (2, 4, 1)               |
 
 - Initial classifier: $w_0 = (3, -1, 0)$ which when expressed algebraically is $3x_1 - 1x_2 = 0$
 
@@ -190,10 +240,12 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 # Perceptron - Multiclass Classification
 - Machine Learning is basically 
   - finding a function `f` such that $f(\overrightarrow x) = \overrightarrow y$
-  - Input -> function -> Ouput
+  - Input -> function -> Output
 - A network of perceptrons can act as a universal function approximator
 - A single layer of perceptron in combination with an AND gate leads to an enclosure in a polygon, and multiple such AND outputs using an OR gate lead to an enclosure in multiple polygons
 - In the most extreme case, this can be extended to finding a polygon for every single data point
+
+---
 
 # Artificial Neural Network - Single Neuron
 - A neuron is very similar to a perceptron, the only difference being that there is an activation function applied to the weighted sum of inputs. 
@@ -209,7 +261,7 @@ Perceptrons work in a similar way. They take some signals as inputs and perform 
 ![Topology](Topology.png)
 
 ## Specifying a Neural Network
-- There are 6 main things that need to be specified for specifying a neural network completely:
+There are 6 main things that need to be specified for specifying a neural network completely:
 1. Network Topology
 2. Input Layer
 3. Output Layer
@@ -284,16 +336,190 @@ What are the values of $p_0, p_1, p_2$
 - We get $w_0.x' = 2, w_1.x' = 3\;\text{and}\; w_2.x' = 6$. Plug the values in $\displaystyle p_{i}=\frac{e^{w_i.x'}}{\sum_{t=0}^{c-1}e^{w_t.x'}}$ to get the values.
 
 
+## Assumptions made to Simplify Neural Networks
+
+1. Neurons are arranged in layers and the layers are arranged sequentially.
+2. Neurons within the same layer do not interact with each other.
+3. All the inputs enter the network through the input layer and all the outputs go out of the network through the output layer.
+4. Neurons in consecutive layers are densely connected, i.e. all neurons in layer l are connected to all neurons in layer l + 1.
+5. Every interconnection in the neural network has a weight associated with it, and every neuron has a bias associated with it.
+6. All neurons in all layers use the same activation function.
+
+## Parameters and Hyperparameters of Neural Networks
+- During training, the neural network learning algorithm fits various models to the training data and selects the best model for prediction. 
+- The learning algorithm is trained with a fixed set of hyperparameters 
+  - the network structure 
+  - number of layers
+  - number of neurons in the input
+  - hidden layers
+  - output layers
+  - activation functions
+- It is trained on the weights and the biases, which are the parameters of the network.
+
+# Notations
+The notations that we shall be going forward are as follows:
+- W is for weight matrix
+- b shall stand for the bias
+- x stands for input
+- y is the ground truth label
+- p is the probability vector of the predicted output
+- h is the output of the hidden layers
+- superscript stands for layer number
+- subscript stands for the index of the individual neuron
+
+## Question
+**According to the diagram below and notation stated above answer the following questions**  
+![notation](.\notations.png)
+**Note that the input vector is $x_1$ as shown in the image**  
+ 
+**How will you represent the probability output coming out of the last layer represented as e?**
+- $p_{14}$
+- We know that the input vector is $x_1$. Hence, the corresponding output vector will be $p_1$. Like we represented the input into the 4th neuron as $x_{14}$, hence the element of  $p_1$ for the 4th neuron will be $p_{14}$.
+
+**How will you represent the element of the weight matrix between layer 1 and 2 represented as b in the figure (do not confuse this with the bias)?**
+- $W_{25}^2$
+- The elements are of the matrix $W^2$. It is connecting to 2nd neuron in layer 2 from 5th neuron in the layer 1. Hence, $W^2_{25}$.
+
+**On similar lines, how will you represent the element of the weight matrix represented as d?**
+- $W_{33}^4$
+- The elements are of the matrix $W^4$. It is connecting to 3rd neuron in layer 4 from 3rd neuron in the layer 3. Hence, $W_{33}^4$.
+
+**How will you represent the bias of the neuron denoted by a?**
+- $b_2^3$
+- It is the bias of the 3rd layer for the 2nd neuron. Hence, $b_2^3$.
+
+**How will you represent the output of the neuron denoted by c?**
+- $h_5^2$
+- It is the output of the 2nd layer for the 5th neuron. Hence, $h_5^2$.
+
+# Activation Functions
+The activation function could be any function, though it should have some important properties such as:
+- Activation functions should be `smooth` i.e. they should have no abrupt changes when plotted.
+- They should also make the inputs and outputs `non-linear` with respect to each other to some extent. This is because non-linearity helps in making neural networks more compact. 
+
+## Most Popular Activation Functions
+
+### Logistic function
+- $f(x) = \frac{1}{1+e^{-x}}$
+
+![Sigmoid](.\Sigmoid_fn.png)
+
+- You can also show that in a sigmoid neuron, if you multiply the weights and biases by a positive constant c>0, as the limit as c→∞ the behaviour of this sigmoid neurons is exactly the same as that of a perceptron, given w.x+b≠0 for the input x.
+
+### Hyperbolic Tangent Function
+- $tanh(x) = \frac{e^x-e^{-x}}{e^x+e^{-x}}$
+
+![tanh](.\tanh.png)
+- It is similar to sigmoid function
+
+### Rectilinear Unit
+- $x = \begin{cases}
+   x, \;\text{if } x\ge 0 \\
+   0, \;\text{otherwise}
+\end{cases}$
+
+![relu](.\ReLU.png)
+
+### Leaky ReLU
+- based on ReLU
+- has a small slope for negative values instead of a flat slope
+- $x = \begin{cases}
+   x, \;\text{if } x\ge 0 \\
+   \alpha x, \;\text{otherwise}
+\end{cases}$
 
 
+![LeakyRelu](.\leaky_relu.png)
 
 
+The output of a neuron is basically the activation function applied to the cumulative input to that neuron. 
+- If the cumulative input to the neuron is $y = w_1a_1 + w_2a_2 + \ldots + w_ka_k + b$ then
+- using the sigmoid activation function the output will be $y = \frac{1}{1+e^{-(w_{1}a_1+w_2a_2+\ldots+w_ka_k + b)}}$
 
 
+### Questions
+**Consider only a single neuron with the following weight vector, $w = \begin{bmatrix}2\\-6\\3\end{bmatrix}$, the input vector $x = \begin{bmatrix}3\\2\\1\end{bmatrix}$ and the bias $b=-1$.**
+
+**What is the cumulative input into the neuron?**
+- $w^T.x + b = -4$
+
+**Output of ReLU**
+- 0
+
+**Output of leaky ReLU with $\alpha = 0.2$**
+- $0.2*(-4) = -0.8$
+
+**Output of sigmoid**
+- $\frac{1}{1+e^{-(-4)}} = 0.018$
+
+# Summary
+
+- We learnt how the architecture of Artificial Neural Networks draws inspiration from the human brain.
+- The perceptron acts as a binary classifier and can perform complex classification tasks.
+- studied the architecture of ANNs - the topology, the parameters (weights and biases) on which the neural network is trained, the hyperparameters, etc.
+- We made some simplifying assumptions in the architecture.
+- ANNs only take numerical inputs, and hence, you need to convert all types of data to a numeric format so that neural networks can process it
+- Next, we fixed the notations that we would use in the future
+- introduced to most common activation functions
+
+# Takeaways
+- Perceptrons, though are very simple in nature, can be used as binary classifiers
+- a group of neurons can approximate arbitrarily complex functions
+- neurons + AND Gate = Polygon
+- neurons + OR Gate = classification (checking which of the polygons a point belongs to)
+
+### Questions
+**Suppose we take all the weights and biases in a perceptron and multiply them by a positive constant, c > 0. The perceptron uses the following step function as the activation function:**  
+**$y = 1, \text{if}\; x > 0$**  
+**$y = 0, \text{if}\; x \le 0$**  
+**Will the output of the perceptron change (compared to the vanilla perceptron without any positive constant c)?**
+- No. [refer: [this blog post](https://nipunsadvilkar.github.io/blog/2018/09/04/neural-networks-and-deep-learning-book-chap1-ex1-part1-solution.html)]
+
+**The hyperparameters in a neural network are:**
+
+| Parameters                      | Is Hyperparameter |
+|---------------------------------|-------------------|
+| Number of layers                | Yes               |
+| Number of neurons in each layer | Yes               |
+| Weights                         | No                |
+| Biases                          | No                |
+| The activation function         | Yes               |
+
+- Hyperparameters are the user-controlled inputs supplied to the learning algorithm which finds out the optimal parameters. 
+- Since the user of Neural Networks decides 
+  - how many layers are to be included in a given network
+  - how many neurons are to be included in a given layer
+  - which activation function is to be used in a given layer
+- hence these are all hyperparameter.
+
+**For an RGB image arranged in 32 x 32 pixels square array, you want to classify it into a dog, cat, bird or none of the above. How many features/datapoints will be fed into the neural network?**
+- 3072. 
+- A black white 32 x 32 image would have 32x32 input features. The RGB image has 3 channels. Hence 32x32x3 = 3072 input features.
 
 
+**For an RGB image as input having 32 x 32 pixels, you want to classify it into a ‘dog’, ‘cat’, ‘bird’ or ‘none’. What will be the number of neurons in the output layer?**
+- 4
+- There are 4 classes we have to classify - dog, cat, bird and none. Hence, 4 output neurons.
 
+**For an RGB image as input having 32 x 32 pixels, you want to classify it into a ‘dog’, ‘cat,’ bird’ or ‘none’. Would you use a sigmoid/ softmax activation in the output layer?**
+- Softmax
+- Since there are 4 classes, we shall use a softmax activation.
 
+**How would you denote the output of the third hidden layer?**  
+- $h^3$
+- The output of the hidden layer is defined by $h$. Superscript denotes the layer number.
+
+**How would you denote the weight which connects the 6th neuron of hidden layer 3 to the 8th neuron of hidden layer 4?**  
+- $w^4_{86}$
+- The first subscript denotes the neuron of layer 'l'. The second subscript refers to the neuron of layer 'l-1'.The superscript refers to layer 'l'.
+
+**We have a hidden layer number 3 with 11 neurons and the hidden layer number 4 with 18 neurons. Also, these hidden layers are densely connected. How many connections will be present?**
+- 198
+- Number of interconnections  =  number of neurons in layer 'l' x number of neurons in layer 'l-1'
+
+**According to the assumptions of the Neural Network, the activation function of all the neurons in a particular layer is the same. True or False.**
+- True
+- Correct, to simplify the network we assume that  the activation function of all the neurons in a particular layer is the same
 
 
 
@@ -305,3 +531,5 @@ What are the values of $p_0, p_1, p_2$
 # References
 - [Link Invalid](https://www.cse.iitb.ac.in/~shivaram/teaching/old/cs344+386-s2017/resources/classnote-1.pdf)
 - [Neural Nets to recognize handwritten digits](http://neuralnetworksanddeeplearning.com/chap1.html)
+
+<!-- \includegraphics[height=0.8em, totalheight=0.9em, width=0.9em, alt=KA logo]{https://katex.org/img/khan-academy.png}$ -->
