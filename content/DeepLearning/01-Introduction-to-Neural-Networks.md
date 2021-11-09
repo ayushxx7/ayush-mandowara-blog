@@ -1,10 +1,10 @@
 ---
 title: Introduction to Neural Networks
 description: NN, Neural, Neurons, perceptron
-date: "2021-09-07"
+date: "2021-09-08"
 image: "NN.png"
 author: "Ayush"
-tags: ["python", "deep-learning", "neural-networks", "machine-learning"]
+tags: ["deep-learning", "neural-networks", "machine-learning"]
 ---
 
 
