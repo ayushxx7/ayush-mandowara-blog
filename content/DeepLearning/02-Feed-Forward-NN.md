@@ -151,3 +151,73 @@ Note that $W^o$ (the weight of the output layer) can be written as $W^{L+1}$ as 
 - As the highest probability is for the neuron representing label 2, it is the predicted label.
 
 
+### Batch Processing
+- It would inefficient to do a for loop type computation for each input row of the whole data
+- We use batch processing to vectorize the process
+- Small batches of the input data are created
+- Each batch is processed one by one
+- The calculation for the whole batch is done in one, almost as if only one data point is being fed
+- Calculation is parallelized due to blockwise property of matrix multiplication
+- The algorithm is similar to the one for single data point
+
+#### Algorithm
+1. $H^0 = B$
+2. for $l$ in $[1,2,...,L]$:
+    1. $H^1=\sigma(\mathbf W^l.\mathbf H^{l-1} + \vec b^l)$
+3. $P = \text{normalize(exp}(\mathbf W^o.\mathbf H^L + \vec b^o))$
+
+- Note that we have used upper case H & P to denote batch processing
+- $H^l$ and $P$ are matrices whose $i^{th}$ column represents the $\vec h^l$ and $\vec p$ vectors respectively of the $i^{th}$ data point.
+- The number of columns in these 'batch matrices' is equal to the number of data points in the batch $m$
+
+#### Example
+![BatchExample](example_batch.png)
+
+##### What is the dimension of the network output matrix $P$
+- $(4, 50)$
+- There are 4 neurons in the output layer. Hence, for every input data point, there will be an output vector of shape (4,1). Since there are 50 such data points, the shape of the matrix P is (4,50).
+
+##### What is the dimension of the output matrix out of the first hidden layer, that is $H^1$
+- There are 7 neurons in the hidden layer 1. Hence, for every input data point, there will be an output vector of shape (7,1). Since there are 50 such data points, the shape of the matrix $\mathbf H^1$ is (7,50).
+
+##### What is the dimension of the input batch $\mathbf B$
+- (5, 50)
+- There are 50 input data points and there are 5 neurons for each input data point. Hence, dimension = (5,50)
+
+# Takeaways
+- Information flows in one direction in feed forward networks (from layer l-1 to l)
+- The computation for output mostly boils down to weights * inputs + bias after which an activation function is applied
+- Block matrix multiplication makes this whole process fast and paralleziable by using fast GPUs.
+
+# Questions
+**Consider a neural network with 5 hidden layers. Choose the ones that are correct in the feedforward scheme of things.**
+
+| Statement                                                                                                                    | True / False |
+|------------------------------------------------------------------------------------------------------------------------------|--------------|
+| The output of the 2nd hidden layer can be calculated only after the output of the 3rd hidden layer in one feed forward pass. | F            |
+| The output of the 3rd hidden layer can be calculated only after the output of the 2nd hidden layer in one feed forward pass. | T            |
+| The output of the 3rd hidden layer can be calculated only after the output of the 4th hidden layer in one feed forward pass. | F            |
+| The output of the 5th hidden layer can be calculated only after the output of the 2nd hidden layer in one feed forward pass. | T            |
+
+- In feed forward, output of layer 'l' can be calculated only after the calculation of the output of all the 'l-1' layer.
+
+**Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. What will be the dimension of the output matrix of the 4th hidden layer if it has 12 neurons?**
+- (12, 20)
+- Dimension = (number of neurons in the layer, size of the batch)
+
+**Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. How will you denote the weight matrix between hidden layers 4 and 5?**
+- $W^5$
+- $W^l$ is the weight matrix between the layer l and l-1
+
+**Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. The weight matrix $W^3$ has the dimension (18,12). How many neurons are present in the hidden layer 2?**
+- 12
+- Matrix dimension  = (number of neurons in the layer in layer l, number of neurons in layer 'l-1')
+
+**Imagine you have a neural network in which a layer l has dimension (128, 64). How many neurons are present in layer l?**
+- 128
+- Matrix dimension  = (number of neurons in the layer in layer l, number of neurons in layer 'l-1')
+
+
+# References
+- [Block Matrix Multiplication](https://ximera.osu.edu/la/LinearAlgebra/MAT-M-0023/main)
+- [Block Matrix Multiplication - StackExchange](https://math.stackexchange.com/questions/112724/need-help-proving-blockwise-property-of-matrix-multiplication)
