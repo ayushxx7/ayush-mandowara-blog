@@ -1,11 +1,47 @@
 ---
 title: Feed Forward in Neural Networks
 description: Feed forward, FF, NN, Neural
-date: "2021-09-08"
+date: "2021-09-13"
 image: "feed-forward.jpg"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Flow of Information in Neural Networks](#flow-of-information-in-neural-networks)
+* [Dimensions in a Neural Network](#dimensions-in-a-neural-network)
+      * [Input Vector](#input-vector)
+      * [Weight Matrix](#weight-matrix)
+      * [Example](#example)
+        * [Dimension of input vector $\vec x_1$](#dimension-of-input-vector-vec-x_1)
+        * [Dimensions of $\mathbf W^1\; \text{to}\; \mathbf W^4$](#dimensions-of-mathbf-w1-textto-mathbf-w4)
+        * [Dimensions of the output vectors of the hidden layers $\vec h^1$ and $\vec h^2$](#dimensions-of-the-output-vectors-of-the-hidden-layers-vec-h1-and-vec-h2)
+        * [The dimension of the bias vector is the same as the output vector for a layer l for a single input vector. True or False.](#the-dimension-of-the-bias-vector-is-the-same-as-the-output-vector-for-a-layer-l-for-a-single-input-vector-true-or-false)
+        * [What is the number of learnable parameters in this network? Note that the learnable parameters are weights and biases.](#what-is-the-number-of-learnable-parameters-in-this-network-note-that-the-learnable-parameters-are-weights-and-biases)
+* [Output](#output)
+      * [Output of a layer](#output-of-a-layer)
+        * [Elaborating on Dimensions](#elaborating-on-dimensions)
+      * [Procedure](#procedure)
+      * [Final Output](#final-output)
+      * [Algorithm](#algorithm)
+      * [Complete Algorithm Steps](#complete-algorithm-steps)
+      * [Example](#example-1)
+        * [Consider $W^o = \begin{bmatrix}3&4\\1&9\\6&2\end{bmatrix}$ and $h^2 = \begin{bmatrix}1\\2\end{bmatrix}$ and bias is 0. What will be $W^o.h^2$?](#consider-wo--beginbmatrix341962endbmatrix-and-h2--beginbmatrix12endbmatrix-and-bias-is-0-what-will-be-woh2)
+        * [Softmax output vector $\vec p$ (output of 3rd layer).](#softmax-output-vector-vec-p-output-of-3rd-layer)
+        * [What is the predicted label?](#what-is-the-predicted-label)
+    * [Batch Processing](#batch-processing)
+      * [Algorithm](#algorithm-1)
+      * [Example](#example-2)
+        * [What is the dimension of the network output matrix $P$](#what-is-the-dimension-of-the-network-output-matrix-p)
+        * [What is the dimension of the output matrix out of the first hidden layer, that is $H^1$](#what-is-the-dimension-of-the-output-matrix-out-of-the-first-hidden-layer-that-is-h1)
+        * [What is the dimension of the input batch $\mathbf B$](#what-is-the-dimension-of-the-input-batch-mathbf-b)
+* [Takeaways](#takeaways)
+* [Questions](#questions)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # Flow of Information in Neural Networks
 In artificial neural networks, the output from one layer is used as input to the next layer. Such networks are called feedforward neural networks. This means there are no loops in the network - information is always fed forward, never fed back.
