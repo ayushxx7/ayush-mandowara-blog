@@ -1,25 +1,20 @@
 ---
 title: Feed Forward in Neural Networks
 description: Feed forward, FF, NN, Neural
-date: "2021-09-13"
+date: "2021-09-14"
 image: "feed-forward.jpg"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning"]
 ---
 
-
 <!-- vim-markdown-toc GFM -->
 
 * [Flow of Information in Neural Networks](#flow-of-information-in-neural-networks)
+  * [Comprehension - Count of Pixels](#comprehension---count-of-pixels)
 * [Dimensions in a Neural Network](#dimensions-in-a-neural-network)
       * [Input Vector](#input-vector)
       * [Weight Matrix](#weight-matrix)
       * [Example](#example)
-        * [Dimension of input vector $\vec x_1$](#dimension-of-input-vector-vec-x_1)
-        * [Dimensions of $\mathbf W^1\; \text{to}\; \mathbf W^4$](#dimensions-of-mathbf-w1-textto-mathbf-w4)
-        * [Dimensions of the output vectors of the hidden layers $\vec h^1$ and $\vec h^2$](#dimensions-of-the-output-vectors-of-the-hidden-layers-vec-h1-and-vec-h2)
-        * [The dimension of the bias vector is the same as the output vector for a layer l for a single input vector. True or False.](#the-dimension-of-the-bias-vector-is-the-same-as-the-output-vector-for-a-layer-l-for-a-single-input-vector-true-or-false)
-        * [What is the number of learnable parameters in this network? Note that the learnable parameters are weights and biases.](#what-is-the-number-of-learnable-parameters-in-this-network-note-that-the-learnable-parameters-are-weights-and-biases)
 * [Output](#output)
       * [Output of a layer](#output-of-a-layer)
         * [Elaborating on Dimensions](#elaborating-on-dimensions)
@@ -28,15 +23,9 @@ tags: ["deep-learning", "neural-networks", "machine-learning"]
       * [Algorithm](#algorithm)
       * [Complete Algorithm Steps](#complete-algorithm-steps)
       * [Example](#example-1)
-        * [Consider $W^o = \begin{bmatrix}3&4\\1&9\\6&2\end{bmatrix}$ and $h^2 = \begin{bmatrix}1\\2\end{bmatrix}$ and bias is 0. What will be $W^o.h^2$?](#consider-wo--beginbmatrix341962endbmatrix-and-h2--beginbmatrix12endbmatrix-and-bias-is-0-what-will-be-woh2)
-        * [Softmax output vector $\vec p$ (output of 3rd layer).](#softmax-output-vector-vec-p-output-of-3rd-layer)
-        * [What is the predicted label?](#what-is-the-predicted-label)
     * [Batch Processing](#batch-processing)
       * [Algorithm](#algorithm-1)
       * [Example](#example-2)
-        * [What is the dimension of the network output matrix $P$](#what-is-the-dimension-of-the-network-output-matrix-p)
-        * [What is the dimension of the output matrix out of the first hidden layer, that is $H^1$](#what-is-the-dimension-of-the-output-matrix-out-of-the-first-hidden-layer-that-is-h1)
-        * [What is the dimension of the input batch $\mathbf B$](#what-is-the-dimension-of-the-input-batch-mathbf-b)
 * [Takeaways](#takeaways)
 * [Questions](#questions)
 * [References](#references)
@@ -45,6 +34,61 @@ tags: ["deep-learning", "neural-networks", "machine-learning"]
 
 # Flow of Information in Neural Networks
 In artificial neural networks, the output from one layer is used as input to the next layer. Such networks are called feedforward neural networks. This means there are no loops in the network - information is always fed forward, never fed back.
+
+
+## Comprehension - Count of Pixels
+The figure below shows an artificial neural network which calculates the count of the number of pixels which are ‘on’, i.e. have a value of 1. It further amplifies the output by a factor of 2; so if 2 pixels are on, the output is 4, if 3 pixels are on the output is 6 and so on.
+
+We’ll call the input layer as layer 0 or simply the input layer. The other three layers are numbered 1, 2 and 3 (3 is the output layer).
+
+![CountPixels](count_pixels.png)
+
+The weight matrices of the 2 hidden layers and the third output layer are shown above. The first and the second neurons of the (hidden) layer 1 represent the number of ‘on’ pixels in row 1 and 2 respectively. The second (hidden) layer amplifies the output of layer 1 by a factor of 2 and the third (output) layer sums up the amplified counts.
+
+The biases are all 0 and the activation function is $\sigma(x) = x$
+
+Let's make one minor modification in our network - let’s represent the input with 4 pixels as a vector with pixels counted clockwise. Thus the input shown in the figure is $\begin{bmatrix}1\\0\\1\\0\end{bmatrix} (and not $\begin{bmatrix}1\\0\\0\\1\end{bmatrix}$) which is called the row-major order)$
+
+**If the output of the network is 6, then the possible inputs are**
+
+| Input Matrix                           | Valid |
+|----------------------------------------|-------|
+| \begin{bmatrix}0\\1\\1\\1\end{bmatrix} | Yes   |
+| \begin{bmatrix}1\\0\\1\\1\end{bmatrix} | Yes   |
+| \begin{bmatrix}0\\0\\1\\1\end{bmatrix} | No    |
+| \begin{bmatrix}1\\1\\0\\1\end{bmatrix} | Yes   |
+
+- The on pixels are represented by number 1. It amplifies the output by a factor of 2. So if 3 pixels are on, then output is 6.
+
+**For the input $\begin{bmatrix}1\\1\\0\\0\end{bmatrix}$, the output of the first neuron of hidden layer 1 is**
+- 2
+- This neuron represents the number of pixels that are on row 1, which is 2
+
+**Now, you want to modify the weights of layer-1 so that the first and the second neurons in the hidden layer 1 represent the number of ‘on’ pixels in the first and second column of the input image respectively. This should be true for all possible inputs into the network. What should be $W^1$? (note that the input vector is created by counting the pixels clockwise)**
+
+- $\begin{bmatrix}1&0&0&1\\0&1&1&0\end{bmatrix}$
+- The first neuron’s output will be the first row of w1 multiplied by the input vector. 
+- If the input vector is [1 0 0 1], i.e both pixels in the first column are on, then the output of neuron 1 should be 2. 
+- For [1 0 0 0], the output should be 1. 
+- In general, for the first neuron, the output should sum up the first and the fourth element of the input. 
+- Thus row 1 should be [1 0 0 1]. 
+- Similarly, for the second neuron, the output should sum up the second and the third element of the input. So the second row should be [ 0 1 1 0].
+
+**Let's assume that each elementary algebraic operation, such as multiplication of two numbers, applying the activation function on a scalar f(x), etc. takes 0.10 microseconds (on a certain OS in python). Note that addition is NOT included as an operation. For the network discussed above, how much time would it take to compute the output from the input given all the parameters?**
+
+**Hint: There are 3 weight matrices $W^1, W^2, W^3$ of sizes $2\times 4, 2\times 2, 1\times 2$. The activation function is applied to each of the three layers' input to compute $h^1, h^2, h^3$.**
+
+- 1.9 microseconds
+- Layer 1
+  - For the weight matrix $W^1$: It is a (2\times 4)(4\times 1) product, thus has 8 multiplications (one for each row).
+  - The activation function is then applied to the 2 neurons.
+  - Thus 10 x 0.1 ms is the time taken till layer 1's output
+- Layer 2
+  - For layer 2, $W^2$, it is a 2 x 2 product + activation function applied on 2 scalars.
+  - So far, we have 8 + 2 + 4 + 2 = 16 operations
+- Layer 3
+  - For layer 3, its a (2x1)(1x2) matrix product + 1 activation operation
+  - Thus, we have 16 + 3 = 19 operations which will take 1.9 microseconds
 
 # Dimensions in a Neural Network
 #### Input Vector
@@ -61,24 +105,39 @@ In artificial neural networks, the output from one layer is used as input to the
 #### Example
 ![CalcDimensionsExample](example_calc_dimensions.png)
 
-##### Dimension of input vector $\vec x_1$
+**Dimension of input vector $\vec x_1$**
 - (5, 1)
 - There are 5 neurons in the input layer. Hence (5,1). By default, a vector is assumed to be a column vector.
 
-##### Dimensions of $\mathbf W^1\; \text{to}\; \mathbf W^4$
+---
+
+
+**Dimensions of $\mathbf W^1\; \text{to}\; \mathbf W^4$**
 - $(8, 5), (7, 8), (4,7)\; \text{and}\; (4,8)$
 - The dimensions of $\mathbf W^l$ are defined as (number of neurons in layer l, number of neurons in layer l-1)
 
-##### Dimensions of the output vectors of the hidden layers $\vec h^1$ and $\vec h^2$
+---
+
+
+**Dimensions of the output vectors of the hidden layers $\vec h^1$ and $\vec h^2$**
 - $(8,1)\;\text{and}\;(7,1)$
 - The dimension of the output vector for a layer l is (number of neurons in the layer, 1)
 
-##### The dimension of the bias vector is the same as the output vector for a layer l for a single input vector. True or False.
+---
+
+
+**The dimension of the bias vector is the same as the output vector for a layer l for a single input vector. True or False.**
 - True
 
-##### What is the number of learnable parameters in this network? Note that the learnable parameters are weights and biases.
+---
+
+
+**What is the number of learnable parameters in this network? Note that the learnable parameters are weights and biases.**
 - 183
 - The weights have 40, 56, 28, 32 individual parameters(the weight elements). The layers have 8, 7, 4, 8 biases respectively.
+
+---
+
 
 # Output
 
@@ -174,17 +233,26 @@ This operation is often called as normalizing the vector $p_i$
 Note that $W^o$ (the weight of the output layer) can be written as $W^{L+1}$ as well.
 
 #### Example
-##### Consider $W^o = \begin{bmatrix}3&4\\1&9\\6&2\end{bmatrix}$ and $h^2 = \begin{bmatrix}1\\2\end{bmatrix}$ and bias is 0. What will be $W^o.h^2$?
+**Consider $W^o = \begin{bmatrix}3&4\\1&9\\6&2\end{bmatrix}$ and $h^2 = \begin{bmatrix}1\\2\end{bmatrix}$ and bias is 0. What will be $W^o.h^2$?**
 - $\begin{bmatrix}11\\19\\10\end{bmatrix}$
 
-##### Softmax output vector $\vec p$ (output of 3rd layer).
+
+---
+
+**Softmax output vector $\vec p$ (output of 3rd layer).**
 - $\begin{bmatrix}0.00034\\0.99954\\0.00012\end{bmatrix}$
 - The probability order would be $3<1<2$ for the class labels
 >
 
-##### What is the predicted label?
+
+---
+
+**What is the predicted label?**
 - 2
 - As the highest probability is for the neuron representing label 2, it is the predicted label.
+
+
+---
 
 
 ### Batch Processing
@@ -209,16 +277,25 @@ Note that $W^o$ (the weight of the output layer) can be written as $W^{L+1}$ as 
 #### Example
 ![BatchExample](example_batch.png)
 
-##### What is the dimension of the network output matrix $P$
+**What is the dimension of the network output matrix $P$**
 - $(4, 50)$
 - There are 4 neurons in the output layer. Hence, for every input data point, there will be an output vector of shape (4,1). Since there are 50 such data points, the shape of the matrix P is (4,50).
 
-##### What is the dimension of the output matrix out of the first hidden layer, that is $H^1$
+
+---
+
+**What is the dimension of the output matrix out of the first hidden layer, that is $H^1$**
 - There are 7 neurons in the hidden layer 1. Hence, for every input data point, there will be an output vector of shape (7,1). Since there are 50 such data points, the shape of the matrix $\mathbf H^1$ is (7,50).
 
-##### What is the dimension of the input batch $\mathbf B$
+
+---
+
+**What is the dimension of the input batch $\mathbf B$**
 - (5, 50)
 - There are 50 input data points and there are 5 neurons for each input data point. Hence, dimension = (5,50)
+
+---
+
 
 # Takeaways
 - Information flows in one direction in feed forward networks (from layer l-1 to l)
@@ -237,22 +314,31 @@ Note that $W^o$ (the weight of the output layer) can be written as $W^{L+1}$ as 
 
 - In feed forward, output of layer 'l' can be calculated only after the calculation of the output of all the 'l-1' layer.
 
+---
+
 **Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. What will be the dimension of the output matrix of the 4th hidden layer if it has 12 neurons?**
 - (12, 20)
 - Dimension = (number of neurons in the layer, size of the batch)
+
+---
 
 **Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. How will you denote the weight matrix between hidden layers 4 and 5?**
 - $W^5$
 - $W^l$ is the weight matrix between the layer l and l-1
 
+---
+
 **Consider a neural network with 5 hidden layers. You send in an input batch of 20 data points. The weight matrix $W^3$ has the dimension (18,12). How many neurons are present in the hidden layer 2?**
 - 12
 - Matrix dimension  = (number of neurons in the layer in layer l, number of neurons in layer 'l-1')
+
+---
 
 **Imagine you have a neural network in which a layer l has dimension (128, 64). How many neurons are present in layer l?**
 - 128
 - Matrix dimension  = (number of neurons in the layer in layer l, number of neurons in layer 'l-1')
 
+---
 
 # References
 - [Block Matrix Multiplication](https://ximera.osu.edu/la/LinearAlgebra/MAT-M-0023/main)
