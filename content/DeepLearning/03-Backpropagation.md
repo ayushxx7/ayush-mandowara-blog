@@ -171,7 +171,7 @@ Therefore,
 <br><br>
 - $z = \begin{bmatrix}z_1\\z_2\\z_3\end{bmatrix}$
 
-We can use the above equations to calculate:
+We can use the above equations along with the chain rule to calculate:
 - $\displaystyle \frac{\partial L}{\partial W^o} = \frac{\partial L}{\partial z}.\frac{\partial z}{\partial W}$
 
 ## Notation
@@ -195,3 +195,55 @@ This is why the process is known as backpropogation.
 
 ## Why do we call it backpropagation
 We propagate the gradients in a backward direction starting from the output layer
+
+# Gradient Descent - Detailed Solution for 3 layers having 2 neurons each
+
+# Stochastic Gradient Descent - SGD
+
+## What is SGD and why is it used
+- For updating weights and biases using plain backpropagation, you have to scan through the entire data set to make a single update to the weights. 
+- This is computationally very expensive  for large datasets. 
+- Thus, you use multiple batches (or mini-batches) of data points, compute the average gradient for a batch, and update the weights based on that gradient.
+- But there is a danger in doing this - you are making weight updates based only on gradients computed for small batches, not the entire training set. 
+- Thus, you make multiple passes through the entire training set using epochs. 
+- An epoch is one pass through the entire training set, and you use multiple epochs (typically 10, 20, 50, 100 etc.) while training. 
+- In each epoch, you reshuffle all the data points, divide the reshuffled set into m batches, and update weights based on gradient of each batch. 
+
+This training technique is called *stochastic gradient descent*, commonly a\betareviated as *SGD*.
+
+## Algorithm
+for epoch in 1 to L:
+  randomize-data
+  num_batches = n/m
+  for batch in num_batches:
+    - compute gradient for each input in batch ($\text{batch}_{i-1}*m, \text{batch}_i*m$)
+    - average gradient $\triangledown w = \frac{\text{(sum of gradient)}\triangledown w}{m}$
+    - average gradient $\triangledown b = \frac{\text{(sum of gradient)}\triangledown b}{m}$
+    - $w = w - \lambda \triangledown w$
+    - $b = b - \lambda \triangledown b$
+
+## SGD Training Procedure
+- You specify the number of epochs (typical values are 10, 20, 50, 100 etc.) - more epochs require more computational power 
+- You specify the number of batches m (typical values are 32, 64, 128, etc.)
+- At the start of each epoch, the data set is reshuffled and divided into m batches.
+- The average gradient of each batch is then used to make a weight update.
+- The training is complete at the end of all the epochs
+
+## Questions
+**Consider a dataset of 1,00,000 data points. You decide to perform a mini batch/ stochastic gradient descent with the batch size of 50. How many batches will be there?**
+- 2000
+- number of batches = n/m = 1,00,000 / 50
+
+**Consider a dataset of 1,00,000 data points. You decide to perform a mini batch/ stochastic gradient descent with the batch size of 50 and for 3 epochs. How many updates will you make at the end of 3 epochs?**
+- 6000
+- You make number of epochs X number of mini batch updates = 3 x 2000 = 6000
+
+## Advantages of SGD
+- fast
+- reaches global minima
+
+## Exploration and Exploitation
+- To avoid the problem of getting stuck at a local optimum, you need to strike a balance between exploration and exploitation.
+- Exploration means that you try to minimise the loss function with different starting points of W and b , i.e., you initialise W and b with different values. 
+- On the other hand, exploitation means that you try to reach the global minima starting from a particular W and b and do not explore the terrain at all. 
+- That might lead you to the lowest point locally, but not the necessarily the global minimum.
