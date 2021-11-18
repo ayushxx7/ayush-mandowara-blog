@@ -49,7 +49,7 @@ tags: ["general"]
 - extremely efficient in communicating intent both via written (email/commit messages/PRs) and spoken mediums.
 - Having an inquisitive mind, I always listened to my colleagues carefully, understanding their requirements or suggestions, thereby consistently choosing the best way forward.
 
-###Flexibility
+### Flexibility
 
 - worked on several projects that involved a wide range of technologies as well interacting with various members of different teams.
 - altered my daily schedule (longer hours, sleepless nights) as per the requirements and deadlines of ongoing projects without fail.
