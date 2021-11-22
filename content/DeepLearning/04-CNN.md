@@ -1,7 +1,7 @@
 ---
 title: Convolutional Neural Networks (CNNs)
 description: NN, Neural, Neurons, perceptron
-date: "2021-11-18"
+date: "2021-11-19"
 image: "NN.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
@@ -68,3 +68,51 @@ Let's consider the common task of visual recognition (like identifying a ‘cat�
 - Application of CNN is found in Insurance Claim Analysis such as assessing the payout when property gets damaged due to floods
 - Can be used for Audio and text analysis as well
 
+# Receptive field for single neurons in the cat striate cortex
+- [Research Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf) published by Hubel and Wiesel
+
+Some of the important observations made in the study were:
+
+- Each neuron in the retina focuses on one part of the image and that part of the image is called the receptive field of that neuron.
+ 
+- There are excitatory and inhibitory regions in the receptive field. The neurons only ‘fire’ when there is a contrast between the excitatory and the inhibitory regions. If we splash light over the excitatory and inhibitory regions together, because of no contrast between them, the neurons don’t ‘fire’ (respond). If we splash light just over the excitatory region, neurons respond because of the contrast.
+
+  ![receptive_field_response](300px-Receptive_field.png)
+
+- The strength of the response is proportional to the summation over only the excitatory region (not inhibitory region). The pooling layer in CNNs corresponds to this observation.
+
+The figure below shows a certain region of the receptive field of a cat. The excitatory region (denoted by the triangular marks) is at the centre surrounded by the inhibitory region marked by the crosses.
+
+![receptivefield](receptive_field_new.png)
+- The response will be the strongest if a "vertical slit" shaped light falls on excitatory region
+
+- The receptive fields of all neurons are almost identical in shape and size
+
+- There is a hierarchy in the units: Units at the initial level do very basic tasks such as picking raw features (such as horizontal edges) in the image. The subsequent units extract more abstract features, such as identifying textures, detecting movement, etc. The layers 'higher' in the hierarchy typically aggregate the features in the lower ones.
+
+
+The image below illustrates the hierarchy in units  - the first level extracts low-level features (such as vertical edges) from the image, while the second level calculates the statistical aggregate of the first layer to extract higher-level features (such as texture, colour schemes etc.).
+
+![heirarchy](heirarchy.png)
+
+Using this idea, if we design a complex network with multiple layers to do image classification (for example), the layers in the network should do something like this:
+
+- The first layer extracts raw features, like vertical and horizontal edges
+- The second layer extracts more abstract features such as textures (using the features extracted by the first layer)
+- The subsequent layers may identify certain parts of the image such as skin, hair, nose, mouth etc. based on the textures.
+- Layers further up may identify faces, limbs etc. 
+- Finally, the last layer may classify the image as 'human', 'cat' etc.
+
+  ![classification](classification.png)
+
+Apart from explaining the visual system, the paper also suggested that similar phenomena have been observed in the auditory system and touch and pressure in the somatosensory system. This suggests that CNN-like architectures can be used for speech processing and analysing signals coming from touch sensors or pressure sensors as well. 
+
+# Research Paper Insights - Summary
+- Each unit, or neuron, is dedicated to its own receptive field. Thus, every unit is meant to ignore everything other than what is found in its own receptive field.
+- The receptive field of each neuron is almost identical in shape and size.
+- The subsequent layers compute the statistical aggregate of the previous layers of units. This is analogous to the 'pooling layer' in a typical CNN.
+- Inference or the perception of the image happens at various levels of abstraction. The first layer pulls out raw features, subsequent layers pull out higher-level features based on the previous features and so on. Finally, the network gets an overall perception of an image in the last layer.
+
+
+# References
+[Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
