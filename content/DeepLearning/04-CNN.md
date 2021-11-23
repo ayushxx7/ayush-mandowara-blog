@@ -109,9 +109,40 @@ Apart from explaining the visual system, the paper also suggested that similar p
 
 # Research Paper Insights - Summary
 - Each unit, or neuron, is dedicated to its own receptive field. Thus, every unit is meant to ignore everything other than what is found in its own receptive field.
+- Each unit, or neuron, performs specialised tasks on its receptive field.
 - The receptive field of each neuron is almost identical in shape and size.
 - The subsequent layers compute the statistical aggregate of the previous layers of units. This is analogous to the 'pooling layer' in a typical CNN.
 - Inference or the perception of the image happens at various levels of abstraction. The first layer pulls out raw features, subsequent layers pull out higher-level features based on the previous features and so on. Finally, the network gets an overall perception of an image in the last layer.
+
+# VGGNet Architecture
+
+![vggnet](vgg.png)
+
+Key elements of CNN
+- Convolution - It Image size shrinks (scales down) after every couple of layers
+- Pooling layers
+- Feature maps
+ 
+The VGGNet was specially designed for the ImageNet challenge which is a classification task with 1000 categories. Thus, the softmax layer at the end has 1000 categories. The blue layers are the convolutional layers while the yellow ones are pooling layers.
+
+Finally, the green layer is a fully connected layer with 4096 neurons, the output from which is a vector of size 4096.
+
+The most important point to notice is that the network acts as a feature extractor for images. For example, the CNN above extracts a 4096-dimensional feature vector representing each input image. In this case, the feature vector is fed to a softmax layer for classification, but you can use the feature vector to do other tasks as well (such as video analysis, object detection, image segmentation etc.).
+
+# Questions
+**Which of Convolution or Softmax operations acts as a feature extractor?**
+- Convolution
+
+**Which of the following is correct for last softmax layer in the CNN?**
+
+| Statement                                    | True / False |
+|----------------------------------------------|--------------|
+| Each class probability lies in the range 0-1 | True         |
+| Sum of class probability is 1                | True         |
+
+- Probability always lies between 0 and 1
+
+# Reading Digital Images
 
 
 # References
