@@ -133,6 +133,8 @@ The most important point to notice is that the network acts as a feature extract
 **Which of Convolution or Softmax operations acts as a feature extractor?**
 - Convolution
 
+---
+
 **Which of the following is correct for last softmax layer in the CNN?**
 
 | Statement                                    | True / False |
@@ -143,7 +145,63 @@ The most important point to notice is that the network acts as a feature extract
 - Probability always lies between 0 and 1
 
 # Reading Digital Images
+- Images are made up of pixels.
+- A number between 0-255 represents the colour intensity of each pixel.
+- Each pixel in a colour image is an array representing the intensities of red, blue and green. The red, blue and green layers are called channels.
+![3dpixel](3DPixel.png)
 
+- In a grayscale image (a 'black and white' image), only one number is required to represent the intensity of white. Thus, grayscale images have only one channel.
+![Greyscale](1Dpixel.png)
+
+- [Reading Digits Example Notebook](https://colab.research.google.com/drive/1Bx8ESgvRKQ45DgQPf8eMSqx5CHy14_mI?usp=sharing)
+
+## Why is the Range of Pixel Values 0-255
+Usually, 8-bits (1 byte) are used to represent each pixel value. Since each bit can be either 0 or 1, 8-bits of information allows for $2^8 = 256$ possible values. Therefore, the range of each pixel is 0-255.
+
+# Questions
+
+**How many total number of pixels are there in a grayscale image whose dimension is (250,150)?**
+- 250x150 = 37500
+- The number of pixels is height x width. Here, height is 250, and the width is 150. So, number of pixels is 250x150 = 37,500
+
+---
+
+**How many channels are there in an image?**
+
+| Statement                                                                                           | True / False |
+|-----------------------------------------------------------------------------------------------------|--------------|
+| If it is a grayscale image, number of channels is 1                                                 | True         |
+| If it is a colour image, and if we represent by RGB (Red, Green, Blue), the number of channels is 3 | True         |
+| If we represent an image in HSV (Hue, Saturation, Value) format, the number of channels is 3.       | True         |
+| The number of channels is always 3                                                                  | False        | 
+
+- A greyscale image has single channel. 
+- If it is a colour image, and if we represent by RGB (Red, Green, Blue), the number of channels is 3 for Red, Green and Blue. 
+- If it is a colour image, and if we represent by RGB (Red, Green, Blue), the number of channels is 3 for Hue, Saturation and Value.
+
+---
+
+**What is the total number of pixels in an image whose dimension is (250,150,3), where ‘3’ represents the RGB channels?**
+- Numbers of pixels is 'width x height', which is 250 x 150, independent of depth.
+
+---
+
+**What is the range of possible values of each channel of a pixel if we represent each pixel by 8 bits?**
+- 2^8(bits) = 256. So, the range is 0 to 255.
+
+---
+
+**In a grayscale image, which colours represent 0 and 255?**
+- Lowest intensity - '0'  is black and the highest intensity-'255' is white. 
+
+---
+
+**What do the numbers signify in the pixel?**
+- Each number in pixel represents intensity. If it's '0', it means black with no intensity and '255' means white with the highest intensity. 
+
+---
 
 # References
-[Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
+- [Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
+- [Deep Learning - Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
+- [Deep Learning - Stanford](https://stanford.edu/~shervine/teaching/cs-230/)
