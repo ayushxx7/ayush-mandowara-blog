@@ -201,6 +201,147 @@ Usually, 8-bits (1 byte) are used to represent each pixel value. Since each bit 
 
 ---
 
+# Video Analysis
+A video is basically a sequence of frames where each frame is an image. You already know that CNNs can be used to extract features from an image. Let's now see how CNNs can be used to process a series of images (i.e. videos). 
+
+## Process
+Let's summarise the process of video analysis using a CNN + RNN (Recurrent Neural Network) stack. At this point, you only need to understand that RNNs are good at processing sequential information such as videos (a sequence of images), text (a sequence of words or sentences), etc. 
+
+For a video classification task, here's what we can do. 
+- Suppose the videos are of length 1 minute each. 
+- If we extract frames from each video at the rate of 2 frames per second (FPS), we will have 120 frames (or images) per video. 
+- Push each of these images into a convolutional net (such as VGGNet) and extract a feature vector (of size 4096, say) for each image. 
+- Thus, we have 120 feature vectors representing each video. 
+- These 120 feature vectors, representing a video as a sequence of images, can now be fed sequentially into an RNN which classifies the videos into one of the categories.
+- The main point here is that a CNN acts as a feature extractor for images, and thus, can be used in a variety of ways to process images.
+
+
+# Convolutions
+Mathematically, the convolution operation is the summation of the element-wise product of two matrices. Let’s take two matrices, X and Y. If you 'convolve the image X using the filter Y', this operation will produce the matrix Z. 
+
+$X = \def\arraystretch{1.5}
+   \begin{array}{c:c:c}
+   1 & 2 & 3 \\ \hline
+   2 & 0 & 0 \\
+   \hline
+   7 & 9 & 1
+\end{array}$
+
+$Y = \def\arraystretch{1.5}
+   \begin{array}{c:c:c}
+   3 & 2 & 0 \\ \hline
+   3 & 0 & 1  \\ \hline
+   0 & 5 & 2
+\end{array}$
+
+$Z = \def\arraystretch{1.5}
+   \begin{array}{c:c:c}
+   1\times 3=3 & 2\times 2=4 & 3\times 0=0 \\ \hline
+   2\times 3=6 & 0\times 0=0 & 0\times 1=1  \\ \hline
+   7\times 0=0 & 9\times 5=45 & 1\times 2=2
+\end{array}$
+
+Finally, you compute the sum of all the elements in Z to get a scalar number, i.e. 3+4+0+6+0+0+0+45+2 = 60. 
+
+## Filter
+- also called Kernel
+- Small array of numbers which act as a filter that allow you to create some special effects on the image that you are viewing through the filter
+
+### Example
+**Given an input matrix X of size (2,2) and filter matrix Y of size (2,2), find the output value after we perform convolution of X and Y.**
+
+$X = \def\arraystretch{1.5}
+   \begin{array}{c:c}
+   1 & 4 \\ \hline
+   0 & 9 \\
+\end{array}$
+
+$Y = \def\arraystretch{1.5}
+   \begin{array}{c:c}
+   4 & 0 \\ \hline
+   2 & 1 \\
+\end{array}$
+
+- 13
+- Convolution of 2 matrices X and Y is : 1x4 + 4x0 + 0x2 + 9x1 = 13
+
+## Detecting Features
+- We can use filters to detect features such as vertical and horizontal edges
+
+### Vertical Edge Detection
+- In the convolution output using the following filter, only the middle two columns are nonzero while the two extreme columns (1 and 4) are zero. This is an example of vertical edge detection.
+
+![verticaledgedetection](vertical_edge_detection.png)
+
+Note that each column of the 4 x 4 output matrix looks at exactly three columns of the input image. The values in the four columns represent the amount of change (or gradient) in the intensity of the corresponding columns in the input image along the horizontal direction.
+
+For example the output is 0 (20 - 20 or 10 - 10) in the columns 1 and 4, denoting that there is no change in intensity in the first three and the last three columns of the input image respectively.
+
+On the other hand, the output is 30 (20 - (-10)) in the columns 2 and 3, indicating that there is a gradient in the intensity of the corresponding columns of the input image.
+
+### Horizontal Edge Detection
+$\def\arraystretch{1.5}
+   \begin{array}{c:c:c}
+   -1 & -1 & -1 \\ \hline
+   0 & 0 & 0 \\
+   \hline
+   1 & 1 & 1
+\end{array}$
+
+#### Convolution Example
+![convolution-example](convolution_example.gif)
+
+Although we have only seen very simple filters, one can design arbitrarily complex filters for detecting edges and other patterns. For example, the image below shows the Sobel filter which can detect both horizontal and vertical edges in complex images. 
+
+### Sobel Filter
+- can be used to detect both horizontal and vertical edges
+![SobelFilter](sobel.png)
+
+# Questions
+**Given an input image of size (10,10) and a filter of size (4,4), what will be the size of the output size on convolving the image with the filter?**
+- (7, 7)
+- If we move (4,4) matrix on a matrix of size (10,10), there will be 7 vertical and 7 horizontal positions.
+
+---
+
+**Which of the following image approximately represents the given matrix?**
+
+$\begin{bmatrix}0 & 0 & 0 & 0\\0 & 0 & 0 & 0\\100 & 100 & 100 & 100\\100&100&100&100\\50&50&50&50\\50&50&50&50\end{bmatrix}$
+
+| Option                   | Yes/No |
+|--------------------------|--------|
+| ![option_1](optionb.png) | Yes    |
+| ![option_2](optiona.png) | No     |
+
+- Lower value of pixel means lower intensity and higher value for high intensity. Like '0' for black and '255' for white. 
+
+---
+
+**Given an input image X, which of the following filters will detect an edge in the vertical direction?**
+
+| Option                                               | Yes / No |
+|------------------------------------------------------|----------|
+| $\begin{bmatrix}1&0&-1\\1&0&-1\\1&0&-1\end{bmatrix}$ | Yes      |
+| $\begin{bmatrix}-1&0&1\\-1&0&1\\-1&0&1\end{bmatrix}$ | Yes      |
+| $\begin{bmatrix}1&0&1\\1&0&1\\1&0&1\end{bmatrix}$    | No       |
+| $\begin{bmatrix}1&0&-1\\1&0&-3\\1&0&-1\end{bmatrix}$ | Yes      |
+
+- Any matrix that takes the difference between the left and the right pixel can find the edge. 
+
+---
+
+**Which of the following filters can be used to detect a diagonal edge (an edge at an angle of 45 degrees from the x-axis) in an image? Choose all the correct options.**
+
+| Option                                               | Yes / No |
+|------------------------------------------------------|----------|
+| $\begin{bmatrix}1&1&0\\1&0&-1\\0&-1&-1\end{bmatrix}$ | Yes      |
+| $\begin{bmatrix}2&2&0\\2&0&-2\\0&-2&-2\end{bmatrix}$ | Yes      |
+| $\begin{bmatrix}1&0&-1\\1&0&-1\\1&0&-1\end{bmatrix}$ | No       |
+| $\begin{bmatrix}-1&0&1\\-1&0&1\\-1&0&1\end{bmatrix}$ | No       |
+
+- A diagonal edge will have pixel values such that there is a gradient in the direction perpendicular to the 45-degree line, i.e. a gradient in pixel values from top-left to bottom-right. The filter should also have a gradient in this direction.
+
+
 # References
 - [Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
 - [Deep Learning - Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
