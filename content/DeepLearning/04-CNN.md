@@ -341,8 +341,174 @@ $\begin{bmatrix}0 & 0 & 0 & 0\\0 & 0 & 0 & 0\\100 & 100 & 100 & 100\\100&100&100
 
 - A diagonal edge will have pixel values such that there is a gradient in the direction perpendicular to the 45-degree line, i.e. a gradient in pixel values from top-left to bottom-right. The filter should also have a gradient in this direction.
 
+## Stride and Padding
+- In the previous examples, while doing convolutions, each time we computed the element-wise product of the filter with the image, we had moved the filter by exactly one pixel (both horizontally and vertically). 
+- But that is not the only way to do convolutions - you can move the filter by an arbitrary number of pixels. This is the concept of stride.
+- There is nothing sacrosanct about the stride length 1. 
+- If you think that you do not need many fine-grained features for your task, you can use a higher stride length (2 or more).
+
+### Problem with Arbitrary Stride Length
+- You cannot convolve all images with just any combination of filter and stride length. For example, you cannot convolve a (4, 4) image with a (3, 3) filter using a stride of 2. Similarly, you cannot convolve a (5, 5) image with a (2, 2) filter and a stride of 2 (try and convince yourself). 
+
+### Padding
+- To solve the above problem, you use the concept of padding.
+
+The following are the two most common ways to do padding:
+- Populating the dummy row/columns with the pixel values at the edges
+- Populating the dummy row/columns with zeros (zero-padding)
+
+  ![StrideAndPadding](stride.png)
+
+- Notation: Padding of 'x' means that 'x units' of rows/columns are added all around the image.
+
+- An alternate (less commonly used) way to do convolution is to shrink the filter size as you hit the edges. 
+
+- You may have noticed that when you convolve an image without padding (using any filter size), the output size is smaller than the image (i.e. the output 'shrinks'). For example. when you convolve a (6, 6) image with a (3, 3) filter and stride of 1, you get an output of (4, 4). 
+
+- If you want to maintain the same size, you can use padding.
+
+- Doing convolutions without padding reduces the output size. 
+- It is important to note that only the width and height decrease (not the depth) when you convolve without padding. The depth of the output depends on the number of filters used 
+
+### Why Padding is Necessary
+- Doing convolutions without padding will 'shrink' the output. 
+- For example, convolving a (6, 6) image with a (3, 3) filter and stride of 1 gives a (4, 4) output. 
+- Further, convolving the (4, 4) output with a (3, 3) filter will give a (2, 2) output. 
+- The size has reduced from (6, 6) to (2, 2) in just two convolutions. 
+- Large CNNs have tens (or even hundreds) of such convolutional layers (recall VGGNet), so we will be incurring massive 'information loss' as we build deeper networks!
+- This is one of the main reasons padding is important - it helps maintain the size of the output arrays and avoid information loss. 
+- Of course, in many layers, you actually want to shrink the output (as shown below), but in many others, you maintain the size of the output.
+
+![vggnet](vgg.png)
+
+# Questions
+**Given an image of size (n, n), a kernel of size (3, 3), no padding, and a stride length of 1, the output size will be**
+- (n-2, n-2)
+- Try convolving (3, 3), (4, 4), (5, 5) etc. images - you will note a pattern. In general, an (n, n) image will produce an (n-2, n-2) output on convolving with a (3, 3) filter.
+
+---
+
+**Given an image of size 5x5, filter size 3x3, stride 2, what is the padding required (on either side) to make the output size same as input size?**
+- 3 pixels of padding is required around each edge of the image to make the output size the same as the image size. 
+
+---
+
+**You saw that doing convolutions without padding reduces the output size (relative to the input which is being convolved). The main reason this is not always beneficial is that:**
+- There will be heavy loss of information (especially in deep networks) if all the convolutional layers reduce the output size
+- If all the layers keep shrinking the output size, by the time the information flows towards the end of the network, the output would have reduced to a very small size (say 2 x 2) - which will be insufficient to store information for complex tasks.
+
+---
+
+**Very often, you want to maintain the output size after convolution, i.e. if you have an (n, n) input, you want the output to be of size (n, n) as well. A general strategy to achieve this is:**
+
+- Use padding of 1 pixel (on both sides), a (3, 3) filter, and stride length 1
+- The output size is $\frac{n+2p+k}{s}+1$
+- With p=1, k=3, s=1, the output will always be (n, n)
+
+## Output Size of Convolved Image
+- Image  - n x n
+- Filter - k x k
+- Padding - P
+- Stride - S
+Size of convolved image =  $(\frac{n+2P-k}{S}+1), (\frac{n+2P-k}{S}+1)$
+
+# Questions
+**Given an input image of size 224x224, a filter of size 5x5 and padding of 3, what are the possible values of stride S?**
+
+| Option | Yes/No |
+|--------|--------|
+| 1      | Yes    |
+| 2      | No     |
+| 3      | Yes    |
+| 4      | No     |
+
+- (n+2P-k) should be divisible by stride 's'. So, (224+ 2x3 - 5) = 225. should be divisible by any possible values.  
+
+---
+
+**Given an input image of size 224x224, a filter of size 5x5 and stride of 2, what are the possible values of padding?**
+
+- Not possible
+- (n+2P-k) should be divisible by stride 's'. So, (224 + 2xPadding -5) should be divisible by 2. This is not possible for any value of padding. 
+
+---
+
+**Doing convolution without padding (assume that you are using a normal convolution with a k x k filter, where k>1, without shrinking it towards the edges etc.):**
+- Always reduces the size of the output
+- Doing convolutions without padding always reduces the output size. You can see that from the formula as well: (n - k)/s will be less than n for all positive values of k >1.
+
+
+## Convolution in Color
+- So far, we have been doing convolutions only on 2D arrays (images), say of size 6x6. But most real images are coloured (RGB) images and are 3D arrays of size m x n x 3. Generally, we represent an image as a 3D matrix of size height x width x channels.
+- To convolve such images, we simply use 3D filters. The basic idea of convolution is still the same - we take the element-wise product and sum up the values. The only difference is that now the filters will be 3-dimensional, For example: 3 x 3 x 3, or 5 x 5 x 3 (the last '3' represents the fact that the filter has as many channels as the image). 
+- We use 3D filters to perform convolution on 3D images. For example: if we have an image of size (224, 224, 3), we can use filters of sizes (3, 3, 3), (5, 5, 3), (7, 7, 3) etc. (with appropriate padding etc.). We can use a filter of any size as long as the number of channels in the filter is the same as that in the input image.
+- The filters are learnt during training (i.e. during backpropagation). Hence, the individual values of the filters are often called the weights of a CNN.
+- Suppose we have an RGB image and a (2, 2, 3) filter as shown below. The filter has three channels, and each channel of the filter convolves the corresponding channel of the image. Thus, each step in the convolution involves the element-wise multiplication of 12 pairs of numbers and adding the resultant products to get a single scalar output.
+
+  ![3dimage](3DImage.png)
+  - channels in image and their corresponding Filter
+
+- The GIF below shows the convolution operation - note that in each step, a single scalar number is generated, and at the end of the convolution, a 2D array is generated:
+
+  ![3dRGBconvolution](convolution_rgb.gif)
+
+You can express the convolution operation as a dot product between the weights and the input image. If you treat the (2, 2, 3) filter as a vector $\vec w$ of length 12, and the 12 corresponding elements of the input image as the vector $\vec p$ (i.e. both unrolled to a 1D vector), each step of the convolution is simply the dot product of $w^T$ and $p$. The dot product is computed at every patch to get a (3, 3) output array, as shown above.
+
+## Bias
+- Apart from the weights, each filter can also have a bias. 
+- In this case, the output of the convolutional operation is a (3, 3) array (or a vector of length 9). 
+- So, the bias will be a vector of length 9. 
+- However, a common practice in CNNs is that all the individual elements in the bias vector have the same value (called tied biases). 
+- For example, a tied bias for the filter shown above can be represented as:
+
+$w^T.x + b = \begin{bmatrix}
+\sum w^T.p_{11}&\sum w^T.p_{12}&\sum w^T.p_{13}\\
+\sum w^T.p_{21}&\sum w^T.p_{22}&\sum w^T.p_{23}\\
+\sum w^T.p_{31}&\sum w^T.p_{32}&\sum w^T.p_{33}
+\end{bmatrix} 
++ 
+\begin{bmatrix}
+b&b&b\\
+b&b&b\\
+b&b&b
+\end{bmatrix}$
+
+The other way is to use untied biases where all the elements in the bias vector are different, i.e. $b_{11}, b_{12}, \ldots, b_{mn}$, but that is much less common than using tied biases.
+
+# Questions
+**Given an image of size 128 x 128 x 3, a stride length of 1, padding of 1, and a kernel of size 3x3x3, what will be the output size?**
+- $128\times 128$
+- Though the input and filter are now 3D, the output of convolution will still be a 2D array. This is because, in each step of the convolution, the 9 elements of the filter will be 'dot product-ed' with the 9 elements of the 3D image, giving a single scalar number as the output.
+
+---
+
+**Suppose you train the same network (i.e. the same architecture) for two different multiclass classification problems (such as classification of mammals and classification of flowers). Will the two resultant sets of weights be the same?**
+- Weights will be different since each network will learn weights which are appropriate for the respective classification task.
+
+**What is the total number of trainable weights in a kernel/filter of size 3x3x3? Assume there are no biases.**
+- 27
+- There are 27 weights in a (3, 3, 3) filter, which are all learnt during training.
+
+---
+
+**What is the total number of trainable parameters in a kernel/filter of size 3x3x3? Assume that there is a single tied bias associated with the filter.**
+- 28
+- There are 27 weights and one bias in the (3, 3, 3) filter.
+
+**Given an image of size 3x3 and a kernel of size 3x3, what will be the total number of multiplication and addition operations in convolution? Assume there is no padding and there are no biases (only weights). If there are m multiplication and n addition operations, the answer will be m+n.**
+- There will be 3x3 multiplication operations and (3x3-1) addition operations (you need n-1 addition operations to add n numbers).
+
+---
+
+**Given an image of size 3x3x3, a kernel of size 3x3x3, padding of 1, and stride length of 1, what will be the total number of multiplication and addition operations in the convolution? Assume there are no biases (only weights). If there are m multiplication and n addition operations, the answer will be m+n.**
+- 477
+- The output will be of size (n + 2p - k + 1) = (3, 3). In each step of the convolution, the 3 x 3 x 3 filter will be dot product-ed with a 3 x 3 x 3 array. This dot product will involve 27 pair-wise multiplications and then 26 addition operations, or 27+26 = 53 total operations. Since this operation will happen for each of the 3 x 3 cells in the output, the total number of operations is 53 x 9 = 477.
+
+---
+
 
 # References
 - [Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
 - [Deep Learning - Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
 - [Deep Learning - Stanford](https://stanford.edu/~shervine/teaching/cs-230/)
+- [CNN Explained](https://towardsdatascience.com/convolutional-neural-networks-explained-9cc5188c4939)
