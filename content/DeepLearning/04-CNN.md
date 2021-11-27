@@ -7,7 +7,7 @@ author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
 ---
 
-# Purpoose
+# Purpose
 Notes on Convolutional Neural Networks
 
 # CNN - Introduction
@@ -15,7 +15,7 @@ Notes on Convolutional Neural Networks
 - They are very similar to the vanilla neural networks (multilayer perceptrons) - every neuron in one layer is connected to every neuron in the next layer, they follow the same general principles of forward and backpropagation, etc. 
 - However, there are certain features of CNNs that make them perform extremely well on image processing tasks. 
 - Convolutional Neural Networks, or CNNs, are specialised architectures which work particularly well with visual data, i.e. images and videos. 
-- They have been largely responsible for revolutionalizing 'deep learning' by setting new benchmarks for many image processing tasks that were very recently considered extremely hard.
+- They have been largely responsible for revolutionizing 'deep learning' by setting new benchmarks for many image processing tasks that were very recently considered extremely hard.
 
 # Challenges in Image Processing
 Let's consider the common task of visual recognition (like identifying a ‘cat’ or a ‘dog’) - trivial as it is for humans, it is still a big challenge for algorithms. Let’s look at some of the challenges:
@@ -93,7 +93,7 @@ The figure below shows a certain region of the receptive field of a cat. The exc
 
 The image below illustrates the hierarchy in units  - the first level extracts low-level features (such as vertical edges) from the image, while the second level calculates the statistical aggregate of the first layer to extract higher-level features (such as texture, colour schemes etc.).
 
-![heirarchy](heirarchy.png)
+![hierarchy](heirarchy.png)
 
 Using this idea, if we design a complex network with multiple layers to do image classification (for example), the layers in the network should do something like this:
 
@@ -161,8 +161,8 @@ Usually, 8-bits (1 byte) are used to represent each pixel value. Since each bit 
 # Questions
 
 **How many total number of pixels are there in a grayscale image whose dimension is (250,150)?**
-- 250x150 = 37500
-- The number of pixels is height x width. Here, height is 250, and the width is 150. So, number of pixels is 250x150 = 37,500
+- $250\times 150 = 37500$
+- The number of pixels is height x width. Here, height is 250, and the width is 150. So, number of pixels is $250\times 150 = 37,500$
 
 ---
 
@@ -429,7 +429,7 @@ Size of convolved image =  $(\frac{n+2P-k}{S}+1), (\frac{n+2P-k}{S}+1)$
 **Given an input image of size 224x224, a filter of size 5x5 and stride of 2, what are the possible values of padding?**
 
 - Not possible
-- (n+2P-k) should be divisible by stride 's'. So, (224 + 2xPadding -5) should be divisible by 2. This is not possible for any value of padding. 
+- (n+2P-k) should be divisible by stride 's'. So, (224 + 2xPadding-5) should be divisible by 2. This is not possible for any value of padding. 
 
 ---
 
@@ -439,7 +439,7 @@ Size of convolved image =  $(\frac{n+2P-k}{S}+1), (\frac{n+2P-k}{S}+1)$
 
 
 ## Convolution in Color
-- So far, we have been doing convolutions only on 2D arrays (images), say of size 6x6. But most real images are coloured (RGB) images and are 3D arrays of size m x n x 3. Generally, we represent an image as a 3D matrix of size height x width x channels.
+- So far, we have been doing convolutions only on 2D arrays (images), say of size $6\times 6$. But most real images are coloured (RGB) images and are 3D arrays of size m x n x 3. Generally, we represent an image as a 3D matrix of size height x width x channels.
 - To convolve such images, we simply use 3D filters. The basic idea of convolution is still the same - we take the element-wise product and sum up the values. The only difference is that now the filters will be 3-dimensional, For example: 3 x 3 x 3, or 5 x 5 x 3 (the last '3' represents the fact that the filter has as many channels as the image). 
 - We use 3D filters to perform convolution on 3D images. For example: if we have an image of size (224, 224, 3), we can use filters of sizes (3, 3, 3), (5, 5, 3), (7, 7, 3) etc. (with appropriate padding etc.). We can use a filter of any size as long as the number of channels in the filter is the same as that in the input image.
 - The filters are learnt during training (i.e. during backpropagation). Hence, the individual values of the filters are often called the weights of a CNN.
