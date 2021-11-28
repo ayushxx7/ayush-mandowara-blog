@@ -1,7 +1,7 @@
 ---
 title: Convolutional Neural Networks (CNNs)
 description: NN, Neural, Neurons, perceptron
-date: "2021-11-19"
+date: "2021-11-22"
 image: "NN.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
@@ -506,9 +506,241 @@ The other way is to use untied biases where all the elements in the bias vector 
 
 ---
 
+# Feature Maps
+- A neuron is basically a filter whose weights are learnt during training. For example, a (3, 3, 3) filter (or neuron) has 27 weights. Each neuron looks at a particular region in the input (i.e. its 'receptive field').
+- A feature map is a collection of multiple neurons each of which looks at different regions of the input with the same weights. All neurons in a feature map extract the same feature (but from different regions of the input). It is called a 'feature map' because it is a mapping of where a certain feature is found in the image. 
+- Weights for all the neurons in one feature map will be the same but bewteen feature maps the weights will be different. This is because different feature maps are extracting different features (one could be extracing edges, other could be extracting texture etc.)
+
+The figure below shows two neurons in a feature map (the right slab) along with the regions in the input from which the neurons extract features. 
+
+![featuremap](featuremap1.png)
+
+In the figure above, the two neurons produce two feature maps. You can have multiple such neurons convolve an image, each having a different set of weights, and each produces a feature map.
+
+# Comprehension - Feature Maps
+Consider the VGGNet architecture shown below. The first convolutional layer takes the input image of size (224, 224, 3), uses a (3, 3, 3) filter (with some padding), and produces an output of (224, 224). This (224, 224) output is then fed to a ReLU to generate a (224, 224) feature map. Note that the term 'feature map' refers to the (non-linear) output of the activation function, not what goes into the activation function (i.e. the output of the convolution).
+
+Similarly, multiple other (224, 224) feature maps are generated using different (3, 3, 3) filters. In the case of VGGNet, 64 feature maps of size (224, 224) are generated, which are denoted in the figure below as the tensor 224 x 224 x 64. Each of the 64 feature maps try to identify certain features (such as edges, textures etc.) in the (224, 224, 3) input image.
+
+![vgg](vgg.png)
+
+The (224, 224, 64) tensor is the output of the first convolutional layer.  In other words, the first convolutional layer consists of 64 (3, 3, 3) filters, and hence contains 64 x 27 trainable weights (assuming there are no biases).
+ 
+The 64 feature maps, or the (224, 224, 64) tensor, is then fed to a pooling layer. You will study the pooling layer in the next segment.
+
+# Questions
+**If we use 32 filters (or kernels) of size 3x3x3 to convolve an image of size 128x128x3, how many feature maps will be created after the convolution?**
+- We have already seen that each kernel of 3x3x3 will produce 1 feature map on an input of size 224x224x3. With 32 kernels, we will get 32 feature maps.
+
+---
+
+**Given an image of size 128x128x3, a stride of 1, padding of 1, what will be the size of the output if we use 32 kernels of size 3x3x3?**
+- $128\times 128\times 32$
+- Each filter will produce a feature map of size 128x128 (with stride and padding of 1).  Thus, 32  filters will produce 32 feature maps of size 128x128.
+- Each filter will produce a feature map of size 128x128 (with stride and padding of 1).  Thus, 32  filters will produce 32 feature maps of size 128x128.
+
+---
+
+**Given an image of size 128x128x3, a stride of 1, zero padding, what will be the size of the output if we use 32 kernels of size 3x3x3?**
+- The output of one kernel will be (128 - 3 +1) = 126 x 126, and thus, the output of 32 kernels will be 126 x 126 x 32.
+
+---
+
+**FIll in the blank: The values in a feature map are ____ related to the weights of the filter generating the map.**
+
+- Non-linearly
+- Feature map is the output from the activation function, which is usually non-linear (such as ReLU). That is, for a patch vector p and weight vector w, the values in the feature map will be $f(w^T.p)$ where $f$ is a non-linear activation function.
+
+# Pooling
+- Role of a individual pixel is not clear w.r.t to the larger image (other than basic things like intensity & color)
+- The strength of the response (of the retinal neurons) is proportional to the summation over the excitatory region. 
+- After extracting features (as feature maps), CNNs typically aggregate these features using the pooling layer. 
+- Pooling tries to figure out whether a particular region in the image has the feature we are interested in or not. It essentially looks at larger regions (having multiple patches) of the image and captures an aggregate statistic (max, average etc.) of each region. In other words, it makes the network invariant to local transformations.
+- Examples of local transformations: face location is different, eyes are closed vs open, smiling vs frowning etc.
+- It reduces the height and width of each feature map, but the number of feature maps remains constant.
+- Pooling has the advantage of making the representation more compact by reducing the spatial size (height and width) of the feature maps, thereby reducing the number of parameters to be learnt. 
+- On the other hand, it also loses a lot of information, which is often considered a potential disadvantage. Having said that, pooling has empirically proven to improve the performance of most deep CNNs.
+- Capsule networks were designed to address some of these potential drawbacks of the conventional CNN architecture.
+
+The two most popular aggregate functions used in pooling are 'max' and 'average'. The intuition behind these are as follows:
+
+- Max pooling: If any one of the patches says something strongly about the presence of a certain feature, then the pooling layer counts that feature as 'detected'.
+
+  ![maxpooling](pooling.png)
+
+- Average pooling: If one patch says something very firmly but the other ones disagree,  the pooling layer takes the average to find out.
+
+# Questions
+
+**Which of the following statements related to pooling are correct?**
+
+| Option                                                                                                                 | True / False |
+|------------------------------------------------------------------------------------------------------------------------|--------------|
+| It makes the network invariant to local transformations.                                                               | True         |
+| It makes the representation of the feature map more compact, thereby reducing the number of parameters in the network. | True         |
+| It reduces the width, height and depth of the input.                                                                   | False        |
+| It reduces only the width and the height.                                                                              | True         |
+
+- Since it takes an average, max or some other operation over group of pixel, it does not look at an individual pixel, making network invariant to local transformation.  
+- It decreases the height and width, which reduces the number of parameters in a feature map. 
+
+---
+
+**How many trainable parameters are there in the pooling layer?**
+- Zero
+- There are no parameters in pooling. The pooling layer just computes the aggregate of the input. For e.g. in max pooling, it takes max over group of pixels. We do not need to adjust any parameter to take max. 
+
+---
+
+**Find the output of the 'average pooling' in the following matrix X with a stride length of 2.**
+
+$X = \begin{bmatrix}
+1&6&12&9\\
+3&9&0&5\\
+3&5&1&7\\
+6&4&0&1
+\end{bmatrix}$
+
+- Output of Average Pooling: $\begin{bmatrix}
+4.75&6.5\\
+4.5&2.25
+\end{bmatrix}$
+
+# CNN Unit
+
+To summarise, a typical CNN layer (or unit) involves the following two components in sequence:
+- We start with an original image and do convolutions using multiple filters to get multiple feature maps.
+- A pooling layer takes the statistical aggregate of the feature maps
+
+# Deep CNNs
+Typically, deep CNNs have multiple such CNN units (i.e. feature map-pooling pairs) arranged sequentially. 
+
+To summarise, a typical CNN has the following sequence of CNN layers:
+
+- We have an input image which is convolved using multiple filters to create multiple feature maps
+- Each feature map, of size (c, c), is pooled to generate a (c/2, c/2) output (for a standard 2 x 2 pooling). 
+- The above pattern is called a CNN layer or unit. Multiple such CNN layers are stacked on top of one another to create deep CNN networks.
+
+Note that pooling reduces only the height and the width of a feature map, not the depth (i.e. the number of channels). For example, if you have m feature maps each of size (c, c), the pooling operation will produce m outputs each of size (c/2, c/2).
+
+# Questions
+**Given an input of size 224x224x3 and stride of 2 and filter size of 2x2, what will be the output after the pooling operation?**
+- 112x112x3
+
+---
+
+**What does a typical CNN 'unit' (also called a CNN 'layer') comprise of?**
+- A collection of feature maps followed by a pooling operation
+- What we refer to as a CNN layer or unit is a collection of m feature maps each of which is pooled to generate m outputs. Typically, the output of pooling reduces the size to half, since the most common form of pooling is with a stride of 2.
+
+---
+
+**In a typical deep CNN, the size of each subsequent feature map reduces with the depth of the network. The size reduction is typically done in two ways  - 1) convolution without padding or 2) by pooling.**
+
+**What is the main reason we prefer a lower dimensional output of an image from the network?**
+
+- We want a compact representation of the image as the output, one which preferably captures only the useful features in the image
+- The reason we want a compact representation of the image is to get rid of all the redundancies in the image. For e.g. all the 224 x 224 x 3 pixels may not be required to do a classification or object detection task, just a smaller vector (say of length 5000) may be enough.
+
+# Summary
+We learnt the basics of convolutional neural networks and their common applications in computer vision such as image classification, object detection, etc. You also learnt that CNNs are not limited to images but can be extended to videos, text, audio etc. 
+
+The design of CNNs uses many observations from the animal visual system, such as each retinal neuron looks at its own (identical) receptive field, some neurons respond proportionally to the summation over excitatory regions (pooling), the images are perceived in a hierarchical manner, etc.
+
+You learned that images are naturally represented in the form of arrays of numbers. Greyscale images have a single channel while colour images have three channels (Red Green Blue). The number of channels or the 'depth' of the image can vary depending on how we represent the image. Each channel of a pixel, usually between 0-255, indicates the 'intensity' of a certain colour.
+
+You saw that specialised filters, or kernels can be designed to extract specific features from an image (such as vertical edges). A filter convolves an image and extracts features from each 'patch'. Multiple filters are used to extract different features from the image. Convolutions can be done using various strides and paddings.
+
+The formula to calculate the output shape after convolution is given by:
+
+$\displaystyle (\frac{n+2P-k}{S}+1), (\frac{n+2P-k}{S}+1)$, where
+- The image is of size n x n
+- The filter is k x k
+- Padding is P
+- Stride is S
+
+The filters are learned during training (backpropagation). Each filter (consisting of weights and biases) is called a neuron. Multiple neurons are used to convolve an image (or feature maps from the previous layers) to generate new feature maps.  The feature maps contain the output of convolution + non-linear activation operations on the input. 
+
+A typical CNN unit (or layer) in a large CNN-based network comprises multiple filters (or neurons), followed by non-linear activations, and then a pooling layer. The pooling layer computes a statistical aggregate (max, sum etc.) over various regions of the input and reduces sensitivity to minor, local variations in the image.  Multiple such CNN units are stacked together, finally followed by some fully connected layers, to form deep convolutional networks.
+
+# Questions
+**What is the range of possible values of each channel of a pixel if we represent each pixel with 5 bits?**
+- Since we are representing each pixel by 5 bits, the total pixels will be 2^5 = 32. So the range is 0-31
+
+---
+
+**Suppose we want to take the average over a (3, 3) patch in an image using a filter. Can you represent the 'average filter'?**
+- $\frac{1}{9}\begin{bmatrix}
+1&1&1\\
+1&1&1\\
+1&1&1
+\end{bmatrix}$
+- The convolution operation in this case should produce an expression like 1/n(x1+x2+x3...xn). In this case 1/n = 1/9 which is the correct factor as the average of 9 numbers will be computed by this filter at one time. Also since all the entries are 1, the convolution operation of this filter over a patch of 9*9 input will produce the sum of 9 numbers.
+
+---
+
+**Suppose we convolve an image X of size 4x4 with filter Y. We use 'zero-padding' of 1 (i.e. adding zeros around each edge of the image) and a stride length of 1. Find the output of the convolution X*Y.**
+
+$X = \begin{bmatrix}
+1&0&0&1\\
+-1&2&1&0\\
+0&1&0&0\\
+0&0&1&-3
+\end{bmatrix}, Y = \begin{bmatrix}
+0&1&0\\
+0&0&0\\
+0&1&0
+\end{bmatrix}$
+
+- $\begin{bmatrix}
+-1&2&1&0\\
+1&1&0&1\\
+-1&2&2&-3\\
+0&1&0&0
+\end{bmatrix}$
+
+---
+
+**Which layers contain trainable parameters in CNN?**
+- The pooling layer does not contain any trainable parameters, Convolution and fully connected layers do. 
+- We learn the value of those parameters during backpropagation. 
+- Since pooling is just taking aggregate, there are no parameters involved in it. 
+- Say, we want to take an average of 4 numbers, we will just do (1/4) ( 4 numbers). 
+- There are no parameters that need to be learned.  
+- Fully connected layer obviously has weights, we already know that from multilayer perceptron. 
+
+---
+
+**What are some properties of filters?**
+- If a filter is extracting a particular feature at one spatial location (x,y), it must be extracting the same feature at some other spatial location (x2,y2).
+- Multiple different filters extract a variety of features from the same patch in an image.
+
+---
+
+**What is the advantage of padding other than to keep the spatial dimension (width and height) of the output constant?**
+- If we don’t do padding then the information at the borders would be “washed away” too quickly.
+- Padding helps to preserve the information at the edges, otherwise, the convolution operation would extract information only from the central regions of the image. 
+
+---
+
+**Which of the following statements related to pooling are correct? More than one options may be correct.**
+
+| Statement                                                                                                                                              | True / False |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| Pooling reduces the width and height of the output, thereby reducing the number of parameters and the amount of computation being done in the network. | True         |
+| Since it reduces the number of parameters in the network, it also helps control overfitting.                                                           | True         |
+| Pooling does not help control overfitting.                                                                                                             | False        |
+| Pooling makes the network invariant to certain local transformations.                                                                                  | True         |
+
+- Pooling reduces the width and height, thereby reducing the number of parameters and the amount of computation (since with less number of parameters there will be fewer computations involved in feedforward/backpropagation etc.). 
+- Pooling reduces the number of parameters and computation, it also controls overfitting.
+- Since pooling takes a statistical aggregate over multiple regions of an image, it makes the network invariant to 'local transformations' (such as the face being tilted a little, or an object being located in a different region than what the training data had seen).
+
+
 
 # References
 - [Research Paper - Receptive field for single neurons in the cat's striate cortex](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1363130/pdf/jphysiol01298-0128.pdf)
 - [Deep Learning - Cheatsheet](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-deep-learning)
 - [Deep Learning - Stanford](https://stanford.edu/~shervine/teaching/cs-230/)
 - [CNN Explained](https://towardsdatascience.com/convolutional-neural-networks-explained-9cc5188c4939)
+- [Capsule Networks](http://arxiv.org/pdf/1710.09829.pdf)
