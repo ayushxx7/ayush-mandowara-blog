@@ -2,7 +2,7 @@
 title: Backpropagation
 description: NN, Neural, Neurons, backprop, backpropagation
 date: "2021-09-15"
-image: "NN.png"
+image: "backprop.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning"]
 ---

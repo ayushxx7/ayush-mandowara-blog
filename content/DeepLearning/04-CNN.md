@@ -2,7 +2,7 @@
 title: Convolutional Neural Networks (CNNs)
 description: NN, Neural, Neurons, perceptron
 date: "2021-11-22"
-image: "NN.png"
+image: "cnn.jpeg"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
 ---
