@@ -71,7 +71,7 @@ plot_image([bin_image, open_img, close_img, eroded_img, dilated_img], cmap='gray
 
 ```
 
-# Questions
+### Questions
 
 | Statement                                                | True / False |
 |----------------------------------------------------------|--------------|
@@ -106,6 +106,47 @@ plot_image([bin_image, open_img, close_img, eroded_img, dilated_img], cmap='gray
 - First, erosion will be used to remove the white skull portion. 
 - But this will also shrink the size of the brain. 
 - To make the dimension of the brain same, dilation will be used.
+
+# Normalization
+- Normalisation makes the training process much smoother. 
+- In backpropagation, the gradients are (directly or idirectly) related to the derivatives $f'(x)$ where $f$ is the activation function. In any activation function, if the value is too large, the gradient will be close to zero, and the weight updates cannot happen in the right direction.
+
+## Why Normalisation
+- Contrast and Lighting condtions: We need to account for variation in pictures, or different settings of machines taking images.
+- Gradient Propagation: Normalized images make for much better gradient propagation
+
+## Outliers
+- To handle outliers, it is better to normalize using some percentile ranges rather than bounding by max and min otherwise the data might scale to small range between 0 to 0.1 while we ideally want it to be between 0 and 1.
+
+```py heading="Normalization"
+norm1_image = image/255 # works well with RGB images
+norm2_image = (image - np.min(image))/(np.max(image) - np.min(image))
+norm3_image = (image - np.percentile(image,5))/ (np.percentile(image,95) - np.percentile(image,5))
+
+plot_image([image, norm1_image, norm2_image, norm3_image], cmap='gray')
+```
+
+### Question
+
+**In which case should we go for max/min normalization instead of dividing by 255?**
+
+- It finds better application in non-natural images
+- Non-natural images are usually specific to the range of the values that they lie between - dividing by 255 distorts the data of this image (e.g. some MRI regions have pixels that never reach 255, and hence 255 is an arbitrary value.)
+
+**Which betwen (0 to 1)  and (-1 to 1) is a more suitable range for input data in the case we use a neural network with ReLU activation?**
+- 0 to 1 range is preferred in the case we use a neural network with ReLU activation as it discards the data below the value 0. 
+
+**Which of the following are the suitable transformations in the case you have outliers in the input data?**
+
+| Statement                                        | True / False |
+|--------------------------------------------------|--------------|
+| $\frac{(x-x_{min})}{x_{max}-x_{min}}$            | False        |
+| $\frac{(x-x_{mean})}{\text{standard deviation}}$ | True         |
+| $\frac{(x-x_{percentile(5)})}{x_{max}-x_{min}}$  | True         |
+
+- Since we have outliers, we can normalize it by dividing it by percentile. 
+- It is not preferred to take the difference between the max and min for the division as those values can take extreme values when compared to normal data points.  
+- Percentile has to be selected such that the outliers are removed.  
 
 ---
 
