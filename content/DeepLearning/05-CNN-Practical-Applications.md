@@ -32,7 +32,7 @@ Neural Networks have changed the face of image processing in the industry.
  The term morphological transformation refers to any modification involving the shape and form of the images. These are very often used in image analysis tasks. Although they are used with all types of images, they are especially powerful for images that are not natural (come from a source other than a picture of the real world).
 
 #### Thresholding
-- Converting RGB image into grayscale
+- Converting RGB image into greyscale
 - Set threshold, intensity above is 1, intensity below is 0
 
 #### Erosion and Dilation
@@ -87,17 +87,17 @@ plot_image([bin_image, open_img, close_img, eroded_img, dilated_img], cmap='gray
 - Closing removes dark spots by performing Dilation followed by Erosion!
 
 **Which between Dilation and Erosion will remove black spots?**
-- Dilation shirnks dark spots, enlarges bright spots
+- Dilation shrinks dark spots, enlarges bright spots
 
 **Identifying the technique used**
 
 ![erosion](erosion.png)
 - Erosion shrinks bright spots, enlarges dark spots. 
-- You can see that the widdth of the alphabel 'j' has been reduced.
+- You can see that the width of the alphabet 'j' has been reduced.
 
 ![dilation](dilation.png)
-- Dilation shirnks dark spots, enlarges bright spots.
-- You can see that the width of the alphabel 'j' has been increased.
+- Dilation shrinks dark spots, enlarges bright spots.
+- You can see that the width of the alphabet 'j' has been increased.
 
 **Given below is the X-ray image of the brain. Which of the following transformations you will use to remove just the outer skull keeping the dimension of the brain same.**
 
@@ -109,10 +109,10 @@ plot_image([bin_image, open_img, close_img, eroded_img, dilated_img], cmap='gray
 
 # Normalization
 - Normalisation makes the training process much smoother. 
-- In backpropagation, the gradients are (directly or idirectly) related to the derivatives $f'(x)$ where $f$ is the activation function. In any activation function, if the value is too large, the gradient will be close to zero, and the weight updates cannot happen in the right direction.
+- In backpropagation, the gradients are (directly or indirectly) related to the derivatives $f'(x)$ where $f$ is the activation function. In any activation function, if the value is too large, the gradient will be close to zero, and the weight updates cannot happen in the right direction.
 
 ## Why Normalisation
-- Contrast and Lighting condtions: We need to account for variation in pictures, or different settings of machines taking images.
+- Contrast and Lighting conditions: We need to account for variation in pictures, or different settings of machines taking images.
 - Gradient Propagation: Normalized images make for much better gradient propagation
 
 ## Outliers
@@ -133,7 +133,7 @@ plot_image([image, norm1_image, norm2_image, norm3_image], cmap='gray')
 - It finds better application in non-natural images
 - Non-natural images are usually specific to the range of the values that they lie between - dividing by 255 distorts the data of this image (e.g. some MRI regions have pixels that never reach 255, and hence 255 is an arbitrary value.)
 
-**Which betwen (0 to 1)  and (-1 to 1) is a more suitable range for input data in the case we use a neural network with ReLU activation?**
+**Which between (0 to 1)  and (-1 to 1) is a more suitable range for input data in the case we use a neural network with ReLU activation?**
 - 0 to 1 range is preferred in the case we use a neural network with ReLU activation as it discards the data below the value 0. 
 
 **Which of the following are the suitable transformations in the case you have outliers in the input data?**
