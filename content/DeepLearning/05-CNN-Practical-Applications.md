@@ -7,6 +7,45 @@ author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Neural networks in industry applications](#neural-networks-in-industry-applications)
+* [Data Preprocessing: Shape, Size and Form](#data-preprocessing-shape-size-and-form)
+  * [Images - Channels and sizes](#images---channels-and-sizes)
+    * [Question](#question)
+  * [Images - Transformations](#images---transformations)
+    * [Morphological Transformations](#morphological-transformations)
+      * [Thresholding](#thresholding)
+      * [Erosion and Dilation](#erosion-and-dilation)
+      * [Opening and Closing](#opening-and-closing)
+    * [Questions](#questions)
+* [Normalization](#normalization)
+  * [Why Normalisation](#why-normalisation)
+  * [Outliers](#outliers)
+    * [Question](#question-1)
+* [Augmentation](#augmentation)
+  * [Reasons](#reasons)
+  * [Types of Augmentation](#types-of-augmentation)
+    * [Linear transformations](#linear-transformations)
+    * [Affine transformations](#affine-transformations)
+    * [Questions](#questions-1)
+* [Resnet](#resnet)
+* [Ablation](#ablation)
+* [Overfitting](#overfitting)
+* [Reasons why learning may not happen](#reasons-why-learning-may-not-happen)
+    * [Question](#question-2)
+* [Hyperparameter Tuning](#hyperparameter-tuning)
+  * [Parameters to tune](#parameters-to-tune)
+* [Summary](#summary)
+  * [Data preprocessing](#data-preprocessing)
+  * [Network building](#network-building)
+    * [Questions](#questions-2)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
+
 # Neural networks in industry applications
 Neural Networks have changed the face of image processing in the industry.
 
@@ -248,6 +287,86 @@ bright_jitter = image*0.999 + np.zeros_like(image)*0.001
 | Illumination | True         |
 
 
+# Resnet
+- The ResNet team argued that a net with $n + 1$ layers should perform at least as good as the one with $n$ layers. 
+- This is because even if the additional layer simply lets the input pass through it (i.e. acts as an identity function $f(x) = x$), it will perform identically to the n-layered network. 
+- In Resnet, instead of estimating $H(x)$, we estimate the residue $F(x) = H(x) - x$
+- In extreme case if the unit simply lets the signal pass-through (i.e. $H(x) = x$) it would easier to push $F(x)$ to zero than to learn $H(x)$
+- The units are therefore called "Residular Units"
+- This facilitates "skip connections" or "shortcut connections"
+- The connections don't add any extra parameter or complexity to the network, they simply add the input to the residual
+- Resnet enabled very deep networks
+
+![resnet](resnet.png)
+
+![bottleneck](bottleneck_res.png)
+- [Intuiton for bottleneck units](https://stats.stackexchange.com/questions/347280/regarding-the-understanding-of-bottleneck-unit-of-resnet)
+
+# Ablation
+- Before training the net on the entire dataset, you should always try to first run some experiments to check whether the net is fitting on a small dataset or not.
+- Ablation run refers to a process where you take a small subset of your data, and try to build your model on it. Broadly, an ablation study is where you systematically remove parts of the input to see which parts of the input are relevant to the networks output.
+
+# Overfitting
+- Overfitting tell us that whether the network is capable of learning the patterns in the training set.
+- A good test of any model is to check whether it can overfit on the training data (i.e. the training loss consistently reduces along epochs). 
+- This technique is especially useful in deep learning because most deep learning models are trained on large datasets, and if they are unable to overfit a small version, then they are unlikely to learn from the larger version.
+
+# Reasons why learning may not happen
+1. Activation function not good enough
+2. Learning rate not optimised
+3. SGD Optimiser not used
+4. Initialisation not done correctly
+5. Problem with network architecture
+
+- During training, sometimes you may get NaN as a loss instead of some finite number. This denotes that the output value predicted by the model is very high, which results in high loss value. This causes exploding gradient problem. 
+- The problem could be a high learning rate and to overcome, you can use SGD Optimiser. 
+- Although the adaptive methods (Adam, RMSProp etc.) have better training performance, they can generalise worse than SGD. 
+- Furthermore, you can also play with some of the initialisation techniques like Xavier initialisation, He initialisation etc. and change the architecture of the network if the problem does not get solved. 
+
+### Question
+
+**Which activation is preferred in Deep Learning Architecture?**
+- ReLU is preferred because it does not suffer from the issue of gradient explosion.
+
+# Hyperparameter Tuning
+The basic idea is to track the validation loss with increasing epochs for various values of a hyperparameter.
+
+## Parameters to tune
+- Learning Rate & Variation + Optimisers
+  - You know that using a high learning rate such as $0.1$ for the entire training process is not a good idea since the loss may start to oscillate around the minima later. 
+  - So, at the start of the training, we use a high learning rate for the model to learn fast, but as we train further and proceed towards the minima, we decrease the learning rate gradually. 
+- Augmentation Techniques
+
+# Summary
+
+## Data preprocessing
+- Morphological Transformations: This refers to changing the shape and size of images. The typical transformations are erosion, dilation, opening and closing. 
+- Augmentation: Refers to making changes related to rotation, translation, shearing, etc. Augmentation is often used in image-based deep learning tasks to increase the amount and variance of training data. Augmentation should only be done on the training set, never on the validation set.
+- Normalisation: Refers to rescaling the pixel values so that they lie within a confined range. One of the reasons to do this is to help with the issue of propagating gradients.
+
+## Network building
+- Choosing the architecture: The biggest of resnet is that the 'skip connections' mechanism allows very deep networks.
+- Ablation Experiments: These refer to taking a small chunk of data and running your model on it - this helps in figuring out if the model is running at all.
+- Overfitting on Training Data: This tells you whether the model is behaving as expected or not.
+- Metrics: Depending on the situation, we choose the appropriate metrics. For binary classification problems, AUC is usually the best metric.
+- Hyperparameter tuning: We tune hyperparameters such as the learning rate, augmentation of images, batch size, etc. Also, we only change the architecture of the network if we have already tried tuning all other hyperparameters.
+
+### Questions
+
+**Suppose you have data containing parameters of an engine of a vehicle and the company wants to predict whether the engine is good or faulty using some machine learning model. Some parameter of the faulty engine can also take extreme values. Given that you normalise the data before training, which normalisation technique you will use?**
+- Subtract the percentile with a particular value from the parameters of the engine and then divide by difference of maximum and minimum percentile of the parameter. 
+
+**Suppose that you have been given the task to identify posture of a person, whether the person is standing, sitting, bending at an angle of 30 degrees to the left or bending at an angle of 30 degrees to the right, If you are using data augmentation to increase the volume of data, which among "translation, flipping, zoom in/out and illumination" you will not apply?**
+- Cannot do flipping as the model has to identify bending at an angle of 30 degrees to the left and bending at an angle of 30 degrees to the right differently. 
+
+**Why do we prefer a gradual decrease in learning rate from a high value to low value during training?**
+- If the decay rate is slow, a lot of time will be wasted bouncing around with little improvement in the loss. 
+- If the decay rate is too high, the learning rate will decay soon to very less value and unable to reach best minima. 
+
+**While calculating the initial learning rate during ablation experiment, how do we calculate the gradient?**
+- The gradient of loss w.r.t the epoch
+
+
 ---
 
 # References
@@ -255,3 +374,9 @@ bright_jitter = image*0.999 + np.zeros_like(image)*0.001
 - [Different kinds of Scans](https://www.medicalnewstoday.com/articles/154877)
 - [Transformations with OpenCV](https://docs.opencv.org/trunk/d9/d61/tutorial_py_morphological_ops.html)
 - [Natural Images - Statistical Definition](https://stats.stackexchange.com/questions/25737/definition-of-natural-images-in-the-context-of-machine-learning)
+- [Research Paper - Resnet Original Architure](https://arxiv.org/abs/1512.03385)
+- [Research Paper - Proposed ResNet Architecture](https://arxiv.org/pdf/1603.05027.pdf)
+- [Resnet - Github](https://github.com/raghakot/keras-resnet)
+- [Prevent overfitting - hackernoon](https://hackernoon.com/memorizing-is-not-learning-6-tricks-to-prevent-overfitting-in-machine-learning-820b091dc42)
+- [Research Paper - Comparison between optimiser](https://arxiv.org/pdf/1705.08292.pdf)
+- [Keras Callbacks](https://keras.io/callbacks/)
