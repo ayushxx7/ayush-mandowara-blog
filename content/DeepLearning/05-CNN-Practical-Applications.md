@@ -148,6 +148,106 @@ plot_image([image, norm1_image, norm2_image, norm3_image], cmap='gray')
 - It is not preferred to take the difference between the max and min for the division as those values can take extreme values when compared to normal data points.  
 - Percentile has to be selected such that the outliers are removed.  
 
+# Augmentation
+## Reasons
+- Many times, the quantity of data that we have is not sufficient to perform the task of classification well enough. In such cases, we perform data augmentation.
+  - As an example, if we are working with a dataset of classifying gemstones into their different types, we may not have enough number of images (since high-quality images are difficult to obtain). In this case, we can perform augmentation to increase the size of your dataset.
+- Tackling Overfitting
+  - scenario: If there is bright spot in center it is a rose, else it's a daisy. If we use augmentation, such kind of memorization can be avoided. If angle is different, it is still a rose.
+
+- As you know that pooling increases the invariance. 
+- If a picture of a dog is in the top left corner of an image, with pooling, you would be able to recognise if the dog is in little bit left/right/up/down around the top left corner. 
+- But with training data consisting of data augmentation like flipping, rotation, cropping, translation, illumination, scaling, adding noise etc., the model learns all these variations. 
+- This significantly boosts the accuracy of the model. 
+- So, even if the dog is there at any corner of the image, the model will be able to recognise it with high accuracy
+
+## Types of Augmentation
+### Linear transformations
+- multiply image with transformation matrix to get transformed image
+- rotation
+- flipping (vertical/horizontal)
+
+```py heading="Linear Transformations"
+from skimage import transform
+
+# flip left-right, up-down
+image_flipr = np.fliplr(image)
+image_flipud = np.flipud(image)
+```
+
+### Affine transformations
+- translations followed by linear transformation
+- Suppose you want to rotate an image, you probably don't want to rotate about the top-left or bottom-left corner (where the origin generally is), but rather the center of the image. 
+- Hence, first we will translate the origin to center, apply transformation, and then translate origin bacak to the original point.
+
+
+```py heading="Affine"
+shift_x, shift_y = image.shape[0]/2, image.shape[1]/2
+
+# translation by certain units
+matrix_to_topleft = transform.SimilarityTransform(translation=[-shift_x, -shift_y])
+matrix_to_center = transform.SimilarityTransform(translation=[shift_x, shift_y])
+
+# rotation
+rot_transforms =  transform.AffineTransform(rotation=np.deg2rad(45))
+rot_matrix = matrix_to_topleft + rot_transforms + matrix_to_center
+rot_image = transform.warp(image, rot_matrix)
+
+# scaling 
+scale_transforms = transform.AffineTransform(scale=(2, 2))
+scale_matrix = matrix_to_topleft + scale_transforms + matrix_to_center
+scale_image_zoom_out = transform.warp(image, scale_matrix)
+
+scale_transforms = transform.AffineTransform(scale=(0.5, 0.5))
+scale_matrix = matrix_to_topleft + scale_transforms + matrix_to_center
+scale_image_zoom_in = transform.warp(image, scale_matrix)
+
+# translation
+transaltion_transforms = transform.AffineTransform(translation=(5
+```
+
+```py heading="Shear"
+# shear transforms
+shear_transforms = transform.AffineTransform(shear=np.deg2rad(45))
+shear_matrix = matrix_to_topleft + shear_transforms + matrix_to_center
+shear_image = transform.warp(image, shear_matrix)
+
+bright_jitter = image*0.999 + np.zeros_like(image)*0.001
+```
+
+- Note: Not all transformations are applicable to all images. Example chest x-ray can't have upside down flip. This choice is based on practical experience.
+
+### Questions
+
+**Where augmentation will not be used?**
+
+| Statement                    | True / False |
+|------------------------------|--------------|
+| Increasing speed of training | True         |
+| Lesser training data         | False        |
+| Tackling overfitting         | False        |
+
+
+**Which statements are True?**
+
+| Statement                                                                                                     | True / False |
+|---------------------------------------------------------------------------------------------------------------|--------------|
+| More the training data, more effective the model                                                              | True         |
+| Even if the data is of lower quality, data augmentation can boost the effectiveness of the model              | True         |
+| Data augmentation reduces overfitting                                                                         | True         |
+| Some of the data augmentation techniques are rotation, flipping, blurring, random cropping, shifting, zooming | True         |
+
+
+**Suppose a city is hit by a cyclone and the insurance company wants to estimate the damage. They want to automate this process and gives you images of the houses captured by drones. Which of the following data augmentation technique you will apply while training a CNN model?**
+
+| Technique    | True / False |
+|--------------|--------------|
+| Rotation     | False        |
+| Translation  | True         |
+| Flipping     | False        |
+| Illumination | True         |
+
+
 ---
 
 # References
