@@ -41,6 +41,7 @@ tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
   * [Data preprocessing](#data-preprocessing)
   * [Network building](#network-building)
     * [Questions](#questions-2)
+* [Weighted cross-entropy](#weighted-cross-entropy)
 * [References](#references)
 
 <!-- vim-markdown-toc -->
@@ -366,6 +367,30 @@ The basic idea is to track the validation loss with increasing epochs for variou
 **While calculating the initial learning rate during ablation experiment, how do we calculate the gradient?**
 - The gradient of loss w.r.t the epoch
 
+# Weighted cross-entropy
+- A common solution to the low prevalence rate problem is using a weighted cross-entropy loss. The loss is modified such that misclassifications of the low-prevalence class are penalised more heavily than the other class.
+- Therefore, every time the model makes an error on the abnormal class (in this case, ‘effusion’), we penalise it heavily by multiplying the loss by a high value of weights. This results in an increase in loss for misclassified classes and therefore the change in weights due to backpropagation is more. So, the learning curve for the weights responsible for misclassification is more. 
+
+Let’s say “no finding” is class 0 and “effusion” is class 1.
+- bin_weights[0,0]:  Actual class: 0, Predicted class: 0, so no penalty, just normal weight of 1. 
+- bin_weights[1,1]:  Actual class: 1, Predicted class: 1, so no penalty, just normal weight of 1. 
+
+In case of abnormality: 
+- bin_weights[1,0] - Actual class is 1, Predicted class is 0, penalise by weight of 5.
+- bin_weights[0,1] - Actual class is 0, Predicted class is 1, penalise by weight of 5.
+
+```py heading="Weighted Cross Entropy"
+def w_categorical_crossentropy(y_true, y_pred, weights):
+    nb_cl = len(weights)
+    final_mask = K.zeros_like(y_pred[:, 0])
+    y_pred_max = K.max(y_pred, axis=1)
+    y_pred_max = K.reshape(y_pred_max, (K.shape(y_pred)[0], 1))
+    y_pred_max_mat = K.cast(K.equal(y_pred, y_pred_max), K.floatx())
+    for c_p, c_t in product(range(nb_cl), range(nb_cl)):
+        final_mask += (weights[c_t, c_p] * y_pred_max_mat[:, c_p] * y_true[:, c_t])
+    cross_ent = K.categorical_crossentropy(y_true, y_pred, from_logits=False)
+    return cross_ent * final_mask
+```
 
 ---
 
@@ -380,3 +405,4 @@ The basic idea is to track the validation loss with increasing epochs for variou
 - [Prevent overfitting - hackernoon](https://hackernoon.com/memorizing-is-not-learning-6-tricks-to-prevent-overfitting-in-machine-learning-820b091dc42)
 - [Research Paper - Comparison between optimiser](https://arxiv.org/pdf/1705.08292.pdf)
 - [Keras Callbacks](https://keras.io/callbacks/)
+- [Reasons for Neural Networks not performing well](https://blog.slavv.com/37-reasons-why-your-neural-network-is-not-working-4020854bd607)
