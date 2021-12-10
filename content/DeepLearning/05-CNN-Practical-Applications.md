@@ -1,7 +1,7 @@
 ---
 title: Convolutional Neural Networks (CNNs) - Industry Applications
 description: CNN, NN, Neural, Neurons, AI, ML, DL, Deep Learning
-date: "2021-11-22"
+date: "2021-12-08"
 image: "cnn_industry.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
