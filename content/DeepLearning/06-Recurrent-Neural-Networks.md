@@ -45,6 +45,8 @@ Recurrent neural networks are variants of the vanilla neural networks which are 
 
 Normal Neural Networks can approximate any given function, while Recurrent Neural Networks can simulate any given algorithm
 
+The state of the recurrent network updates itself as it sees new elements in the sequence. This is the core idea of an RNN - it updates what it has learnt as it sees new inputs in the sequence. The 'next state' is influenced by the previous one, and so it can learn the dependence between the subsequent states which is a characteristic of sequence problems. 
+
 # RNN Formulation
 
 The most basic form can be expressed as:
@@ -63,3 +65,58 @@ In other words, $a^l_{t+1}$ is a function of $a_{t+1}^{l-1}$ and $a_t^l$:
 $a_{t+1}^{(l)} = g(a_{t}^{(l)}, z_{t+1}^{(l)})$
 
 We say that there is a recurrent relationship between $a^l_{t+1}$ and its previous state $a^l_t$, and hence the name Recurrent Neural Networks.
+
+The feedforward equations are extensions of the vanilla neural nets - the only difference being that now there is a weight associated with both $a_{t+1}^{l+1}\; \text{and}\; a^l_t$.
+
+$a^l_{t+1} = \sigma(W_F.a^{l-1}_{t+1} + W_R.a^l_t + b^l)$
+
+The $W_F$'s are called the **feedforward weights** and the $W_R$'s are called the **recurrent weights**.
+
+# Architecture of RNN
+
+![RNN Arch](rnn_arch.jfif)
+
+- The green layer is the input layer in which the $x_i$'s are elements in a sequence - words of a sentence, frames of a video, etc.
+- The layers in red are the 'recurrent layers' - they represent the various states evolving over time as new inputs are seen by the network.
+- The blue layer is the output layer where the $y_i$'s are the outputs emitted by the network at each time step.
+
+For example, in a parts of speech (POS) tagging task (assigning tags such as noun, verb, adjective etc. to each word in a sentence), the $yi$'s will be the POS tags of the corresponding $x_{i}$'s. 
+
+Note that in this figure, the input and output sequences are of equal lengths, but this is not necessary. For e.g. to classify a sentence as 'positive/negative' (sentiment-wise), the output layer will emit just one label (0/1) at the end of T timesteps
+
+You can see that the layers of an RNN are similar to the vanilla neural nets (MLPs) - each layer has some neurons and is interconnected to the previous and the next layers. The only difference is that now each layer has a copy of itself along the time dimension (the various states of a layer, shown in red colour).  Thus, the layers along the time dimension have the same number of neurons (since they represent the various states of same $l_{th}$ layer over time). 
+
+## The flow of information in RNNs is as follows
+- each layer gets the input from two directions 
+  - activations from the previous layer at the current timestep and 
+  - activations from the current layer at the previous timestep. 
+- Similarly, the activations (outputs from each layer) go in two directions 
+  - towards the next layer at the current timestep (through $W_F$), and 
+  - towards the next timestep in the same layer (through $W_R$).
+- The 'depth' of an RNN refers to the number of layers in the RNN
+- All the timesteps at a particular layer are virtual copies of the same layer. The only difference between different timesteps at a particular layer is their state.
+
+
+### Example
+The inputs going into the second layer at the 8th time step are:
+- $a^1_8$: output from previous layer at current timestep
+- $a^2_7$: output from current layer at previous timestep
+
+The following outputs (activations) will necessarily have the same size:
+- $a^4_3, a^4_5$, $a^2_2, a^2_6$
+- This is because same layers are copied over at different timesteps
+- The outputs of any layer at different steps will be of exactly the same size since they basically represent the output of the same layer evolving over time.
+
+
+However, the same cannot be said for 
+- $a^4_3, a^3_5$, $a^2_2, a^3_6$
+- Since different layers (at each depth) can have different number of neurons
+
+## Unrolled RNN
+![unrolled rnn](unrolled_rnn.png)
+
+In the diagram given below, the input $(x_t)$ and hidden state $(h_t)$ are shown at each time step t, which are changing across time steps. 
+Both $x_t$ and $h_t$ have their separate weights $W_F$ and $W_R$ respectively, which remain the same for each time step as depicted by just using $W_F$ and $W_R$ at each time step. 
+
+## Rolled RNN
+![rolled rnn](rolled_rnn.png)
