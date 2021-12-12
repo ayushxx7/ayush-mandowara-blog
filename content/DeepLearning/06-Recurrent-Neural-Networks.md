@@ -57,8 +57,8 @@ $a_{t+1}^{(l)} = g(a_{t}^{(l)}, z_{t+1}^{(l)})$
 - The basic notation itself changes from $a^l$ to $a^l_t$. 
 - In fact, in RNNs it is somewhat incomplete to say 'the output at layer $l$'; we rather say 'the output at _layer_ $l$ and _time_ $t$'
 - One way to think about RNNs is that the network changes its state with time (as it sees new words in a sentence, new frames in a video etc.). 
-- The the output of layer $l$ at time $t+1$, $a^l_{t+1}$, depends on two things:
-  1. Theoutput of the previous layer at the same time step $a_{t+1}^{l+1}$ (this is the _depth_ dimension).
+- The output of layer $l$ at time $t+1$, $a^l_{t+1}$, depends on two things:
+  1. The output of the previous layer at the same time step $a_{t+1}^{l+1}$ (this is the _depth_ dimension).
   2. Its own previous state $a_t^l$ (this is the _time_ dimension)
 
 In other words, $a^l_{t+1}$ is a function of $a_{t+1}^{l-1}$ and $a_t^l$:  
@@ -120,3 +120,51 @@ Both $x_t$ and $h_t$ have their separate weights $W_F$ and $W_R$ respectively, w
 
 ## Rolled RNN
 ![rolled rnn](rolled_rnn.png)
+
+# Feeding Sequences to RNNs
+
+- In the case of an RNN, each data point is a sequence.
+- The individual sequences are assumed to be independently and identically distributed (I.I.D.), though the entities within a sequence may have a dependence on each other.
+- As the network keeps ingesting new elements in the sequence it updates its current state (i.e. updates its activations after consuming each element in the sequence). 
+- After the sequence is finished (say after T time steps), the output from the last layer of the network $a_T^L$ captures the representation of the entire sequence. 
+- You can now do whatever you want with this output - use it to classify the sentence as correct/incorrect, feed it to a regression output, etc. 
+- This is exactly analogous to the way CNNs are used to learn a representation of images, and one can use those representations for a variety of tasks.
+
+## IID Data - Independently and Identically Distributed Data
+
+- In a sentence classification task (grammatically correct/incorrect), the individual sentences used for training are IID
+- In a video classification task (contains violence/does not contain violence), the individual videos are IID
+
+### Question
+
+**Consider a batch of 50 sequences. Suppose you have trained an RNN model with these sequences. Let’s call this model A. Now, suppose you want to train another model B which has the exact same architecture as model A. Assume that the training is not stochastic in nature (that is, all the seed values are same while initialising the network parameters). Which of the following actions will result in a different set of weights for model B after the training is done in the exact same fashion as done in case of model A?**
+
+| Statement                                                  | True / False |
+|------------------------------------------------------------|--------------|
+| Shuffling the order of entities within each sequence.      | True         |
+| Shuffling the order of the sequences in the training data. | False        |
+
+- Since entities within a sequence are dependent on each other, changing the sequence will result in a different sequence altogether. 
+- This will result in the RNN learning a different representation for the sequence and model B would eventually end up having different set of weights than model A.
+
+# Sizes of Components of RNN
+
+![size_table](size_table.png)
+
+# RNNs: Simplified Notations
+
+The RNN Feedforward equations are:
+- $z^t_t = W^l_Fa^{l-1}_t + W^l_Ra^{l}_{t-1} + b^l$
+- $a^l_t = f^l(z^l_t)$
+
+The above equation can be written in the following matrix form:
+
+- $z_t^l = \begin{bmatrix}W^l_F & W^l_R\end{bmatrix}\begin{bmatrix}a^{l-1}_t \\ a^l_{t-1}\end{bmatrix}+b^l$
+
+We can now merge the two weight matrices into one to get the following notation:
+
+- $z^l_t = W^l\begin{bmatrix}a_t^{l-1}, a_{t-1}^l\end{bmatrix} + b^l$
+
+where $W^l$ denotes the feedforward + recurrent weights of layer $l$ formed by stacking (or concatenating) $W^l_F$ and $W_R^l$ side by side and $\begin{bmatrix}a^{l-1}_t,a^l_{t-1}\end{bmatrix}$ on top of each other.
+
+This form is not only more concise but also more computationally efficient. Rather than doing two matrix multiplications and adding them, the network can do one large matrix multiplication. 
