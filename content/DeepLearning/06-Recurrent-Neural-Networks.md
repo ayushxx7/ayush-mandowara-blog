@@ -7,6 +7,42 @@ author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "rnn"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Recurrent Neural Networks](#recurrent-neural-networks)
+* [What are Sequences](#what-are-sequences)
+* [RNN Formulation](#rnn-formulation)
+* [Architecture of RNN](#architecture-of-rnn)
+  * [The flow of information in RNNs is as follows](#the-flow-of-information-in-rnns-is-as-follows)
+    * [Example](#example)
+  * [Unrolled RNN](#unrolled-rnn)
+  * [Rolled RNN](#rolled-rnn)
+* [Feeding Sequences to RNNs](#feeding-sequences-to-rnns)
+  * [IID Data - Independently and Identically Distributed Data](#iid-data---independently-and-identically-distributed-data)
+    * [Question](#question)
+* [Sizes of Components of RNN](#sizes-of-components-of-rnn)
+* [RNNs: Simplified Notations](#rnns-simplified-notations)
+* [Trainable Parameters](#trainable-parameters)
+  * [Output Layer](#output-layer)
+  * [RNN Unit Connections](#rnn-unit-connections)
+  * [Formula for Number of Parameters](#formula-for-number-of-parameters)
+  * [Question](#question-1)
+* [Types of RNNs](#types-of-rnns)
+  * [Many-to-one RNN](#many-to-one-rnn)
+    * [Loss](#loss)
+  * [Many-to-many RNN: Equal input and output length](#many-to-many-rnn-equal-input-and-output-length)
+  * [Many-to-many RNN: Unequal input and output lengths](#many-to-many-rnn-unequal-input-and-output-lengths)
+    * [Loss](#loss-1)
+  * [One-to-many RNN](#one-to-many-rnn)
+* [Loss](#loss-2)
+* [Quesions](#quesions)
+* [The Gradient Propagation Problem in RNNs](#the-gradient-propagation-problem-in-rnns)
+* [Questions](#questions)
+
+<!-- vim-markdown-toc -->
+
+
 # Recurrent Neural Networks
 - RNNs are specially designed to work with sequential data, i.e. data where there is a natural notion of a 'sequence' such as text (sequences of words, sentences etc.), videos (sequences of images), speech etc. 
 - RNNs have been able to produce state-of-the-art results in fields such as natural language processing, computer vision, and time series analysis.
@@ -259,7 +295,7 @@ In this type of RNN, the input is a single entity, and output consists of a sequ
 
 ![one-to-many](one-to-many.jfif)
 
-This architecture hasn’t been used in the fields of computer vision or natural language processing. Rather, it has been used by a wide variety of industries such as music and arts.
+This architecture hasn't been used in the fields of computer vision or natural language processing. Rather, it has been used by a wide variety of industries such as music and arts.
 
 This type of architecture is generally used as a generative model. Among popular use of this architecture are applications such as generating music (given a genre, for example), generating landscape images given a keyword, generating text given an instruction/topic, etc.
 
@@ -285,10 +321,86 @@ We can now add the losses for all the sequences (i.e. for a batch of input seque
 - The input comprises of a sequence, the document, which is greater in length than the length of the output sequence, the summary. Therefore an encoder-decoder architecture will be the most suitable of all the enlisted ones.
 
 **Let’s say you want to predict whether a person will click on an advertisement link based on features such as browsing time on the website, timestamp, gender, age, occupation, ethnicity, etc. Which of the following RNN architectures will be most suitable for this kind of problem?**
-- The problem is doesn’t involve any sequences. Therefore, an RNN won’t be suitable for this type of problem. A standard feedforward network more appropriate in this case.
+- The problem is doesn't involve any sequences. Therefore, an RNN won’t be suitable for this type of problem. A standard feedforward network more appropriate in this case.
 
 **Let’s say you’re working for a company which wants to build an AI keyboard for smartphones. The aim of the company is to build such a keyboard which predicts the next word based on previous few words that the user has typed. For example, when someone types "Hey, I will be late to the ___", the network should predict the next word (say) "office".**
 - The input is a sequence of words based on which the next word, a single entity, will be predicted. Hence, a many-to-one architecture will be most suitable in this case.
 
 **Suppose you’re working for an online video streaming company that wants to caption each frame of the videos with the actor name that is present in each scene. What architecture do you think would be most suitable for this job?**
 - The input is a video, which is nothing but a sequence of images, and the output is the actor’s name in the scene. Hence a standard many-to-many architecture will be suitable for this problem.
+
+# The Gradient Propagation Problem in RNNs
+- Although RNNs are extremely versatile and can (theoretically) learn extremely complex functions, the biggest problem is that they are extremely hard to train (especially when the sequences get very long).  
+- RNNs are designed to learn patterns in sequential data, i.e. patterns across 'time'. RNNs are also capable of learning what are called long-term dependencies. For example, in a machine translation task, we expect the network to learn the interdependencies between the first and the eighth word, learn the grammar of the languages, etc. This is accomplished through the recurrent layers of the net - each state learns the cumulative knowledge of the sequence seen so far by the network.
+- Although this feature is what makes RNNs so powerful, it introduces a severe problem - as the sequences become longer, it becomes much harder to backpropagate the errors back into the network. The gradients 'die out' by the time they reach the initial time steps during backpropagation.
+- RNNs use a slightly modified version of backpropagation to update the weights. In a standard neural network, the errors are propagated from the output layer to the input layer. However, in RNNs, errors are propagated not only from right to left but also through the time axis.
+
+![many-to-many](many-to-many-no-equation.jpg)
+
+- Refer to the figure above - notice that the output $y_t$ is not only dependent on the input $x_t$, but also on the inputs $x_{t-1}, x_{t-2}$, and so on till $x_1$. Thus, the loss at time $t$ depends on all the inputs and weights that appear before $t$. For e.g. if you change $W_F^2$, it will affect all the outputs $a_1^2, a_2^2, a_3^2$, which will eventually affect the output $y_t$ 9through a long feedforward chain).
+- This implies that the gradient of the loss at time $t$ needs to be propagated backwards through all the layers and all the time steps. To appreciate the complexity of this task, consider a typical speech recognition task - a typical spoken English sentence may have 30-40 words, so you have to backpropagate the gradients through 40 time steps and the different layers.
+- This type of backpropagation is known as backpropagation through time or BPTT.
+- The exact backpropagation equations are covered in the optional session, though here let's just understand the high-level intuition. The feedforward equation is:
+
+  $a_t^1 = f(W_F^la_t^{l-1} + W_R^la^l_{t-1} + b^l)$
+
+- Now, recall that in backpropagation we compute the gradient of subsequent layers with respect to the previous layers. In the time dimension, we compute the gradient of output at time $t$ with respect to the output at $t-1$, i.e. $\frac{\partial a^l_t}{\partial a^l_{t-1}}$. This quantity depends linearly on $W_R$, so $\frac{\partial a_t^l}{\partial a_{t-1}^l}$ is some function of $W_R$:
+
+  $\frac{\partial a_t^l}{\partial a^l_{t-1}} = g(W_R)$
+
+- Similarly, extending the gradient one time step backwards, the gradient $\frac{\partial a^l_{t-1}}{\partial a^l_{t-2}}$ will also be a function of $W_R$, and so on. The problem is that these gradients are eventually multiplied with each other during backpropagating, and so the matrix $W_R$ is raised to higher and higher power of its own, $(W_R)^n$, as the error propagates backwards in time.
+
+- The longer the sequence, the higher the power. This leads to exploding or vanishing gradients. If the individual entries of $W_R$ are greater than one, the values in $(W_R)^n$ will explode to extremely large values; if the entries are lesser than one, $(W_R)^n$ will make them extremely small.
+
+- You could still use some workarounds to solve the problem of exploding gradients. You can impose an upper limit to the gradient while training, commonly known as gradient clipping. By controlling the maximum value of a gradient, you could do away with the problem of exploding gradients.
+
+- But the problem of vanishing gradients is a more serious one. The vanishing gradient problem is so rampant and serious in the case of RNNs that it renders RNNs useless in practical applications. One way to get rid of this problem is to use short sequences instead of long sequences. But this is more of a compromise than a solution - it restricts the applications where RNNs can be used.
+
+- To get rid of the vanishing gradient problem, researchers have been tinkering around with the RNN architecture for a long while. The most notable and popular modifications are the long short-term memory units (LSTMs) and the gated recurrent units (GRUs). 
+
+
+# Questions
+
+**While backpropagating, one is supposed to calculate the gradient of the loss w.r.t. the weights sitting at different layers. While backpropagating, which of the following entities will have an influence on the gradient of $y_3$?**
+- $x_1, x_2, and x_3$
+- $y_3$ will depend on each input till $x_3$
+
+**Which of the following techniques will have no effect on the either of the two problems: vanishing and the exploding gradients?**
+
+| Statement                                                  | True / False |
+|------------------------------------------------------------|--------------|
+| Making the sequence longer or shorter                      | False        |
+| Putting an upper limit to the gradient by clipping it      | False        |
+| Changing the architecture from many-to-many to many-to-one | True         |
+
+- Changing the architectures will have no effect in the architecture as far as calculations are concerned. The vanishing and exploding gradients problem is because of sequence length, not because of the type of architecture in use.
+
+**Suppose you’re building a sentiment classifier based on users’ reviews on a product. The model is expected to predict a numeric ‘sentiment score’ for each review. Which of the following RNN architectures will be most suitable for this kind of problem?**
+- Many-to-one architecture
+- The input, a review, is a sequence of words and the output, the sentiment label, is a single entity. Hence, this architecture will be most suitable in this case.
+
+**Consider a many-to-one recurrent neural network with 20 timesteps and a batch size of 32 (batch size refers to the number of sequences fed into the network in one iteration). The network architecture is as follows:**
+
+![param-table](graded_table.png)
+
+**What is the size of $W_R^2$?**
+- (8, 8)
+- We know that the $W^l_R$ is of size (#neurons at layer l, #neurons at layer l). The second hidden layer has 8 neurons. Therefore, its dimension is (8, 8).
+
+**What is the size of $a^1_8$?**
+- (5, 32)
+- We know that the size of $a^l_t$ is (#neurons at layer l, #batch_size). The first hidden layer has 5 neurons and the batch size is 32. Therefore, its dimension is (5, 32).
+
+**What of the following statement is incorrect?**
+
+| Statement                                                              | True / False                                        |
+|------------------------------------------------------------------------|-----------------------------------------------------|
+| The size of $W^1_F$ is greater than the size of $W^1_R$                | False                                               |
+| The activations at the output layer consist of a vector of 32 elements | False                                               |
+| The size of $a^2_3$ is larger than the size of $a^2_{10}$.               | True. Size of both $a_3^2$ and $a^2_{10}$ is (8, 32). |
+| The bias of the output layer $b^3$ is equivalent to a scalar           | False                                               |
+
+**Suppose you change the batch size from 32 to 128. Which of the following matrix sizes will be affected by this change?**
+- $a^2_{20}$
+- The size of $a^2_20$ will change to (8, 128) from (8, 32) after changing the batch size.
+
