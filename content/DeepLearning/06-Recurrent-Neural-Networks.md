@@ -168,3 +168,127 @@ We can now merge the two weight matrices into one to get the following notation:
 where $W^l$ denotes the feedforward + recurrent weights of layer $l$ formed by stacking (or concatenating) $W^l_F$ and $W_R^l$ side by side and $\begin{bmatrix}a^{l-1}_t,a^l_{t-1}\end{bmatrix}$ on top of each other.
 
 This form is not only more concise but also more computationally efficient. Rather than doing two matrix multiplications and adding them, the network can do one large matrix multiplication. 
+
+# Trainable Parameters
+## Output Layer
+- There is a dense connection between output layer and RNN Layer
+- Number of output layer weights = Number of RNN units * Number of output nodes
+- Number of biases = Number of output nodes
+
+## RNN Unit Connections
+- The hidden RNN layer constitutes connections across each of the RNN units as each of these units needs to know what is going inside the other unit for efficient results.
+
+## Formula for Number of Parameters
+
+Configurable parameters of a Simple RNN Layer
+- No of Simple RNN units in a layer
+- No of input streams fed into the network, acting as features
+
+Parameters for different Layers
+- Number of Input Weights = Number of input features * Number of RNN Units
+- Number of Recurrent Weights = Number of RNN units * Number of RNN Units
+- Number of Biases = Number of RNN Units
+
+Total Parameters
+- Total trainable parameters = Number of Input Weights + Number of Recurrent Weights + Number of Biases = (num_features*num_units)+(num_units*num_units)+num_units
+
+## Question
+**Assuming we have an RNN network with 4 input features, then 5 RNN units and then 3 output labels.** 
+
+- Number of Input Weights = 4*5 = 20
+- Number of Recurrent Weights = 5*5 = 25
+- Number of Biases = Number of RNN Units = 5
+- Number of Output Layer Weights = 5*3 = 15
+- Number of Biases = Number of Output Nodes = 3
+- Total Parameters = input parameters + recurrent parameters + output parameters = 20 + (25+5) + (15+3) = 68
+
+Just like the ANNs, the dimensions of the weights and biases in RNNs will be dependent upon the number of input features, number of hidden RNN units and number of output nodes. In the network we used above, considering that each input will be a single numeric value hence overall dimensions (1x4), the input weights will be of dimension (4x5). Similarly the recurrent weights will have dimensions (5x5), the recurrent bias (1x5) and Output weight will be a matrix of dimension (5x3).
+
+# Types of RNNs
+## Many-to-one RNN
+In this architecture, the input is a sequence while the output is a single element. We have already discussed an example of this type - classifying a sentence as grammatically correct/incorrect. The figure below shows the many-to-one architecture:
+
+![many-to-one](many-to-one.jfif)
+
+Note that each element of the input sequence $x_{i}$ is a numeric vector. For words in a sentence, you can use a one-hot encoded representation, use word embeddings etc.
+
+Some other examples of many-to-one problems are:
+- Predicting the sentiment score of a text (between -1 to 1). For e.g., you can train an RNN to assign sentiment scores to customer reviews etc. Note that this can be framed as either a regression problem (where the output is a continuous number) or a classification problem (e.g. when the sentiment is positive/neutral/negative)
+- Classifying videos into categories. For example, say you want to classify YouTube videos into two categories 'contains violent content / does not contain violence'. The output can be a single softmax neuron which predicts the probability that a video is violent. 
+
+Here, at the last layer, we only care about the activation coming from the last timestep i.e. activation after the full sequence has been pushed through the network.
+
+### Loss
+ In a many-to-one architecture (such as classifying a sentence as correct/incorrect), the loss is simply the difference between the predicted and the actual label. The loss is computed and backpropagated after the entire sequence has been digested by the network. 
+
+## Many-to-many RNN: Equal input and output length 
+
+In this type of RNN, the input (X) and output (Y) both are a sequence of multiple entities spread over timesteps.
+
+![many-to-many](many-to-many-no-equation.jpg)
+
+In this architecture, the network spits out an output at each timestep. There is a one-to-one correspondence between the input and output at each timestep. You can use this architecture for various tasks.
+
+Example: Part of Speech Tagger
+
+## Many-to-many RNN: Unequal input and output lengths
+
+In the previous many-to-many example of POS tagging, we had assumed that the lengths of the input and output sequences are equal. However, this is not always the case. There are many problems where the lengths of the input and output sequences are different. For example, consider the task of machine translation - the length of a Hindi sentence can be different from the corresponding English sentence. 
+
+The encoder-decoder architecture is used in tasks where the input and output sequences are of different lengths.
+
+![encoder-decoder](encoder_decoder.jpg)
+
+The above architecture comprises of two components - an encoder and a decoder both of which are RNNs themselves. The output of the encoder, called the encoded vector (and sometimes also the 'context vector'), captures a representation of the input sequence. The encoded vector is then fed to the decoder RNN which produces the output sequence.
+
+You can see that the input and output can now be of different lengths since there is no one-to-one correspondence between them anymore. This architecture gives the RNNs much-needed flexibility for real-world applications such as language translation.
+
+### Loss
+In a many-to-many architecture, the network emits an output at multiple time steps, and the loss is calculated at each time step. The total loss (= the sum of the losses at each time step) is propagated back into the network after the entire sequence has been ingested.
+
+In encoder-decoder architecture, 
+- The loss is backpropagated to the encoder through the decoder. Backpropagation starts from the output sequence of the decoder and ends at the input sequence.
+- The loss is calculated after every timestep of a sequence.
+- The loss corresponding to each element of the output sequence can be computed as they are being produced by the decoder. The loss corresponding to each output element can be computed on the fly as the outputs are being emitted by the decoder layer. They are added to get the total loss after all the time steps are over.
+- The loss is backpropagated after the entire sequence (or a batch of sequences) has been ingested by the network. Backpropagation only starts when the total loss of a sequence is computed (in fact, only after the total loss for a batch of sequences is computed). 
+- The total loss of a sequence is the sum of the losses of the individual output elements of the sequence
+
+## One-to-many RNN
+
+In this type of RNN, the input is a single entity, and output consists of a sequence. The following image shows such an architecture:
+
+![one-to-many](one-to-many.jfif)
+
+This architecture hasn’t been used in the fields of computer vision or natural language processing. Rather, it has been used by a wide variety of industries such as music and arts.
+
+This type of architecture is generally used as a generative model. Among popular use of this architecture are applications such as generating music (given a genre, for example), generating landscape images given a keyword, generating text given an instruction/topic, etc.
+
+# Loss
+
+- Let the network have $T_1$ input time steps and $T_2$ output time steps.
+- The input-output pairs are thus $(x_1, x_2, \ldots, x_{T_1})$ and $(y_1, y_2, \ldots, y_{T_2})$
+- $T_1$ and $T_2$ can be unequal.
+
+In many-to-one architectures, the output length $T_2=1$, i.e. there is only a single output $y_{out}$ for each sequence. If the actual correct label of the sequence is $y$, then the loss $L$ for each sequence is (assuming a cross-entropy loss):
+
+$L = \text{cross-entropy}(y_{out}, y)$
+
+In a many-to-many architecture, if the actual output is $(y_1, y_2, \ldots, y_{T_2})$ and the predicted output is $(y_1', y_2', ..., y'_{T_2})$, then the loss $L$ for each sequence is:
+
+$l = \sum_{i=1}^{T_2}\text{cross-entropy}(y_{i}', y_{i}')$
+
+We can now add the losses for all the sequences (i.e. for a batch of input sequences) and backpropagate the total loss into the network. 
+
+# Quesions
+
+**Suppose you have a corpus of English documents along with the summary of each document. You want to train an RNN model to build a document summarizer. Which of the following architectures is suited best for this problem?**
+- The input comprises of a sequence, the document, which is greater in length than the length of the output sequence, the summary. Therefore an encoder-decoder architecture will be the most suitable of all the enlisted ones.
+
+**Let’s say you want to predict whether a person will click on an advertisement link based on features such as browsing time on the website, timestamp, gender, age, occupation, ethnicity, etc. Which of the following RNN architectures will be most suitable for this kind of problem?**
+- The problem is doesn’t involve any sequences. Therefore, an RNN won’t be suitable for this type of problem. A standard feedforward network more appropriate in this case.
+
+**Let’s say you’re working for a company which wants to build an AI keyboard for smartphones. The aim of the company is to build such a keyboard which predicts the next word based on previous few words that the user has typed. For example, when someone types "Hey, I will be late to the ___", the network should predict the next word (say) "office".**
+- The input is a sequence of words based on which the next word, a single entity, will be predicted. Hence, a many-to-one architecture will be most suitable in this case.
+
+**Suppose you’re working for an online video streaming company that wants to caption each frame of the videos with the actor name that is present in each scene. What architecture do you think would be most suitable for this job?**
+- The input is a video, which is nothing but a sequence of images, and the output is the actor’s name in the scene. Hence a standard many-to-many architecture will be suitable for this problem.
