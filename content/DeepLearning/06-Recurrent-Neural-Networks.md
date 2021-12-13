@@ -1,7 +1,7 @@
 ---
-title: Convolutional Neural Networks (CNNs) - Industry Applications
-description: CNN, NN, Neural, Neurons, AI, ML, DL, Deep Learning
-date: "2021-12-08"
+title: Recurrent Neural Networks (RNNs)
+description: RNN, NN, Neural, Neurons, AI, ML, DL, Deep Learning
+date: "2021-12-13"
 image: "rnn.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "rnn"]
