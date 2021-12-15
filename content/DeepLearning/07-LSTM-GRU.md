@@ -140,3 +140,76 @@ Having said that, most real-life sequence problems such as speech recognition, t
 At the time of gradient calculation, the gradients depend on the derivation of Ct, which is a summation function. Therefore, however small the values become, they will have an addition (the plus sign while updating Ct) operation rather than a recursive multiplication, thus overcoming the vanishing gradient problem.
 
 
+---
+
+# Gated Recurrent Unit (GRU)
+
+Sometimes, you may need a lighter architecture. Considering the computational expense and the problem of overfitting, researchers have tried to come up with alternative structures to the LSTM cell.
+
+The most popular alternative is the gated recurrent unit (GRU), which was introduced in late 2014 by Kyunghyun Cho et al.
+
+Like LSTM, GRU also has gates, but there is no external memory like cell state in the GRU architecture. GRU has two gates: the reset gate and the update gate.
+
+The functionality of the reset gate is to decide the influence of the previous hidden state on the update of the current hidden state in combination with the current input.
+
+The functionality of the update gate is similar to that of the input gate in LSTM in terms of updating the memory with both the current information and any relevant past information.
+
+The major characteristics of the gating mechanism of GRU is that the gates (reset and update) operate on the hidden state, and not on the cell state, which is not even present in GRU. This makes the GRU model lighter than the LSTM model.
+
+![gru](gru.png)
+
+You can easily observe that in GRU, one less gate than LSTM results in fewer sets of weights, $W_z$, $W_r$, $W_h$, and each of these weights contain two types of weights, $W_F$ and $W_R$.
+
+There are only three sets of weights in GRU, whereas in RNN, you have just one set of weights. Therefore, the number of parameters in GRU will be three times that in RNN.
+
+While backpropagating through the hidden state, you can observe that ht is a summation function. Therefore, the values might get smaller, but the summation operator will ensure that we have a significant value of gradients even for longer dependencies.
+ 
+In practice, LSTMs and GRUs have replaced the standard RNNs most of the time because they are more effective and faster to train than vanilla RNNs (despite the larger number of parameters). In most sequence problems, the problem of vanishing gradient is far more severe than training time, which explains the more common use of advanced architectures such as GRU and LSTM.
+
+# Feedforward Equations of GRU
+
+# GRU Training Parameters
+- Input Weights = Num Layers * Num Features * Num Units
+- Recurrent Weights = Num Layers * Num Units * Num Units
+- Biases = Num Layers * Num Units
+- Total Parameters = Input Weights + Recurrent Weights + Biases
+- Num Units implies Numbr of Outputs
+- Num features implies Number of Inputs
+- Num layers for GRU will always be 3
+
+- Biases of GRU cell in keras = num layers * (2*num units)
+
+# Training Time compared to LSTM
+- Number of trainable parameters are not very different between LSTM and GRU
+- But computations are less in GRU
+- Because GRPU has less number of weights compared to LSTM
+- Hence GRU Training Time is less than LSTM
+
+# GRU Key Aspects
+- GRU is a simplified version of LSTM and also performs well especially if long sequences need not be remembered
+- Both types of states (short and long-term) are merged into one ($h_t$)
+- A single gate controller ($z_t$) controls both - erasing and writing the state
+- Thus, data in $h_{t-1}$ is erased first before storing a new value in $h_t$
+- If the new input is ignored the previous state itself will be given as output. Outliers are treated this way.
+- Full state vector is output at every timestep
+
+# RNN vs LSTM vs GRU
+- Standard RNN suffers from vanishing and exploding gradient problems
+- GRU has only one activation function ($\tanh$) whereas LSTM has two. GRU takes less time in training as well inference.
+- GRU also has less number of weights for a given configuration compared to LSTM
+- So, GRU is fater to train compared to LSTM
+- LSTM is suited for analyzing longer sequences and larger datasets compared to GRU
+- Long-term dependencies handled well by LSTM
+
+- When dependencies are very small, RNN might be a good option. This is because GRU has a lesser number of parameters to train.
+
+- If you want better results for longer dependency and have a requirement of training time, then GRU will be a good option.
+
+- When dependencies are longer and training speed is not a bottleneck, LSTM is a decent choice.
+
+Note that if the data set is small and dependencies are longer, GRU may even outperform LSTM, as LSTM requires more data for training and is harder to train than GRU. Otherwise, a tuned LSTM model will almost always outperform RNN and GRU.
+
+
+
+# References
+- [Research Paper - Speech Recognition with Deep RNN](https://arxiv.org/pdf/1303.5778.pdf)
