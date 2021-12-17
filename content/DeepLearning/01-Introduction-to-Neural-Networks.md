@@ -531,5 +531,6 @@ The output of a neuron is basically the activation function applied to the cumul
 # References
 - [Link Invalid](https://www.cse.iitb.ac.in/~shivaram/teaching/old/cs344+386-s2017/resources/classnote-1.pdf)
 - [Neural Nets to recognize handwritten digits](http://neuralnetworksanddeeplearning.com/chap1.html)
+- [Softmax vs Sigmoid](https://medium.com/arteos-ai/the-differences-between-sigmoid-and-softmax-activation-function-12adee8cf322)
 
 <!-- \includegraphics[height=0.8em, totalheight=0.9em, width=0.9em, alt=KA logo]{https://katex.org/img/khan-academy.png}$ -->
