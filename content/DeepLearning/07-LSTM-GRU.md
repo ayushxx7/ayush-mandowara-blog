@@ -213,3 +213,4 @@ Note that if the data set is small and dependencies are longer, GRU may even out
 
 # References
 - [Research Paper - Speech Recognition with Deep RNN](https://arxiv.org/pdf/1303.5778.pdf)
+- [Understanding LSTM](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
