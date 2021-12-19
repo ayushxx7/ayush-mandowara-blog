@@ -637,3 +637,4 @@ This is the reason Lasso regression can perform feature selection.
 - [Common Math Functions](https://www.mathsisfun.com/sets/functions-common.html)
 - [Data Tranformations](https://online.stat.psu.edu/stat462/node/155/)
 - [Nonlinear Regression](https://online.stat.psu.edu/stat462/node/204/)
+- [Which metric is better for regression](https://medium.com/analytics-vidhya/mae-mse-rmse-coefficient-of-determination-adjusted-r-squared-which-metric-is-better-cd0326a5697e)
