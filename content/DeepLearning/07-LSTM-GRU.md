@@ -7,6 +7,31 @@ author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "rnn"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Bi-Directional RNN](#bi-directional-rnn)
+* [Problems with Vanilla RNNs](#problems-with-vanilla-rnns)
+* [Long, Short-term Memory Networks](#long-short-term-memory-networks)
+* [Characteristics of an LSTM Cell](#characteristics-of-an-lstm-cell)
+* [LSTM Cell](#lstm-cell)
+* [Common Activation Functions](#common-activation-functions)
+  * [Sigmoid](#sigmoid)
+  * [tanh](#tanh)
+* [LSTM Cell Structure](#lstm-cell-structure)
+* [Feedforward in LSTM](#feedforward-in-lstm)
+* [Dimensions involved in LSTM](#dimensions-involved-in-lstm)
+* [Trainable Parameters](#trainable-parameters)
+* [RNN vs LSTM](#rnn-vs-lstm)
+* [Gated Recurrent Unit (GRU)](#gated-recurrent-unit-gru)
+* [Feedforward Equations of GRU](#feedforward-equations-of-gru)
+* [GRU Training Parameters](#gru-training-parameters)
+* [Training Time compared to LSTM](#training-time-compared-to-lstm)
+* [GRU Key Aspects](#gru-key-aspects)
+* [RNN vs LSTM vs GRU](#rnn-vs-lstm-vs-gru)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Bi-Directional RNN
 - In bidirectional RNN, the input stream goes from left-to-right as well as well right-to-left. This way, the network has context of the future, making it more robust.
 - The bidirectional RNN is functionally exact same as RNN, except that it takes 2x the input. If the seqence length is $L$, then at t timestep, it gets input $w_t$ as well as $w_{L-t+1}$.
