@@ -1,11 +1,61 @@
 ---
 title: Convolutional Neural Networks (CNNs)
 description: NN, Neural, Neurons, perceptron
-date: "2021-11-22"
+date: "2021-12-23"
 image: "cnn.jpeg"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "cnn"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [CNN - Introduction](#cnn---introduction)
+* [Challenges in Image Processing](#challenges-in-image-processing)
+* [CNNs - A specialised architecture for visual data](#cnns---a-specialised-architecture-for-visual-data)
+* [Applications of CNNs](#applications-of-cnns)
+* [Receptive field for single neurons in the cat striate cortex](#receptive-field-for-single-neurons-in-the-cat-striate-cortex)
+* [Research Paper Insights - Summary](#research-paper-insights---summary)
+* [VGGNet Architecture](#vggnet-architecture)
+* [Questions](#questions)
+* [Reading Digital Images](#reading-digital-images)
+  * [Why is the Range of Pixel Values 0-255](#why-is-the-range-of-pixel-values-0-255)
+* [Questions](#questions-1)
+* [Video Analysis](#video-analysis)
+  * [Process](#process)
+* [Convolutions](#convolutions)
+  * [Filter](#filter)
+    * [Example](#example)
+  * [Detecting Features](#detecting-features)
+    * [Vertical Edge Detection](#vertical-edge-detection)
+    * [Horizontal Edge Detection](#horizontal-edge-detection)
+      * [Convolution Example](#convolution-example)
+    * [Sobel Filter](#sobel-filter)
+* [Questions](#questions-2)
+  * [Stride and Padding](#stride-and-padding)
+    * [Problem with Arbitrary Stride Length](#problem-with-arbitrary-stride-length)
+    * [Padding](#padding)
+    * [Why Padding is Necessary](#why-padding-is-necessary)
+* [Questions](#questions-3)
+  * [Output Size of Convolved Image](#output-size-of-convolved-image)
+* [Questions](#questions-4)
+  * [Convolution in Color](#convolution-in-color)
+  * [Bias](#bias)
+* [Questions](#questions-5)
+* [Feature Maps](#feature-maps)
+* [Comprehension - Feature Maps](#comprehension---feature-maps)
+* [Questions](#questions-6)
+* [Pooling](#pooling)
+* [Questions](#questions-7)
+* [CNN Unit](#cnn-unit)
+* [Deep CNNs](#deep-cnns)
+* [Questions](#questions-8)
+* [Summary](#summary)
+* [Questions](#questions-9)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # Purpose
 Notes on Convolutional Neural Networks
