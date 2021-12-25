@@ -1,7 +1,7 @@
 ---
 title: Long, Short-term Memory, Gated Recurrent Unit
 description: RNN, NN, Neural, Neurons, AI, ML, DL, Deep Learning
-date: "2021-12-14"
+date: "2021-12-23"
 image: "lstm.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning", "rnn"]

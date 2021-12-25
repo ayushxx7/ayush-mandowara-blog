@@ -1,11 +1,43 @@
 ---
 title: Backpropagation
 description: NN, Neural, Neurons, backprop, backpropagation
-date: "2021-09-15"
+date: "2021-12-25"
 image: "backprop.png"
 author: "Ayush"
 tags: ["deep-learning", "neural-networks", "machine-learning"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [Neural Network Topology](#neural-network-topology)
+* [Training a Neural Network](#training-a-neural-network)
+  * [Mathematically](#mathematically)
+* [Complexity of the Loss Function](#complexity-of-the-loss-function)
+  * [Example](#example)
+* [Gradient Descent](#gradient-descent)
+  * [Questions](#questions)
+  * [Gradient Descent Algorithm](#gradient-descent-algorithm)
+* [Backpropogation](#backpropogation)
+  * [Algorithm](#algorithm)
+  * [Loss function of a neural network](#loss-function-of-a-neural-network)
+  * [Cross Entropy Loss](#cross-entropy-loss)
+    * [Example](#example-1)
+  * [Notations](#notations)
+  * [Gradient Descent on Output Layer with 3 neurons](#gradient-descent-on-output-layer-with-3-neurons)
+  * [Notation](#notation)
+  * [Strategy](#strategy)
+  * [Why do we call it backpropagation](#why-do-we-call-it-backpropagation)
+* [Gradient Descent - Detailed Solution for 3 layers having 2 neurons each](#gradient-descent---detailed-solution-for-3-layers-having-2-neurons-each)
+* [Stochastic Gradient Descent - SGD](#stochastic-gradient-descent---sgd)
+  * [What is SGD and why is it used](#what-is-sgd-and-why-is-it-used)
+  * [Algorithm](#algorithm-1)
+  * [SGD Training Procedure](#sgd-training-procedure)
+  * [Questions](#questions-1)
+  * [Advantages of SGD](#advantages-of-sgd)
+  * [Exploration and Exploitation](#exploration-and-exploitation)
+
+<!-- vim-markdown-toc -->
 
 # Neural Network Topology
 1. Architecture is fixed
