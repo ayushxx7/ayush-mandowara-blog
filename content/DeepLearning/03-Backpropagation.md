@@ -18,7 +18,7 @@ tags: ["deep-learning", "neural-networks", "machine-learning"]
 * [Gradient Descent](#gradient-descent)
   * [Questions](#questions)
   * [Gradient Descent Algorithm](#gradient-descent-algorithm)
-* [Backpropogation](#backpropogation)
+* [Backpropagation](#backpropagation)
   * [Algorithm](#algorithm)
   * [Loss function of a neural network](#loss-function-of-a-neural-network)
   * [Cross Entropy Loss](#cross-entropy-loss)
@@ -134,7 +134,7 @@ Imagine an n -dimensional space whose each dimension (axis) corresponds to one p
 - The model starts with a random guess of the initial weights, predict the output using feedforward and change the weights in the direction of reducing loss. 
 - This is the gradient descent algorithm.
 
-# Backpropogation
+# Backpropagation
 
 ## Algorithm
 1. The data points are first fed forward

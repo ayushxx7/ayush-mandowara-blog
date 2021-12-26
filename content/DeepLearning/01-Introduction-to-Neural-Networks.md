@@ -492,7 +492,7 @@ The output of a neuron is basically the activation function applied to the cumul
   - which activation function is to be used in a given layer
 - hence these are all hyperparameter.
 
-**For an RGB image arranged in 32 x 32 pixels square array, you want to classify it into a dog, cat, bird or none of the above. How many features/datapoints will be fed into the neural network?**
+**For an RGB image arranged in 32 x 32 pixels square array, you want to classify it into a dog, cat, bird or none of the above. How many features/data points will be fed into the neural network?**
 - 3072. 
 - A black white 32 x 32 image would have 32x32 input features. The RGB image has 3 channels. Hence 32x32x3 = 3072 input features.
 
@@ -521,16 +521,9 @@ The output of a neuron is basically the activation function applied to the cumul
 - True
 - Correct, to simplify the network we assume that  the activation function of all the neurons in a particular layer is the same
 
-
-
-
-
-
 --- 
 
 # References
 - [Link Invalid](https://www.cse.iitb.ac.in/~shivaram/teaching/old/cs344+386-s2017/resources/classnote-1.pdf)
 - [Neural Nets to recognize handwritten digits](http://neuralnetworksanddeeplearning.com/chap1.html)
 - [Softmax vs Sigmoid](https://medium.com/arteos-ai/the-differences-between-sigmoid-and-softmax-activation-function-12adee8cf322)
-
-<!-- \includegraphics[height=0.8em, totalheight=0.9em, width=0.9em, alt=KA logo]{https://katex.org/img/khan-academy.png}$ -->
