@@ -190,9 +190,12 @@ A balance is required between Bias and Variance
 - Model should be complex enough to make fewer errors
 - Correctness vs Consistency trade-off
 - We want both Bias and Variance to be low, however, decreasing bias increases variance and vice-versa.
+- Bias of a model represents the amount of error the model will commit on a given dataset, while the variance of the model measures how much the model changes when trained on a different dataset
+
 ## Example
 - Cracking competitive exam
     - you need to know the fundamentals, but you also require some level of memorization
+
 
 # Regularization
 - Steps to reduce model complexity
