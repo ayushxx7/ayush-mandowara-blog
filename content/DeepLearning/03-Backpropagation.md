@@ -223,7 +223,7 @@ You can see that the gradients are calculated in a backward direction \starting 
 - $dz^1$
 - $dW^1$
 
-This is why the process is known as backpropogation.
+This is why the process is known as backpropagation.
 
 ## Why do we call it backpropagation
 We propagate the gradients in a backward direction starting from the output layer
@@ -241,7 +241,7 @@ We propagate the gradients in a backward direction starting from the output laye
 - An epoch is one pass through the entire training set, and you use multiple epochs (typically 10, 20, 50, 100 etc.) while training. 
 - In each epoch, you reshuffle all the data points, divide the reshuffled set into m batches, and update weights based on gradient of each batch. 
 
-This training technique is called *stochastic gradient descent*, commonly a\betareviated as *SGD*.
+This training technique is called *stochastic gradient descent*, commonly abbreviated as *SGD*.
 
 ## Algorithm
 for epoch in 1 to L:
