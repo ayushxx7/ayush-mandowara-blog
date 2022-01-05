@@ -794,3 +794,5 @@ $X = \begin{bmatrix}
 - [Deep Learning - Stanford](https://stanford.edu/~shervine/teaching/cs-230/)
 - [CNN Explained](https://towardsdatascience.com/convolutional-neural-networks-explained-9cc5188c4939)
 - [Capsule Networks](http://arxiv.org/pdf/1710.09829.pdf)
+- [Style Transfer - Research Paper](https://arxiv.org/pdf/1508.06576.pdf)
+- [Object Detection - Research Paper](https://arxiv.org/pdf/1506.01497.pdf)
