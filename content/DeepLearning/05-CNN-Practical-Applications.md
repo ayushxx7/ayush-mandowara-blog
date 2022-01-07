@@ -406,3 +406,4 @@ def w_categorical_crossentropy(y_true, y_pred, weights):
 - [Research Paper - Comparison between optimiser](https://arxiv.org/pdf/1705.08292.pdf)
 - [Keras Callbacks](https://keras.io/callbacks/)
 - [Reasons for Neural Networks not performing well](https://blog.slavv.com/37-reasons-why-your-neural-network-is-not-working-4020854bd607)
+- [Morphological Transformations](https://www.mathworks.com/help/images/morphological-dilation-and-erosion.html)
