@@ -38,6 +38,56 @@ To do any NLP task, your system should be able to take the raw unprocessed data 
 
 Once you have the meaning of the words, obtained via semantic analysis, you can use it for a variety of applications. Machine translation, chatbots and many other applications require a complete understanding of the text, right from the lexical level to the understanding of syntax to that of meaning. Hence, in most of these applications, lexical and semantic processing simply form the “pre-processing” layer of the overall process. In some simpler applications, only lexical processing is also enough as the pre-processing part.
 
+# Text Encoding
+Character Encoding: A unique code assinged to a character, based on the encoding standard, to represent it on a computer.
+
+It is not necessary that when you work with text, you’ll get to work with the English language. With so many languages in the world and internet being accessed by many countries, there is a lot of text in non-English languages. For you to work with non-English text, you need to understand how all the other characters are stored.
+ 
+Computers could handle numbers directly and store them on registers (the smallest unit of memory on a computer). But they couldn’t store the non-numeric characters as is. The alphabets and special characters were to be converted to a numeric value first before they could be stored.
+
+Hence, the concept of encoding came into existence. All the non-numeric characters were encoded to a number using a code. Also, the encoding techniques had to be standardised so that different computer manufacturers won’t use different encoding techniques.
+
+The first encoding standard that came into existence was the ASCII (American Standard Code for Information Interchange) standard, in 1960. ASCII standard assigned a unique code to each character of the keyboard which was known as  ASCII code. For example, the ASCII code of the alphabet ‘A’ is 65 and that of the digit zero is 48. Since then, there have been several revisions made to the codes to incorporate new characters that came into existence after the initial encoding.
+
+When ASCII was built, English alphabets were the only alphabets that were present on the keyboard. With time, new languages began to show up on keyboard sets which brought new characters. ASCII became outdated and couldn’t incorporate so many languages. A new standard has come into existence in recent years - the Unicode standard. It supports all the languages in the world - both modern and the older ones.
+
+For someone working on text processing, knowing how to handle encodings becomes crucial. Before even beginning with any text processing, you need to know what kind of encoding the text has and if required, modify it to another encoding format.
+
+## Encoding Standard
+1. Each character has a unique representation code on computers
+2. ASCII (American Standard Code for Information Interchange) was a widely popular standard that mostly ecodes all English characters
+3. The Unicode Standard helps represent text in almost all the languages of the world
+  - UTF-16: Encodes each character with a 16-bit code. It is a multiligual plane. It uses 2-bytes per character.
+  - UTF-8: Encodes each English character with an 8-bit code and each non-English character with a 32-bit code. First 8-bits use same representation as ASCII. It uses 1-byte per character.
+
+Let’s look at the relation between ASCII, UTF-8 and UTF-16 through an example. The table below shows the ASCII, UTF-8 and UTF-16 codes for two symbols - the dollar sign and the Indian rupee symbol.
+
+![Types of Encoding](encoding.png)
+
+As you can see, UTF-8 offers a big advantage in cases when the character is an English character or a character from the ASCII character set. Also, while UTF-8 uses only 8 bits to store the character, UTF-16 (BE) uses 16 bits to store it, which looks like a waste of memory.
+
+However, in the second case, a symbol is used which doesn’t appear in the ASCII character set. For this case, UTF-8 uses 24 bits, whereas UTF-16 (BE) only uses 16. Hence the storage advantages offered by UTF-8 is reversed and actually becomes a disadvantage here. Also, the advantage UTF-8 offered previously by being same as the ASCII code is also not of use here, as ASCII code doesn’t even exist for this case.
+
+The default encoding for strings in python is Unicode UTF-8. You can also look at [this](https://mothereff.in/utf-8) UTF-8 encoder-decoder to look how a string is stored. Note that, the online tool gives you the hexadecimal codes of a given string.
+
+```py heading="Encoding in Python"
+# create a string
+amount = u"₹50"
+print('Default string: ', amount, '\n', 'Type of string', type(amount), '\n')
+
+# encode to UTF-8 byte format
+amount_encoded = amount.encode('utf-8')
+print('Encoded to UTF-8: ', amount_encoded, '\n', 'Type of string', type(amount_encoded), '\n')
+
+
+# sometime later in another computer...
+# decode from UTF-8 byte format
+amount_decoded = amount_encoded.decode('utf-8')
+print('Decoded from UTF-8: ', amount_decoded, '\n', 'Type of string', type(amount_decoded), '\n')
+```
+
+---
+
 # References
 - [Computational Social Science](https://www.youtube.com/watch?v=kyZkptxlSA8)
 - [Understanding Text using Cognitive Services](https://www.youtube.com/watch?v=hmUOr_i7NY4&t=42s)
