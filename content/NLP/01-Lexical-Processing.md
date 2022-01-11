@@ -86,6 +86,47 @@ amount_decoded = amount_encoded.decode('utf-8')
 print('Decoded from UTF-8: ', amount_decoded, '\n', 'Type of string', type(amount_decoded), '\n')
 ```
 
+# Regular Expressions
+Regular expressions, also called regex, are very powerful programming tools that are used for a variety of purposes such as feature extraction from text, string replacement and other string manipulations. For someone to become a master at text analytics, being proficient with regular expressions is a must-have skill.
+
+A regular expression is a set of characters, or a pattern, which is used to find substrings in a given string. 
+
+Let’s say you want to extract all the hashtags from a tweet. A hashtag has a fixed pattern to it, i.e. a pound (‘#’) character followed by a string. Some example hashtags are - #mumbai, #bangalore, #upgrad. You could easily achieve this task by providing this pattern and the tweet that you want to extract the pattern from (in this case, the pattern is - any string starting with #). Another example is to extract all the phone numbers from a large piece of textual data.
+
+In short, if there’s a pattern in any string, you can easily extract, substitute and do all kinds of other string manipulation operations using regular expressions.
+
+Learning regular expressions basically means learning how to identify and define these patterns.
+
+Regulars expressions are a language in itself since they have their own compilers. Almost all popular programming languages support working with regexes and so does Python.
+
+## Quantifiers
+Quantifiers allow you to mention and have control over how many times you want the character(s) in your pattern to occur.
+
+Let’s take an example. Suppose you have some data which have the word ‘awesome’ in it. The list might look like - [‘awesome’, ‘awesomeeee’, ‘awesomee’]. You decide to extract only those elements which have more than one ‘e’ at the end of the word ‘awesome’. This is where quantifiers come into picture. They let you handle these tasks.
+
+There are 4 common quantifiers:
+1. The ‘?’ operator
+    - The ‘?’  can be used where you want the preceding character of your pattern to be an optional character in the string. 
+    - It matches either 0 or 1 character at most.
+    - For example, if you want to write a regex that matches both ‘car’ and ‘cars’, the corresponding regex will be ’cars?’. ‘S’ followed by ‘?’ means that ‘s’ can be absent or present, i.e. it can be present zero or one time.
+1. The ‘*’ operator
+    - A ‘*’ quantifier matches the preceding character any number of times. 
+    - It matches 0 or more than 0 characters.
+1. The ‘+’ operator
+    - The ‘+’ quantifier matches the preceding character one or more times. 
+    - That means the preceding character has to be present at least once for the pattern to match the string.
+    - The only difference between '+' and '*' is that the '+' needs a character to be present at least once, while the '*' does not.
+1. The ‘{m, n}’ operator
+    - To specify occurrences of the preceding character a fixed number of times.
+    - `{m, n}`: Matches the preceding character ‘m’ times to ‘n’ times.
+    - `{m, }`: Matches the preceding character ‘m’ times to infinite times, i.e. there is no upper limit to the occurrence of the preceding character.
+    - `{, n}`: Matches the preceding character from zero to ‘n’ times, i.e. the upper limit is fixed regarding the occurrence of the preceding character.
+    - `{n}`: Matches if the preceding character occurs exactly ‘n’ number of times. 
+    - Note that while specifying the {m,n} notation, avoid using a space after the comma, i.e. use {m,n} rather than {m, n}.
+    - '?' is equivalent to zero or once, or {0, 1}
+    - '*' is equivalent to zero or more times, or {0, }
+    - '+' is equivalent to one or more times, or {1, }
+
 ---
 
 # References
