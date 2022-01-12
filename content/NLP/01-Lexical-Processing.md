@@ -239,9 +239,45 @@ You can use meta-sequences in two ways:
 - You can either use them without the square brackets. For example, the pattern ‘\w+’ will match any alphanumeric character.
 - Or you can them it inside the square brackets. For example, the pattern ‘[\w]+’ is same as ‘\w+’. But when you use meta-sequences inside a square bracket, they’re commonly used along with other meta-sequences. For example, the ‘[\w\s]+’ matches both alphanumeric characters and whitespaces. The square brackets are used to group these two meta-sequences into one.
 
+## Greedy versus Non-greedy Search
+
+When you use a regular expression to match a string, the regex greedily tries to look for the longest pattern possible in the string. For example, when you specify the pattern 'ab{2,5}' to match the string 'abbbbb', it will look for the maximum number of occurrences of 'b' (in this case 5).
+
+This is called a 'greedy approach'. By default, a regular expression is greedy in nature.
+
+There is another approach called the non-greedy approach, also called the lazy approach, where the regex stops looking for the pattern once a particular condition is satisfied.
+
+`?` can be placed at the end of a regex to convert the greedy approach (default) to non-greedy. Non-greedy means that the regex will only return minimum match (if found).
+
+```py heading='Greedy vs Non-Greedy'
+import re
+
+# greedy
+print(re.search("<.*>", "<HTML><TITLE>My Page</TITLE><HTML>"))
+
+# non-greedy
+print(re.search("<.*?>", "<HTML><TITLE>My Page</TITLE><HTML>"))
+```
+
+Let’s understand the non-greedy or the lazy approach with another example. Suppose, you have the string ‘3000’. Now, if you use the regular expression ‘30+’, it means that you want to look for a string which starts with ‘3’ and then has one or more '0's followed by it. This pattern will match the entire string, i.e. ‘3000’. This is the greedy way. But if you use the non-greedy technique, it will only match ‘30’ because it still satisfies the pattern ‘30+’ but stops as soon as it matches the given pattern.
+
+It is important to not confuse the greedy approach with matching multiple strings in a large piece of text - these are different use cases. Similarly,  the lazy approach is different from matching only the first match.
+
+For example, take the string ‘One batsman among many batsmen.’. If you run the patterns ‘bat*’ and ‘bat*?’ on this text, the pattern ‘bat*’ will match the substring ‘bat’ in ‘batsman’ and ‘bat’ in ‘batsmen’ while the pattern ‘bat*?’ will match the substring ‘ba’ in batsman and ‘ba’ in ‘batsmen’. The pattern ‘bat*’ means look for the term ‘ba’ followed by zero or more ‘t’s so it greedily looks for as many ‘t’s as possible and the search ends at the substring ‘bat’. On the other hand, the pattern ‘bat*?’ will look for as few ‘t’s as possible. Since ‘*’ indicates zero or more, the lazy approach stops the search at ‘ba’.
+
+To use a pattern in a non-greedy way, you can just put a question mark at the end of any of the following quantifiers. Example of lazy quantifiers:
+- *?
+- +?
+- ??
+- {m, n}?
+- {m,}?
+- {, n}?
+- {n}?
+
+
 ---
 
 # References
 - [Computational Social Science](https://www.youtube.com/watch?v=kyZkptxlSA8)
 - [Understanding Text using Cognitive Services](https://www.youtube.com/watch?v=hmUOr_i7NY4&t=42s)
-
+- [Basics of HTML](https://html.com/)
