@@ -4,7 +4,7 @@ description: nlp, natural language processing, text analytics
 date: "2020-01-10"
 image: "nlp.jpg"
 author: "Ayush"
-tags: ["nlp", "natural-language-processing", "machine-learning"]
+tags: ["nlp", "natural-language-processing", "python"]
 ---
 
 # Preface
@@ -187,6 +187,57 @@ result = re.search("a+", "abc")
 pattern = re.compile("a+")
 result = pattern.search("abc")
 ```
+
+## Anchors
+Anchors are used to specify the start and end of the string. 
+
+- `^`: The ‘^’ specifies the start of the string. The character followed by the ‘^’ in the pattern should be the first character of the string in order for a string to match the pattern. `^` can also be used in a character set to specify complement set.
+
+- `$`: Similarly, the $ specifies the end of the string. The character that precedes the ‘$’ in the pattern should be the last character in the string in order for the string to match the pattern.
+
+Both the anchors can be specified in a single regular expression itself. For example, the regular expression pattern `^01*0$` will match any string that starts and end with zeroes with any number of 1s between them. It will match ‘010’, ‘0110’, ‘01111111110’ and even ‘00’ (‘*’ matches zero or more 1s). But it will not match the string ‘0’ because there is only one zero in this string and in the pattern we have specified that there needs to be two 0s, one at the start and one at the end.
+
+## Wildcard
+
+- `.`: There is one special character in regular expressions that acts as a placeholder and can match any character (literally!) in the given input string. It’s the ‘.’ (dot) character is also called the wildcard character. 
+
+For example, the pattern ‘hur{2,}ay’ matches ‘hurray’, ‘hurrray’, ‘hurrrray’ and so on. Here, we had specified that the letter ‘r’ should be present two or more times. But you don’t always know the letter that you want to repeat. In such situations, you’ll need to use the wildcard instead. 
+
+The wildcard comes handy in many situations. It can be followed by a quantifier which specifies that any character is present a specified number of times.
+
+For example, if you’re asked to write a regex pattern that should match a string that starts with four characters, followed by three 0s and two 1s, followed by any two characters. The valid strings can be abcd00011ft, jkds00011hf, etc. The pattern that satisfies this kind of condition would be ‘.{4}0{3}1{2}.{2}’. You can also use ‘....00011..’ where the dot acts as a placeholder which means anything can sit on the place of the dot. Both are correct regex patterns.
+
+## Characters Sets
+
+For example, say you want to match phone numbers in a large document. You know that the numbers may contain hyphens, plus symbol etc. (e.g. +91-9930839123) , but it will not have any alphabet. You need to somehow specify that you are looking only for numerics and some other symbols, but avoid alphabets.
+
+To handle such situations, you can use what are called character sets in regular expression jargon.
+
+Character sets provide lot more flexibility than just typing a wildcard or the literal characters. Character sets can be specified with or without a quantifier. When no quantifier succeeds the character set, it matches only one character and the match is successful only if the character in the string is one of the characters present inside the character set. For example, the pattern ‘[a-z]ed’ will match strings such as ‘ted’, ‘bed’, ‘red’ and so on because the first character of each string - ‘t’, ‘b’ and ‘r’ - is present inside the range of the character set.
+
+On the other hand, when we use a character set with a quantifier, such as in this case - ‘[a-z]+ed’, it will match any word that ends with ‘ed’ such as ‘watched’, ‘baked’, ‘jammed’, ‘educated’ and so on. In this way, a character set is similar to a wildcard because it can also be used with or without a quantifier. It’s just that a character set gives you more power and flexibility!
+
+Note that a quantifier loses its special meaning when it’s present inside the character set. Inside square brackets, it is treated as any other character. 
+
+You can also mention a whitespace character inside a character set to specify one or more whitespaces inside the string. The pattern [A-z ] can be used to match the full name of a person. It includes a space, so it can match the full name which includes the first name, a space, and the last name of the person.
+
+But what if you want to match every other character other than the one mentioned inside the character set. You can use the caret operator to do this. 
+
+The ‘^’ has two use cases. You already know that it can be used outside a character set to specify the start of a string. Here, it is known as an anchor.
+
+It’s another use is inside a character set. When used inside a character set, it acts as a complement operator, i.e. it specifies that it will match any character other than the ones mentioned inside the character set.
+
+The pattern [0-9] matches any single digit number. On the other hand, the pattern `[^0-9]` matches any single digit character that is not a digit.
+
+## Meta Sequences
+
+When you work with regular expressions, you’ll find yourself using characters often. You’ll commonly use sets to match only digits, only alphabets, only alphanumeric characters, only whitespaces, etc.
+
+Therefore, there is a shorthand way to write commonly used character sets in regular expressions. These are called meta-sequences.
+
+You can use meta-sequences in two ways:
+- You can either use them without the square brackets. For example, the pattern ‘\w+’ will match any alphanumeric character.
+- Or you can them it inside the square brackets. For example, the pattern ‘[\w]+’ is same as ‘\w+’. But when you use meta-sequences inside a square bracket, they’re commonly used along with other meta-sequences. For example, the ‘[\w\s]+’ matches both alphanumeric characters and whitespaces. The square brackets are used to group these two meta-sequences into one.
 
 ---
 
