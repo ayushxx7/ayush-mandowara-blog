@@ -1,7 +1,7 @@
 ---
-title: Lexical Processing
+title: Lexical Processing - Regular Expressions
 description: nlp, natural language processing, text analytics
-date: "2020-01-10"
+date: "2020-01-12"
 image: "nlp.jpg"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
@@ -274,6 +274,102 @@ To use a pattern in a non-greedy way, you can just put a question mark at the en
 - {, n}?
 - {n}?
 
+## Commonly Used Regex Functions
+- `re.match()`: determine if the RE matches at the beginning of the string
+- `re.search()`: scan through a string, looking for any location where this RE matches
+- `findall()`: find all substings where the RE matches, and returns them as a list
+- `finditer()`: find all substrings where the RE matches, and returns them as an iterator
+- `sub()`: find all sbstrings where the RE matches, and substitute them with the given string
+    - Regular expression patterns can help you find the substring in a given corpus of text that you want to substitute with another string. 
+    - For example, you might want to replace the American spelling ‘color’ with the British spelling ‘colour’. 
+    - Similarly, the re.sub() function is very useful in text cleaning. 
+    - It can be used to replace all the special characters in a given string for example, remove '$','@' and '*' in the string '$hello @wo*rld'.
+
+```py heading='re.sub'
+import re
+
+pattern = "\d"
+replacement = "X"
+string = "My address is 13B, Baker Street"
+
+print(re.sub(pattern, replacement, string))
+```
+
+The match and search command return only one match. But you often need to extract all the matches rather than only the first match, and that's when you use the other methods.
+
+Suppose, in a huge corpus of text, you want to extract all the dates, in that case you can use the finditer() function or the findall() function to extract the results. The result of the findall() function is a list of all the matches and the finditer() function is used in a 'for' loop to iterate through each separate match one by one.
+
+## Grouping
+Sometimes you need to extract sub-patterns out of a larger pattern. This can be done by using grouping. Suppose you have textual data with dates in it and you want to extract only the year. from the dates. You can use a regular expression pattern with grouping to match dates and then you can extract the component elements such as the day, month or the year from the date.
+
+Grouping is achieved using the parenthesis operators. Let’s understand grouping using an example.
+
+Let’s say the source string is: “Kartik’s birthday is on 15/03/1995”. To extract the date from this string you can use the pattern - “\d{1,2}\/\d{1,2}\/\d{4}”.
+
+Now to extract the year, you can put parentheses around the year part of the pattern. The pattern is: “^\d{1,2}/\d{1,2}/(\d{4})$”.
+
+## Use Cases
+
+```py heading='File Search'
+# items contains all the files and folders of current directory
+items = ['photos', 'documents', 'videos', 'image001.jpg','image002.jpg','image005.jpg', 'wallpaper.jpg',
+         'flower.jpg', 'earth.jpg', 'monkey.jpg', 'image002.png']
+
+# create an empty list to store resultant files
+images = []
+
+# regex pattern to extract files that end with '.jpg'
+pattern = ".*\.jpg$"
+
+for item in items:
+    if re.search(pattern, item):
+        images.append(item)
+
+# print result
+print(images)
+
+
+# The above code extracts only those documents which have ‘.jpg’ extension. 
+# The pattern ‘.*\.jpg$’ is pretty self-explanatory. 
+# The important thing here is the use of backslash. 
+# If you don’t escape the dot operator with a backslash, you won’t get the results you want
+# Try to run the code without the escape sequence.
+```
+
+You saw how to search for specific file names using regular expressions. Similarly, they can be used to extract features from text such as the ones listed below:
+- Extracting dates
+- Extracting emails
+- Extracting phone numbers, and other patterns.
+
+Along with the applications in NLP, regular expressions are extensively used by software engineers in various applications such as checking if a new password meets the minimum criteria or not, checking if a new username meets the minimum criteria or not, and so on.
+
+# Questions
+
+**The __ and __ operator match the start and end of the string.**
+- `^` and `$`
+
+**Which function returns a None (that is, no match) if the pattern is not present at the very beginning of a given string:**
+- `re.match()`
+
+**The ‘*’ quantifier equivalent to which of the quantifiers?**
+- `{0,}`
+
+**The correct syntax of the re.sub() function is:**
+- `re.sub(pattern, replacement, string)`
+
+**Which meta-sequence is used to match all the whitespaces in a given pattern?**
+- `\s`
+
+**Which character is used to escape the meaning of a character that has special meaning in regular expressions?**
+- `\`
+
+**Which of the following regular expression patterns is equivalent to this pattern - `[\d\s]{2, }`?**
+
+| Pattern | Equivalent (Y/N) |
+|---------|------------------|
+| [\d\s]* | N                |
+| [\d\s]? | N                |
+| [\d\s]+ | N                |
 
 ---
 
@@ -281,3 +377,6 @@ To use a pattern in a non-greedy way, you can just put a question mark at the en
 - [Computational Social Science](https://www.youtube.com/watch?v=kyZkptxlSA8)
 - [Understanding Text using Cognitive Services](https://www.youtube.com/watch?v=hmUOr_i7NY4&t=42s)
 - [Basics of HTML](https://html.com/)
+- [regex101](https://regex101.com/)
+- [regexone](https://regexone.com/)
+- [regex cheat-sheet](https://pycon2016.regex.training/cheat-sheet)
