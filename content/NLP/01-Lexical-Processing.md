@@ -1,7 +1,7 @@
 ---
 title: Lexical Processing - Regular Expressions
 description: nlp, natural language processing, text analytics
-date: "2020-01-12"
+date: "2022-01-12"
 image: "nlp.jpg"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
