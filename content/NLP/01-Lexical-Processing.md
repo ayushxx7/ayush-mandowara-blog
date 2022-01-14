@@ -1,5 +1,5 @@
 ---
-title: Lexical Processing - Regular Expressions
+title: NLP - Regular Expressions
 description: nlp, natural language processing, text analytics
 date: "2022-01-12"
 image: "regex.png"
