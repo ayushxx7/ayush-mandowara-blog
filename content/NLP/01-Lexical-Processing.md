@@ -7,6 +7,33 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Areas of Application](#areas-of-application)
+* [Understanding Text](#understanding-text)
+* [Text Encoding](#text-encoding)
+    * [Encoding Standard](#encoding-standard)
+* [Regular Expressions](#regular-expressions)
+    * [Quantifiers](#quantifiers)
+    * [White Space](#white-space)
+    * [Parentheses](#parentheses)
+    * [Pipe](#pipe)
+    * [Special Characters](#special-characters)
+    * [Flags](#flags)
+    * [Anchors](#anchors)
+    * [Wildcard](#wildcard)
+    * [Characters Sets](#characters-sets)
+    * [Meta Sequences](#meta-sequences)
+    * [Greedy versus Non-greedy Search](#greedy-versus-non-greedy-search)
+    * [Commonly Used Regex Functions](#commonly-used-regex-functions)
+    * [Grouping](#grouping)
+    * [Use Cases](#use-cases)
+* [Questions](#questions)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 Natural language processing, also referred to as text analytics, plays a very vital role in today’s era because of the sheer volume of text data that users generate around the world on digital channels such as social media apps, e-commerce websites, blog posts, etc.
 
