@@ -111,3 +111,89 @@ Lemmatization only works on correctly spelt words. Since there are a lot of miss
 
 In general, you can try both and see if its worth using a lemmatizer over a stemmer. If a stemmer is giving you almost same results with increased efficiency than choose a stemmer, otherwise use a lemmatizer.
 
+# TF-IDF Representation
+
+The bag of words representation, while effective, is a very naive way of representing text. It relies on just the word frequencies of the words of a document. But don’t you think word representation shouldn’t solely rely on the word frequency? There is another way to represent documents in a matrix format which represents a word in a smarter way. It’s called the TF-IDF representation and it is the one that is often preferred by most data scientists.
+
+The term TF stands for term frequency, and the term IDF stands for inverse document frequency.
+
+The TF-IDF representation, also called the TF-IDF model, takes into the account the importance of each word. In the bag-of-words model, each word is assumed to be equally important, which is of course not correct.
+
+The formula to calculate TF-IDF weight of a term in a document is:
+
+$tf_{t,d} = \frac{\text{frequency of term 't' in document 'd'}}{\text{total terms in document 'd'}}$
+
+$idf_t = \log\frac{\text{total number of documents}}{\text{total documents that have the term 't'}}$
+
+The log in the above formula is with base 10. Now, the tf-idf score for any term in a document is just the product of these two terms:
+
+$tf-idf = tf_{t,d}*idf_t$
+
+Higher weights are assigned to terms that are present frequently in a document and which are rare among all documents. On the other hand, a low score is assigned to terms which are common across all documents.
+
+```py heading='TF-IDF in Py'
+# calculate tf-idf
+
+import math
+from  nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# term frequency
+def tf(term, document):
+    freq_term = document.count(term)
+    freq_doc = len(document)
+    print(freq_term, freq_doc)
+    print(freq_term / float(freq_doc))
+    return freq_term / float(freq_doc)
+
+def idf(term, documents):
+    freq_term = 0
+    for doc in documents:
+        if term in doc:
+            freq_term += 1
+    print(len(documents), freq_term)
+    print(math.log(len(documents) / float(freq_term), 10))
+    return math.log(len(documents) / float(freq_term), 10)
+
+def tf_idf(term, document, documents):
+    tf_idf_val = tf(term, document) * idf(term, documents)
+    print(f'TF-IDF: [{term} :: {documents}] = {tf_idf_val}')
+    return tf_idf_val
+
+d1 = "Vapour, Bangalore has a really great terrace seating and an awesome view of the Bangalore skyline"
+d2 = "The beer at Vapour, Bangalore was amazing. My favourites are the wheat beer and the ale beer."
+d3 = "Vapour, Bangalore has the best view in Bangalore"
+
+# remove stop words and punctuation
+stop_words = set(stopwords.words('english'))
+punctuation = set(['.', ',', '"', "'", '?', '!', ':', ';', '(', ')', '[', ']', '{', '}', '-', '_', '+', '=', '*', '&', '^', '%', '$', '#', '@', '<', '>', '/', '\\', '|', '~', '`', '``', '\'\'', '``', '--', '---', '...'])
+
+d1 = [word for word in word_tokenize(d1.lower()) if word not in stop_words and word not in punctuation]
+
+d2 = [word for word in word_tokenize(d2.lower()) if word not in stop_words and word not in punctuation]
+
+d3 = [word for word in word_tokenize(d3.lower()) if word not in stop_words and word not in punctuation]
+
+docs = [d1, d2, d3]
+
+print(docs)
+
+term = 'bangalore'
+doc = d1
+
+# print(tf_idf(term, doc, docs))
+
+# print(tf_idf('beer', d2, docs))
+
+print(tf_idf('vapour', d2, docs))
+print(tf_idf('bangalore', d2, docs))
+```
+
+# Summary
+In this session, you learnt a lot of essential preprocessing steps that you would need to apply when you’re working with a corpus of text. First, you learnt about word frequencies. You learnt how to plot word frequencies on a given piece of corpus. Then you learnt about stop words which are words that add no information in applications such as the spam detector. You also learnt how to remove English stopwords using the NLTK’s list of stopwords.
+
+Next, you went through the process of tokenising a document. You learnt that a document can be tokenised based on word, sentences, paragraphs, or even using your own custom regular expression.
+
+Then you learnt about the importance of removing redundant words from the corpus by using two techniques - stemming and lemmatization. You learnt that stemming converts a word to its root from by chopping off its suffix. While lemmatization reduces a word to its base form, called the lemma, by going through the WordNet library. You also learnt the advantages and disadvantages of each technique.
+
+Then you created a model from the text corpus that could be used to train a classifier, called the bag-of-words model. On similar lines, you also learnt about the more advanced tf-idf model, which is a more robust representation of the text than the bag-of-words model.
