@@ -7,6 +7,20 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Word Frequencies and Stop Words](#word-frequencies-and-stop-words)
+* [Tokenisation](#tokenisation)
+* [Bag-of-Words Representation](#bag-of-words-representation)
+* [Stemming and Lemmatization](#stemming-and-lemmatization)
+    * [Stemming](#stemming)
+    * [Lemmatization](#lemmatization)
+* [TF-IDF Representation](#tf-idf-representation)
+* [Summary](#summary)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 Before performing any text analysis, we must perform some pre-processing steps. This post will look at some of those, namely:
 - Tokenisation
