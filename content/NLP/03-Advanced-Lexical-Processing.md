@@ -87,3 +87,46 @@ Now, people have made various attempts to make spell correctors using different 
 
 One of the good performing spell correctors is Norvig’s spell corrector.
 
+# Pointwise Mutual Information
+Till now you have learnt about reducing words to their base form. But there is another common scenario that you’ll encounter while working with text. Suppose there is an article titled “Higher Technical Education in India” which talks about the state of Indian education system in engineering space. Let’s say, it contains names of various Indian colleges such as ‘International Institute of Information Technology, Bangalore’, ‘Indian Institute of Technology, Mumbai’, ‘National Institute of Technology, Kurukshetra’ and many other colleges. Now, when you tokenise this document, all these college names will be broken into individual words such as ‘Indian’, ‘Institute’, ‘International’, ‘National’, ‘Technology’ and so on. But you don’t want this. You want an entire college name to be represented by one token.
+
+To solve this issue, you could either replace these college names by a single term. So, ‘International Institute of Information Technology, Bangalore’ could be replaced by ‘IIITB’. But this seems like a really manual process. To replace words in such manner, you would need to read the entire corpus and look for such terms.
+
+Turns out that there is a metric called the pointwise mutual information, also called the PMI. You can calculate the PMI score of each of these terms. PMI score of terms such as ‘International Institute of Information Technology, Bangalore’ will be much higher than other terms. If the PMI score is more than a certain threshold then you can choose to replace these terms with a single term such as ‘International_Institute_of_Information_Technology_Bangalore’.
+
+You saw how to calculate PMI of a term that has two words. The PMI score for such term is:
+
+$PMI(x, y) = log ( P(x, y)/P(x)P(y))$
+
+For terms with three words, the formula becomes:
+
+$PMI(z, y, x) = log [(P(z,y,x))/(P(z)P(y)P(x))] = log[(P(z|y, x)*P(y|x))*P(x)/(P(z)P(y)P(x))] = log [(P(z|y, x)*P(y|x))/([P(z)P(y))]$
+
+Till now, to calculate the probability of your word you chose words as the occurrence context. But you could also choose a sentence or even a paragraph as the occurrence context.
+
+If we choose words as the occurrence context, then the probability of a word is:
+
+P(w) = Number of times given word ‘w’ appears in the text corpus/ Total number of words in the corpus
+
+Similarly, if a sentence is the occurrence context, then the probability of a word is given by:
+
+P(w) = Number of sentences that contain ‘w’ / Total number of sentences in the corpus
+
+Similarly, you could calculate the probability of a word with paragraphs as occurrence context.
+
+Once you have the probabilities, you can simply plug in the values and have the PMI score.
+
+In practical settings, calculating PMI for terms whose length is more than two is still very costly for any relatively large corpus of text. You can either go for calculating it only for a two-word term or choose to skip it if you know that there are only a few occurrences of such terms.
+
+You can also refer to [Palmetto](https://palmetto.demos.dice-research.org/) tool (In case this link does not work, please refer to [this](https://en.cs.uni-paderborn.de/ds/news-single/palmetto-a-quality-measuring-tool-for-topics) blog for more information about this tool) for calculating PMIs. 
+
+After calculating the PMI score, you can compare it with a cutoff value and see if PMI is larger or smaller than the cutoff value. A good cutoff value is zero. Terms with PMI larger than zero are valid terms, i.e. they don’t need to be tokenised into different words. You can replace these terms with a single-word term that has an underscore present between different words of the term. For example, the term ‘New Delhi’ has a PMI greater than zero. It can be replaced with ‘New_Delhi’. This way, it won’t be tokenised while using the NLTK tokeniser.
+
+# Summary
+To handle words that have different spellings due to different pronunciations, you learnt the concept of phonetic hashing. Phonetic hashing is used to bucket words with similar pronunciation to the same hash code. To hash words, you used the Soundex algorithm. The American Soundex algorithm maps the letters of a word in such a way that words are reduced to a four-character long code. Words with the same Soundex code can be replaced by a common spelling of the word. This way, you learnt how to get rid of different variations in spellings of a word.
+
+The next thing that you learnt about was the Levenshtein edit distance and spell corrector. You learnt that an edit distance is the number of edits that are needed to convert a source string to a target string. In a single edit operation, you can either insert, delete or substitute a letter. You also learnt a different variant of edit distance - the Damerau–Levenshtein distance. It lets you swap two adjacent letters in a single edit operation.
+
+With the help of the edit distance, one can create a spell corrector. You could use that spell corrector to rectify the spelling of incorrect words in your corpus.
+
+Lastly, you learnt about the pointwise mutual information (PMI) score. You saw how you can calculate PMI of terms with two or more words. You learnt about the concept of occurrence context. After choosing the occurrence context, you can calculate the PMI of a term and choose whether it is a valid term or not based on the cutoff value. A good cutoff value is zero. Terms that have PMI higher than zero can be replaced by a single term by simply attaching the multiple words using an underscore.
