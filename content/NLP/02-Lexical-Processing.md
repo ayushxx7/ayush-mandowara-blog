@@ -2,7 +2,7 @@
 title: NLP - Lexical Processing 
 description: nlp, natural language processing, text analytics
 date: "2022-01-17"
-image: "regex.png"
+image: "bag_of_words.png"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
 ---
