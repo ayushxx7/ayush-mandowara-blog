@@ -1,11 +1,23 @@
 ---
 title: NLP - Advanced Lexical Processing 
 description: nlp, natural language processing, text analytics
-date: "2022-01-12"
+date: "2022-01-20"
 image: "regex.png"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing", "python"]
 ---
+
+<!-- vim-markdown-toc GFM -->
+
+* [Purpose](#purpose)
+* [Canonicalisation](#canonicalisation)
+    * [Phonetic Hashing](#phonetic-hashing)
+    * [Edit Distance](#edit-distance)
+* [Spell Corrector](#spell-corrector)
+* [Pointwise Mutual Information](#pointwise-mutual-information)
+* [Summary](#summary)
+
+<!-- vim-markdown-toc -->
 
 # Purpose
 Even after basic lexical processing a couple of issues need to be addressed.
