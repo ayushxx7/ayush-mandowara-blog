@@ -9,12 +9,14 @@ import Footer from "../components/footer"
 import "../style/prism-darcula.less"
 import Comments from "../components/comments"
 import SEO from "../components/seo"
+import Scroll from '../components/scroll'
 
 function BlogPost(props) {
   const {title, image, tags, description} = props.data.markdownRemark.frontmatter
   const {prev, next} = props.pageContext
   return (
     <Layout>
+      <Scroll showBelow={250} />
       <SEO title={title} keywords={tags} description={description} />
       <div>
         {image && (
