@@ -7,57 +7,54 @@ author: "Ayush"
 tags: ["python"]
 ---
 
-<!-- vim-markdown-toc GFM -->
-
-* [PURPOSE](#purpose)
-  * [CLASSES](#classes)
-    * [Using variables of Parent Class](#using-variables-of-parent-class)
-    * [Load value during Class Initialization using own function](#load-value-during-class-initialization-using-own-function)
-  * [FUNCTIONS](#functions)
-    * [Get current function's name](#get-current-functions-name)
-    * [Accessing Function attributes if you know it's name](#accessing-function-attributes-if-you-know-its-name)
-  * [DICTIONARIES](#dictionaries)
-    * [Delete keys from dictionary](#delete-keys-from-dictionary)
-    * [Get the first key from a dictionary](#get-the-first-key-from-a-dictionary)
-    * [Pretty print dictionaries while logging](#pretty-print-dictionaries-while-logging)
-    * [Use `copy` to make duplicate dictionaries](#use-copy-to-make-duplicate-dictionaries)
-    * [Dictionary to JSON](#dictionary-to-json)
-  * [LISTS](#lists)
-    * [List slicing](#list-slicing)
-    * [Convert list to indexed tuple list](#convert-list-to-indexed-tuple-list)
-    * [Unpacking lists to individual values](#unpacking-lists-to-individual-values)
-    * [Combining lists together](#combining-lists-together)
-    * [Generating strings from lists after filtering False values](#generating-strings-from-lists-after-filtering-false-values)
-    * [Sort by length](#sort-by-length)
-  * [FORMATTING](#formatting)
-    * [Add 0 padding to strings](#add-0-padding-to-strings)
-    * [Stripping values generated during a split operation](#stripping-values-generated-during-a-split-operation)
-    * [Convert Numbers to Hex](#convert-numbers-to-hex)
-    * [Convert bytes to Human Readable format](#convert-bytes-to-human-readable-format)
-  * [Testing via Python](#testing-via-python)
-    * [Good Testcase pattern to follow](#good-testcase-pattern-to-follow)
-    * [Skip Test Cases based on command line arguments in Pytest](#skip-test-cases-based-on-command-line-arguments-in-pytest)
-  * [MISC UTIL](#misc-util)
-    * [Round Robin Ticket Assigner](#round-robin-ticket-assigner)
-    * [Using map to get sum of a 2D array](#using-map-to-get-sum-of-a-2d-array)
-    * [Get files matching a regular expression](#get-files-matching-a-regular-expression)
-      * [We can use glob and fnmatch for extracting files that match a specific pattern](#we-can-use-glob-and-fnmatch-for-extracting-files-that-match-a-specific-pattern)
-    * [Sending List/Array as data while making a request](#sending-listarray-as-data-while-making-a-request)
-    * [Supress error of Subprocess check Output](#supress-error-of-subprocess-check-output)
-    * [Make multilevel directories](#make-multilevel-directories)
-    * [Store temporary information to Temp Folder](#store-temporary-information-to-temp-folder)
-    * [Restore Timestamps of Extracted Files](#restore-timestamps-of-extracted-files)
-    * [Binomial Coefficent - <sup>n</sup>C<sub>r</sub>](#binomial-coefficent---supnsupcsubrsub)
-    * [Python not able to detect folders as packages](#python-not-able-to-detect-folders-as-packages)
-    * [Upgrade Pip in Venv](#upgrade-pip-in-venv)
-
-<!-- vim-markdown-toc -->
-
-
 # PURPOSE
 
 Sharing a collection of quick references for common issues encountered when coding in Python
 
+<!-- vim-markdown-toc GFM -->
+
+* [CLASSES](#classes)
+  * [Using variables of Parent Class](#using-variables-of-parent-class)
+  * [Load value during Class Initialization using own function](#load-value-during-class-initialization-using-own-function)
+* [FUNCTIONS](#functions)
+  * [Get current function's name](#get-current-functions-name)
+  * [Accessing Function attributes if you know it's name](#accessing-function-attributes-if-you-know-its-name)
+* [DICTIONARIES](#dictionaries)
+  * [Delete keys from dictionary](#delete-keys-from-dictionary)
+  * [Get the first key from a dictionary](#get-the-first-key-from-a-dictionary)
+  * [Pretty print dictionaries while logging](#pretty-print-dictionaries-while-logging)
+  * [Use `copy` to make duplicate dictionaries](#use-copy-to-make-duplicate-dictionaries)
+  * [Dictionary to JSON](#dictionary-to-json)
+* [LISTS](#lists)
+  * [List slicing](#list-slicing)
+  * [Convert list to indexed tuple list](#convert-list-to-indexed-tuple-list)
+  * [Unpacking lists to individual values](#unpacking-lists-to-individual-values)
+  * [Combining lists together](#combining-lists-together)
+  * [Generating strings from lists after filtering False values](#generating-strings-from-lists-after-filtering-false-values)
+  * [Sort by length](#sort-by-length)
+* [FORMATTING](#formatting)
+  * [Add 0 padding to strings](#add-0-padding-to-strings)
+  * [Stripping values generated during a split operation](#stripping-values-generated-during-a-split-operation)
+  * [Convert Numbers to Hex](#convert-numbers-to-hex)
+  * [Convert bytes to Human Readable format](#convert-bytes-to-human-readable-format)
+* [Testing via Python](#testing-via-python)
+  * [Good Testcase pattern to follow](#good-testcase-pattern-to-follow)
+  * [Skip Test Cases based on command line arguments in Pytest](#skip-test-cases-based-on-command-line-arguments-in-pytest)
+* [MISC UTIL](#misc-util)
+  * [Round Robin Ticket Assigner](#round-robin-ticket-assigner)
+  * [Using map to get sum of a 2D array](#using-map-to-get-sum-of-a-2d-array)
+  * [Get files matching a regular expression](#get-files-matching-a-regular-expression)
+    * [We can use glob and fnmatch for extracting files that match a specific pattern](#we-can-use-glob-and-fnmatch-for-extracting-files-that-match-a-specific-pattern)
+  * [Sending List/Array as data while making a request](#sending-listarray-as-data-while-making-a-request)
+  * [Supress error of Subprocess check Output](#supress-error-of-subprocess-check-output)
+  * [Make multilevel directories](#make-multilevel-directories)
+  * [Store temporary information to Temp Folder](#store-temporary-information-to-temp-folder)
+  * [Restore Timestamps of Extracted Files](#restore-timestamps-of-extracted-files)
+  * [Binomial Coefficent - <sup>n</sup>C<sub>r</sub>](#binomial-coefficent---supnsupcsubrsub)
+  * [Python not able to detect folders as packages](#python-not-able-to-detect-folders-as-packages)
+  * [Upgrade Pip in Venv](#upgrade-pip-in-venv)
+
+<!-- vim-markdown-toc -->
 
 ## CLASSES
 
