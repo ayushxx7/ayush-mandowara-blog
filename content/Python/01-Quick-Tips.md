@@ -655,8 +655,8 @@ In case you call a process via subprocess, but do not wish to see the error in c
 - Just redirect the standard error (`stderr`) to `DEVNULL`
 
 ```py heading="Supress subprocess error output"
-import subprocess
-subprocess.check_output("<Call the Process>", stderr=subp.DEVNULL)
+import subprocess as subp
+subp.check_output("<Call the Process>", stderr=subp.DEVNULL)
 ```
 
 ---
