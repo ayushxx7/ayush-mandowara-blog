@@ -179,8 +179,122 @@ The bandage was wound/A around the wound/B.
 
 The first mention of 'wound' represents the injury/cut, and the second represents the act of 'winding' the bandage.
 
+# Hidden Markov Model
+In the previous segment, you learnt about PoS tagging based on the frequency of tags alone, which seems inefficient when words are used in different contexts. So, to improve this model, in this segment, you will learn about the Hidden Markov Model, which performs better and uses the context of the previous word to decide the PoS tag of the current word.
+
+Let’s consider the following example; what does your mind process when you see the blank space at the end of this sentence?
+
+'Rahul is driving to _____.'
+
+Don’t you think that the blank space should be the name of a place?
+
+How do you manage to identify that the blank space would be a name of the place? 
+
+Try to analyse your thoughts after reading this statement, when you see the word ‘Rahul’ who is driving to some place and hence, you reach to a conclusion that the blank space should be the name of a place (noun).
+
+This means that you have sequentially looked at the entire sentence and concluded that the blank space should be the name of a place. 
+
+Now, what if we build an algorithm that can work sequentially to identify the PoS tags of the words based on the PoS tag of the previous word? 
+
+## HMM
+
+`Sequence labelling` is the task of assigning the respective PoS tags of the words in the sentence using the PoS tag of the previous word in the sentence.
+
+Hidden Markov Model can be used to do sequence labelling, which means that it takes input of words in a sequence and assigns the PoS tags to each word based on the PoS tag of the previous word. 
+
+Example: ‘The tortoise won the race’
+
+In the example, to decide the PoS tag of ‘race’, the model uses the PoS tag of the previous word, i.e., ‘the’, which is an article. 
+
+Now, let’s take a look at the following points and try to understand why Hidden Markov Model is called ‘Hidden’:
+
+- When you observe (read/listen) a sentence, you only observe the words in the sentence and not their PoS tags; thus, PoS tags are hidden.
+- You must infer these hidden tags from your observations, and that's why Hidden Markov Model is called Hidden.
+ 
+There are majorly two assumptions that HMM follows, which are as follows:
+- The PoS tag of the next word is dependent only on the PoS tag of the current word.
+- The probability of the next word depends on the PoS tag of the next word. 
+
+Before learning about HMM, you need to understand the two most important types of matrices, i.e., emission and transition matrices. In the next video, let’s take a look at an example of how you can build these matrices.
+
+To build any machine learning model, you first need to train that model using some training data, and then, you need to use that model to predict the output on the test data.
+
+Here, the train data is the corpus of sentences, and you need to perform some manual tasks to assign the PoS tags to each word in the corpus. Once you manually assign the PoS tags to each word in the training corpus, you create two important matrices using the training dataset, which are as follows:
+
+### Emission matrix
+
+This matrix contains all words of the corpus as row labels; the PoS tag is a column header, and the values are the conditional probability values.
+
+![emission_matrix](emission_matrix.png)
+
+For example, in a sample corpus, whenever a noun appears in the training corpus, there is an 18% chance that it will be the word ‘judge’. Similarly, whenever a verb appears in the training corpus, there is an 84% chance that it will be the word ‘laugh’.
+
+So, here, 0.18 is the probability of occurrence of the word ‘judge’ given that there will be a noun at that place. In a similar way, 0.10 is the probability of occurrence of the word ‘judge’ given that there will be a verb at that place.
 
 
+#### Example
+
+Suppose you have been given the following table in which there are a total of six words and their counts in the training corpus. You are also given information regarding how many times each word appears as a noun, verb or adjective. From this table, you compute the following emission matrix.
+
+![hmm_example](hmm_example.png)
+
+What is the meaning of the value P11 in this table?
+
+- It is the value of conditional probability that if there is a verb at any place in the training corpus, then the probability that it will be the word ‘light’ is equal to P11. 
+
+### Transition matrix
+
+This matrix contains PoS tags in the column and row headers. Let’s try to understand the conditional probability values that have been given in the following table.
+
+![transition_matrix](transition_matrix.png)
+
+Let’s take a look at the first row of the table; it represents that 0.26 is the probability of occurrence of a noun at the start of the sentence in the training dataset. In the same way, 0.73 is the probability of occurrence of a verb at the start of the sentence in the training dataset.
+
+If you take a look at the second row, then you will see that 0.44 is the probability of occurrence of noun just after a noun in the training dataset, and similarly, 0.19 is the probability of occurrence of a verb just after a noun in the training dataset.
+
+Essentially, the transition matrix gives the information of the next PoS tag considering the current PoS tag of the word.
+
+
+## Assigning POS Tag using HMM
+
+In HMM, you understood that transition and emission matrices specify the probabilities of transition between tags and the emission of the word from the tag, respectively. 
+
+Suppose you have the following corpus of the training dataset.
+
+![hmm_ex_1](hmm_ex_1.png)
+
+The emission and transition matrices of this corpus are as follows:
+
+![hmm_ex_2](hmm_ex_2.png)
+
+Suppose you have been given the following test sentence to predict the correct PoS tags of the words.
+
+S: 'Sumit teaches NLP.'
+
+As of now, we are only considering the two PoS tags, i.e., noun (N) and verb (V).
+
+There are many combinations of PoS tags possible for the sentence ‘S’ such as NVN, NNN, VVV and VVN or NNV.
+
+If you calculate the total number of combinations for this example, then you will see that there are only noun and verb tags; hence, 2^3 will be the total number of combinations possible.
+
+Let’s consider the two sequences as of now, which are NNN and NVN.
+
+Calculate the score for the NNN sequence.
+
+Score of NNN: 
+
+$[P(\text{Start-Noun}) * P(\text{Sumit|Noun})] * [P(\text{Noun-Noun})*P(\text{teaches|Noun})] * [P(\text{Noun-Noun}) * P(\text{NLP|Noun})] = (0.7*0.2) *  (0.2*0.05)  * (0.2*0.1) = 0.000028$
+
+Score of NVN:
+
+$[P(\text{Start-Noun})*P(\text{Sumit|Noun})] * [P(\text{Noun-Verb})*P(\text{teaches|Verb})] * [P(\text{Verb-Noun}) * P(\text{NLP|Noun})] = (0.7*0.2) * (0.5*0.3) * (0.65*0.1) = 0.001365$
+
+You get the maximum score for the NVN sequence; hence the model assigns the noun to ‘Sumit’, the verb to ‘teaches’ and another noun to ‘NLP’ in the test sentence.
+
+### Note
+In practice, you do not have to calculate these scores from scratch. You will be using an already prepared toolkit to implement HMM, but it is important to be aware of the basic techniques used in PoS tagging. 
+
+Although you are not going to implement these PoS tagging techniques in the real-life scenario, you are going to use the SpaCy library to tag the correct PoS tags that are based on the neural network models. It is important to have an intuitive understanding of these techniques, including the rule-based tagger and HMM, to understand how a PoS tagger works.
 
 # References
 - [pos tags](https://universaldependencies.org/docs/u/pos/)
