@@ -76,3 +76,37 @@ The following techniques can be used to extract named entities:
     - ML algorithm can be used to train a model from a labelled data set and to predict the named entities present in the given text.
 - Creating rules for all the possible cases to find a named entity
     - A rule-based approach can find a named entity, but sometimes it can be difficult to create complete rules.
+
+# IOB Labelling
+IOB (inside-outside-beginning) labelling is one of many popular formats in which the training data for creating a custom NER is stored. IOB labels are manually generated.
+
+This helps to identify entities that are made of a combination of words like ‘Indian Institute of Technology’, ‘New York’ and ‘Mohandas KaramChand Gandhi’.
+
+Suppose you want your system to read words such as ‘Mohandas Karamchand Gandhi', ‘American Express’ and ‘New Delhi’ as single entities. For this, you need to identify each word of the entire name as the PER (person) entity type in the case of, say, ‘Mohandas Karamchand Gandhi'. However, since there are three words in this name, you will need to differentiate them using IOB tags.
+
+The IOB format tags each token in the sentence with one of the following three labels: I - inside (the entity), O - outside (the entity) and B - at the beginning (of entity). IOB labelling can be especially helpful when the entities contain multiple words. 
+
+So, in the case of ‘Mohandas Karamchand Gandhi', the system will tag ‘Mohandas’ as B-PER, ‘Karamchand’ as I-PER and ‘Gandhi' as I-PER. Also, the words outside the entity ‘Mohandas Karamchand Gandhi' will be tagged as ‘O’.
+
+Consider the following example for IOB labelling:
+Sentence: ‘Donald Trump visit New Delhi on February 25, 2020 ”
+
+| Donald   | Trump    | visit | New   | Delhi | on | February | 25     | ,      | 2020   |
+|----------|----------|-------|-------|-------|----|----------|--------|--------|--------|
+| B-Person | I-Person | O     | B-GPE | I-GPE | O  | B-Date   | I-Date | I-Date | I-Date |
+
+In the example above, the first word of more than one-word entities starts with a B label, and the next words of that entity are labelled as I, and other words are labelled as O.
+
+Note that you will not always find the IOB format only in all applications. You may encounter some other labelling methods as well. So, the type of labelling method to be used depends on the scenario. Let's take a look at an example of a healthcare data set where the labelling contains 'D', 'T', and 'O', which stand for disease, treatment and others, respectively.
+
+S: ‘In[O] the[O] initial[O] stage[O], Cancer[D] can[O] be[O] treated[O] using[O] Chemotherapy[T]’
+
+```py heading="Named Entity Recognition using spacy"
+import spacy 
+model = spacy.load("en_core_web_sm")
+doc = "Any sentence"
+ 
+processed_doc = model(doc)
+for ent in processed_doc.ents:
+  print(ent.text, " -- ", ent.start_char, " -- ", ent.end_char, " -- ", ent.label_)
+```
