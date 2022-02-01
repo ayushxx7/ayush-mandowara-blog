@@ -46,8 +46,8 @@ module.exports = {
             resolve: "gatsby-remark-external-links",
             options: {
               target: "_blank",
-              rel: "nofollow"
-            }
+              rel: "nofollow",
+            },
           },
           {
             resolve: `gatsby-remark-table-of-contents`,
@@ -92,6 +92,18 @@ module.exports = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-page-progress",
+      options: {
+        // includePaths: ["/"],
+        excludePaths: ["/", "/blog", "/tags"],
+        height: 5,
+        prependToBody: false,
+        color: `teal`,
+        footerHeight: 500,
+        headerHeight: 0,
       },
     },
   ],
