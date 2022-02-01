@@ -296,6 +296,29 @@ In practice, you do not have to calculate these scores from scratch. You will be
 
 Although you are not going to implement these PoS tagging techniques in the real-life scenario, you are going to use the SpaCy library to tag the correct PoS tags that are based on the neural network models. It is important to have an intuitive understanding of these techniques, including the rule-based tagger and HMM, to understand how a PoS tagger works.
 
+## Heteronyms
+Heteronyms are words that have the same spelling but mean differently when pronounced differently.
+
+### Examples
+- Live
+    - We can see live (adjective) animals.
+    - I live (verb) in India.
+
+- Minute
+    - There is a minute (adjective) difference in crimson red and red colours.
+    - The minute (noun) hand of the clock is broken down.
+
+- Wind
+    - We have experienced a heavy wind (noun) in the afternoon.
+    - Please wind (verb) up the rope on the terrace.
+
+## Word sense disambiguation - WSD
+WSD is an open problem in computational linguistics concerned with which sense of word is used in a sentence. It is very difficult to fully solve the WSD problem. 
+
+So, the problem when the system is not able to identify the correct pronunciation of the words which have the same PoS tag but different meanings in different contexts can be considered under the WSD problem. 
+
+Please note that this is just one of the dimensions of WSD. WSD is altogether a broader area to discover and it is an open problem in computational linguistics concerned with identifying which sense of a word is used in a sentence.
+
 # References
 - [pos tags](https://universaldependencies.org/docs/u/pos/)
 - [spacy](https://spacy.io/)
