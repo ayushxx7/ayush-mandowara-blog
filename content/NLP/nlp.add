@@ -55,3 +55,8 @@ nsubj
 dobj
 amod
 pobj
+ner
+Sachin
+Tendulkar
+GPE
+LOC
