@@ -1,7 +1,7 @@
 ---
 title: NLP - Syntactic Processing
 description: nlp, natural language processing, text analytics
-date: "2022-01-26"
+date: "2022-01-27"
 image: "nlp.png"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing"]
