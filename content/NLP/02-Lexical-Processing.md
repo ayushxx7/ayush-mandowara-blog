@@ -4,7 +4,7 @@ description: nlp, natural language processing, text analytics
 date: "2022-01-17"
 image: "bag_of_words.png"
 author: "Ayush"
-tags: ["nlp", "natural-language-processing", "python"]
+tags: ["nlp", "natural-language-processing", "python", "lexical-processing"]
 ---
 
 <!-- vim-markdown-toc GFM -->
