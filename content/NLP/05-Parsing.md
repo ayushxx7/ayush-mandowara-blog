@@ -1,8 +1,8 @@
 ---
 title: NLP - Parsing 
 description: nlp, natural language processing, text analytics
-date: "2022-01-27"
-image: "nlp.png"
+date: "2022-01-29"
+image: "nlp_parsing.png"
 author: "Ayush"
 tags: ["nlp", "natural-language-processing"]
 ---
@@ -147,6 +147,38 @@ Moving further, you need to keep the following points in mind while understandin
 
 In this way, dependency parsers relate words to each other.
 
+```py heading='Visualize dependency parsing tree using spaCy'
+import spacy
+from spacy import displacy
+nlp = spacy.load("en_core_web_sm")
+
+# Define active and passive sentences.
+active = ['Hens lay eggs.',
+         'Birds build nests.',
+         'The batter hit the ball.',
+         'The computer transmitted a copy of the manual']
+passive = ['Eggs are laid by hens',
+           'Nests are built by birds',
+           'The ball was hit by the batter',
+           'A copy of the manual was transmitted by the computer.']
+
+# Visualise the parse tree of all the active sentences.
+for sent in active:
+    doc = nlp(sent)
+    displacy.render(doc, style="dep")
+
+# Visualise the parse tree of all the active sentences.
+for sent in passive:
+    doc = nlp(sent)
+    displacy.render(doc, style="dep")
+```
+
+Please note that the number of arrows emitting from a particular word of a sentence in the dependency parse tree are called the ‘children’ of that word.
+
+The root word in any dependency parse tree does not have any parent. It will however have children.
+
 # References
 - [Universal Dependency Tags](https://universaldependencies.org/docs/en/dep/)
 - [Dependency Parsing - Visualization](https://explosion.ai/demos/displacy?text=I%20prefer%20morning%20flights&model=en_core_web_sm&cpu=0&cph=0)
+- [spaCy - Matcher](https://spacy.io/api/matcher)
+- [spaCy - Rule Based Matching](https://spacy.io/usage/rule-based-matching)
