@@ -83,3 +83,70 @@ Their respective parse trees are shown in the figure given below.
 There are two parse trees possible for this sentence; if we are able to identify the relationship among the words instead of looking at individual constituents or PoS tags, then understanding each word with other words will be easier, and the machine will be able to understand the syntax or meaning of the sentence better. This relationship structure can be drawn using the dependency parsing technique.
 
 In general, since natural languages are inherently ambiguous (at least for computers to understand), there are often cases where multiple parse trees are possible, such as those in the example provided above. So, to understand the relationship between different words, you need to use dependency parsing.
+
+### Question
+
+**Which of the following statements about constituency parsing is not true?**
+
+| Statement                                                                             | True / False |
+|---------------------------------------------------------------------------------------|--------------|
+| It organises words into nested constituents such as noun phrase and verb phrase.      | True         |
+| It always contains the PoS tags of the words of a sentence as its terminal nodes.     | False        |
+| It checks whether a sentence is semantically correct, i.e., whether it is meaningful. | False        |
+
+- Constituency parsing segregates sentences into constituents of the same paradigm.
+- Words of a sentence are present as the terminal node of the constituency parse tree.
+- Constituency parsing finds structural dependencies in a sentence.
+
+
+# Dependency Parsing
+Until now, we discussed constituency parsing where groups of words or constituencies form the basic structure of a parse tree. In this segment, we will introduce an alternate paradigm of grammar called dependency grammar and related dependency parsing techniques.
+
+In dependency parsing, we do not form constituencies (such as noun phrase and verb phrase) but rather establish a dependency between the words themselves.
+
+Dependency parsing identifies the relation between words and produces a concise representation of these dependencies. 
+
+In the example ‘upGrad is a great platform’, constituency parsing fails to explain how ‘great’ is related to the two nouns of the sentence ‘upGrad’ and ‘platform’. Is ‘great’ related more to ‘upGrad’ than to ‘platform’? Whereas, dependency parsing tells us that ‘great’ is a modifier of ‘platform’. Similarly for the two nouns, ‘upGrad’ is the subject of another noun ‘platform’.
+
+![UpGrad_dependency](upgrad_dependency.png)
+
+Now, let’s take another example of the dependency parse tree. It is as follows:
+
+Sentence: “Economic news had little effect on financial markets.”
+
+
+You can visualise the dependency parse of this sentence [here](https://explosion.ai/demos/displacy?text=Economic%20news%20had%20little%20effect%20on%20financial%20markets&model=en_core_web_sm&cpu=0&cph=0). Also, in the diagram shown below, we have merged the phrases such as 'Economic news' and 'little effect'.
+
+![Dependency Visual](dependency_visual.png)
+
+Let’s identify the role of each word one by one, starting with the root verb.
+
+- The word 'had' is the root. 
+- The phrase ‘Economic news’ is the nominal subject (nsubj).
+- The phrase 'little effect' is the direct object (dobj) of the verb 'had'.
+- The word 'on' is a preposition associated with 'little effect'.
+- The noun phrase 'financial markets' is the object of 'on'.
+
+Now, let’s take a look at the role of each word in the parse. 
+
+- The word 'Economic' is the modifier of ‘news’. 
+    - news -> amod -> economic
+- The words ‘financial’ and ‘little’ modify the words 'markets' and 'effect', respectively.
+    - effect -> amod -> little
+    - markets -> amod -> financial
+- The two words ‘on’ and ‘markets’ have no incoming arcs. The word ‘on’ is dependent on the word ‘effect’ as a nominal modifier.
+    - effect -> prep -> on
+- The word ‘markets’ is an object of the word ‘on’.
+    - on -> pobj -> markets
+
+Moving further, you need to keep the following points in mind while understanding the dependency parse model:
+- Each word is a node in a parse tree.
+- There is exactly one node with no incoming arc (root).
+- Each non-root node has exactly one incoming arc.
+- There is a unique path from the root node to each non-root node.
+
+In this way, dependency parsers relate words to each other.
+
+# References
+- [Universal Dependency Tags](https://universaldependencies.org/docs/en/dep/)
+- [Dependency Parsing - Visualization](https://explosion.ai/demos/displacy?text=I%20prefer%20morning%20flights&model=en_core_web_sm&cpu=0&cph=0)
