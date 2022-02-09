@@ -27,3 +27,201 @@ Another domain where RL is used is finance. RL is turning out to be a robust too
 The roots of Reinforcement Learning, acronymed as RL, go back to a psychologist, Edward L. Thorndike who talked about learning by trial and error.  He studied cats in puzzle boxes. The cat was motivated to come out of the box. The cat would fall around and eventually stumble upon the latch that would open the box. Once the cat managed to get out, the same cat would be put in the same box again. After successive runs, he observed that cats were getting faster in finding and pulling the latch. And on the basis of this behavioural experiment, Thorndike put forward the 'Law of Effect':
 
 "Responses that produce a satisfying effect in a particular situation become more likely to occur again in that situation, and responses that produce a discomforting effect become less likely to occur again in that situation."
+
+# What is Reinforcement Learning
+
+Ever noticed how an infant learns to walk? She puts a step forward. If she falls, she realises 'that was probably the wrong way'. She keeps trying and relies on the feedbacks (e.g. falling, being able to walk easily, etc.) to judge whether ‘the current technique is correct or not’.
+
+You learn from your interactions with the world aka 'environment'. When you are learning to drive a car (assuming you have no instructor), you completely rely on the feedback you get from the surroundings. If you cross a lane or come too close to a tree, you change your technique (or actions, such as putting more breaks, turning the steering a little lesser, etc.).
+
+Let’s first start with an overview of the RL problem and look at some examples which will help build an intuition of RL.
+- Solving a maze
+- Managing Investment Portfolio
+- Deciding among the pickup requests in cab-service scenario
+- Process Control System
+
+- Humanoid robot
+  - Say, an engineer is learning to design a humanoid robot and his objective is to make it stand. 
+  - He can do that by turning some joints. A wrong turn of a joint can make it fall. 
+  - By trial and error experience, he will learn which sequence of turning joints is making robot stand and which is not. 
+  - This is a reinforcement learning problem. 
+  - Here, the engineer is the agent and the robot on which he is taking the actions is the environment; actions are 'turning the joints' and consequences could be robot falling or standing up.
+
+Note:
+- The agent is any robot that is trying to learn the task,
+- While the environment is the world around it that gives it the feedback.
+
+When you are learning to walk, you are the agent and the surroundings are the environment.
+
+Reinforcement learning is similar to 'human learning'. Remember the first time you were trying to learn to ride a bicycle? Learning how to balance and manoeuvre comes with experience. Maybe, when you had a fall (a negative experience), you learnt that the action which led to the fall was wrong and you should not do that again. Similarly, when you had a positive experience, you learnt what actions (how to keep your feet on the pedal, how much to turn the handlebar, etc.) led to a happy ride.
+
+The agent can interact with the environment, and take an action of its choice. However, it cannot control the consequences i.e. the outcome of taking the action. The consequence is a property of the environment itself.
+
+# Questions
+
+**A mobile robot has the job of collecting trash in an office. It has sensors for detecting cans, and an arm that picks it up. It runs on a rechargeable battery. The robot’s control system has components for interpreting sensory information, for navigating, and for controlling the arm.**
+
+**It makes decisions depending upon the charge levels of battery. Consider there are three levels of charge: ‘high’, ‘medium’ and ‘low’. The agent needs to decide whether to (1) actively search for a can, (2) remain stationary and wait for someone to bring it a can, or (3) head back to its home base to recharge its battery.**
+
+**Who is the agent in this case?**
+
+- Robot's control system
+- It’s a high-level agent which is responsible for interpreting sensory information, for navigating, and for controlling the arm and gripper
+
+**What is the environment in this case?**
+
+- Office Environment
+- Environment presents a new state and reward to the agent basis its actions
+
+**What are the actions in this case?**
+
+- Agent’s decisions: (1) actively search for a can, (2) remain stationary and wait for someone to bring it a can, or (3) head back to its home base to recharge its battery
+- Actions are tasks that an agent can perform
+
+---
+
+**Investment Management: You want to manage your investments such that the profit is maximised. Given that you can either buy, hold or sell a stock, what are the possible consequences (or outcomes)?**
+
+- % Profit or Loss or no-profit-no-loss
+- any action whether it’s buying or selling would either result in a profit or a loss or a no-profit-no-loss
+
+**Which of the following is the best possible explanation of RL?**
+
+| Statement                                                                                                                                                                | T/F |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----|
+| RL is a learning problem where an agent learns from environment with help of a teacher telling what is right or wrong                                                    | F   |
+| RL is a learning problem where an agent learns from the environment by taking actions and controlling the consequences in its favor                                      | F   |
+| RL is a learning problem where an agent is trying to learn from its environment by taking an action and understanding the consequences; in order to achieve an objective | T   |
+
+- Environment doesn't tell the agent what is right or wrong. It tells the agent what is the consequence of its action. 
+
+---
+
+# Agent-Environment Interaction
+
+- agent observes the environment, then 
+- takes an action which he thinks is good. After taking the action, 
+- the environment tells him how good that action was, in the form of rewards; this also presents a new observation to the agent. 
+
+![Agent-Environment](agent-environment-interaction.png)
+
+## Example
+Let’s take the example of a student learning to maximise grades in his training. 
+
+- He has grades of the exam that happened two weeks back. 
+- He observes the subjects in which he scored lower. 
+- And then studies (action) only for those subjects. 
+- For the remaining time, he plays or surfs. After a week, he goes through the exams again. 
+- His grades improve and now only in one subject his marks are a little less than the average. 
+- So, the action of studying had a positive consequence as his marks increased.
+- Apart from this, he observes the subject in which he scored low marks - that becomes his new observation.
+
+Reward, in this case, is the increase in marks. However, note that the reward is not enough to judge his action. What if he had failed the subjects for which he did not study in the second attempt? 
+
+Reward only tells you how well you are carrying out the task. It does not guarantee that this is the best action. 
+
+In other words, reward is an indicator, or a 'weak signal', which roughly indicates whether the agent is taking actions in the right direction. 
+
+Unlike supervised learning, which classifies each observation as 'right' or 'wrong'; reward in reinforcement learning is just a number indicating how well you are performing the action. The robot needs to try and find out which actions are better than the others, if not the best. The objective here is to maximise the cumulative reward as the sequence of actions is taken.
+
+## Two Types of Tasks
+- Continuous: tasks that do not have a definite end - e.g. learning to walk, controlling a chemical plant, driving a car
+- Episodic tasks: tasks that have a definite end - e.g. most games (videos games, Chess, Ludo) etc. are episodic since at the end of the game the agent either wins or loses. 
+ 
+
+# Questions
+
+**Rewards are under the control of the agent, i.e., after taking an action, it can modify the rewards obtained**
+- False
+- Rewards are the property of the environment
+
+---
+
+**Map out tasks as continuous or episodic**
+
+| Task                    | Continuous / Episodic |
+|-------------------------|-----------------------|
+| Automated stock trading | Continuous            |
+| Solving a maze          | Episodic              |
+| Playing Tic-tac-toe     | Episodic              |
+
+- Episodic tasks end in a terminal state, i.e., they terminate after time T.
+
+---
+
+**Objective of RL agent is to:**
+
+- Find sequence of actions that accumulate maximum rewards
+- The objective of RL agent is to carry out task well.  By doing the task well, it implies that its actions should be more aligned to accumulate maximum rewards
+
+---
+
+# State Vectors
+
+- A state is a representation of the environment at any point in time. 
+- The environment will give all the signals, but how relevant those signals are for the agent to take an action is what you have to decide.
+- You can consider state vector as a list of features that help the agent to take an action.
+- For each RL problem, state vector would be different.
+
+Let’s take the example of a humanoid robot where your objective is to make him stand. Now, the environment offers you values for the following:
+
+- pressure & temperature at some chemical plant
+- robot’s joint positions
+- the angle at the knee joint
+- Bitcoin’s current price
+
+Would all these variables impact the agent’s decision making? No. The pressure and temperature at the chemical plant would not help you decide which joint to turn. The action you need to make is on the basis of ‘which joint of the robot should be turned’. So, your 'state' will be the representation of robot’s joint positions and the angle at knee joint. These two are enough to take the next action.
+
+State is your representation of the environment. Perhaps the environment would have a lot of things, but the state that you want to take will determine which parameters in the environment really matter to you.
+
+
+## Examples of State Vectors, Actions and Rewards
+
+1. Process Control System
+- State Vector: (Pressure, Temperature)
+- Action: Turning knobs, valves
+- Rward: Yield
+
+2. Investment Management Portfolio
+- State Vector: (amount of cash, % investments in mutual funds, equity, FDs, etc.)
+- Action: Sell / Buy / Hold
+- Reware: Profit / Loss %
+
+3. Cab Driver Problem
+- State Vector: (location, time, day)
+- Action: Service a request
+- Reward: Money earned from a trip
+
+So, the representation of the environment which is necessary for the agent to take an action is called state. In any real-life scenario, it will be left on your judgement to decide what variables are good for the agent to take an action.
+
+# Questions
+
+**Which statement is incorrect?**
+
+| Statement                                                                                                                                                                                   | Correct / Incorrect |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------|
+| Agent interacts with the environment in the form of actions, and the environment responds to the agent by rewarding these actions and by presenting a new set of state vectors to the agent | Correct             |
+| Reward is in the form of a vector                                                                                                                                                           | Incorrect           |
+| State is usually represented by a number                                                                                                                                                    | Incorrect           |
+| Agent observes the state variables and basis that takes some action                                                                                                                         | Correct             |
+
+- State represents what features agent wants to observe from the environment. It is usually represented in form of a vector.
+- Environment rewards the agent's action as a number. And it is just a weak signal of telling how good or bad an action is
+
+**Self-driving cars: You are designing a self-driving car and you want the car to observe the values of the state vector to take the next action. Which of following options do you think makes a good state vector for this problem.**
+
+- (Current position of car on road, speed of car, the angle of the steering wheel, distance of obstacles (other vehicles, buildings, pedestrian), the current position of obstacles (other vehicles, pedestrian) image in rear-view mirror, road condition, white marks on road, current traffic signal)
+
+**Inventory Management: Say you are the owner of a retail shop. Your objective is to maximise the profits earned in a day. So, you need to place an order to meet the demand. On any day, you observe the ‘state vector’ and take an action for placing an order (from the supplier) which arrives later the next day. Assume that your demand is a function of the day of the week. Which of the following is the most relevant state vector?**
+
+- (Current inventory level, the day of the week)
+
+**Deciding cover for each movie/series on Netflix homepage: Say, Netflix wants to customize the home page for each of the customer. It wants to show very relevant cover photo for each movie or series it recommends. Example, a person watching a lot of horror movies, will be interested if he is shown some intense scene from the movie as a cover photo. So, the action is to decide the cover photo, basis some state vector. What could be the state vector in this case? Choose the most appropriate option.**
+
+- (Customer’s past preferences of genres, actors, directors, ratings of movie he has watched)
+
+---
+
+# References
+
+- [Reinforcement Learning for Humanoid Robotics](https://faculty.cc.gatech.edu/~isbell/reading/papers/peters-ICHR2003.pdf)
