@@ -7,6 +7,31 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Syntactic Processing](#syntactic-processing)
+    * [Applications](#applications)
+    * [Lexical Processing vs Syntactic Processing](#lexical-processing-vs-syntactic-processing)
+* [POS Tagging](#pos-tagging)
+    * [Open Class](#open-class)
+    * [Closed Class](#closed-class)
+    * [POS Tagging Model](#pos-tagging-model)
+        * [Example](#example)
+* [Hidden Markov Model](#hidden-markov-model)
+    * [HMM](#hmm)
+        * [Emission matrix](#emission-matrix)
+            * [Example](#example-1)
+        * [Transition matrix](#transition-matrix)
+    * [Assigning POS Tag using HMM](#assigning-pos-tag-using-hmm)
+        * [Note](#note)
+    * [Heteronyms](#heteronyms)
+        * [Examples](#examples)
+    * [Word sense disambiguation - WSD](#word-sense-disambiguation---wsd)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 
 We will learn about the algorithms and techniques that are used to analyse the syntax or the grammatical structure of sentences.
