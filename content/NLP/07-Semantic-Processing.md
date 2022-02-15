@@ -7,6 +7,16 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing", "ner"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Knowledge Graphs](#knowledge-graphs)
+* [Types of Relationships](#types-of-relationships)
+* [Word Sense Disambiguation](#word-sense-disambiguation)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 
 Syntactic processing involved the study of grammar to understand the meaning of sentences. However, there is no single encompassing rule book that defines grammar because language is always evolving. On the other hand, the text data that is generated is mostly grammatically incorrect. 

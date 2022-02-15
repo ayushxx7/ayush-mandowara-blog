@@ -7,6 +7,22 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing", "ner"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Named Entity Recognition](#named-entity-recognition)
+    * [Noun POS Tags](#noun-pos-tags)
+    * [Simple rule-based NER tagger](#simple-rule-based-ner-tagger)
+* [IOB Labelling](#iob-labelling)
+* [Sequence Labelling](#sequence-labelling)
+* [Conditional Random Field](#conditional-random-field)
+    * [CRF Training](#crf-training)
+    * [CRF Training - Custom Features](#crf-training---custom-features)
+    * [CRF Training - Score calculation using weights](#crf-training---score-calculation-using-weights)
+    * [CRF Predictions](#crf-predictions)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 As you already know, with the help of PoS tagging and parsing techniques, you can determine the relationship between the words in a sentence. Now, the next step of understanding the text is Named Entity Recognition (NER).
 
