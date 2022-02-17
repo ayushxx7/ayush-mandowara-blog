@@ -1,5 +1,5 @@
 ---
-title: Five Powerful and Easy to Learn Numpy Operations
+title: 123
 description: Beginner's gold mine to understand the power of Numpy
 date: "2020-10-24"
 image: "data-analysis.png"
