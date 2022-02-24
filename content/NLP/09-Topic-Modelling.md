@@ -7,6 +7,20 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing", "ner"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Topic Modelling](#topic-modelling)
+    * [Applications](#applications)
+    * [How it works](#how-it-works)
+        * [Question](#question)
+    * [Algorithms](#algorithms)
+        * [Non-Negative Matrix Factorisation](#non-negative-matrix-factorisation)
+        * [Question](#question-1)
+    * [Process](#process)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 Suppose you are a product manager at Amazon and want to understand the features of a recently released product (say, Amazon Alexa) that customers are discussing in their reviews. Say you are able to identify that 50% of the customers are talking about the hardware, 30% are talking about features related to music, and 20% are discussing the packaging of the product. This information would be pretty useful for you.
 
