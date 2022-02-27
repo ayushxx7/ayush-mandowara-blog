@@ -7,6 +7,17 @@ author: "Ayush"
 tags: ["nlp", "natural-language-processing"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Constituency Parsing](#constituency-parsing)
+        * [Question](#question)
+* [Dependency Parsing](#dependency-parsing)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 
 A key task in syntactic processing is parsing. It means to break down a given sentence into its 'grammatical constituents'. Parsing is an important step in many applications that helps us better understand the linguistic structure of sentences.
