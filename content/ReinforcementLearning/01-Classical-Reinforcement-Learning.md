@@ -222,6 +222,60 @@ So, the representation of the environment which is necessary for the agent to ta
 
 ---
 
+# Objective of RL Agent
+
+So far, you have learnt that the agent is interacting with the environment in an 'optimal manner' to achieve the objective. But, how do you define the objective of an RL problem? Can you say that the objective is to gather maximum rewards?
+
+Take an episodic task, say a game of tic-tac-toe. How will you calculate the reward for each O (or X) you marked? You will get a reward after you win or lose the game. What is the agent’s end-objective in this case? Similarly, for a continuing task, say for stock market trading, you can define your reward as how much profit you earned in a month or a day. There is no end to continuing tasks, so how are you going to parametrise your objective?
+
+You can summarise the objectives of the RL agent in the following manner:
+- The objective of episodic tasks is to find such a sequence of actions that will make the majority of episodes successful.
+- For continuing tasks, break it into multiple episodes and then find out actions that maximise the average rewards earned from those episodes.
+
+**Note**
+- The objective is defined after observing the state vector from the environment
+- Just like the reward, the objective is also a property of the environment
+
+## Question
+**A self-driving car gets rewarded for every 1km of a ride. And after every 8 hours, it needs to charge itself. Which of following is the correct objective of a self-driving car?**
+
+- Find out an action sequence that could accumulate maximum rewards in maximum rides. 
+- Since the car needs to charge itself after every 8 hours, this makes it an episodic task. And the objective then would be to find a sequence of actions that would accumulate maximum rewards.
+
+---
+
+# Actions & Policy
+
+So far, you have two pieces of information:
+
+- An action leads to a reward and a change in state.
+- The objective of the RL agent is to find the sequence of actions to maximise overall rewards.
+
+How does an RL agent take an action from a given state? Are there some rules defined for each scenario?  Or is there some mathematical model of the environment which the agent learns over time and then takes an action?
+
+Agent needs to learn about the environment before it behaves in an optimal manner. Learning essentially means that the agent interacts with the environment by trying out different actions and understanding their consequences. 
+
+The consequence is two-fold, one in form of rewards, other in form of change of state. It is like a child learning how to walk. He needs to understand which foot to put forward, to keep both the legs straight, etc., and the consequence for each of these. So, he will remember what action he took and what consequence it led to. This memory of action and consequence is called knowledge-base or history for an RL agent.
+
+Now, the agent can look up in its knowledge base and see which action leads to the best consequence when in a given state. You could also build a mathematical model of the environment rather than storing all possible (action, consequence) pairs.
+
+All this is good for smaller problems where there are very few states and actions. In more realistic situations, it is very difficult to explore all possible states and actions and therefore makes it difficult to build a knowledge base or a model. 
+
+A policy is a set of rules which helps the agent decide the action that it should take in a given state such that the agent can maximise its rewards in the long run. There are two types of policies:
+
+- A deterministic policy: $\pi(s) \rightarrow a$
+- A probabilistic policy: $\pi(a|s)$
+
+A probabilistic policy becomes deterministic when $\pi(a|s) = 1$
+
+For example, for a novice doing investment portfolio management, the policy could be: whenever the stock price reaches a certain threshold, he will sell all the stock. This is the deterministic case. He has fixed the action for a state. A probabilistic policy, on the other hand, could be: whenever the stock price reaches a certain threshold, sell the stock 60% of the times, retain the stock 35% of the times, and for rest of the times, buy the stock. What if the stock price keeps on increasing and he holds the stock rather than selling it? Well, he could earn more profit by selling it later.
+
+
+**Which of following correctly defines a policy?**
+- A mapping from state that helps the agent to figure out what action needs to be taken
+
+---
+
 # References
 
 - [Reinforcement Learning for Humanoid Robotics](https://faculty.cc.gatech.edu/~isbell/reading/papers/peters-ICHR2003.pdf)
