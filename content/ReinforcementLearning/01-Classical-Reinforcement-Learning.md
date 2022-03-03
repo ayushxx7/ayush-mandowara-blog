@@ -276,6 +276,58 @@ For example, for a novice doing investment portfolio management, the policy coul
 
 ---
 
+# Exploration vs Exploitation
+
+Exploiting an action is fine if you have exhaustively explored all the actions from a given state. But, this is generally not the case in real-life situations. In most scenarios, you would have explored only a small fraction of all possible actions. What if there exists an action that can get you a lottery? Wouldn't you go exploring more? But at the same time, you also don’t want to lose out on the benefits of the current action, in case you don’t find good options while exploring.
+
+So, to handle this problem, typically, a small window of exploration is set. 
+
+**What is Exploitation**
+- Exploiting the current option which you already know is reaping benefits
+
+# Markov State
+
+In the previous segment, you learnt that when in a given state, an agent takes an action according to a policy (which is learnt during training. The action leads to a change in state and possibly generates a reward. One brute force way to learn a policy is to actually remember all the possible pairs of state, action and reward. But that is often not feasible. For example, in a game of (say) Chess, this set may comprise of a million possible combinations. In more complex problems (such as playing Go, driving a car etc.) this may be further intractable. Therefore, in the RL problem, we make a Markovian assumption. 
+
+The Markov assumption states that the current state contains all the necessary information about all the past states the agent was in and all the past actions the agent took. It assumes that the current state is sufficient for taking the next action.
+
+You can consider a Markov state as some function of the knowledge base that captures all relevant information from the knowledge base. And once ‘Markov state’ is known, the knowledge base can be thrown away. What action the agent needs to take next or what possible state an agent can land on given he has taken an action - all of this can be determined from the Markov state.
+
+Markov state contains all necessary information that helps to predict the future state.
+
+
+## Example
+
+Let's consider a robot learning to fly a plane. It has the knowledge base of position, the speed at each and every time step. Now, at some position, the robot makes a right turn. The next state of the plane will be dependent on what the current position and speed of the plane are, and the robot has taken the right turn. It doesn't need to know how it arrived at the current position or how it gained its current speed. Its current state vector (current position, current speed) and action satisfy the Markovian assumption.
+
+# Markov Decision Processes
+
+All these processes that work in accordance to Markov property are called Markov Decision Processes (popularly called MDPs). The word ‘Decision’ in MDP takes into account actions taken by the agent in a given Markov state. MDP is the formal name of a sequential decision-making process. All the RL problems set its ground on MDPs, i.e., work on the assumption of the Markov property. 
+
+The following points apply to an RL problem:
+- An agent learns how to behave in an environment by taking actions.
+- Then observing the consequences (rewards and next state), of the action taken.
+- The control objective of the agent is to learn a policy to accumulate maximum cumulative rewards over a period of time.
+- All of RL problems are based on the Markov assumption: the current state contains all relevant information to take the best action.
+
+# Questions
+
+**A policy is a mapping from perceived states of the environment to actions to be taken when in those states**
+- True
+- Policy defines what action RL agent will taken when in a given state
+
+**Stochastic Policy is generally preferred over deterministic. Why?**
+- Stochastic policy gives a chance to explore, whereas deterministic does not
+- In stochastic policy, the agent has an option to choose among different actions possible. In the case of deterministic policy, only one action is possible. So, stochastic policy is inherently exploratory, whereas deterministic is not
+- Stochastic policy provides an edge over deterministic by allowing to choose some less probable actions
+
+**What is Markov in Markov Decision Process?**
+- The state vector
+- Markov assumption is for states. That state should be sufficient to make the current decision
+
+
+---
+
 # References
 
 - [Reinforcement Learning for Humanoid Robotics](https://faculty.cc.gatech.edu/~isbell/reading/papers/peters-ICHR2003.pdf)
