@@ -325,6 +325,91 @@ The following points apply to an RL problem:
 - The state vector
 - Markov assumption is for states. That state should be sufficient to make the current decision
 
+---
+
+# Value Function
+
+Let’s say an agent is learning to play a game where it has to fight enemy's drones in a battlefield. Assume that his current location and the number of bullets in his gun defines his state. His action could be - to move forward or to shoot. The reward is the number of drones he shot without getting killed. Let’s say he found a position behind a wall and he can shoot as many drones as he wants without getting killed. 
+
+The position behind the wall has offered him an advantage and is more valuable to him. On the other hand, the agent once found himself out in the middle of the battlefield where he was an easy target for the drones.
+
+This implies that some states are inherently more valuable than others, i.e. the agent prefers some states over others. It will be useful if the agent learns the 'values' of all these states.
+
+## State value function
+
+Value function helps in evaluating a state. Consider the following table. 
+
+| column 1 | column 2    | column 3   |
+|----------|-------------|------------|
+| 3        | 4           | 9 (Target) |
+| 2        | 5 (current) | 8          |
+| 1        | 6           | 7          |
+
+Assume that you want to reach cell 9 from the current state (which is cell 5). Assuming you can take actions only from the following set {Left, Up, Down, Right}, the possible next states you can be in, starting from cell 5, are - cell 2, cell 4, cell 6, cell 8. You evaluate all the states, based on how valuable each of these states would be in achieving the final goal of reaching state/cell 9.
+
+Clearly, if you move to cell 4 (or 8), the chances of reaching cell 9 in the next step are higher than if you were in cell 2 or 6.  
+
+The positional advantage you have simply by being in a particular state is the intrinsic value of the state. For example, it is far more valuable to be in state 4 as opposed to state 3, because the immediate step after 4 will result in achieving the target i.e. state 9. So, state 4 is inherently more valuable than state 3. So, you can select an action that helps you achieve the state with the maximum 'value'. 
+
+A value function tells you how good it is for the agent to be in that particular state. It is also known as the state value function. The agent would want to be in a state such that its total rewards (immediate + expected future rewards) are maximised.
+
+- Value Function: $V_{\pi}(s)$
+
+
+## Total Rewards
+
+Consider that the agent starts from state S0, takes an action A0 and gets an immediate reward of R0 and ends up in state S1. From there he takes action A1 and so on. So, his episode is:
+
+(S0, A0, R0), (S1, A1, R1), (S2, A2, R2), (S3, A3, R3), (S4, A4, R4), S5
+
+where S5 is the terminal state.
+
+Now, you want to calculate total rewards earned from State S2, that will be: (R2)+ (R3+R4). Here R2 is an immediate reward and (R3+R4) are future rewards.
+
+## Action value function
+
+On a similar note, we can define a value function for action, i.e., define how valuable it is to perform an action in a particular state. Consider the game of chess - you moved your rook to take the opponent’s queen and got an immediate high reward for this move. But taking this action might have been useful in some other state, but in this state (where the King gets endangered) this action is quite unfavorable.
+
+You take actions that bring about states with high value, i.e. actions that fetch high immediate reward + expected future rewards because these actions bring the greatest amount of reward over the long run.
+ 
+| column 1 | column 2    | column 3   |
+|----------|-------------|------------|
+| 3        | 4           | 9 (Target) |
+| 2        | 5 (current) | 8          |
+| 1        | 6           | 7          |
+
+Consider the above example: If you (the agent) are in state 5, let’s say you have the choice of performing 4 actions in that state. You can go either left, right, up or down. All actions are not equally valuable. Some actions can make you closer to the target. So, in state 5, actions ‘up’ and ‘right’ will take you closer to the target cell 9, while the actions ‘down’ and ‘left’ will take you away from the target cell. So when you are in state 5, actions ‘up’ and ‘right’ are more valuable.
+
+This function calculates the intrinsic value of performing an action when you are in state ‘s’. 
+
+Also known as the q-function, q(s, a) is the reward you can expect if you take an action ‘a’ in state ‘s’.
+
+For example, if you are near the airport at 6:30 pm in the evening, the action of going to the airport by 8 pm is very valuable. Why? Because many flights land at around 8 pm in the evening, so the cab driver will be expected to get many long-distance rides at 8 pm if he is at the airport at that time.
+
+To summarise, 
+
+- The state-value function v(s) is the total reward an agent can expect if it is in state s
+- The action-value function q(s, a) is the total reward an agent can expect if it performs an action ‘a’ when it is in the state ‘s’
+- The state-value function and action-value function reflects the expected total reward and not the immediate reward. 
+
+Once you fix the policy, the value and the q-function are fixed. 
+
+Therefore, we subscript both state and action-value functions with policy $\pi$:
+- $v_{\pi}(s)$
+- $q_{\pi}(s,a)$
+
+
+# Optimal Policy
+
+The objective of an RL agent is to find the best action to take in a given state, i.e. to learn an optimal policy.
+
+A policy $\pi*$ is called optimal only if $\forall \pi:\pi* \ge \pi$
+
+But, $\pi$ is just a mapping (of what actions to take in a given state). How can we compare two mappings? We must have some metric to say one policy is better than another.
+
+Policy $\pi$ is better than $\pi'$ if, for all states, the value function is higher if you follow policy $\pi$ than if you follow policy $\pi'$. Mathematically,
+
+$\pi \ge \pi'$ if $\forall s:v_{pi}(s) \ge v_{\pi'}(s)$
 
 ---
 
