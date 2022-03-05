@@ -413,6 +413,54 @@ $\pi \ge \pi'$ if $\forall s:v_{pi}(s) \ge v_{\pi'}(s)$
 
 ---
 
+# Model of the Environment
+
+
+There are broadly two types of frameworks in RL: model-based and model-free.
+
+- In model-based methods, it is possible to learn what is called a model of the environment, i.e. a model which maps the consequences (next state, reward) of taking an action in a state.
+- In model-free methods, it is not possible to learn an explicit model (which is a more realistic case).
+
+In most cases, the environment is stochastic, i.e., most of the times you will see different rewards and states after taking a particular action in a particular state. Therefore, the model is represented as: 
+
+$p(s',r|s,a)$
+
+It is the probabilistic distribution of finding the agent in state 's' and reaping the reward r, given a particular action a is taken in a particular state s. This is known as the model of the environment.
+
+In most real-world scenarios, you wouldn’t know what exactly the model of the environment is. You implicitly infer about the model from the observations and the RL techniqes used to solve such problems are called model-free. 
+
+So, the objective of an RL agent is to find the optimal policy either using the explicit model (model-based) or by implicitly inferring the model from the actions taken from various states (model-free). 
+
+**Difference between policy and model of the environment**
+- Model of the environment defines which state the agent will land into and what reward it will get for taking an action from state s; whereas policy defines what action the agent should take from a state
+
+
+---
+
+# Reinforcement Learning vs Supervised Learning
+
+- In reinforcement learning, you deal with the processes where the agent actively interacts with the environment. Whereas in supervised learning, you deal with objects or datasets. There is no interaction with the environment and given a dataset, you are required to predict the target.
+- RL is an active learning, where the agent learns only by interacting. While supervised learning is passive learning, where the agent learns only by extracting features from a given dataset.
+- In supervised learning, there is a ‘target’ or ‘label’ which is the best tag for that observation. Whereas in reinforcement learning, an agent only gets a reward for its action, but the reward doesn’t tell the agent whether this is the best action or not.
+- Unlike reinforcement learning, in supervised learning there is no concept of agent taking actions and observing the consequence of its actions.
+- In supervised learning, there is a teacher (ground-truth) which tells you whether the result for a given observation is correct or not. And, then the model can be improved by minimising the error term. 
+- On the other hand, in reinforcement learning, there is no teacher. The environment acts only as a critic, where it tells you how good or bad the action is by giving rewards. It doesn’t tell whether the action taken is the ultimate best or not.
+
+
+## Questions
+**Classify problems into RL or SL**
+
+| Problem Statement                                                                                                                                                                                                                                                                      | RL or SL               |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------|
+| A drone is learning to classify an image as human face or not. Is this supervised or RL?                                                                                                                                                                                               | Supervised Learning    |
+| Your manager tells you to design a model to predict future sales to maximise the profit. He asks you to use last 3 years dataset and come up with a model.                                                                                                                             | Supervised Learning    |
+| You decide to improve grades in class by observing your current grades and then deciding how much time you need to put to improve the current grades. Your objective is to maximise total grades earned in a semester                                                                  | Reinforcement Learning |
+| Suppose, one day, you decide to learn to fly an aeroplane. So, learning to fly is:                                                                                                                                                                                                     | Reinforcement Learning |
+| You are the owner of a retail shop and you want to learn how much order to place each day to meet the demand so that you can earn maximum profit? The order that you’ll place will be judged on how much profit you make. And it is for you to decide how much profit is good for you. | Reinforcement Learning |
+
+
+---
+
 # References
 
 - [Reinforcement Learning for Humanoid Robotics](https://faculty.cc.gatech.edu/~isbell/reading/papers/peters-ICHR2003.pdf)
