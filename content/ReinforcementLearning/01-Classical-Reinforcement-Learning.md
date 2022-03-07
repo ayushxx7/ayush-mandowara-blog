@@ -7,6 +7,41 @@ author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+  * [The Evolution of RL](#the-evolution-of-rl)
+* [What is Reinforcement Learning](#what-is-reinforcement-learning)
+* [Questions](#questions)
+* [Agent-Environment Interaction](#agent-environment-interaction)
+  * [Example](#example)
+  * [Two Types of Tasks](#two-types-of-tasks)
+* [Questions](#questions-1)
+* [State Vectors](#state-vectors)
+  * [Examples of State Vectors, Actions and Rewards](#examples-of-state-vectors-actions-and-rewards)
+* [Questions](#questions-2)
+* [Objective of RL Agent](#objective-of-rl-agent)
+  * [Question](#question)
+* [Actions & Policy](#actions--policy)
+* [Exploration vs Exploitation](#exploration-vs-exploitation)
+* [Markov State](#markov-state)
+  * [Example](#example-1)
+* [Markov Decision Processes](#markov-decision-processes)
+* [Questions](#questions-3)
+* [Value Function](#value-function)
+  * [State value function](#state-value-function)
+  * [Total Rewards](#total-rewards)
+  * [Action value function](#action-value-function)
+* [Optimal Policy](#optimal-policy)
+* [Model of the Environment](#model-of-the-environment)
+* [Reinforcement Learning vs Supervised Learning](#reinforcement-learning-vs-supervised-learning)
+  * [Questions](#questions-4)
+* [Summary](#summary)
+* [Questions](#questions-5)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 Reinforcement Learning (RL) is the field of machine learning in which an 'agent' (i.e. the software being trained) learns to take actions to maximise some cumulative 'reward'.
 
@@ -458,8 +493,43 @@ So, the objective of an RL agent is to find the optimal policy either using the 
 | Suppose, one day, you decide to learn to fly an aeroplane. So, learning to fly is:                                                                                                                                                                                                     | Reinforcement Learning |
 | You are the owner of a retail shop and you want to learn how much order to place each day to meet the demand so that you can earn maximum profit? The order that you’ll place will be judged on how much profit you make. And it is for you to decide how much profit is good for you. | Reinforcement Learning |
 
+---
+
+# Summary
+
+Reinforcement learning is about learning from interaction with the environment. The objective is to learn how to behave in order to achieve a goal. 
+
+In a reinforcement learning problem, 
+- an agent learns how to behave in an environment by taking actions and seeing the consequences - rewards and change in state.
+- The control objective of the agent is to learn a policy to accumulate maximum rewards over a period of time.
+- The entire reinforcement learning problem is based on the Markov assumption: the current state contains all relevant information to take the future action.
+ 
+
+You also learnt about deterministic and stochastic policy, and how the stochastic policy gives a window for exploration.
+
+Then, you learnt about value function and action-value (q-value) functions. These are the expected return from that state, or state–action pair, given that the agent uses the policy.
+
+A policy for which value functions are optimal is an optimal policy. While the optimal value functions for states and state–action pairs are unique for a given MDP, though there can be many optimal policies.
+
+Then, you learn about the model of the environment. In problems, where the agent has a complete knowledge about the environment’s dynamics we call them as model-based problems. In the case when a complete model of the environment is not available, we call those problems as model-free.
 
 ---
+
+# Questions
+
+**An agent is learning to play the game of chess. His policy is deterministic, i.e. when in state s he always takes the action a. According to him, everytime he takes the action a in the state s, he should end up in the same new state s' and get the same reward r. However, this is not the case. Each time he is taking the action a in state s, he is landing in a very different new state (which is not s') and getting a very different reward (which is not equal to r).**
+
+**Why is he getting a different reward and a different next state on taking the same action in state s?**
+
+- Environment is stochastic
+- Since the environment is stochastic, taking the same action from the same state is giving him a different consequence. In chess. it is similar to your opponent changing his strategy every time you make a particular move in the state s
+
+---
+
+**"Value Function $v_{\pi}(s)$ tells how good it is for the agent to perform an action in a given state". State True or False.**
+
+- False
+- Value Function $v_{\pi}(s)$ tells how good it is for the agent to be in a given state
 
 # References
 
