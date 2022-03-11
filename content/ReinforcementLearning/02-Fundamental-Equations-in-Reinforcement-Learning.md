@@ -132,3 +132,72 @@ Total reward = $r + \gamma*r(s') + \gamma^2*r(s''')+...$
 
 - 1.96
 - for S0 = 1 + 0.8*2 + 0.8^2*(-1) = 1.96
+
+# Understanding the RL Equations
+
+- $\boxed{v_{\pi}(s) = \sum_{a\sim\pi(a|s)}\pi(a|s)q_{\pi}(s|a)}$
+
+- $\boxed{q_{\pi}(s,a) = \sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi}(s'))}$
+
+### Important Points
+- $q_{\pi}(s,a)$ represents the value of performing a particular action a while in state $s$.
+- $v_{\pi}(s)$ represents the value of the state $s$. This value is calculated by  taking the average value of preforming all the possible actions from state s. Here, you multiply the value corresponding to performing an action a, with the probability of performing the action when in state s.
+
+You can use $q_{\pi}(s, a)$ function in $v_{\pi}(s)$ and come up with an equation that only deals with value functions:
+
+$\boxed{
+v_{\pi}(s) = \sum_{a}\pi(a|s)\sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi}(s'))}
+$
+
+Similarly you can substitute $v_{\pi}(s)$ in $q_{\pi}(s, a)$ function and come up with an equation that only has action-value functions
+
+$\boxed{q_{\pi}(s,a) = \sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma \sum_{a\sim\pi(a|s)}\pi(a|s)q_{\pi}(s|a)}$
+
+Here $\pi(a|s)$ is policy and $p(s'r,r|s,a)$ is the model.
+
+# Model Free Methods
+
+In most real-life scenarios with large state and action spaces, the model of the environment is not available (i.e. model-free methods). In such cases, you can compute the q-function using the fact that it is the expected value of the total reward:
+
+$q_{\pi}(s, a) = E_M[r + \gamma v_{\pi}(s')]$
+
+To compute the expected value, you take multiple episodes where the agent was in state ‘s’ and took the action ‘a’. For this particular state-action pair, you will get different (s', reward) pairs for different episodes. To get an estimate of the expected value of this state-action pair - $q_{\pi}(s, a)$ - you take the_3 average of the different rewards you get via these different episodes.
+
+### Cab-Driver Example
+
+Consider the example of a cab driver. She has to go from point A (state A) to point B (state B). Here one episode means that the driver is going from state A to state B. The driver performs 100 such episodes. The policy that she is following is stochastic. Let’s assume that she encounters state C in most of these episodes. When in state C, in some episodes she takes the action RIGHT, while in a few others she takes the actions UP, LEFT, DOWN. You want to calculate the state-value of state C.
+
+ 
+
+To calculate the state-value of state C, you calculate the reward associated with the pair (state C, RIGHT), (state C, LEFT), (state C, UP) and (state C, DOWN) in all episodes corresponding to each of the state-action pairs. 
+
+ 
+
+- q(state C, RIGHT) = average value of the rewards corresponding to this state-action pair in all the episodes
+- q(state C, LEFT) = average value of the rewards corresponding to this state-action pair in all the episodes
+- q(state C, UP) = average value of the rewards corresponding to this state-action pair in all the episodes
+- q(state C, DOWN) = average value of the rewards corresponding to this state-action pair in all the episodes 
+
+v(state C) = $\pi$(Right|C)*q(state C, RIGHT) + $\pi$(Left|C)*q(state C, Left) + $\pi$(Up|C)*q(state C, Up) + $\pi$(Down|C)*q(state C, Down)
+
+For this you can run multiple episodes starting from the state s and taking action a; and compute the average of total rewards obtained in each episode. This average will provide an estimate of the expected value of $q_{\pi}(s, a)$.
+
+**Formal justification of using q-value not value-function in model-free methods:**
+
+Now, to compute the value function, you need to evaluate q-function. And given that you don't have the model of the environment, you can't directly evaluate q-function, thereby, can't substitute q-function in value function equation. And this is a typical scenario. 
+
+ 
+
+Intuitively, with a model, value-function is enough to find an optimal policy, as the agent can look ahead one step and choose the action that leads to the best combination of reward and state. But without a model, the agent needs to estimate the value of each action to find an optimal policy.
+
+Most of the model-free methods directly work with q-values. Multiple episodes are run to get its estimate. From the q-values itself, we can derive the policy.
+
+### Question
+
+What is meant by model of the environment?
+
+- Model of the environment is something that imitates how environment behaves
+  - Model of the environment is basically a probabilistic distribution telling the agent what could be the consequence when the agent takes an action a from state s
+
+- Model of the environment predicts the next state and reward given the current state and action
+  - Model of the environment is basically a probabilistic distribution telling the agent what could be the consequence when the agent takes an action a from state s
