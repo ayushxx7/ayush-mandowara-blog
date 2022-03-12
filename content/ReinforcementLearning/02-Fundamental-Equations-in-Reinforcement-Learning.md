@@ -54,7 +54,7 @@ This is the **first basic equation** of RL. The intuition of this equation is th
 | Statement                                                                                       | Correct / Incorrect |
 |-------------------------------------------------------------------------------------------------|---------------------|
 | $v_{\pi}(s)$ is the weighted sum of the value of all the actions that can be taken in a state s | Correct             |
-| $q_{\pi}(s)$ is the weighted sum of the value of all the actions that can be taken in a state s | Incorrect           | 
+| $q_{\pi}(s)$ is the weighted sum of the value of all the actions that can be taken in a state s | Incorrect           |
 
 # RL Equations - Action Value Function
 
@@ -201,3 +201,133 @@ What is meant by model of the environment?
 
 - Model of the environment predicts the next state and reward given the current state and action
   - Model of the environment is basically a probabilistic distribution telling the agent what could be the consequence when the agent takes an action a from state s
+
+# Bellman Equations of Optimality
+
+Policy $\pi$ is better than $\pi'$ if, for all states, the value function is higher if you follow policy $\pi$ than if you follow policy $\pi'$. Mathematically,
+
+$\pi \ge \pi'$ if $\forall s:v_{pi}(s) \ge v_{\pi'}(s)$
+
+A policy $\pi*$ is called optimal only if $\forall \pi:\pi* \ge \pi$
+
+$\implies \forall {\pi} \forall s: v_{\pi*}(s) \ge v_{\pi}(s)$
+
+Optimal policy refers to finding the best action **a** in state **s**. In this case, as is the case for many MDPs, the optimal policy is deterministic, i.e., there is only one optimal action to take in each state. 
+
+Let's build equations for optimal state and action-value functions.
+
+Value of a state under an optimal policy must be equal to the expected total return for the best action from that state. At each state, greedily pick the best action that has the maximum q-value. 
+
+The optimal action-value function $q*(s,a)$ is defined as:
+
+
+$q^*(s,a) = \sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi^*}(s'))$
+
+Also,
+
+$v_{\pi^*}(s) = max_{\pi}(v_{\pi}(s)) = max_{\pi}(\sum \pi(a|s)*q_{\pi}(s,a))$
+
+Now, you have already picked the best value for $q*(s,a)$ for the policy. The right side term can be maximum only if you set the probability of picking the action for which $q*(s,a)$ is maximum as 1 and all to 0.
+
+
+For reference, sample values are picked for a random variable from [ 3 4 5 6 ] with a probability distribution as [ 0.1 0.3 0.4 0.2 ] i.e. the probability of picking 3 is 0.1, 4 is 0.3, 5 is 0.4 and 6 is 0.2. 
+
+The expected value of random variable E[X] is calculated as 0.1x3 + 0.3x4 + 0.4x5 + 0.2x6 = 4.7. But you need to get the maximum value among all the values. For that, you would set the probability value for 6 as 1 and for others as zero. 
+
+The same idea applies to state and action-value functions. Since v(s’) = 6 is highest out of all the v(s’) values, you make its probability = 1.
+
+We can define optimal policy as:
+
+$\pi^*(a^*|s) = \begin{cases}
+   1 & a^* = \text{argmax}_a q^*(s,a) \\
+   0 & \text{otherwise}
+\end{cases}
+$
+
+To summarise, the state-value and action-value functions for the optimal policy can be defined as:
+
+- $v^*(s) = \sum_a \pi^*(a|s)q^*(s,a)$
+- $q^*(s,a) = \sum_{s'}\sum_{r}p(s', r|s, a)[r + \gamma v^*(s')]$
+
+These equations relate the optimal policy to the optimal state and optimal action-value equations. These equations are popularly known as the **Bellman Equations of Optimality**.
+
+# Solving Bellman Equations
+
+There are 4 basic equations
+
+- State-value and action-value functions for policy $\pi$ (These equations are known as **Bellman Expectation Equations**):
+- $v_{\pi}(s) = \sum_a \pi(a|s)q_{\pi}(s,a)$
+
+-  ${q_{\pi}(s,a) = \sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi}(s'))}$
+- $v^*(s) = \sum_a \pi^*(a|s)q^*(s,a)$
+- $q^*(s,a) = \sum_{s'}\sum_{r}p(s', r|s, a)[r + \gamma v^*(s')]$
+
+where $p(s',r|s,a)$ is the model of the environment
+
+We will start with methods that assume that model of the environment $p(s',r|s,a)$ is available. These methods are called **model-based methods**.
+
+All these equations work together to arrive at optimal policy and optimal value functions. There are broadly two steps involved in arriving at optimal policy and state-value functions:
+- **Policy Evaluation**: Say you know a policy and you want to evaluate how good it is, i.e., compute the state-value functions for the existing policy
+- **Policy Improvement**: Say you know the value function for each state and you want to improve the policy which was used to compute these value functions, i.e., improve the policy using the existing state value function. This new policy could not have been found directly from the old policy without calculating those value functions.
+
+The process of learning an optimal policy is analogous to learning to play, say, Chess. You want to learn the optimal policy (i.e. learn to play well), and to do that you need to know the ‘values’ of the various states (i.e. get an intuition of which states are good). So you start playing with some policy (the initial ones are likely to be bad) and compute the ‘state-values’ under that policy. Once you have played enough games under a policy, you can try changing your policy, compare that with other policies, and gradually improve your policy.
+
+Policy Improvement is done to maximise the total rewards, by finding the best action for each state.
+
+Consider that the agent is at state s following some policy $\pi$. The value function at state s is given by:
+
+$v_{\pi} = \sum_a\pi(a|s)q_{\pi}(s, \pi'(s))$
+
+Now, you want to find out that if there is some other policy $\pi'$ which has better state-value. Assume that $\pi' \ge \pi$. And you take an action $a$ according to policy $\pi'$ at state $s$.
+
+If $\pi' \ge \pi$ is true, then $v_{\pi}(s) \le q_{\pi'}(s, \pi'(s))$ -- (1)
+
+According to the policy improvement theorem:
+
+$\pi' \ge \pi$ is true, then $v_{\pi}(s) \le v_{\pi'}(s)$ -- (2)
+
+If you can prove that the equation (1) is same as equation (2) then it is proved that $\pi' \ge \pi$
+
+Now, let's see how we can define $\pi'$ as an improved version of $\pi$. The improvement step is basically choosing the best action $a^*$ at each state, i.e., an action that gives maximum q-value.
+
+
+Mathematically:
+
+$a^* = \text{argmax}_a q_{\pi}(s, a)$
+
+$\pi'(a|s) = \begin{cases}
+   1 & a = a^* \\
+   0 & \text{otherwise}
+\end{cases}
+$
+
+Let's also understand how this greedy approach will give better estimates:
+
+$v_{\pi}(s) = \sum_a \pi(a|s)q_{\pi}(s,a) \le \text{max}_a q_{\pi}(s,a)$
+
+And the action for which $q_{\pi}(s,a)$ is maximum, we orient the entire probability towards that action. Any weighted sum with the probabilities can never be more than the maximum value of that variable.
+
+### Questions
+
+**Why do you need to compute value functions?**
+
+- To understand the importance of each state
+  - The value functions tells the inherent value of that state. If the agent knows which states have high values, it will try to align its actions to reach at those states
+
+- To find out better policies
+  - The value functions tells the inherent value of that state. If the agent knows which states have high values, it will try to align its actions to reach at those states
+
+---
+
+**If the optimal policy derived is deterministic, that means an agent has only limited set of actions to exploit. This can be of issue in model-free methods. Is this statement correct? If yes, which of the reason justifies the statement?**
+
+- Yes, in model-free methods, we need to interact with the environment to find out the best policy so we need to explore the entire state space while figuring out best actions.
+- We are not given the model of the environment. So, only exploitation will not explore the entire state space and therefore, we won't get true estimates of value-functions
+
+
+
+
+
+# References
+
+- Mathematical Proof for Policy Improvement: https://learn.upgrad.com/course/1611/segment/9859/110977/335647/1743753
