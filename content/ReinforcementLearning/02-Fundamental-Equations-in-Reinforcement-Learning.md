@@ -1,11 +1,32 @@
 ---
 title: Fundamental Equations of Reinforcement Learning
 description: 
-date: "2022-06-03"
+date: "2022-06-13"
 image: "bellman.png"
 author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]
 ---
+
+
+<!-- vim-markdown-toc GFM -->
+
+* [RL Equations - State Value Function](#rl-equations---state-value-function)
+  * [Expected value](#expected-value)
+  * [Questions](#questions)
+* [RL Equations - Action Value Function](#rl-equations---action-value-function)
+  * [Example](#example)
+    * [Questions](#questions-1)
+* [Understanding the RL Equations](#understanding-the-rl-equations)
+    * [Important Points](#important-points)
+* [Model Free Methods](#model-free-methods)
+    * [Cab-Driver Example](#cab-driver-example)
+    * [Question](#question)
+* [Bellman Equations of Optimality](#bellman-equations-of-optimality)
+* [Solving Bellman Equations](#solving-bellman-equations)
+    * [Questions](#questions-2)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
 
 # RL Equations - State Value Function
 
