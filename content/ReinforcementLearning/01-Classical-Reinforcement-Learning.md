@@ -1,7 +1,7 @@
 ---
 title: Classical Reinforcement Learning
 description: 
-date: "2022-06-03"
+date: "2022-03-03"
 image: "reinforcement_learning.jpg"
 author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]

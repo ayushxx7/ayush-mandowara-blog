@@ -1,7 +1,7 @@
 ---
 title: Fundamental Equations of Reinforcement Learning
 description: 
-date: "2022-06-13"
+date: "2022-03-13"
 image: "bellman.png"
 author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]
