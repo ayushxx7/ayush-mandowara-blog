@@ -88,6 +88,42 @@ The stopping condition for Policy Iteration is:
 - For each state $v_{\pi}(s) = v_{\pi'}(s)$
 - The value of a state for the improved policy should be the same for the policy we started with.
 
+# Policy Evaluation - Prediction
+
+Let's rearrange the equations. The equation:
+
+$v_{\pi}(s) = \sum_{a}\pi(a|s)[\sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi}(s'))]$
+
+can be rewritten as 
+
+$v_{\pi}(s_1) = c_1\times v_{\pi}(s_1)+c_2\times v_{\pi}(s_2)+c_3\times v_{\pi}(s_3) + ...$
+
+Hence the system of linear equations can be written as:
+
+$v_{\pi}(s_1) = c_1\times v_{\pi}(s_1)+c_2\times v_{\pi}(s_2)+c_3\times v_{\pi}(s_3) + ...$
+
+$v_{\pi}(s_2) = d_1\times v_{\pi}(s_1)+d_2\times v_{\pi}(s_2)+d_3\times v_{\pi}(s_3) + ...$
+
+$v_{\pi}(s_3) = e_1\times v_{\pi}(s_1)+e_2\times v_{\pi}(s_2)+e_3\times v_{\pi}(s_3) + ...$
+
+
+This can be further simplified as:
+
+A constant matrix*$[v_{\pi}(s_1), v_{\pi}(s_2),...]$ = another constant matrix. So, the policy evaluation equation could be written as:
+
+$A\vec v = c$
+
+Where $\bold A$ is a function of policy, the model of the environment and discount factor and c is a function of policy, model of the environment and reward.
+
+These equations could be solved using matrix inverse. This approach is computationally expensive and is not suitable when the number of states is huge.
+
+The other method is to iteratively solve for $v_{\pi}(s)$. You \start with initialised values for $v_{\pi}(s)$ and then compute the new values using the policy evaluation equation. And then you use the new values to re-compute the values $v_{\pi}(s)$. You continue to do this until $v_{\pi}(s)$ shows convergence, i.e., value get stabilised for a particular policy.
+
+### Points to consider
+- We don't need to initialize $v_{\pi}(s)$ for closed form solution. We can just solve the equations.
+- Policy evaluation equation is written for each state. While solving for value functions, the number of actions won't affect the number of equations. If there are 50 states in RL problem and 4 actions for each state, then number of equations will be 50.
+- We use iterative methods for large state spaces (all practical problems have large state spaces) as closed form (inverse matrix) calculation is too expensive.
+
 # References
 
 - [Dynamic Programming - Stanford](https://web.stanford.edu/class/cs97si/04-dynamic-programming.pdf)
