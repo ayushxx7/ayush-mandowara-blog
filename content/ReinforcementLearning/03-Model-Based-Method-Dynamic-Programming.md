@@ -124,6 +124,46 @@ The other method is to iteratively solve for $v_{\pi}(s)$. You \start with initi
 - Policy evaluation equation is written for each state. While solving for value functions, the number of actions won't affect the number of equations. If there are 50 states in RL problem and 4 actions for each state, then number of equations will be 50.
 - We use iterative methods for large state spaces (all practical problems have large state spaces) as closed form (inverse matrix) calculation is too expensive.
 
+# Policy Improvement - Control
+
+Once the value function $v_{\pi}(s)$ is evaluated, the agent improves the policy. The improvement is made greedily with respect to the current value function. In state s, that action is chosen which has the maximum state-action value, i.e. maximum $q_{\pi}(s, a)$ value:
+
+$\pi'(a|s) = \begin{cases}
+1 & a = \text{argmax}_a[\sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v_{\pi}(s'')]  \\
+   0 & \text{otherwise}
+\end{cases}
+$
+
+If there is no improvement in the policy, then the agent is already at the optimal policy. Else, we need to evaluate the improved policy until the state-values converge and then perform the policy improvement step on top of it. These steps are repeated until there is no further improvement in the policy.
+
+# Value Iteration
+
+You can compute the maximum value of a state by comparing the different actions possible in that state - the action which results in the max state-value is the optimal action. This is the major idea behind Value Iteration algorithm. 
+
+In value iteration, instead of running the policy evaluation step till the state-values converge, you perform exactly one update, calculating the state-values. These state-values are corresponding to the action that yields the maximum state-action value. The state-value function is a greedy choice among all the current actions:
+
+$v(s) = \max_{a}[\sum_{s'}\sum_{r}p(s',r|s,a)(r + \gamma v(s'))]$
+
+Policy improvement is an implicit step in state-value function update. The update step combines the policy improvement and (truncated) policy evaluation steps. 
+
+### Points to consider
+
+- Value Iteration is computationally less expensive when compared with policy iteration as the entire sweep till state-value function stabilisation need not be done
+
+- The optimal value function obtained from Policy and Value Iteration will be the same. They both will converge to give the same results
+
+- The update is greedy in terms of best action to be taken from state s
+
+### Psuedo Code
+
+(a) Initialise value functions for each state, i.e., v(s) for all s.
+
+(b) Repeat:
+- Select a state, s
+- Calculate the value for each action starting from state s, i.e., q(s, a)
+- Select the highest value among the q-values calculated in the previous step.
+- Store v(s)
+
 # References
 
 - [Dynamic Programming - Stanford](https://web.stanford.edu/class/cs97si/04-dynamic-programming.pdf)
