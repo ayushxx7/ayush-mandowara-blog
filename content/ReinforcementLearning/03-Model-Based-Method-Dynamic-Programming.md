@@ -154,7 +154,7 @@ Policy improvement is an implicit step in state-value function update. The updat
 
 - The update is greedy in terms of best action to be taken from state s
 
-### Psuedo Code
+### Pseudo Code
 
 (a) Initialise value functions for each state, i.e., v(s) for all s.
 
@@ -163,6 +163,23 @@ Policy improvement is an implicit step in state-value function update. The updat
 - Calculate the value for each action starting from state s, i.e., q(s, a)
 - Select the highest value among the q-values calculated in the previous step.
 - Store v(s)
+
+# Generalised Policy Iteration (GPI)
+
+Policy Iteration and Value Iteration are two sides of a coin.
+
+In policy iteration, you complete the entire policy evaluation to get the estimates of value functions for a given a policy and then use those estimates to improve the policy. And then repeat these two steps, until you arrive at optimal state value function.
+
+In value iteration, for every state update, you’re doing a policy improvement, i.e., updating the state value by picking the most greedy action using current estimates of state-values.
+
+Generalised Policy Iteration (GPI) is a class of algorithms that pans out the entire range of strategies that fall between Policy Iteration & Value Iteration. A GPI is basically the following two steps running in a loop
+
+1. Updates based on current values
+2. Policy improvement
+
+A GPI becomes:
+- Policy Iteration: When Policy Evaluation is done till convergence and then one step of Policy Improvement.
+- Value Iteration: When one step of Policy Evaluation is done and then one step of Policy Improvement.
 
 # References
 
