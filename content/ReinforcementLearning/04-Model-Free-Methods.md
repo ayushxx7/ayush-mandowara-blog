@@ -112,8 +112,90 @@ Let's say that you are trying to estimate $q_{\pi}(s, a)$, and $\pi$ is your tar
 
 How do you ensure that every action taken under $\pi$ is also taken, at least occasionally, under $\pi'$. 
 
+## Importance Sampling
+
 Importance sampling is a technique that is used to ensure that the state-actions pairs produced by the target policy are also explored by behaviour policy.
 
 The sample episodes are produced by behaviour policy but you want to learn a target policy.
 
 Thus it is important to measure how important/similar the samples generated are to samples that the target policy may have made. Importance sampling is one way of sampling from a weighted distribution which favours these "important" samples.
+
+# Temporal Difference
+
+There are some inherent issues with Monte-Carlo. To start with, you need to wait until the end of the episode to update the expected rewards for a state-action pair.
+
+Similar to Monte-Carlo, Temporal Difference (TD) methods also learn directly from experience without an explicit model of the environment.
+
+The major difference between these two methods is:
+- In Monte Carlo methods, you need to wait until the end of the episode and then update the q-value
+- In TD methods, you can update the value after every few time steps. This update mechanism is often advantageous since it gives the agent early signals if some of the eventual states are disastrous, and so the agent avoids that path altogether.
+
+Let's understand this through an example.
+
+Say there are two agents in a chemical plant. One is learning using Monte-Carlo while the other is learning using TD. Each day is a new episode for them. One day, they both changed the similar valves (action). The pressure in one of the tube increased too much and the yield of the product started decreasing (the reward started becoming negative). The TD agent will update the q-value of this action (i.e. reduce it immediately) and will instead take some other action that will increase the future rewards. On the other hand, the Monte-Carlo agent will continue taking actions according to its policy. The pressure could increase beyond a threshold level leading to a blast. After this episode, the MC agent would realise that the action (of turning that valve) was quite bad and update the policy accordingly, though the TD agent cleverly avoided all the trouble altogether.
+
+## Temporal Difference Algorithm
+
+Let's understand the TD algorithm using a small example:
+
+Say you played the game of Chess 10,000 times (episodes) over a period of 5 years. You have learnt that when you take a particular action from some board position, you always end up getting a high reward - the q(s, a) is 100 for that state-action pair. Today, when you played the game, you got a total reward of 70 (starting from the same state-action pair). How will you update the value of q(s, a)? You cannot directly make it 70 as you can't ignore the learning of 5 years. Also, intuitively, you know that the updated value should be lesser than 100 (since the latest reward of 70 is lesser than 100). So you'll update the q-value incrementally in the direction of the new, latest learning.
+
+Typically, any TD algorithm could be written as:
+
+new q-value = old q-value + $\alpha$(current value - old q-value)
+
+Now, $\alpha$ is the learning rate that decides how much importance you give to your current value.
+- If $\alpha$ is too low, it means that you value the incremental learning less
+- If $\alpha$ is too high, it means that you value the incremental learning more
+
+TD update equation relies on a similar idea. There are many different versions of TD update. The only difference in all updates is the calculation of current value. 
+
+## Q-Learning
+
+In Q-learning, you do max-update. After taking action $$ from state $s$, you get an immediate reward of $r$ and land in a new sstate $s'$. From $s'$, you take the most greedy action, i.e., the action with the highest q-value.
+
+So, q-value function update becomes:
+
+$q(s,a):=q(s,a) + \alpha(r + \gamma max_a q(s', a) - q(s, a))$
+
+Here, $r + \gamma max_a q(s', a) - q(s, a)$ is the TD Error. It is the difference between current value obtained - current estimate of q-value.
+
+Q-learning learns the optimal policy 'relentlessly' because the estimates of q-values are updated based on the q-value of the next state-action pair assuming the greediest action will be taken subsequently.
+
+If there is a risk of a large negative reward close to the optimal path, Q-learning will tend to trigger that reward while exploring. And in practice, if the mistakes are costly, you don't want Q-learning to explore more of these negative rewards. You will want something more conservative.
+
+There are other approaches like  SARSA, Double Q-learning, which are more conservative and avoid high risk. 
+
+### Q-Learning Pseudocode
+
+The learned action-value function, Q, directly approximates $q*$ - the optimal action-value function, independent of the policy being followed. After every step, it updates the q-value of each (state-action) pair by greedily taking an action that has the maximum q-value. 
+
+- Initialization: Q(s, a)
+- Repeat
+    - A ~ $\epsilon_{}$-greedy at s w.r.t Q(s,a)
+    - Observe state $s'$ and $r$ after taking action $a$ from $s$
+    - $Q(s,a):=Q(s,a) + \alpha(r + \gamma max_a Q(s', a) - Q(s, a))$
+    - set s as s'
+
+
+# Summary
+
+In this blog, you learnt two different kinds of model-free learning methods:
+- Monte-Carlo
+- Temporal-difference (TD)
+You learnt how these can be applied to the reinforcement learning problem. Similar to DP, the problem was divided into a prediction problem and a control problem.
+
+
+Monte Carlo (MC) methods learn value functions and optimal policies directly from the interaction with the environment. They average out the rewards earned from different episodes to estimate the action-value functions and use these action-value functions to improve the policy ($\epsilon_{}$-greedily). 
+ 
+$\epsilon_{}$ is the hyperparameter that balances the trade-off between exploration and exploitation. Lower the value, lower is the exploration.
+
+Then you learnt about off-policy methods and importance sampling. These methods deal with two kinds of policies: behaviour policy and target policy. And importance sampling ensures that important samples (important both for target and behaviour policy) are sampled more often than others.
+
+Then, you learn about TD methods and in particular, Q-Learning. In TD methods, you can update the value after every time step. And, in practice, this update can be very advantageous when some of the states are extremely disastrous.
+
+Q-learning directly learns the optimal policy, because the estimate of q-value is updated basis the estimate from the maximum estimate of possible next actions, regardless of which action you took. 
+
+# References
+- [Eligibility Traces and TD($\lambda$)](https://amreis.github.io/ml/reinf-learn/2017/11/02/reinforcement-learning-eligibility-traces.html)
+- [Monte-Carlo vs TD](https://stats.stackexchange.com/questions/336974/when-are-monte-carlo-methods-preferred-over-temporal-difference-ones)
