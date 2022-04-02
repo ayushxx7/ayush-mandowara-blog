@@ -7,6 +7,24 @@ author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]
 ---
 
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Dynamic Programming](#dynamic-programming)
+* [Policy Iteration](#policy-iteration)
+    * [Steps](#steps)
+    * [Algorithm](#algorithm)
+* [Policy Evaluation - Prediction](#policy-evaluation---prediction)
+        * [Points to consider](#points-to-consider)
+* [Policy Improvement - Control](#policy-improvement---control)
+* [Value Iteration](#value-iteration)
+        * [Points to consider](#points-to-consider-1)
+        * [Pseudo Code](#pseudo-code)
+* [Generalised Policy Iteration (GPI)](#generalised-policy-iteration-gpi)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
 # Preface
 
 There are two basic steps for solving any RL problem.

@@ -7,6 +7,26 @@ author: "Ayush"
 tags: ["machine-learning", "reinforcement-learning"]
 ---
 
+
+<!-- vim-markdown-toc GFM -->
+
+* [Preface](#preface)
+* [Monte-Carlo Methods](#monte-carlo-methods)
+        * [Points to consider](#points-to-consider)
+* [Monte-Carlo Prediction](#monte-carlo-prediction)
+* [Monte-Carlo Control](#monte-carlo-control)
+* [Off Policy](#off-policy)
+    * [Importance Sampling](#importance-sampling)
+* [Temporal Difference](#temporal-difference)
+    * [Temporal Difference Algorithm](#temporal-difference-algorithm)
+    * [Q-Learning](#q-learning)
+        * [Q-Learning Pseudocode](#q-learning-pseudocode)
+* [Summary](#summary)
+* [References](#references)
+
+<!-- vim-markdown-toc -->
+
+
 # Preface
 
 In most real-world scenarios, the model is not available. You have to implicitly infer the model from the observations. Methods designed to solve these scenarios are called model-free methods. Examples of such model-free environments are self-driving space, games such as Chess, Go, etc.
