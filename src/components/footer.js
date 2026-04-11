@@ -3,12 +3,22 @@ import {Link} from "gatsby"
 
 const Footer = () => {
   return (
-    <div>
-      <h3>
-        Thank the <Link to={'https://github.com/ayushxx7'} style={{color: "#f33"}} >author</Link>.
-        Fork <Link to={'https://github.com/ayushxx7/ayush-mandowara-blog/fork'} style={{color: "#9cdcfe"}} > this blog.</Link>
-      </h3>
-    </div >
+    <footer style={{
+      borderTop: "1px solid var(--zinc-muted)",
+      padding: "3rem 2rem",
+      marginTop: "4rem",
+      textAlign: "center",
+      color: "var(--zinc-secondary)"
+    }}>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <Link to="/" className="mono" style={{ marginRight: "2rem", opacity: 0.7 }}>Home</Link>
+        <Link to="/blog" className="mono" style={{ marginRight: "2rem", opacity: 0.7 }}>Blog</Link>
+        <Link to="/tags" className="mono" style={{ opacity: 0.7 }}>Topics</Link>
+      </div>
+      <p style={{ fontSize: "0.8rem" }}>
+        &copy; {new Date().getFullYear()} Ayush Mandowara. Built with Gatsby.
+      </p>
+    </footer>
   )
 }
 

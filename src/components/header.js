@@ -32,6 +32,13 @@ const Header = () => {
           <Link to="/tags" activeClassName={style.activeLink}>
             /topics
           </Link>
+          <a
+            href="https://ayush-mandowara.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            /resume
+          </a>
         </nav>
 
         <div className={style.menuIcon} onClick={toggleMenu}>
@@ -41,7 +48,7 @@ const Header = () => {
 
       <div
         className={`${style.mobileNav} ${
-          isMenuCollapsed ? style.closed : ""
+          isMenuCollapsed ? style.closed : style.open
         }`}
       >
         <Link to="/" onClick={toggleMenu}>
@@ -53,6 +60,14 @@ const Header = () => {
         <Link to="/tags" onClick={toggleMenu}>
           /topics
         </Link>
+        <a
+          href="https://ayush-mandowara.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+        >
+          /resume
+        </a>
       </div>
     </div>
   )

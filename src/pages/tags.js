@@ -7,6 +7,17 @@ import * as style from "./tags.module.less"
 function TagsPage(props) {
   const data = props.data.allMarkdownRemark.group
 
+  const slugify = (text) => {
+    return text
+      .toString()
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/--+/g, '-')
+      .replace(/^-+/, '')
+      .replace(/-+$/, '')
+  }
+
   return (
     <Layout>
       <SEO title="Tags" keywords={["ayush@machine"]} />
@@ -14,7 +25,7 @@ function TagsPage(props) {
       <div className={style.container}>
         {data.map(tag => (
           <Link
-            to={`/${tag.fieldValue}`}
+            to={`/${slugify(tag.fieldValue)}`}
             key={tag.fieldValue}
             className=" my-1 card text-center"
           >

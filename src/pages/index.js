@@ -24,16 +24,33 @@ const IndexPage = () => {
           distributed intelligence that scales. Currently architecting applied ML
           systems at the intersection of research and product.
         </p>
-        <Link
-          to="/blog"
-          className="mono"
-          style={{
-            borderBottom: "1px solid var(--surgical-orange)",
-            paddingBottom: "4px",
-          }}
-        >
-          Read the Manifest &rarr;
-        </Link>
+        <div style={{ display: "flex", gap: "2rem", marginBottom: "3rem", flexWrap: "wrap" }}>
+          <a
+            href="mailto:ayushxx7@gmail.com"
+            className="mono"
+            style={{
+              background: "var(--surgical-orange)",
+              color: "white",
+              padding: "0.75rem 1.5rem",
+              borderRadius: "4px",
+              fontWeight: 600,
+            }}
+          >
+            Hire Me &rarr;
+          </a>
+          <a
+            href="https://the-vibe-coder-69.github.io/www"
+            className="mono"
+            style={{
+              borderBottom: "1px solid var(--surgical-orange)",
+              paddingBottom: "4px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            Read the Manifest &rarr;
+          </a>
+        </div>
       </section>
 
       {/* PROJECTS SECTION (THE LAB) */}
@@ -41,24 +58,25 @@ const IndexPage = () => {
         <h2 className={style.sectionTitle}>Selected Artifacts // The Lab</h2>
 
         <div className={style.caseStudy}>
-          <div className={style.visual}>
-            <img src={ThisBlog} alt="Sentient Analytics" />
-          </div>
+          <a href="https://the-vibe-coder-69.github.io/www" target="_blank" rel="noopener noreferrer" className={style.visual}>
+            <img src={Me} alt="Portfolio" />
+          </a>
           <div className={style.content}>
             <div className={style.meta}>
-              <span className="mono">01 // Case Study</span>
-              <span className="mono">LLM Infrastructure</span>
+              <span className="mono">01 // Artifact</span>
+              <span className="mono">Portfolio</span>
             </div>
-            <h3>Sentient Analytics</h3>
+            <a href="https://the-vibe-coder-69.github.io/www" target="_blank" rel="noopener noreferrer">
+              <h3>The Vibe Coder World</h3>
+            </a>
             <p>
-              A high-throughput RAG pipeline that transforms enterprise data into
-              actionable intelligence. Redefined the feedback loop between raw
-              data and executive decision-making.
+              An immersive digital experience showcasing applied ML systems,
+              creative engineering, and the architecture behind the vibecoder brand.
             </p>
             <div className={style.tags}>
-              <span className="mono">Python</span>
-              <span className="mono">LlamaIndex</span>
-              <span className="mono">Modal</span>
+              <span className="mono">React</span>
+              <span className="mono">Three.js</span>
+              <span className="mono">Vibe</span>
             </div>
           </div>
         </div>
@@ -66,24 +84,27 @@ const IndexPage = () => {
         <div className={style.caseStudy}>
           <div className={style.content}>
             <div className={style.meta}>
-              <span className="mono">02 // Case Study</span>
-              <span className="mono">Generative Media</span>
+              <span className="mono">02 // Channel</span>
+              <span className="mono">Education</span>
             </div>
-            <h3>Neural Content Generation</h3>
+            <a href="https://www.youtube.com/@thevibecoder69" target="_blank" rel="noopener noreferrer">
+              <h3>The Vibe Coder @ YouTube</h3>
+            </a>
             <p>
-              Automated multi-modal content pipeline for digital ecosystems.
-              Implemented fine-tuned control over diffusion models to maintain
-              brand consistency across 1M+ monthly assets.
+              Bridging the gap between theory and code. Detailed deep-dives into
+              LLM infrastructure, system architecture, and modern development workflows.
             </p>
             <div className={style.tags}>
-              <span className="mono">PyTorch</span>
-              <span className="mono">Transformers</span>
-              <span className="mono">React</span>
+              <span className="mono">Tutorials</span>
+              <span className="mono">Deep Dives</span>
+              <span className="mono">GenAI</span>
             </div>
           </div>
-          <div className={style.visual}>
-            <img src={Gvim} alt="Neural Generation" />
-          </div>
+          <a href="https://www.youtube.com/@thevibecoder69" target="_blank" rel="noopener noreferrer" className={style.visual}>
+            <div style={{ background: "var(--zinc-muted)", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+               <span className="mono" style={{ fontSize: "1.5rem", color: "var(--surgical-orange)" }}>@thevibecoder69</span>
+            </div>
+          </a>
         </div>
       </section>
 
@@ -115,6 +136,13 @@ const IndexPage = () => {
         <h2 className={style.sectionTitle}>Network // Connection</h2>
         <div style={{ display: "flex", gap: "3rem", flexWrap: "wrap" }}>
           <a
+            href="mailto:ayushxx7@gmail.com"
+            className="mono"
+            style={{ fontSize: "1.2rem" }}
+          >
+            Contact
+          </a>
+          <a
             href="https://github.com/ayushxx7"
             className="mono"
             style={{ fontSize: "1.2rem" }}
@@ -122,14 +150,14 @@ const IndexPage = () => {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/ayushxx7"
+            href="https://www.linkedin.com/in/ayush-mandowara/"
             className="mono"
             style={{ fontSize: "1.2rem" }}
           >
             LinkedIn
           </a>
           <a
-            href="https://youtube.com"
+            href="https://www.youtube.com/@thevibecoder69"
             className="mono"
             style={{ fontSize: "1.2rem" }}
           >

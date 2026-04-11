@@ -21,7 +21,7 @@ module.exports = {
         path: `${__dirname}/content`,
       },
     },
-    "gatsby-plugin-offline",
+    `gatsby-plugin-less`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -36,7 +36,7 @@ module.exports = {
         icon: `src/images/me.jpg`,
       },
     },
-    `gatsby-plugin-less`,
+    "gatsby-plugin-offline",
     {
       resolve: "gatsby-transformer-remark",
       options: {

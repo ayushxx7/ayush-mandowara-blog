@@ -19,7 +19,7 @@ function SEO({ description, lang, meta, title, keywords }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const author = site.siteMetadata.author || "Ayush Mandowara (ayushxx7)"
+  const author = site.siteMetadata.author || "Ayush Mandowara"
 
   return (
     <Helmet
@@ -46,12 +46,16 @@ function SEO({ description, lang, meta, title, keywords }) {
           content: `website`,
         },
         {
+          property: `og:image`,
+          content: `/og-image.png`,
+        },
+        {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author || "Ayush",
+          content: `@thevibecoder69`,
         },
         {
           name: `twitter:title`,

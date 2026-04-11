@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(5, 5, 5, 0.8);
+  background: rgba(5, 5, 5, 0.85);
   backdrop-filter: blur(12px);
   z-index: 1000;
   border-bottom: 1px solid var(--zinc-muted);
@@ -51,25 +51,50 @@
 .menuIcon {
   display: none;
   cursor: pointer;
+  font-size: 1.25rem;
+  color: var(--zinc-primary);
+  padding: 0.5rem;
   @media (max-width: 768px) {
     display: block;
   }
 }
 
 .mobileNav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   display: flex;
   flex-direction: column;
   padding: 2rem;
   gap: 1.5rem;
   background: var(--obsidian);
-  font-family: var(--mono-font);
   border-top: 1px solid var(--zinc-muted);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: -1;
+
+  &.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
 
   &.closed {
-    display: none;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
   }
 
   a {
+    font-family: var(--mono-font);
     font-size: 1.25rem;
+    opacity: 0.7;
+    &:hover {
+      color: var(--surgical-orange);
+      opacity: 1;
+    }
   }
 }
