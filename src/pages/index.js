@@ -74,9 +74,9 @@ const IndexPage = () => {
               creative engineering, and the architecture behind the vibecoder brand.
             </p>
             <div className={style.tags}>
-              <span className="mono">React</span>
-              <span className="mono">Three.js</span>
-              <span className="mono">Vibe</span>
+              <span className="mono">HTML, CSS, JS</span>
+              <span className="mono">GitHub Pages</span>
+              <span className="mono">Good Vibes</span>
             </div>
           </div>
         </div>
@@ -95,8 +95,8 @@ const IndexPage = () => {
               LLM infrastructure, system architecture, and modern development workflows.
             </p>
             <div className={style.tags}>
-              <span className="mono">Tutorials</span>
-              <span className="mono">Deep Dives</span>
+              <span className="mono">Tutorials, Deep Dives</span>
+              <span className="mono">Raw Life of Delhi</span>
               <span className="mono">GenAI</span>
             </div>
           </div>
@@ -113,20 +113,20 @@ const IndexPage = () => {
         <h2 className={style.sectionTitle}>Technical Inventory // The Stack</h2>
         <div className={style.inventoryGrid}>
           <div className={style.item}>
-            <label className="mono">Architecture</label>
-            <span>Applied ML Systems</span>
+            <label className="mono">GenAI & NLP</label>
+            <span>OpenAI, LangChain, RAG, Agentic AI, Transformers</span>
           </div>
           <div className={style.item}>
             <label className="mono">Infrastructure</label>
-            <span>Modal, Ray, Kubernetes</span>
+            <span>Kubernetes, AWS (SageMaker), GCP, Docker</span>
           </div>
           <div className={style.item}>
-            <label className="mono">Foundations</label>
-            <span>LLMs, Edge AI, RAG</span>
+            <label className="mono">ML Systems</label>
+            <span>PyTorch, FastAPI, MLOps, Prefect, Redis</span>
           </div>
           <div className={style.item}>
             <label className="mono">Terminal</label>
-            <span>Neovim, Tmux, Rust</span>
+            <span>vi, Tmux, Python</span>
           </div>
         </div>
       </section>

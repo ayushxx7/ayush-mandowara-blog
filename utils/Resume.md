@@ -1,16 +1,22 @@
-# My Resume
+# Ayush Mandowara
 
-- one
-- two
+## Technical Inventory
 
-  - four
+### GenAI & NLP
+- OpenAI (GPT-4/o/mini), SORA, Grok
+- LangChain, RAG, Prompt Engineering, Agentic AI
+- Transformers, BERT, distilBERT, HuggingFace, spaCy
 
-- three
+### Infrastructure
+- Modal, Kubernetes, Docker, Prefect
+- AWS (SageMaker, S3), GCP, BigQuery
 
-```java
-some code
-```
+### ML Systems
+- PyTorch, FastAPI, Celery, Redis
+- MLOps, Ray, GitHub Actions
+- Linear/Logistic Regression, XGBoost, SVM, Clustering
 
-## second
-
-### TODO make this mdx
+### Languages & Frameworks
+- Python, JavaScript, TypeScript, Go, Rust, Dart
+- Flask, Django, React, MCP, A2A
+- SQL, Neovim, Tmux
