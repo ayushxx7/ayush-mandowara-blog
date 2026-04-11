@@ -39,7 +39,7 @@ const IndexPage = () => {
             Hire Me &rarr;
           </a>
           <a
-            href="https://the-vibe-coder-69.github.io/www"
+            href="https://the-vibe-coder-69.github.io/www/the-vibe-coder.html"
             className="mono"
             style={{
               borderBottom: "1px solid var(--surgical-orange)",
