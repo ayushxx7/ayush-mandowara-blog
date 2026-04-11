@@ -1,17 +1,18 @@
 import React from "react"
 import { Link } from "gatsby"
-
-import Img from "gatsby-image"
-import style from "./post.module.less"
+import { GatsbyImage } from "gatsby-plugin-image"
+import * as style from "./post.module.less"
 import { slugify } from "../../utils/Utilities"
 
-const Post = ({ title, author, date, body, slug, tags, fluid }) => {
+const Post = ({ title, author, date, body, slug, tags, gatsbyImageData }) => {
   return (
     <div className={style.card}>
       <div key={title} className={style.post}>
         <div className={style.cover}>
           <Link to={slug} key={slug}>
-            <Img fluid={fluid} title={body} alt={title} />
+            {gatsbyImageData && (
+              <GatsbyImage image={gatsbyImageData} alt={title} title={body} />
+            )}
           </Link>
         </div>
         <Link to={slug} key={slug}>
@@ -22,7 +23,7 @@ const Post = ({ title, author, date, body, slug, tags, fluid }) => {
             <p>{body}</p>
             <ul className={style.postTags}>
               {tags.map(tag => (
-                <li>
+                <li key={tag}>
                   <Link to={`/${slugify(tag)}`}>
                     <div className={style.badge}>{tag}</div>
                   </Link>
@@ -36,4 +37,3 @@ const Post = ({ title, author, date, body, slug, tags, fluid }) => {
   )
 }
 export default Post
-

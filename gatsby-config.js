@@ -6,6 +6,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -16,9 +17,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
+        name: `pages`,
         path: `${__dirname}/content`,
-        name: "pages",
       },
     },
     "gatsby-plugin-offline",
@@ -33,11 +33,10 @@ module.exports = {
         background_color: `#1e2127`,
         theme_color: `#1e2127`,
         display: `minimal-ui`,
-        icon: `src/images/me.jpg`, // This path is relative to the root of the site.
+        icon: `src/images/me.jpg`,
       },
     },
     `gatsby-plugin-less`,
-    `gatsby-plugin-sharp`,
     {
       resolve: "gatsby-transformer-remark",
       options: {
@@ -64,20 +63,8 @@ module.exports = {
             resolve: `gatsby-remark-autolink-headers`,
             options: { elements: [`h1`, `h2`] },
           },
-          `gatsby-remark-codefence`,
-          `gatsby-remark-katex`,
+          `gatsby-remark-prismjs`,
           {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: "language-",
-              inlineCodeMarker: null,
-              aliases: {},
-              showLineNumbers: false,
-              noInlineHighlight: false,
-            },
-          },
-          {
-            // for youtube
             resolve: "gatsby-remark-embed-youtube",
             options: {
               width: 800,
@@ -85,7 +72,6 @@ module.exports = {
             },
           },
           {
-            // for images
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 800,
@@ -97,7 +83,6 @@ module.exports = {
     {
       resolve: "gatsby-plugin-page-progress",
       options: {
-        // includePaths: ["/"],
         excludePaths: ["/", "/blog", "/tags"],
         height: 5,
         prependToBody: false,

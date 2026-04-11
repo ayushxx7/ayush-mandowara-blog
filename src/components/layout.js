@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {useStaticQuery, graphql} from "gatsby"
-import style from "./layout.module.less"
+import * as style from "./layout.module.less"
 import Header from "./header"
 
 const Layout = ({children}) => {

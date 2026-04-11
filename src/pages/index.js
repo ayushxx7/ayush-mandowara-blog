@@ -6,7 +6,7 @@ import Me from "../images/me.jpg"
 import Gvim from "../images/gvim.png"
 import ThisBlog from "../images/this-blog.png"
 import bluestacks from "../images/bluestacks.png"
-import style from "./index.module.less"
+import * as style from "./index.module.less"
 import {
   FaGithub,
   FaLinkedin,

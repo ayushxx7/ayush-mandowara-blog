@@ -1,8 +1,8 @@
 import React from "react"
-import {Link, graphql} from "gatsby"
+import { Link, graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import style from "./tags.module.less"
+import * as style from "./tags.module.less"
 
 function TagsPage(props) {
   const data = props.data.allMarkdownRemark.group
@@ -10,10 +10,14 @@ function TagsPage(props) {
   return (
     <Layout>
       <SEO title="Tags" keywords={["ayush@machine"]} />
-      <h1 style={{textAlign: "center"}}>All Topics</h1>
+      <h1 style={{ textAlign: "center", marginTop: "80px" }}>All Topics</h1>
       <div className={style.container}>
         {data.map(tag => (
-          <Link to={`/${tag.fieldValue}`} className=" my-1 card text-center">
+          <Link
+            to={`/${tag.fieldValue}`}
+            key={tag.fieldValue}
+            className=" my-1 card text-center"
+          >
             <h2>
               {tag.fieldValue} {`(${tag.totalCount})`}
             </h2>
@@ -29,7 +33,7 @@ export default TagsPage
 export const pageQuery = graphql`
   query {
     allMarkdownRemark(limit: 3000) {
-      group(field: frontmatter___tags) {
+      group(field: { frontmatter: { tags: SELECT } }) {
         fieldValue
         totalCount
       }

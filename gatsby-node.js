@@ -1,6 +1,6 @@
 // create a file path
 const { slugify } = require("./utils/Utilities")
-const { createFilePath, createFileNode } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 const _ = require("lodash")
 const path = require("path")
 
@@ -22,7 +22,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
   const result = await graphql(`
     {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+      allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
         edges {
           node {
             fields {
@@ -37,6 +37,10 @@ exports.createPages = async ({ actions, graphql }) => {
       }
     }
   `)
+
+  if (result.errors) {
+    throw result.errors
+  }
 
   const blogTemplate = path.resolve("./src/templates/blog-post.js")
   const tagsTemplate = path.resolve("./src/templates/tag-template.js")
@@ -64,7 +68,7 @@ exports.createPages = async ({ actions, graphql }) => {
   // Eliminate duplicate tags
   allTags = _.uniq(allTags)
 
-  allTags.forEach(async (tag, index) => {
+  for (const tag of allTags) {
     const tagposts = await graphql(`
       {
         allMarkdownRemark(filter: { frontmatter: { tags: { eq: "${tag}" } } }) {
@@ -91,7 +95,7 @@ exports.createPages = async ({ actions, graphql }) => {
         tag,
       },
     })
-  })
+  }
 
   posts.forEach(({ node }, index) => {
     createPage({
@@ -100,9 +104,8 @@ exports.createPages = async ({ actions, graphql }) => {
       context: {
         slug: node.fields.slug,
         prev: index === 0 ? null : posts[index - 1],
-        next: index === result.length - 1 ? null : posts[index + 1],
+        next: index === posts.length - 1 ? null : posts[index + 1],
       }, // additional data can be passed via context
     })
   })
-  return
 }

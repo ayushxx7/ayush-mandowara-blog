@@ -1,48 +1,40 @@
 import React, { useState } from "react"
-import Layout from "../components/layout"
 import Post from "../components/post"
+import Layout from "../components/layout"
 import { graphql } from "gatsby"
-import customStyle from "../components/post.module.less"
+import SEO from "../components/seo"
+import * as customStyle from "../components/post.module.less"
 import "./custom.css"
 
 const PostList = ({ data }) => {
   const allPosts = data.allMarkdownRemark.edges
-
-  const emptyQuery = ""
-  const [state, setState] = useState({
-    filteredData: [],
-    query: emptyQuery,
-  })
+  const [posts, setPosts] = useState(allPosts)
 
   const handleInputChange = event => {
-    console.log(event.target.value)
     const query = event.target.value
-
-    const filteredData = allPosts.filter(post => {
+    const filteredPosts = allPosts.filter(post => {
       const { description, title, tags } = post.node.frontmatter
       return (
-        (description &&
-          description.toLowerCase().includes(query.toLowerCase())) ||
+        (description && description.toLowerCase().includes(query.toLowerCase())) ||
         title.toLowerCase().includes(query.toLowerCase()) ||
-        (tags && tags.join("").toLowerCase().includes(query.toLowerCase()))
+        (tags && tags.join(" ").toLowerCase().includes(query.toLowerCase()))
       )
     })
-
-    setState({
-      query,
-      filteredData,
-    })
+    setPosts(filteredPosts)
   }
-
-  const { filteredData, query } = state
-  const hasSearchResults = filteredData && query !== emptyQuery
-  const posts = hasSearchResults ? filteredData : allPosts
 
   return (
     <Layout>
-      <h1 style={{ textAlign: "center", marginTop: "80px" }}>Articles</h1>
-      <div className="searchContainer">
-        <div>
+      <SEO title="Blog" />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "80px",
+        }}
+        className="searchContainer"
+      >
+        <div style={{ flexGrow: "2" }}>
           <input
             className={customStyle.card + " " + "searchInput"}
             type="text"
@@ -61,45 +53,45 @@ const PostList = ({ data }) => {
 
       {posts.map(({ node }) => (
         <Post
+          key={node.id}
           title={node.frontmatter.title}
           author={node.frontmatter.author}
           date={node.frontmatter.date}
           body={node.excerpt}
           slug={node.fields.slug}
           tags={node.frontmatter.tags}
-          fluid={node.frontmatter.image.childImageSharp.fluid}
+          gatsbyImageData={node.frontmatter.image.childImageSharp.gatsbyImageData}
         />
       ))}
     </Layout>
   )
 }
 
+export default PostList
+
 export const PostListQuery = graphql`
-  query PostListQuery($skip: Int!) {
+  query PostListQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
+      sort: { frontmatter: { date: DESC } }
+      limit: $limit
       skip: $skip
     ) {
       edges {
         node {
           id
+          excerpt
           fields {
             slug
           }
-          excerpt(pruneLength: 100)
           frontmatter {
-            author
-            date(formatString: "MMMM Do YYYY")
             title
+            author
+            date(formatString: "MMMM DD, YYYY")
             tags
+            description
             image {
               childImageSharp {
-                resize(width: 100, height: 200) {
-                  src
-                }
-                fluid(maxWidth: 286) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
               }
             }
           }
@@ -108,5 +100,3 @@ export const PostListQuery = graphql`
     }
   }
 `
-
-export default PostList

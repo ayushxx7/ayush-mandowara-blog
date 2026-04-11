@@ -6,7 +6,6 @@ import Post from "../components/post"
 
 const Tags = ({ data, pageContext }) => {
   const posts = data.allMarkdownRemark.edges
-  console.log(posts)
   const { tag } = pageContext
   return (
     <Layout>
@@ -15,13 +14,14 @@ const Tags = ({ data, pageContext }) => {
       </h1>
       {posts.map(({ node }) => (
         <Post
+          key={node.id}
           title={node.frontmatter.title}
           author={node.frontmatter.author}
           date={node.frontmatter.date}
           body={node.excerpt}
           slug={node.fields.slug}
           tags={node.frontmatter.tags}
-          fluid={node.frontmatter.image.childImageSharp.fluid}
+          gatsbyImageData={node.frontmatter.image.childImageSharp.gatsbyImageData}
         />
       ))}
       <Pager pageContext={pageContext} />
@@ -31,34 +31,29 @@ const Tags = ({ data, pageContext }) => {
 
 export default Tags
 
-export const TagListQuery = graphql`
-  query TagListQuery($skip: Int!, $limit: Int!, $tag: String!) {
+export const query = graphql`
+  query TagQuery($tag: String!, $skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      filter: { frontmatter: { tags: { eq: $tag } } }
-      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+      sort: { frontmatter: { date: DESC } }
       limit: $limit
       skip: $skip
     ) {
       edges {
         node {
           id
+          excerpt
           fields {
             slug
           }
-          excerpt(pruneLength: 100)
           frontmatter {
-            author
-            date(formatString: "MMMM Do YYYY")
             title
+            author
+            date(formatString: "MMMM DD, YYYY")
             tags
             image {
               childImageSharp {
-                resize(width: 100, height: 200) {
-                  src
-                }
-                fluid(maxWidth: 286) {
-                  ...GatsbyImageSharpFluid
-                }
+                gatsbyImageData(width: 600, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
               }
             }
           }

@@ -1,35 +1,38 @@
 import React from "react"
 import Layout from "../components/layout"
-import Img from "gatsby-image"
-import {graphql} from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
 import PostPager from "../components/post-pager"
-import style from "./blog-post.module.less"
-import "katex/dist/katex.min.css"
+import * as style from "./blog-post.module.less"
 import Footer from "../components/footer"
 import "../style/prism-darcula.less"
 import Comments from "../components/comments"
 import SEO from "../components/seo"
-import Scroll from '../components/scroll'
+import Scroll from "../components/scroll"
 
 function BlogPost(props) {
-  const {title, image, tags, description} = props.data.markdownRemark.frontmatter
-  const {prev, next} = props.pageContext
+  const { title, image, tags, description } =
+    props.data.markdownRemark.frontmatter
+  const { prev, next } = props.pageContext
+  const gatsbyImage = getImage(image)
+
   return (
     <Layout>
       <Scroll showBelow={250} />
       <SEO title={title} keywords={tags} description={description} />
       <div>
-        {image && (
-          <Img
-            style={{backgroundColor: "#1e2127"}}
-            fluid={image.childImageSharp.fluid}
+        {gatsbyImage && (
+          <GatsbyImage
+            image={gatsbyImage}
+            alt={title}
+            style={{ backgroundColor: "#1e2127" }}
           />
         )}
-        <h1 style={{backgroundColor: "#1e2127", textAlign: "left"}}>
+        <h1 style={{ backgroundColor: "#1e2127", textAlign: "left" }}>
           {title}
         </h1>
         <div
-          dangerouslySetInnerHTML={{__html: props.data.markdownRemark.html}}
+          dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
           className={style.markdownBody}
         />
         <div className={style.markdownBody}>
@@ -40,12 +43,11 @@ function BlogPost(props) {
           <br />
           <span>Tagged in </span>
           {tags.map((tag, i) => (
-            <a href={`/${tag}`} key={i} style={{marginLeft: "10px"}}>
+            <a href={`/${tag}`} key={i} style={{ marginLeft: "10px" }}>
               {tag}
             </a>
           ))}
         </div>
-        {/* <Share title={title} url={url} pathname={props.location.pathname} /> */}
         <PostPager prev={prev && prev.node} next={next && next.node} />
       </div>
     </Layout>
@@ -65,12 +67,7 @@ export const query = graphql`
         description
         image {
           childImageSharp {
-            resize(width: 1000, height: 420) {
-              src
-            }
-            fluid(maxWidth: 786) {
-              ...GatsbyImageSharpFluid
-            }
+            gatsbyImageData(width: 1000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
           }
         }
       }
