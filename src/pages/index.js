@@ -40,6 +40,8 @@ const IndexPage = () => {
           </a>
           <a
             href="https://the-vibe-coder-69.github.io/www/the-vibe-coder.html"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mono"
             style={{
               borderBottom: "1px solid var(--surgical-orange)",
@@ -144,6 +146,8 @@ const IndexPage = () => {
           </a>
           <a
             href="https://github.com/ayushxx7"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mono"
             style={{ fontSize: "1.2rem" }}
           >
@@ -151,6 +155,8 @@ const IndexPage = () => {
           </a>
           <a
             href="https://www.linkedin.com/in/ayush-mandowara/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mono"
             style={{ fontSize: "1.2rem" }}
           >
@@ -158,6 +164,8 @@ const IndexPage = () => {
           </a>
           <a
             href="https://www.youtube.com/@thevibecoder69"
+            target="_blank"
+            rel="noopener noreferrer"
             className="mono"
             style={{ fontSize: "1.2rem" }}
           >
