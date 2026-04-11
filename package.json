@@ -3,6 +3,9 @@
   "private": true,
   "description": "A simple blog where I keep all of my notes",
   "version": "3.0.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "author": "Ayush Mandowara <ayushxx7@gmail.com>",
   "dependencies": {
     "@deckdeckgo/highlight-code": "^3.0.0",
