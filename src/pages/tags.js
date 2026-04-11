@@ -10,7 +10,7 @@ function TagsPage(props) {
   return (
     <Layout>
       <SEO title="Tags" keywords={["ayush@machine"]} />
-      <h1 style={{ textAlign: "center", marginTop: "80px" }}>All Topics</h1>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>All Topics</h1>
       <div className={style.container}>
         {data.map(tag => (
           <Link

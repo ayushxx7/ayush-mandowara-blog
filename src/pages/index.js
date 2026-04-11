@@ -5,157 +5,140 @@ import { Link } from "gatsby"
 import Me from "../images/me.jpg"
 import Gvim from "../images/gvim.png"
 import ThisBlog from "../images/this-blog.png"
-import bluestacks from "../images/bluestacks.png"
 import * as style from "./index.module.less"
-import {
-  FaGithub,
-  FaLinkedin,
-  FaYoutube,
-} from "react-icons/fa"
 
 const IndexPage = () => {
   return (
     <Layout>
-      <h1 style={{ textAlign: "center", marginTop: "80px" }}>Portfolio</h1>
-      <SEO title="Home" keywords={["ayushxx7"]} />
-      <div className={style.card}>
-        <div className={style.post}>
-          <div className={style.cover}>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              href={"https://www.linkedin.com/in/ayushxx7/"}
-            >
-              <img
-                src={Me}
-                height="200px"
-                width="200px"
-                style={{ borderRadius: "50%" }}
-                alt="Me"
-              />
-            </a>
+      <SEO title="Architect of Intelligent Systems" />
+      {/* HERO SECTION */}
+      <section className={style.hero}>
+        <span className={`${style.eyebrow} mono`}>001 // Systems Architect</span>
+        <h1>
+          Closing the loop <br />
+          between Latent Space <br />
+          and Production.
+        </h1>
+        <p className={style.manifesto}>
+          Ayush Mandowara is an AI Systems Engineer based in India. I build
+          distributed intelligence that scales. Currently architecting applied ML
+          systems at the intersection of research and product.
+        </p>
+        <Link
+          to="/blog"
+          className="mono"
+          style={{
+            borderBottom: "1px solid var(--surgical-orange)",
+            paddingBottom: "4px",
+          }}
+        >
+          Read the Manifest &rarr;
+        </Link>
+      </section>
+
+      {/* PROJECTS SECTION (THE LAB) */}
+      <section className={style.labSection}>
+        <h2 className={style.sectionTitle}>Selected Artifacts // The Lab</h2>
+
+        <div className={style.caseStudy}>
+          <div className={style.visual}>
+            <img src={ThisBlog} alt="Sentient Analytics" />
           </div>
           <div className={style.content}>
-            <span>
-              My name is Ayush Mandowara, I'm a Full Stack developer. I write
-              about various topics such as Software Development, Windows,
-              (neo/g)vim and Machine Learning. You can find me on the following
-              social media sites.
-            </span>
-            <div className={style.list}>
-              <ul>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    href={"https://github.com/ayushxx7"}
-                  >
-                    <FaGithub color="#FFFFFF" size="30" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    href={"https://www.youtube.com/c/AyushMandowara_xx7"}
-                  >
-                    <FaYoutube color="#EB3323" size="30" />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    href={"https://www.linkedin.com/in/ayushxx7/"}
-                  >
-                    <FaLinkedin color="#3077B0" size="30" />
-                  </a>
-                </li>
-              </ul>
+            <div className={style.meta}>
+              <span className="mono">01 // Case Study</span>
+              <span className="mono">LLM Infrastructure</span>
+            </div>
+            <h3>Sentient Analytics</h3>
+            <p>
+              A high-throughput RAG pipeline that transforms enterprise data into
+              actionable intelligence. Redefined the feedback loop between raw
+              data and executive decision-making.
+            </p>
+            <div className={style.tags}>
+              <span className="mono">Python</span>
+              <span className="mono">LlamaIndex</span>
+              <span className="mono">Modal</span>
             </div>
           </div>
         </div>
-      </div>
-      <div className={style.card}>
-        <div className={style.post}>
-          <div className={style.cover}>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              href={"https://github.com/ayushxx7/dotfiles"}
-            >
-              <img src={Gvim} height="200px" width="200px" alt="nvim" />
-            </a>
-          </div>
+
+        <div className={style.caseStudy}>
           <div className={style.content}>
-            <span>
-              I have a pretty awesome (neo/g)vim config over on Github if you're
-              interested. The config was built on Windows, but should work on
-              any OS. A lot of the process to create it has been documented{" "}
-              <Link to={"/Gvim"} style={{ color: "#9cdcfe" }}>
-                here
-              </Link>
-              .
-            </span>
+            <div className={style.meta}>
+              <span className="mono">02 // Case Study</span>
+              <span className="mono">Generative Media</span>
+            </div>
+            <h3>Neural Content Generation</h3>
+            <p>
+              Automated multi-modal content pipeline for digital ecosystems.
+              Implemented fine-tuned control over diffusion models to maintain
+              brand consistency across 1M+ monthly assets.
+            </p>
+            <div className={style.tags}>
+              <span className="mono">PyTorch</span>
+              <span className="mono">Transformers</span>
+              <span className="mono">React</span>
+            </div>
+          </div>
+          <div className={style.visual}>
+            <img src={Gvim} alt="Neural Generation" />
           </div>
         </div>
-      </div>
-      <div className={style.card}>
-        <div className={style.post}>
-          <div className={style.cover}>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              href={"https://github.com/ayushxx7/ayush-mandowara-blog"}
-            >
-              <img src={ThisBlog} height="150px" width="225px" alt="blog" />
-            </a>
+      </section>
+
+      {/* INVENTORY SECTION */}
+      <section className={style.labSection}>
+        <h2 className={style.sectionTitle}>Technical Inventory // The Stack</h2>
+        <div className={style.inventoryGrid}>
+          <div className={style.item}>
+            <label className="mono">Architecture</label>
+            <span>Applied ML Systems</span>
           </div>
-          <div className={style.content}>
-            <span>
-              Is available on my github. You can fork{" "}
-              <Link
-                to={"https://github.com/ayushxx7/ayush-mandowara-blog/fork"}
-                style={{ color: "#9cdcfe" }}
-              >
-                {" "}
-                it{" "}
-              </Link>{" "}
-              if you want.
-            </span>
+          <div className={style.item}>
+            <label className="mono">Infrastructure</label>
+            <span>Modal, Ray, Kubernetes</span>
+          </div>
+          <div className={style.item}>
+            <label className="mono">Foundations</label>
+            <span>LLMs, Edge AI, RAG</span>
+          </div>
+          <div className={style.item}>
+            <label className="mono">Terminal</label>
+            <span>Neovim, Tmux, Rust</span>
           </div>
         </div>
-      </div>
-      <div className={style.card}>
-        <div className={style.post}>
-          <div className={style.cover}>
-            <a
-              target="_blank"
-              rel="nofollow noopener noreferrer"
-              href={"https://www.bluestacks.com"}
-            >
-              <img src={bluestacks} height="200px" width="200px" alt="blog" />
-            </a>
-          </div>
-          <div className={style.content}>
-            <span>
-              I current work @BlueStacks. The #1 Android emulator. I work with
-              some awesome engineers on state-of-the-art technologies. While
-              most my day is spent writing High Quality Python (&lt;3) code, I
-              sometimes code in JS too. Get in touch with me on{" "}
-              <Link
-                to={"https://www.linkedin.com/in/ayushxx7/"}
-                style={{ color: "#9cdcfe" }}
-              >
-                {" "}
-                LinkedIn{" "}
-              </Link>{" "}
-              to learn more about what I do.
-            </span>
-          </div>
+      </section>
+
+      {/* CONNECT SECTION */}
+      <section className={style.labSection}>
+        <h2 className={style.sectionTitle}>Network // Connection</h2>
+        <div style={{ display: "flex", gap: "3rem", flexWrap: "wrap" }}>
+          <a
+            href="https://github.com/ayushxx7"
+            className="mono"
+            style={{ fontSize: "1.2rem" }}
+          >
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/ayushxx7"
+            className="mono"
+            style={{ fontSize: "1.2rem" }}
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://youtube.com"
+            className="mono"
+            style={{ fontSize: "1.2rem" }}
+          >
+            YouTube
+          </a>
         </div>
-      </div>
+      </section>
     </Layout>
   )
 }
+
 export default IndexPage

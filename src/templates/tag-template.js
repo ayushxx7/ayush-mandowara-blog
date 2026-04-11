@@ -9,7 +9,7 @@ const Tags = ({ data, pageContext }) => {
   const { tag } = pageContext
   return (
     <Layout>
-      <h1 style={{ textAlign: "center", marginTop: "80px" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
         Topic: <span style={{ color: "#61afef" }}>{tag}</span>
       </h1>
       {posts.map(({ node }) => (

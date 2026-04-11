@@ -26,27 +26,16 @@ const PostList = ({ data }) => {
   return (
     <Layout>
       <SEO title="Blog" />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "80px",
-        }}
-        className="searchContainer"
-      >
-        <div style={{ flexGrow: "2" }}>
-          <input
-            className={customStyle.card + " " + "searchInput"}
-            type="text"
-            aria-label="Search"
-            placeholder="Type to filter posts..."
-            onChange={handleInputChange}
-          />
-        </div>
-        <div>
-          <div className={customStyle.card + " " + "counter"}>
-            {posts.length}/{allPosts.length}
-          </div>
+      <div className="searchContainer">
+        <input
+          className="searchInput"
+          type="text"
+          aria-label="Search"
+          placeholder="Type to filter..."
+          onChange={handleInputChange}
+        />
+        <div className="counter">
+          {posts.length}/{allPosts.length}
         </div>
       </div>
       <h1 />

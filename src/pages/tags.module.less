@@ -1,33 +1,25 @@
-@import (reference) '../style/index.less';
-
 .container {
-    .flex-center();
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding-top: 2rem;
+
+  h2 {
+    font-size: 1.25rem;
+    color: var(--zinc-secondary);
+    background: var(--zinc-muted);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 2rem;
+    margin: 0;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
 
-
-    h1, h2, p {
-    text-align: center;
-        margin: @margin-zero @margin-zero @margin-zero @margin-zero;
-        font-size: 2rem;
-        padding: 20px;
-        color: #61afef;
-        border: 1px solid transparent;
-    };
-
-    h2:hover {
-      box-shadow: 0 -1px 4px #61afef;
-      border: 1px solid #61afef;
+    &:hover {
+      color: var(--surgical-orange);
+      border-color: var(--zinc-secondary);
     }
-
-    @media @mobile {
-        flex-direction: column;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1rem;
-    }
+  }
 }
-
