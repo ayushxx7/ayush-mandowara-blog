@@ -2,14 +2,15 @@
 **Insights, Experiments, and Engineering Notes**
 
 [![Tested on Gemini](https://img.shields.io/badge/Tested_on-Gemini_CLI-8E44AD?style=for-the-badge&logo=google-gemini&logoColor=white)](https://github.com/google/gemini-cli)
-[![Live Blog](https://img.shields.io/badge/Live_Blog-Click_Here_to_Read-blue?style=for-the-badge&logo=netlify)](https://ayush-mandowara.in/blog)
+[![Live Blog](https://img.shields.io/badge/Live_Blog-Click_Here_to_Read-blue?style=for-the-badge&logo=netlify)](https://ayush-blog.netlify.app)
 
 **Ayush Mandowara Tech Blog** is a high-performance static site generated with Gatsby. It serves as a central hub for deep-dives into software engineering, AI agents, and product development experiments.
 
 `✅ Static Site Generation | ✅ Gatsby v5 | ✅ MIT Licensed | ✅ JAMstack Architected`
 
 ## 🎬 UI Preview
-![UI Preview](showcase/ui_preview.svg)
+<img width="1246" height="1201" alt="Screenshot 2026-04-20 at 7 25 54 PM" src="https://github.com/user-attachments/assets/e5e35b2b-b8d1-447c-8652-4d46a150a7f3" />
+
 
 ## 🏗 Architecture
 The blog uses a JAMstack architecture (JavaScript, APIs, and Markup) for sub-second page loads and robust static delivery.
