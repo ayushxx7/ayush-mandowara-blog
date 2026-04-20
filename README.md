@@ -10,21 +10,7 @@
 
 **Ayush Mandowara Tech Blog** is a high-performance static site generated with Gatsby. It serves as a central hub for deep-dives into software engineering, AI agents, and product development experiments.
 
-## 🎬 Showcase Gallery
-| 📖 Blog Index | 📄 Article View |
-| :---: | :---: |
-| ![Index](https://raw.githubusercontent.com/ayushxx7/ayush-mandowara-blog/main/showcase/blog_index.png) | ![Article](https://raw.githubusercontent.com/ayushxx7/ayush-mandowara-blog/main/showcase/article_view.png) |
-
-## 📊 Repo Health: 90 / 100 (High Readiness)
-This project is optimized for performance (Lighthouse 90+) and SEO.
-
-| Category | Item | Status | Score |
-| :--- | :--- | :--- | :--- |
-| **Documentation** | README & LICENSE | ✅ Updated | 15 / 15 |
-| **Security** | Netlify Auth & .gitignore | ✅ Secure | 15 / 15 |
-| **Automation** | Gatsby Build & Prettier | ✅ Working | 20 / 20 |
-| **Showcase** | High-res Blog Visuals | ⚠️ Pending | 10 / 20 |
-| **Distribution** | Netlify CI/CD | ✅ Active | 30 / 30 |
+`✅ Static Site Generation | ✅ Gatsby v5 | ✅ MIT Licensed | ✅ JAMstack Architected`
 
 ## 🏗 Architecture
 The blog uses a JAMstack architecture (JavaScript, APIs, and Markup) for sub-second page loads and robust static delivery.
